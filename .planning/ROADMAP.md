@@ -27,6 +27,14 @@
 
 **Dependencies:** None
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Initialize project from bhvr template
+- [ ] 01-02-PLAN.md — Configure Drizzle ORM with MySQL schema
+- [ ] 01-03-PLAN.md — Setup shadcn/ui, shared types, Money utility
+- [ ] 01-04-PLAN.md — Integration test and verification
+
 ---
 
 ### Phase 2: Nomenclatoare
@@ -150,7 +158,7 @@
 
 | Phase | Name | Status | Requirements |
 |-------|------|--------|--------------|
-| 1 | Foundation & Setup | Not Started | 5 |
+| 1 | Foundation & Setup | Planned | 5 |
 | 2 | Nomenclatoare | Not Started | 5 |
 | 3 | Mijloace Fixe Core | Not Started | 6 |
 | 4 | Operatiuni | Not Started | 5 |
@@ -161,3 +169,4 @@
 
 ---
 *Roadmap created: 2026-01-22*
+*Phase 1 planned: 2026-01-22*
