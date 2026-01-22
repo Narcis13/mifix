@@ -12,7 +12,7 @@ function App() {
         if (data.success && data.data) {
           setHealth(data.data);
         } else {
-          setError(data.error || "Unknown error");
+          setError(data.message || "Unknown error");
         }
       })
       .catch((err) => setError(err.message));
