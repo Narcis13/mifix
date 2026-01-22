@@ -1,89 +1,89 @@
 # Requirements: MiFix - Gestiune Mijloace Fixe
 
 **Defined:** 2026-01-22
-**Core Value:** Contabilitatea poate genera amortizarea lunară corect și la timp pentru toate mijloacele fixe active.
+**Core Value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active.
 
 ## v1 Requirements
 
-Requirements pentru release-ul inițial. Fiecare se mapează la faze din roadmap.
+Requirements pentru release-ul initial. Fiecare se mapeaza la faze din roadmap.
 
-### Setup & Infrastructură
+### Setup & Infrastructura
 
-- [ ] **SETUP-01**: Proiect inițializat cu bhvr template (Bun, Hono, React, Vite)
-- [ ] **SETUP-02**: Bază de date MySQL configurată cu Drizzle ORM
-- [ ] **SETUP-03**: shadcn/ui instalat și configurat
-- [ ] **SETUP-04**: Tipuri shared între client și server
+- [ ] **SETUP-01**: Proiect initializat cu bhvr template (Bun, Hono, React, Vite)
+- [ ] **SETUP-02**: Baza de date MySQL configurata cu Drizzle ORM
+- [ ] **SETUP-03**: shadcn/ui instalat si configurat
+- [ ] **SETUP-04**: Tipuri shared intre client si server
 - [ ] **SETUP-05**: decimal.js integrat pentru calcule financiare
 
 ### Nomenclatoare
 
 - [ ] **NOM-01**: CRUD gestiuni (cod, denumire, responsabil, activ)
-- [ ] **NOM-02**: CRUD locuri de folosință (în cadrul gestiunilor)
-- [ ] **NOM-03**: CRUD surse de finanțare (cod, denumire)
+- [ ] **NOM-02**: CRUD locuri de folosinta (in cadrul gestiunilor)
+- [ ] **NOM-03**: CRUD surse de finantare (cod, denumire)
 - [ ] **NOM-04**: CRUD plan de conturi (simbol, denumire, tip, cont amortizare)
-- [ ] **NOM-05**: Clasificare MF conform HG 2139/2004 preîncărcată (cod, denumire, grupă, durată normală)
+- [ ] **NOM-05**: Clasificare MF conform HG 2139/2004 preincarcata (cod, denumire, grupa, durata normala)
 
 ### Mijloace Fixe
 
-- [ ] **MF-01**: Înregistrare mijloc fix cu toate câmpurile (nr. inventar, denumire, clasificare, gestiune, valoare, dată achiziție, durată normală)
-- [ ] **MF-02**: Listare mijloace fixe cu filtrare (gestiune, stare, căutare text)
+- [ ] **MF-01**: Inregistrare mijloc fix cu toate campurile (nr. inventar, denumire, clasificare, gestiune, valoare, data achizitie, durata normala)
+- [ ] **MF-02**: Listare mijloace fixe cu filtrare (gestiune, stare, cautare text)
 - [ ] **MF-03**: Vizualizare detalii mijloc fix
 - [ ] **MF-04**: Editare mijloc fix
-- [ ] **MF-05**: Validare număr inventar unic
+- [ ] **MF-05**: Validare numar inventar unic
 - [ ] **MF-06**: Selectare clasificare din catalogul HG 2139/2004
 
-### Operațiuni
+### Operatiuni
 
-- [ ] **OP-01**: Transfer mijloc fix între gestiuni cu documentare (gestiune sursă, destinație, dată, observații)
-- [ ] **OP-02**: Transfer mijloc fix între locuri de folosință în aceeași gestiune
-- [ ] **OP-03**: Casare mijloc fix (marcare ca scos din funcțiune)
+- [ ] **OP-01**: Transfer mijloc fix intre gestiuni cu documentare (gestiune sursa, destinatie, data, observatii)
+- [ ] **OP-02**: Transfer mijloc fix intre locuri de folosinta in aceeasi gestiune
+- [ ] **OP-03**: Casare mijloc fix (marcare ca scos din functiune)
 - [ ] **OP-04**: Declasare mijloc fix (reducere valoare)
-- [ ] **OP-05**: Istoric tranzacții per mijloc fix (toate operațiunile)
+- [ ] **OP-05**: Istoric tranzactii per mijloc fix (toate operatiunile)
 
 ### Amortizare
 
-- [ ] **AMO-01**: Calcul amortizare liniară (valoare inventar / durată normală în luni)
-- [ ] **AMO-02**: Generare amortizare lunară batch (pentru toate MF active și amortizabile)
-- [ ] **AMO-03**: Actualizare valoare amortizată și valoare rămasă pe MF
-- [ ] **AMO-04**: Vizualizare istoric amortizări per MF
-- [ ] **AMO-05**: Vizualizare amortizări pe lună/an (toate MF-urile)
-- [ ] **AMO-06**: Nu depășește valoarea de amortizat (ultima lună = rest)
+- [ ] **AMO-01**: Calcul amortizare liniara (valoare inventar / durata normala in luni)
+- [ ] **AMO-02**: Generare amortizare lunara batch (pentru toate MF active si amortizabile)
+- [ ] **AMO-03**: Actualizare valoare amortizata si valoare ramasa pe MF
+- [ ] **AMO-04**: Vizualizare istoric amortizari per MF
+- [ ] **AMO-05**: Vizualizare amortizari pe luna/an (toate MF-urile)
+- [ ] **AMO-06**: Nu depaseste valoarea de amortizat (ultima luna = rest)
 
 ### Rapoarte
 
-- [ ] **RAP-01**: Fișa mijlocului fix (date complete + istoric tranzacții + istoric amortizare)
-- [ ] **RAP-02**: Balanța de verificare cantitativ-valorică (pe gestiuni, cu totaluri)
-- [ ] **RAP-03**: Jurnal acte operate (istoric tranzacții pe perioadă)
-- [ ] **RAP-04**: Situație amortizare lunară (amortizări calculate pe lună)
-- [ ] **RAP-05**: Filtrare rapoarte pe perioadă, gestiune, clasificare
+- [ ] **RAP-01**: Fisa mijlocului fix (date complete + istoric tranzactii + istoric amortizare)
+- [ ] **RAP-02**: Balanta de verificare cantitativ-valorica (pe gestiuni, cu totaluri)
+- [ ] **RAP-03**: Jurnal acte operate (istoric tranzactii pe perioada)
+- [ ] **RAP-04**: Situatie amortizare lunara (amortizari calculate pe luna)
+- [ ] **RAP-05**: Filtrare rapoarte pe perioada, gestiune, clasificare
 
 ### Autentificare
 
-- [ ] **AUTH-01**: Login cu user și parolă
-- [ ] **AUTH-02**: Sesiune persistentă (rămâne logat între refresh-uri)
+- [ ] **AUTH-01**: Login cu user si parola
+- [ ] **AUTH-02**: Sesiune persistenta (ramane logat intre refresh-uri)
 - [ ] **AUTH-03**: Logout
 
 ## v2 Requirements
 
-Amânate pentru release viitor. Tracked dar nu în roadmap-ul curent.
+Amanate pentru release viitor. Tracked dar nu in roadmap-ul curent.
 
 ### Export Rapoarte
 
-- **EXP-01**: Export rapoarte în PDF
-- **EXP-02**: Export rapoarte în Excel
+- **EXP-01**: Export rapoarte in PDF
+- **EXP-02**: Export rapoarte in Excel
 
-### Amortizare Avansată
+### Amortizare Avansata
 
-- **AMO-ADV-01**: Amortizare degresivă
-- **AMO-ADV-02**: Amortizare accelerată
+- **AMO-ADV-01**: Amortizare degresiva
+- **AMO-ADV-02**: Amortizare accelerata
 - **AMO-ADV-03**: Dual tracking fiscal vs contabil
 
 ### Utilizatori Multipli
 
 - **USER-01**: Mai multe conturi de utilizator
-- **USER-02**: Roluri și permisiuni
+- **USER-02**: Roluri si permisiuni
 
-### Integrări
+### Integrari
 
 - **INT-01**: Export SAF-T (Declaration 406)
 - **INT-02**: Import date din alte sisteme
@@ -94,62 +94,62 @@ Explicit excluse. Documentate pentru a preveni scope creep.
 
 | Feature | Motiv |
 |---------|-------|
-| Multi-tenant/SaaS | Aplicație internă pentru un singur spital |
+| Multi-tenant/SaaS | Aplicatie interna pentru un singur spital |
 | Mobile app | Web-first, suficient pentru uz intern |
-| Migrare date FoxPro | Se pornește fresh, fără import date vechi |
+| Migrare date FoxPro | Se porneste fresh, fara import date vechi |
 | OAuth/SSO | Login simplu e suficient pentru nevoi curente |
-| Real-time collaboration | Single-user efectiv, fără concurență |
-| Audit log detaliat | Istoric tranzacții acoperă nevoia de bază |
-| Documente atașate | Nu e necesar pentru v1 |
-| Inventariere cu barcode | Funcționalitate avansată, poate v2+ |
+| Real-time collaboration | Single-user efectiv, fara concurenta |
+| Audit log detaliat | Istoric tranzactii acopera nevoia de baza |
+| Documente atasate | Nu e necesar pentru v1 |
+| Inventariere cu barcode | Functionalitate avansata, poate v2+ |
 
 ## Traceability
 
-Care faze acoperă care requirements. Actualizat în timpul creării roadmap-ului.
+Care faze acopera care requirements. Actualizat in timpul crearii roadmap-ului.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SETUP-01 | TBD | Pending |
-| SETUP-02 | TBD | Pending |
-| SETUP-03 | TBD | Pending |
-| SETUP-04 | TBD | Pending |
-| SETUP-05 | TBD | Pending |
-| NOM-01 | TBD | Pending |
-| NOM-02 | TBD | Pending |
-| NOM-03 | TBD | Pending |
-| NOM-04 | TBD | Pending |
-| NOM-05 | TBD | Pending |
-| MF-01 | TBD | Pending |
-| MF-02 | TBD | Pending |
-| MF-03 | TBD | Pending |
-| MF-04 | TBD | Pending |
-| MF-05 | TBD | Pending |
-| MF-06 | TBD | Pending |
-| OP-01 | TBD | Pending |
-| OP-02 | TBD | Pending |
-| OP-03 | TBD | Pending |
-| OP-04 | TBD | Pending |
-| OP-05 | TBD | Pending |
-| AMO-01 | TBD | Pending |
-| AMO-02 | TBD | Pending |
-| AMO-03 | TBD | Pending |
-| AMO-04 | TBD | Pending |
-| AMO-05 | TBD | Pending |
-| AMO-06 | TBD | Pending |
-| RAP-01 | TBD | Pending |
-| RAP-02 | TBD | Pending |
-| RAP-03 | TBD | Pending |
-| RAP-04 | TBD | Pending |
-| RAP-05 | TBD | Pending |
-| AUTH-01 | TBD | Pending |
-| AUTH-02 | TBD | Pending |
-| AUTH-03 | TBD | Pending |
+| SETUP-01 | Phase 1 | Pending |
+| SETUP-02 | Phase 1 | Pending |
+| SETUP-03 | Phase 1 | Pending |
+| SETUP-04 | Phase 1 | Pending |
+| SETUP-05 | Phase 1 | Pending |
+| NOM-01 | Phase 2 | Pending |
+| NOM-02 | Phase 2 | Pending |
+| NOM-03 | Phase 2 | Pending |
+| NOM-04 | Phase 2 | Pending |
+| NOM-05 | Phase 2 | Pending |
+| MF-01 | Phase 3 | Pending |
+| MF-02 | Phase 3 | Pending |
+| MF-03 | Phase 3 | Pending |
+| MF-04 | Phase 3 | Pending |
+| MF-05 | Phase 3 | Pending |
+| MF-06 | Phase 3 | Pending |
+| OP-01 | Phase 4 | Pending |
+| OP-02 | Phase 4 | Pending |
+| OP-03 | Phase 4 | Pending |
+| OP-04 | Phase 4 | Pending |
+| OP-05 | Phase 4 | Pending |
+| AMO-01 | Phase 5 | Pending |
+| AMO-02 | Phase 5 | Pending |
+| AMO-03 | Phase 5 | Pending |
+| AMO-04 | Phase 5 | Pending |
+| AMO-05 | Phase 5 | Pending |
+| AMO-06 | Phase 5 | Pending |
+| RAP-01 | Phase 6 | Pending |
+| RAP-02 | Phase 6 | Pending |
+| RAP-03 | Phase 6 | Pending |
+| RAP-04 | Phase 6 | Pending |
+| RAP-05 | Phase 6 | Pending |
+| AUTH-01 | Phase 6 | Pending |
+| AUTH-02 | Phase 6 | Pending |
+| AUTH-03 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 34 total
-- Mapped to phases: 0
-- Unmapped: 34 ⚠️
+- Mapped to phases: 34
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-22*
-*Last updated: 2026-01-22 after initial definition*
+*Last updated: 2026-01-22 after roadmap creation*
