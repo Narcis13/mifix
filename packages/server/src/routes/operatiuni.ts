@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { eq, and } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
+import { alias } from "drizzle-orm/mysql-core";
 import { db } from "../db";
 import {
   mijloaceFixe,
@@ -9,7 +10,7 @@ import {
   locuriUilizare,
 } from "../db/schema";
 import { Money } from "shared";
-import type { ApiResponse } from "shared";
+import type { ApiResponse, Tranzactie } from "shared";
 import {
   transferGestiuneSchema,
   transferLocSchema,
@@ -18,6 +19,102 @@ import {
 } from "../validation/operatiuni-schemas";
 
 export const operatiuniRoutes = new Hono();
+
+// ============================================================================
+// GET /istoric/:mijlocFixId - Get transaction history for asset (OP-05)
+// ============================================================================
+operatiuniRoutes.get("/istoric/:mijlocFixId", async (c) => {
+  const mijlocFixId = parseInt(c.req.param("mijlocFixId"));
+
+  if (isNaN(mijlocFixId)) {
+    return c.json<ApiResponse>({ success: false, message: "ID invalid" }, 400);
+  }
+
+  try {
+    // Create aliases for JOIN disambiguation
+    const gestiuneSursa = alias(gestiuni, "gestiune_sursa");
+    const gestiuneDestinatie = alias(gestiuni, "gestiune_destinatie");
+    const locFolosintaSursa = alias(locuriUilizare, "loc_folosinta_sursa");
+    const locFolosintaDestinatie = alias(locuriUilizare, "loc_folosinta_destinatie");
+
+    const result = await db
+      .select({
+        tranzactie: tranzactii,
+        gestiuneSursa: gestiuneSursa,
+        gestiuneDestinatie: gestiuneDestinatie,
+        locFolosintaSursa: locFolosintaSursa,
+        locFolosintaDestinatie: locFolosintaDestinatie,
+      })
+      .from(tranzactii)
+      .leftJoin(gestiuneSursa, eq(tranzactii.gestiuneSursaId, gestiuneSursa.id))
+      .leftJoin(gestiuneDestinatie, eq(tranzactii.gestiuneDestinatieId, gestiuneDestinatie.id))
+      .leftJoin(locFolosintaSursa, eq(tranzactii.locFolosintaSursaId, locFolosintaSursa.id))
+      .leftJoin(locFolosintaDestinatie, eq(tranzactii.locFolosintaDestinatieId, locFolosintaDestinatie.id))
+      .where(eq(tranzactii.mijlocFixId, mijlocFixId))
+      .orderBy(desc(tranzactii.dataOperare), desc(tranzactii.createdAt));
+
+    // Map to API response
+    const items: Tranzactie[] = result.map((row) => ({
+      id: row.tranzactie.id,
+      mijlocFixId: row.tranzactie.mijlocFixId,
+      tip: row.tranzactie.tip,
+      dataOperare: row.tranzactie.dataOperare?.toISOString().split("T")[0] ?? "",
+      documentNumar: row.tranzactie.documentNumar ?? undefined,
+      documentData: row.tranzactie.documentData?.toISOString().split("T")[0] ?? undefined,
+      gestiuneSursaId: row.tranzactie.gestiuneSursaId ?? undefined,
+      gestiuneDestinatieId: row.tranzactie.gestiuneDestinatieId ?? undefined,
+      locFolosintaSursaId: row.tranzactie.locFolosintaSursaId ?? undefined,
+      locFolosintaDestinatieId: row.tranzactie.locFolosintaDestinatieId ?? undefined,
+      gestiuneSursa: row.gestiuneSursa
+        ? {
+            id: row.gestiuneSursa.id,
+            cod: row.gestiuneSursa.cod,
+            denumire: row.gestiuneSursa.denumire,
+            responsabil: row.gestiuneSursa.responsabil ?? undefined,
+            activ: row.gestiuneSursa.activ ?? true,
+          }
+        : undefined,
+      gestiuneDestinatie: row.gestiuneDestinatie
+        ? {
+            id: row.gestiuneDestinatie.id,
+            cod: row.gestiuneDestinatie.cod,
+            denumire: row.gestiuneDestinatie.denumire,
+            responsabil: row.gestiuneDestinatie.responsabil ?? undefined,
+            activ: row.gestiuneDestinatie.activ ?? true,
+          }
+        : undefined,
+      locFolosintaSursa: row.locFolosintaSursa
+        ? {
+            id: row.locFolosintaSursa.id,
+            gestiuneId: row.locFolosintaSursa.gestiuneId,
+            cod: row.locFolosintaSursa.cod,
+            denumire: row.locFolosintaSursa.denumire,
+            activ: row.locFolosintaSursa.activ ?? true,
+          }
+        : undefined,
+      locFolosintaDestinatie: row.locFolosintaDestinatie
+        ? {
+            id: row.locFolosintaDestinatie.id,
+            gestiuneId: row.locFolosintaDestinatie.gestiuneId,
+            cod: row.locFolosintaDestinatie.cod,
+            denumire: row.locFolosintaDestinatie.denumire,
+            activ: row.locFolosintaDestinatie.activ ?? true,
+          }
+        : undefined,
+      valoareOperatie: row.tranzactie.valoareOperatie ?? undefined,
+      valoareInainte: row.tranzactie.valoareInainte ?? undefined,
+      valoareDupa: row.tranzactie.valoareDupa ?? undefined,
+      descriere: row.tranzactie.descriere ?? undefined,
+      observatii: row.tranzactie.observatii ?? undefined,
+      createdAt: row.tranzactie.createdAt?.toISOString() ?? "",
+    }));
+
+    return c.json<ApiResponse<Tranzactie[]>>({ success: true, data: items });
+  } catch (error) {
+    console.error("Get istoric error:", error);
+    return c.json<ApiResponse>({ success: false, message: "Eroare la obtinerea istoricului" }, 500);
+  }
+});
 
 // ============================================================================
 // POST /transfer-gestiune - Transfer asset between gestiuni (OP-01)

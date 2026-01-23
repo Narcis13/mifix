@@ -139,17 +139,23 @@ export interface Tranzactie {
   mijlocFix?: MijlocFix;
   tip: TipTranzactie;
   dataOperare: string;
-  dataDocument?: string;
-  nrDocument?: string;
-  tipDocument?: string;
+  documentNumar?: string;
+  documentData?: string;
   gestiuneSursaId?: number;
   gestiuneDestinatieId?: number;
   locFolosintaSursaId?: number;
   locFolosintaDestinatieId?: number;
+  // Populated relations
+  gestiuneSursa?: Gestiune;
+  gestiuneDestinatie?: Gestiune;
+  locFolosintaSursa?: LocFolosinta;
+  locFolosintaDestinatie?: LocFolosinta;
+  // Values
   valoareOperatie?: string;
-  detalii?: Record<string, unknown>;
+  valoareInainte?: string;
+  valoareDupa?: string;
+  descriere?: string;
   observatii?: string;
-  userId?: number;
   createdAt: string;
 }
 
