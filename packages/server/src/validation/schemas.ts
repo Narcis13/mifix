@@ -1,6 +1,6 @@
 import { createInsertSchema } from "drizzle-zod";
 import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument, mijloaceFixe } from "../db/schema";
-import type { z } from "zod";
+import { z } from "zod";
 
 // ============================================================================
 // Gestiuni - Asset Custodians
@@ -73,6 +73,10 @@ export type UpdateTipDocument = z.infer<typeof updateTipDocumentSchema>;
 // ============================================================================
 // Mijloace Fixe - Fixed Assets
 // ============================================================================
+
+// Helper for date string to Date coercion
+const dateStringToDate = z.string().transform((val) => new Date(val));
+
 export const insertMijlocFixSchema = createInsertSchema(mijloaceFixe, {
   numarInventar: (schema) => schema
     .min(1, "Numar inventar obligatoriu")
@@ -98,6 +102,11 @@ export const insertMijlocFixSchema = createInsertSchema(mijloaceFixe, {
   observatii: (schema) => schema
     .max(1000, "Observatii maxim 1000 caractere")
     .optional(),
+  // Date fields - coerce string to Date
+  dataAchizitie: () => dateStringToDate,
+  dataIncepereAmortizare: () => dateStringToDate.optional(),
+  dataFinalizareAmortizare: () => dateStringToDate.optional(),
+  dataIesire: () => dateStringToDate.optional(),
 }).omit({
   id: true,
   createdAt: true,
