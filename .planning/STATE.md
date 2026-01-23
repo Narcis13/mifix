@@ -14,9 +14,9 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 3 of 6 (Mijloace Fixe Core)
-Plan: 1 of 6 in current phase
+Plan: 3 of 6 in current phase
 Status: In progress
-Last activity: 2026-01-23 - Completed 03-01-PLAN.md
+Last activity: 2026-01-23 - Completed 03-03-PLAN.md
 
 Progress: [███░░░░░░░] 2/6 Phases complete
 
@@ -26,7 +26,7 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
-| 3 | Mijloace Fixe Core | In Progress | 1/6 |
+| 3 | Mijloace Fixe Core | In Progress | 3/6 |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
@@ -63,6 +63,8 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 | 02-05 | Form pattern with onSubmit/isSubmitting | Consistent with SurseFinantareForm for better separation |
 | 03-01 | TipDocument CRUD follows nomenclator pattern | Consistency with Phase 2 routes |
 | 03-01 | eAmortizabil field for per-asset override | Allows non-amortizable assets to be marked at entry time |
+| 03-03 | StareBadge uses actual StareMijlocFix enum | Type safety with shared types (activ, conservare, casat, transferat, vandut) |
+| 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
 
 ### Blockers
 
@@ -88,8 +90,10 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 - 02-05 Plan de Conturi CRUD complete: API + UI with conditional amortizare field
 - **Phase 2 COMPLETE** - All 5 nomenclatoare requirements done
 - 03-01 UI Components & TipDocument complete: shadcn Badge/Command/Popover/Card/Separator + TipDocument API
+- 03-02 MijlocFix validation schemas complete: Zod schemas for create/update with Romanian messages
+- 03-03 Reusable components complete: ClasificarePicker, StareBadge, MijlocFixFilters, useDebounce
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed 03-01-PLAN.md*
+*Stopped at: Completed 03-03-PLAN.md*
 *Resume file: None*
