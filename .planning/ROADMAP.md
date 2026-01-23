@@ -57,6 +57,15 @@ Plans:
 
 **Dependencies:** Phase 1
 
+**Plans:** 5 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Dependencies, shadcn/ui components, routing, DataTable
+- [ ] 02-02-PLAN.md — Gestiuni CRUD (API + UI)
+- [ ] 02-03-PLAN.md — Surse Finantare CRUD + Clasificari read-only
+- [ ] 02-04-PLAN.md — Locuri de Folosinta CRUD with gestiune dependency
+- [ ] 02-05-PLAN.md — Conturi CRUD with conditional amortizare field
+
 ---
 
 ### Phase 3: Mijloace Fixe Core
@@ -158,8 +167,8 @@ Plans:
 
 | Phase | Name | Status | Requirements |
 |-------|------|--------|--------------|
-| 1 | Foundation & Setup | ✓ Complete | 5/5 |
-| 2 | Nomenclatoare | Not Started | 0/5 |
+| 1 | Foundation & Setup | Complete | 5/5 |
+| 2 | Nomenclatoare | Planned | 0/5 |
 | 3 | Mijloace Fixe Core | Not Started | 0/6 |
 | 4 | Operatiuni | Not Started | 0/5 |
 | 5 | Amortizare | Not Started | 0/6 |
@@ -171,3 +180,4 @@ Plans:
 *Roadmap created: 2026-01-22*
 *Phase 1 planned: 2026-01-22*
 *Phase 1 complete: 2026-01-23*
+*Phase 2 planned: 2026-01-23*
