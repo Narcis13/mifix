@@ -14,11 +14,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 4 of 6 (Operatiuni)
-Plan: 1 of ? in current phase
+Plan: 2 of ? in current phase
 Status: In progress
-Last activity: 2026-01-23 - Completed 04-01-PLAN.md (Operatiuni API)
+Last activity: 2026-01-23 - Completed 04-02-PLAN.md (Transfer Dialogs)
 
-Progress: [██████░░░░] ~55% (Phase 4 started)
+Progress: [██████░░░░] ~58% (Phase 4 in progress)
 
 ## Progress
 
@@ -27,7 +27,7 @@ Progress: [██████░░░░] ~55% (Phase 4 started)
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
-| 4 | Operatiuni | In Progress | 1/? |
+| 4 | Operatiuni | In Progress | 2/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
@@ -76,6 +76,9 @@ Progress: [██████░░░░] ~55% (Phase 4 started)
 | 04-01 | db.transaction() for atomic operations | Asset update + tranzactie insert in single atomic transaction |
 | 04-01 | Money class for declasare calculations | Ensures decimal precision for value reductions |
 | 04-01 | Transfer-gestiune clears locFolosinta | Logical since loc belongs to gestiune |
+| 04-02 | Dialog pattern for operations | Consistent with nomenclator forms (GestiuniForm.tsx) |
+| 04-02 | Inline error display for API errors | Show above form rather than external toast |
+| 04-02 | useWatch for dependent dropdown | Gestiune selection triggers loc folosinta fetch |
 
 ### Blockers
 
@@ -98,11 +101,12 @@ Progress: [██████░░░░] ~55% (Phase 4 started)
   - 03-04: List page with filtering and pagination
   - 03-05: Multi-section form (669 lines)
   - 03-06: Detail page + human verification passed
-- **Phase 4 IN PROGRESS** - Operatiuni API complete
+- **Phase 4 IN PROGRESS** - Operatiuni API + Transfer dialogs complete
   - 04-01: API endpoints for transfer-gestiune, transfer-loc, casare, declasare
-  - Next: UI dialogs for operations, transaction history timeline
+  - 04-02: TransferGestiuneDialog and TransferLocDialog components
+  - Next: Casare/Declasare dialogs, transaction history timeline
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed 04-01-PLAN.md*
+*Stopped at: Completed 04-02-PLAN.md*
 *Resume file: None*
