@@ -1,6 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { healthRoutes } from "./routes/health";
+import { gestiuniRoutes } from "./routes/gestiuni";
+import { surseFinantareRoutes } from "./routes/surse-finantare";
 
 const app = new Hono();
 
@@ -9,6 +11,8 @@ app.use("/*", cors());
 
 // Routes
 app.route("/api/health", healthRoutes);
+app.route("/api/gestiuni", gestiuniRoutes);
+app.route("/api/surse-finantare", surseFinantareRoutes);
 
 // Root route
 app.get("/", (c) => {
