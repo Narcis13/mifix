@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 2 of 6 (Nomenclatoare)
-**Phase Status:** Not Started
+**Phase Status:** In Progress
 **Last Updated:** 2026-01-23
 
 ## Project Reference
@@ -14,18 +14,18 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 2 of 6 (Nomenclatoare)
-Plan: 0 of ? in current phase
-Status: Not started
-Last activity: 2026-01-23 - Completed Phase 1
+Plan: 1 of ? in current phase
+Status: In progress
+Last activity: 2026-01-23 - Completed 02-01-PLAN.md
 
-Progress: [█░░░░░░░░░] 1/6 Phases complete
+Progress: [██░░░░░░░░] ~20% (Phase 1 complete + Phase 2 started)
 
 ## Progress
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
-| 2 | Nomenclatoare | Not Started | 0/? |
+| 2 | Nomenclatoare | In Progress | 1/? |
 | 3 | Mijloace Fixe Core | Not Started | 0/? |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
@@ -45,6 +45,9 @@ Progress: [█░░░░░░░░░] 1/6 Phases complete
 | 01-03 | Tailwind v4 with @import syntax | Modern approach, better CSS organization |
 | 01-03 | Immutable Money class | All arithmetic returns new instances, preventing mutation bugs |
 | 01-03 | Monetary values as strings in types | Preserves decimal precision throughout the stack |
+| 02-01 | Zod validation messages in Romanian | User-facing error messages should be in Romanian |
+| 02-01 | DataTable with isLoading/emptyMessage props | Consistent UX across all data tables |
+| 02-01 | API client returns ApiResponse wrapper | Standardized response structure for all endpoints |
 
 ### Blockers
 
@@ -63,8 +66,9 @@ Progress: [█░░░░░░░░░] 1/6 Phases complete
 - 01-03 UI & Shared complete: shadcn/ui, Tailwind v4, Money class, entity types
 - 01-04 Integration complete: Health API, decimal test, demo UI verified
 - Phase 1 COMPLETE - Ready for Phase 2 Nomenclatoare
+- 02-01 Infrastructure complete: routing, DataTable, Zod schemas, API client
 
 ---
-*Last session: 2026-01-23T04:03:35Z*
-*Stopped at: Completed 01-04-PLAN.md (Phase 1 Complete)*
+*Last session: 2026-01-23T10:45:00Z*
+*Stopped at: Completed 02-01-PLAN.md*
 *Resume file: None*
