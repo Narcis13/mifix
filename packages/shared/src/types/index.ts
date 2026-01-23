@@ -70,6 +70,13 @@ export interface Cont {
   activ: boolean;
 }
 
+export interface TipDocument {
+  id: number;
+  cod: string;
+  denumire: string;
+  activ: boolean;
+}
+
 export interface MijlocFix {
   id: number;
   numarInventar: string;
@@ -92,6 +99,10 @@ export interface MijlocFix {
   contId: number;
   cont?: Cont;
 
+  // Document type
+  tipDocumentId?: number;
+  tipDocument?: TipDocument;
+
   // Values (strings for decimal precision)
   valoareInventar: string;
   valoareAmortizata: string;
@@ -107,6 +118,7 @@ export interface MijlocFix {
   durataNormala: number; // months
   metodaAmortizare: MetodaAmortizare;
   amortizabil: boolean;
+  eAmortizabil: boolean; // override for depreciation calculation
 
   // Documents
   documentAchizitie?: string;

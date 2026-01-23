@@ -77,7 +77,17 @@ export const conturi = mysqlTable("conturi", {
 });
 
 // ============================================================================
-// 6. Mijloace Fixe - Fixed Assets (Main Entity)
+// 6. Tipuri Document - Document Types for Asset Acquisition
+// ============================================================================
+export const tipuriDocument = mysqlTable("tipuri_document", {
+  id: int("id").primaryKey().autoincrement(),
+  cod: varchar("cod", { length: 20 }).notNull().unique(),
+  denumire: varchar("denumire", { length: 100 }).notNull(),
+  activ: boolean("activ").default(true),
+});
+
+// ============================================================================
+// 7. Mijloace Fixe - Fixed Assets (Main Entity)
 // ============================================================================
 export const mijloaceFixe = mysqlTable(
   "mijloace_fixe",
@@ -100,6 +110,9 @@ export const mijloaceFixe = mysqlTable(
     // Accounting reference
     contId: int("cont_id"),
 
+    // Document type reference
+    tipDocumentId: int("tip_document_id"),
+
     // Acquisition details
     dataAchizitie: date("data_achizitie").notNull(),
     documentAchizitie: varchar("document_achizitie", { length: 100 }),
@@ -120,6 +133,7 @@ export const mijloaceFixe = mysqlTable(
       precision: 15,
       scale: 2,
     }).notNull(),
+    eAmortizabil: boolean("e_amortizabil").default(true), // override depreciation calculation
 
     // State
     stare: mysqlEnum("stare", ["activ", "casare", "declasare", "transfer"]).notNull().default("activ"),
@@ -251,6 +265,10 @@ export const conturiRelations = relations(conturi, ({ many }) => ({
   mijloaceFixe: many(mijloaceFixe),
 }));
 
+export const tipuriDocumentRelations = relations(tipuriDocument, ({ many }) => ({
+  mijloaceFixe: many(mijloaceFixe),
+}));
+
 export const mijloaceFixeRelations = relations(mijloaceFixe, ({ one, many }) => ({
   clasificare: one(clasificari, {
     fields: [mijloaceFixe.clasificareCod],
@@ -271,6 +289,10 @@ export const mijloaceFixeRelations = relations(mijloaceFixe, ({ one, many }) => 
   cont: one(conturi, {
     fields: [mijloaceFixe.contId],
     references: [conturi.id],
+  }),
+  tipDocument: one(tipuriDocument, {
+    fields: [mijloaceFixe.tipDocumentId],
+    references: [tipuriDocument.id],
   }),
   tranzactii: many(tranzactii),
   amortizari: many(amortizari),

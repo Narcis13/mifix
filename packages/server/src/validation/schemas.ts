@@ -1,5 +1,5 @@
 import { createInsertSchema } from "drizzle-zod";
-import { gestiuni, locuriUilizare, surseFinantare, conturi } from "../db/schema";
+import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument } from "../db/schema";
 import type { z } from "zod";
 
 // ============================================================================
@@ -56,3 +56,16 @@ export type InsertCont = z.infer<typeof insertContSchema>;
 
 export const updateContSchema = insertContSchema.partial();
 export type UpdateCont = z.infer<typeof updateContSchema>;
+
+// ============================================================================
+// Tipuri Document - Document Types for Asset Acquisition
+// ============================================================================
+export const insertTipDocumentSchema = createInsertSchema(tipuriDocument, {
+  cod: (schema) => schema.min(1, "Cod obligatoriu").max(20, "Cod maxim 20 caractere"),
+  denumire: (schema) => schema.min(1, "Denumire obligatorie").max(100, "Denumire maxim 100 caractere"),
+}).omit({ id: true });
+
+export type InsertTipDocument = z.infer<typeof insertTipDocumentSchema>;
+
+export const updateTipDocumentSchema = insertTipDocumentSchema.partial();
+export type UpdateTipDocument = z.infer<typeof updateTipDocumentSchema>;
