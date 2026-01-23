@@ -14,9 +14,9 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 3 of 6 (Mijloace Fixe Core)
-Plan: 4 of 6 in current phase (03-01, 03-02, 03-03, 03-04 complete)
+Plan: 5 of 6 in current phase (03-01, 03-02, 03-03, 03-04, 03-05 complete)
 Status: In progress
-Last activity: 2026-01-23 - Completed 03-04-PLAN.md
+Last activity: 2026-01-23 - Completed 03-05-PLAN.md
 
 Progress: [███░░░░░░░] 2/6 Phases complete
 
@@ -26,7 +26,7 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
-| 3 | Mijloace Fixe Core | In Progress | 4/6 |
+| 3 | Mijloace Fixe Core | In Progress | 5/6 |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
@@ -69,6 +69,9 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 | 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
 | 03-02 | Date string coercion in Zod schemas | JSON sends dates as strings, transform to Date objects |
 | 03-02 | Money class for computed depreciation | Ensures decimal precision for cotaAmortizareLunara |
+| 03-05 | Zod v4 uses nullable() for optional numbers | required_error option not supported, use min(1) pattern |
+| 03-05 | Multi-section Card form layout | Logical grouping for complex forms (Identificare, Document, Contabile, Amortizare) |
+| 03-05 | useWatch for dependent dropdown | Gestiune selection dynamically filters LocFolosinta options |
 
 ### Blockers
 
@@ -97,8 +100,9 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 - 03-02 MijloaceFixe API complete: CRUD endpoints with filtering, pagination, joins, uniqueness validation
 - 03-03 Reusable components complete: ClasificarePicker, StareBadge, MijlocFixFilters, useDebounce
 - 03-04 MijloaceFixe list page complete: DataTable with filters, pagination, row click navigation, routing
+- 03-05 MijlocFixForm complete: 669-line multi-section form with validation, classification auto-fill, dependent dropdowns
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed 03-04-PLAN.md*
+*Stopped at: Completed 03-05-PLAN.md*
 *Resume file: None*
