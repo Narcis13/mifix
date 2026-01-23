@@ -14,24 +14,24 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 2 of 6 (Nomenclatoare)
-Plan: 1 of ? in current phase
+Plan: 2 of ? in current phase
 Status: In progress
-Last activity: 2026-01-23 - Completed 02-01-PLAN.md
+Last activity: 2026-01-23 - Completed 02-02-PLAN.md
 
-Progress: [██░░░░░░░░] ~20% (Phase 1 complete + Phase 2 started)
+Progress: [███░░░░░░░] ~25% (Phase 1 complete + Phase 2 plans 1-2)
 
 ## Progress
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
-| 2 | Nomenclatoare | In Progress | 1/? |
+| 2 | Nomenclatoare | In Progress | 2/? |
 | 3 | Mijloace Fixe Core | Not Started | 0/? |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 5/34 complete
+**Requirements:** 6/34 complete (NOM-01 Gestiuni done)
 
 ## Session Context
 
@@ -48,6 +48,8 @@ Progress: [██░░░░░░░░] ~20% (Phase 1 complete + Phase 2 star
 | 02-01 | Zod validation messages in Romanian | User-facing error messages should be in Romanian |
 | 02-01 | DataTable with isLoading/emptyMessage props | Consistent UX across all data tables |
 | 02-01 | API client returns ApiResponse wrapper | Standardized response structure for all endpoints |
+| 02-02 | Dialog-based form for create/edit | Single component handles both modes with useEffect reset |
+| 02-02 | Actions column in DataTable | Edit button per row, no delete (use deactivation instead) |
 
 ### Blockers
 
@@ -62,13 +64,14 @@ Progress: [██░░░░░░░░] ~20% (Phase 1 complete + Phase 2 star
 - Project initialized 2026-01-22
 - Roadmap created with 6 phases covering 34 v1 requirements
 - 01-01 Foundation complete: monorepo with Bun, Hono, React, Vite, Turbo
-- 01-02 Database complete: Drizzle ORM with PostgreSQL schema for all 8 tables
+- 01-02 Database complete: Drizzle ORM with MySQL schema for all 8 tables
 - 01-03 UI & Shared complete: shadcn/ui, Tailwind v4, Money class, entity types
 - 01-04 Integration complete: Health API, decimal test, demo UI verified
 - Phase 1 COMPLETE - Ready for Phase 2 Nomenclatoare
 - 02-01 Infrastructure complete: routing, DataTable, Zod schemas, API client
+- 02-02 Gestiuni CRUD complete: API endpoints + UI with DataTable and dialog form
 
 ---
-*Last session: 2026-01-23T10:45:00Z*
-*Stopped at: Completed 02-01-PLAN.md*
+*Last session: 2026-01-23T08:44:08Z*
+*Stopped at: Completed 02-02-PLAN.md*
 *Resume file: None*
