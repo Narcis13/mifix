@@ -197,8 +197,8 @@ export function MijlocFixForm({
       locFolosintaId: data.locFolosintaId || null,
       contId: data.contId || null,
       sursaFinantareId: data.sursaFinantareId || null,
+      valoareInitiala: data.valoareInventar, // Same as valoareInventar for new assets
       valoareInventar: data.valoareInventar,
-      valoareAmortizata: isEditMode ? mijlocFix!.valoareAmortizata : "0.00",
       valoareRamasa: isEditMode ? mijlocFix!.valoareRamasa : data.valoareInventar,
       dataAchizitie: data.dataAchizitie,
       dataPIF: data.dataAchizitie, // Same as acquisition date by default
