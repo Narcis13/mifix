@@ -8,6 +8,7 @@ import { conturiRoutes } from "./routes/conturi";
 import { locuriRoutes } from "./routes/locuri";
 import { tipuriDocumentRoutes } from "./routes/tipuri-document";
 import { mijloaceFixeRoutes } from "./routes/mijloace-fixe";
+import { operatiuniRoutes } from "./routes/operatiuni";
 
 const app = new Hono();
 
@@ -23,6 +24,7 @@ app.route("/api/conturi", conturiRoutes);
 app.route("/api/locuri", locuriRoutes);
 app.route("/api/tipuri-document", tipuriDocumentRoutes);
 app.route("/api/mijloace-fixe", mijloaceFixeRoutes);
+app.route("/api/operatiuni", operatiuniRoutes);
 
 // Root route
 app.get("/", (c) => {
