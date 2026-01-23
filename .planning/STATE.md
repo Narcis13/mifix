@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 4 of 6 (Operatiuni)
-**Phase Status:** Not Started
+**Phase Status:** In Progress
 **Last Updated:** 2026-01-23
 
 ## Project Reference
@@ -14,11 +14,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 4 of 6 (Operatiuni)
-Plan: 0 of ? in current phase
-Status: Not started - needs planning
-Last activity: 2026-01-23 - Phase 3 completed
+Plan: 1 of ? in current phase
+Status: In progress
+Last activity: 2026-01-23 - Completed 04-01-PLAN.md (Operatiuni API)
 
-Progress: [█████░░░░░] 3/6 Phases complete
+Progress: [██████░░░░] ~55% (Phase 4 started)
 
 ## Progress
 
@@ -27,7 +27,7 @@ Progress: [█████░░░░░] 3/6 Phases complete
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
-| 4 | Operatiuni | Not Started | 0/? |
+| 4 | Operatiuni | In Progress | 1/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
@@ -35,6 +35,7 @@ Progress: [█████░░░░░] 3/6 Phases complete
 - SETUP-01 through SETUP-05 - Done (Phase 1)
 - NOM-01 through NOM-05 - Done (Phase 2)
 - MF-01 through MF-06 - Done (Phase 3)
+- OP-01 through OP-04 - API Done (Phase 4, Plan 1)
 
 ## Session Context
 
@@ -71,6 +72,10 @@ Progress: [█████░░░░░] 3/6 Phases complete
 | 03-05 | Multi-section Card form layout | Logical grouping for complex forms (Identificare, Document, Contabile, Amortizare) |
 | 03-05 | useWatch for dependent dropdown | Gestiune selection dynamically filters LocFolosinta options |
 | 03-06 | valoareInitiala must be sent in form payload | Server schema requires it, same as valoareInventar for new assets |
+| 04-01 | Operations only on stare='activ' assets | Prevents double operations on already processed assets |
+| 04-01 | db.transaction() for atomic operations | Asset update + tranzactie insert in single atomic transaction |
+| 04-01 | Money class for declasare calculations | Ensures decimal precision for value reductions |
+| 04-01 | Transfer-gestiune clears locFolosinta | Logical since loc belongs to gestiune |
 
 ### Blockers
 
@@ -93,9 +98,11 @@ Progress: [█████░░░░░] 3/6 Phases complete
   - 03-04: List page with filtering and pagination
   - 03-05: Multi-section form (669 lines)
   - 03-06: Detail page + human verification passed
-- Ready for Phase 4: Operatiuni (transfers, disposal, audit trail)
+- **Phase 4 IN PROGRESS** - Operatiuni API complete
+  - 04-01: API endpoints for transfer-gestiune, transfer-loc, casare, declasare
+  - Next: UI dialogs for operations, transaction history timeline
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Phase 3 complete, ready for Phase 4*
+*Stopped at: Completed 04-01-PLAN.md*
 *Resume file: None*
