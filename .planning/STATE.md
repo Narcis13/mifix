@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 3 of 6 (Mijloace Fixe Core)
-**Phase Status:** Not Started
+**Phase Status:** In Progress
 **Last Updated:** 2026-01-23
 
 ## Project Reference
@@ -14,9 +14,9 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 3 of 6 (Mijloace Fixe Core)
-Plan: 0 of ? in current phase
-Status: Not started
-Last activity: 2026-01-23 - Completed Phase 2 Nomenclatoare
+Plan: 1 of 6 in current phase
+Status: In progress
+Last activity: 2026-01-23 - Completed 03-01-PLAN.md
 
 Progress: [███░░░░░░░] 2/6 Phases complete
 
@@ -26,7 +26,7 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
-| 3 | Mijloace Fixe Core | Not Started | 0/? |
+| 3 | Mijloace Fixe Core | In Progress | 1/6 |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
@@ -61,6 +61,8 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 | 02-04 | Locuri filtered by gestiune | GET /api/locuri?gestiuneId=X for gestiune-specific locations |
 | 02-05 | Conditional contAmortizare field | Watch amortizabil to show/hide contAmortizare input |
 | 02-05 | Form pattern with onSubmit/isSubmitting | Consistent with SurseFinantareForm for better separation |
+| 03-01 | TipDocument CRUD follows nomenclator pattern | Consistency with Phase 2 routes |
+| 03-01 | eAmortizabil field for per-asset override | Allows non-amortizable assets to be marked at entry time |
 
 ### Blockers
 
@@ -85,8 +87,9 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 - 02-04 Locuri Folosinta CRUD complete: API with gestiune filter + UI
 - 02-05 Plan de Conturi CRUD complete: API + UI with conditional amortizare field
 - **Phase 2 COMPLETE** - All 5 nomenclatoare requirements done
+- 03-01 UI Components & TipDocument complete: shadcn Badge/Command/Popover/Card/Separator + TipDocument API
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed Phase 2 Nomenclatoare*
+*Stopped at: Completed 03-01-PLAN.md*
 *Resume file: None*
