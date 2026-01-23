@@ -124,10 +124,10 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Schema migration + Operatiuni API routes (transfer, casare, declasare)
-- [ ] 04-02-PLAN.md — Transfer dialogs (TransferGestiune + TransferLoc)
-- [ ] 04-03-PLAN.md — Casare + Declasare dialogs
-- [ ] 04-04-PLAN.md — Transaction history timeline + Detail page integration
+- [x] 04-01-PLAN.md — Schema migration + Operatiuni API routes (transfer, casare, declasare)
+- [x] 04-02-PLAN.md — Transfer dialogs (TransferGestiune + TransferLoc)
+- [x] 04-03-PLAN.md — Casare + Declasare dialogs
+- [x] 04-04-PLAN.md — Transaction history timeline + Detail page integration
 
 ---
 
@@ -188,11 +188,11 @@ Plans:
 | 1 | Foundation & Setup | Complete | 5/5 |
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
-| 4 | Operatiuni | Planned | 0/5 |
+| 4 | Operatiuni | Complete | 5/5 |
 | 5 | Amortizare | Not Started | 0/6 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/8 |
 
-**Total:** 16/34 requirements complete
+**Total:** 21/34 requirements complete
 
 ---
 *Roadmap created: 2026-01-22*
@@ -203,3 +203,4 @@ Plans:
 *Phase 3 planned: 2026-01-23*
 *Phase 3 complete: 2026-01-23*
 *Phase 4 planned: 2026-01-23*
+*Phase 4 complete: 2026-01-24*

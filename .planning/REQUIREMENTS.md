@@ -17,28 +17,28 @@ Requirements pentru release-ul initial. Fiecare se mapeaza la faze din roadmap.
 
 ### Nomenclatoare
 
-- [ ] **NOM-01**: CRUD gestiuni (cod, denumire, responsabil, activ)
-- [ ] **NOM-02**: CRUD locuri de folosinta (in cadrul gestiunilor)
-- [ ] **NOM-03**: CRUD surse de finantare (cod, denumire)
-- [ ] **NOM-04**: CRUD plan de conturi (simbol, denumire, tip, cont amortizare)
-- [ ] **NOM-05**: Clasificare MF conform HG 2139/2004 preincarcata (cod, denumire, grupa, durata normala)
+- [x] **NOM-01**: CRUD gestiuni (cod, denumire, responsabil, activ)
+- [x] **NOM-02**: CRUD locuri de folosinta (in cadrul gestiunilor)
+- [x] **NOM-03**: CRUD surse de finantare (cod, denumire)
+- [x] **NOM-04**: CRUD plan de conturi (simbol, denumire, tip, cont amortizare)
+- [x] **NOM-05**: Clasificare MF conform HG 2139/2004 preincarcata (cod, denumire, grupa, durata normala)
 
 ### Mijloace Fixe
 
-- [ ] **MF-01**: Inregistrare mijloc fix cu toate campurile (nr. inventar, denumire, clasificare, gestiune, valoare, data achizitie, durata normala)
-- [ ] **MF-02**: Listare mijloace fixe cu filtrare (gestiune, stare, cautare text)
-- [ ] **MF-03**: Vizualizare detalii mijloc fix
-- [ ] **MF-04**: Editare mijloc fix
-- [ ] **MF-05**: Validare numar inventar unic
-- [ ] **MF-06**: Selectare clasificare din catalogul HG 2139/2004
+- [x] **MF-01**: Inregistrare mijloc fix cu toate campurile (nr. inventar, denumire, clasificare, gestiune, valoare, data achizitie, durata normala)
+- [x] **MF-02**: Listare mijloace fixe cu filtrare (gestiune, stare, cautare text)
+- [x] **MF-03**: Vizualizare detalii mijloc fix
+- [x] **MF-04**: Editare mijloc fix
+- [x] **MF-05**: Validare numar inventar unic
+- [x] **MF-06**: Selectare clasificare din catalogul HG 2139/2004
 
 ### Operatiuni
 
-- [ ] **OP-01**: Transfer mijloc fix intre gestiuni cu documentare (gestiune sursa, destinatie, data, observatii)
-- [ ] **OP-02**: Transfer mijloc fix intre locuri de folosinta in aceeasi gestiune
-- [ ] **OP-03**: Casare mijloc fix (marcare ca scos din functiune)
-- [ ] **OP-04**: Declasare mijloc fix (reducere valoare)
-- [ ] **OP-05**: Istoric tranzactii per mijloc fix (toate operatiunile)
+- [x] **OP-01**: Transfer mijloc fix intre gestiuni cu documentare (gestiune sursa, destinatie, data, observatii)
+- [x] **OP-02**: Transfer mijloc fix intre locuri de folosinta in aceeasi gestiune
+- [x] **OP-03**: Casare mijloc fix (marcare ca scos din functiune)
+- [x] **OP-04**: Declasare mijloc fix (reducere valoare)
+- [x] **OP-05**: Istoric tranzactii per mijloc fix (toate operatiunile)
 
 ### Amortizare
 
@@ -114,22 +114,22 @@ Care faze acopera care requirements. Actualizat in timpul crearii roadmap-ului.
 | SETUP-03 | Phase 1 | Complete |
 | SETUP-04 | Phase 1 | Complete |
 | SETUP-05 | Phase 1 | Complete |
-| NOM-01 | Phase 2 | Pending |
-| NOM-02 | Phase 2 | Pending |
-| NOM-03 | Phase 2 | Pending |
-| NOM-04 | Phase 2 | Pending |
-| NOM-05 | Phase 2 | Pending |
-| MF-01 | Phase 3 | Pending |
-| MF-02 | Phase 3 | Pending |
-| MF-03 | Phase 3 | Pending |
-| MF-04 | Phase 3 | Pending |
-| MF-05 | Phase 3 | Pending |
-| MF-06 | Phase 3 | Pending |
-| OP-01 | Phase 4 | Pending |
-| OP-02 | Phase 4 | Pending |
-| OP-03 | Phase 4 | Pending |
-| OP-04 | Phase 4 | Pending |
-| OP-05 | Phase 4 | Pending |
+| NOM-01 | Phase 2 | Complete |
+| NOM-02 | Phase 2 | Complete |
+| NOM-03 | Phase 2 | Complete |
+| NOM-04 | Phase 2 | Complete |
+| NOM-05 | Phase 2 | Complete |
+| MF-01 | Phase 3 | Complete |
+| MF-02 | Phase 3 | Complete |
+| MF-03 | Phase 3 | Complete |
+| MF-04 | Phase 3 | Complete |
+| MF-05 | Phase 3 | Complete |
+| MF-06 | Phase 3 | Complete |
+| OP-01 | Phase 4 | Complete |
+| OP-02 | Phase 4 | Complete |
+| OP-03 | Phase 4 | Complete |
+| OP-04 | Phase 4 | Complete |
+| OP-05 | Phase 4 | Complete |
 | AMO-01 | Phase 5 | Pending |
 | AMO-02 | Phase 5 | Pending |
 | AMO-03 | Phase 5 | Pending |
@@ -152,4 +152,4 @@ Care faze acopera care requirements. Actualizat in timpul crearii roadmap-ului.
 
 ---
 *Requirements defined: 2026-01-22*
-*Last updated: 2026-01-22 after roadmap creation*
+*Last updated: 2026-01-24 after Phase 4 completion*
