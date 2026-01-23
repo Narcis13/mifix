@@ -1,5 +1,5 @@
 import { createInsertSchema } from "drizzle-zod";
-import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument } from "../db/schema";
+import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument, mijloaceFixe } from "../db/schema";
 import type { z } from "zod";
 
 // ============================================================================
@@ -69,3 +69,45 @@ export type InsertTipDocument = z.infer<typeof insertTipDocumentSchema>;
 
 export const updateTipDocumentSchema = insertTipDocumentSchema.partial();
 export type UpdateTipDocument = z.infer<typeof updateTipDocumentSchema>;
+
+// ============================================================================
+// Mijloace Fixe - Fixed Assets
+// ============================================================================
+export const insertMijlocFixSchema = createInsertSchema(mijloaceFixe, {
+  numarInventar: (schema) => schema
+    .min(1, "Numar inventar obligatoriu")
+    .max(50, "Numar inventar maxim 50 caractere"),
+  denumire: (schema) => schema
+    .min(1, "Denumire obligatorie")
+    .max(255, "Denumire maxim 255 caractere"),
+  descriere: (schema) => schema
+    .max(1000, "Descriere maxim 1000 caractere")
+    .optional(),
+  clasificareCod: (schema) => schema
+    .min(1, "Clasificare obligatorie"),
+  gestiuneId: (schema) => schema
+    .min(1, "Gestiune obligatorie"),
+  valoareInitiala: (schema) => schema
+    .min(1, "Valoare initiala obligatorie"),
+  valoareInventar: (schema) => schema
+    .min(1, "Valoare inventar obligatorie"),
+  valoareRamasa: (schema) => schema
+    .min(1, "Valoare ramasa obligatorie"),
+  durataNormala: (schema) => schema
+    .min(1, "Durata normala obligatorie"),
+  observatii: (schema) => schema
+    .max(1000, "Observatii maxim 1000 caractere")
+    .optional(),
+}).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  valoareAmortizata: true,  // Computed
+  durataRamasa: true,       // Computed
+  cotaAmortizareLunara: true, // Computed
+});
+
+export type InsertMijlocFix = z.infer<typeof insertMijlocFixSchema>;
+
+export const updateMijlocFixSchema = insertMijlocFixSchema.partial();
+export type UpdateMijlocFix = z.infer<typeof updateMijlocFixSchema>;
