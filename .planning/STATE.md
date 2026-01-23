@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 2 of 6 (Nomenclatoare)
-**Phase Status:** In Progress
+**Phase Status:** Complete
 **Last Updated:** 2026-01-23
 
 ## Project Reference
@@ -9,29 +9,34 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** Phase 2 - Nomenclatoare
+**Current focus:** Phase 2 Complete - Ready for Phase 3
 
 ## Current Position
 
 Phase: 2 of 6 (Nomenclatoare)
-Plan: 3 of 5 in current phase
-Status: In progress
-Last activity: 2026-01-23 - Completed 02-03-PLAN.md
+Plan: 5 of 5 in current phase
+Status: Phase complete
+Last activity: 2026-01-23 - Completed 02-05-PLAN.md
 
-Progress: [████░░░░░░] ~35% (Phase 1 complete + Phase 2 plans 1-3)
+Progress: [█████░░░░░] ~45% (Phase 1 + Phase 2 complete)
 
 ## Progress
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
-| 2 | Nomenclatoare | In Progress | 3/5 |
+| 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Not Started | 0/? |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 8/34 complete (NOM-01 Gestiuni, NOM-03 Surse Finantare, NOM-05 Clasificari done)
+**Requirements:** 13/34 complete
+- NOM-01 Gestiuni - Done (02-02)
+- NOM-02 Locuri Folosinta - Done (02-04)
+- NOM-03 Surse Finantare - Done (02-03)
+- NOM-04 Plan de Conturi - Done (02-05)
+- NOM-05 Clasificari - Done (02-03)
 
 ## Session Context
 
@@ -53,6 +58,9 @@ Progress: [████░░░░░░] ~35% (Phase 1 complete + Phase 2 plan
 | 02-03 | Clasificari read-only API | HG 2139/2004 data is preloaded, no user edits allowed |
 | 02-03 | 300ms debounce for search | Balance responsiveness with API efficiency |
 | 02-03 | PaginatedResponse pattern | Standard structure for paginated endpoints |
+| 02-04 | Locuri filtered by gestiune | GET /api/locuri?gestiuneId=X for gestiune-specific locations |
+| 02-05 | Conditional contAmortizare field | Watch amortizabil to show/hide contAmortizare input |
+| 02-05 | Form pattern with onSubmit/isSubmitting | Consistent with SurseFinantareForm for better separation |
 
 ### Blockers
 
@@ -74,8 +82,11 @@ Progress: [████░░░░░░] ~35% (Phase 1 complete + Phase 2 plan
 - 02-01 Infrastructure complete: routing, DataTable, Zod schemas, API client
 - 02-02 Gestiuni CRUD complete: API endpoints + UI with DataTable and dialog form
 - 02-03 Surse Finantare CRUD + Clasificari catalog complete
+- 02-04 Locuri Folosinta CRUD complete: API with gestiune filter + UI
+- 02-05 Plan de Conturi CRUD complete: API + UI with conditional amortizare field
+- **Phase 2 COMPLETE** - All 5 nomenclatoare requirements done
 
 ---
-*Last session: 2026-01-23T08:44:45Z*
-*Stopped at: Completed 02-03-PLAN.md*
+*Last session: 2026-01-23T08:53:41Z*
+*Stopped at: Completed 02-05-PLAN.md*
 *Resume file: None*
