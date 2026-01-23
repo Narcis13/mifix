@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { cn } from "./lib/utils";
+import { Toaster } from "./components/ui/sonner";
 
 const navItems = [
   { path: "/", label: "Acasa" },
@@ -54,6 +55,9 @@ function App() {
       <main className="container mx-auto px-4 py-6">
         <Outlet />
       </main>
+
+      {/* Toast notifications */}
+      <Toaster position="top-right" />
     </div>
   );
 }
