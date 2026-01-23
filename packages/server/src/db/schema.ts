@@ -181,6 +181,8 @@ export const tranzactii = mysqlTable(
     // For transfers
     gestiuneSursaId: int("gestiune_sursa_id"),
     gestiuneDestinatieId: int("gestiune_destinatie_id"),
+    locFolosintaSursaId: int("loc_folosinta_sursa_id"),
+    locFolosintaDestinatieId: int("loc_folosinta_destinatie_id"),
 
     // Monetary values - decimal(15, 2)
     valoareOperatie: decimal("valoare_operatie", { precision: 15, scale: 2 }),
@@ -310,6 +312,14 @@ export const tranzactiiRelations = relations(tranzactii, ({ one }) => ({
   gestiuneDestinatie: one(gestiuni, {
     fields: [tranzactii.gestiuneDestinatieId],
     references: [gestiuni.id],
+  }),
+  locFolosintaSursa: one(locuriUilizare, {
+    fields: [tranzactii.locFolosintaSursaId],
+    references: [locuriUilizare.id],
+  }),
+  locFolosintaDestinatie: one(locuriUilizare, {
+    fields: [tranzactii.locFolosintaDestinatieId],
+    references: [locuriUilizare.id],
   }),
 }));
 
