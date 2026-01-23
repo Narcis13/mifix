@@ -92,12 +92,12 @@ Plans:
 **Plans:** 6 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Prerequisites: shadcn components + TipDocument nomenclator + schema updates
-- [ ] 03-02-PLAN.md — MijloaceFixe API (CRUD with filtering, pagination, joins)
-- [ ] 03-03-PLAN.md — Shared components: ClasificarePicker, StareBadge, MijlocFixFilters
-- [ ] 03-04-PLAN.md — Asset list page with DataTable and filtering
-- [ ] 03-05-PLAN.md — Asset form (create/edit) with multi-section layout
-- [ ] 03-06-PLAN.md — Asset detail page + final verification
+- [x] 03-01-PLAN.md — Prerequisites: shadcn components + TipDocument nomenclator + schema updates
+- [x] 03-02-PLAN.md — MijloaceFixe API (CRUD with filtering, pagination, joins)
+- [x] 03-03-PLAN.md — Shared components: ClasificarePicker, StareBadge, MijlocFixFilters
+- [x] 03-04-PLAN.md — Asset list page with DataTable and filtering
+- [x] 03-05-PLAN.md — Asset form (create/edit) with multi-section layout
+- [x] 03-06-PLAN.md — Asset detail page + final verification
 
 ---
 
@@ -179,12 +179,12 @@ Plans:
 |-------|------|--------|--------------|
 | 1 | Foundation & Setup | Complete | 5/5 |
 | 2 | Nomenclatoare | Complete | 5/5 |
-| 3 | Mijloace Fixe Core | Planned | 0/6 |
+| 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Not Started | 0/5 |
 | 5 | Amortizare | Not Started | 0/6 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/8 |
 
-**Total:** 10/34 requirements complete
+**Total:** 16/34 requirements complete
 
 ---
 *Roadmap created: 2026-01-22*
@@ -193,3 +193,4 @@ Plans:
 *Phase 2 planned: 2026-01-23*
 *Phase 2 complete: 2026-01-23*
 *Phase 3 planned: 2026-01-23*
+*Phase 3 complete: 2026-01-23*

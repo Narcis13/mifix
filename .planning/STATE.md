@@ -1,7 +1,7 @@
 # Project State: MiFix
 
-**Current Phase:** 3 of 6 (Mijloace Fixe Core)
-**Phase Status:** In Progress
+**Current Phase:** 4 of 6 (Operatiuni)
+**Phase Status:** Not Started
 **Last Updated:** 2026-01-23
 
 ## Project Reference
@@ -9,16 +9,16 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** Phase 3 - Mijloace Fixe Core
+**Current focus:** Phase 4 - Operatiuni (asset lifecycle operations)
 
 ## Current Position
 
-Phase: 3 of 6 (Mijloace Fixe Core)
-Plan: 5 of 6 in current phase (03-01, 03-02, 03-03, 03-04, 03-05 complete)
-Status: In progress
-Last activity: 2026-01-23 - Completed 03-05-PLAN.md
+Phase: 4 of 6 (Operatiuni)
+Plan: 0 of ? in current phase
+Status: Not started - needs planning
+Last activity: 2026-01-23 - Phase 3 completed
 
-Progress: [███░░░░░░░] 2/6 Phases complete
+Progress: [█████░░░░░] 3/6 Phases complete
 
 ## Progress
 
@@ -26,17 +26,15 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
-| 3 | Mijloace Fixe Core | In Progress | 5/6 |
+| 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 10/34 complete
-- NOM-01 Gestiuni - Done (02-02)
-- NOM-02 Locuri Folosinta - Done (02-04)
-- NOM-03 Surse Finantare - Done (02-03)
-- NOM-04 Plan de Conturi - Done (02-05)
-- NOM-05 Clasificari - Done (02-03)
+**Requirements:** 16/34 complete
+- SETUP-01 through SETUP-05 - Done (Phase 1)
+- NOM-01 through NOM-05 - Done (Phase 2)
+- MF-01 through MF-06 - Done (Phase 3)
 
 ## Session Context
 
@@ -63,15 +61,16 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 | 02-05 | Form pattern with onSubmit/isSubmitting | Consistent with SurseFinantareForm for better separation |
 | 03-01 | TipDocument CRUD follows nomenclator pattern | Consistency with Phase 2 routes |
 | 03-01 | eAmortizabil field for per-asset override | Allows non-amortizable assets to be marked at entry time |
-| 03-03 | StareBadge uses actual StareMijlocFix enum | Type safety with shared types (activ, conservare, casat, transferat, vandut) |
-| 03-04 | DataTable onRowClick prop for row navigation | Reusable pattern for any table requiring row click navigation |
-| 03-04 | URL params sync with filter state | Shareable/bookmarkable filtered views, browser back/forward works |
-| 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
 | 03-02 | Date string coercion in Zod schemas | JSON sends dates as strings, transform to Date objects |
 | 03-02 | Money class for computed depreciation | Ensures decimal precision for cotaAmortizareLunara |
+| 03-03 | StareBadge uses actual StareMijlocFix enum | Type safety with shared types (activ, conservare, casat, transferat, vandut) |
+| 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
+| 03-04 | DataTable onRowClick prop for row navigation | Reusable pattern for any table requiring row click navigation |
+| 03-04 | URL params sync with filter state | Shareable/bookmarkable filtered views, browser back/forward works |
 | 03-05 | Zod v4 uses nullable() for optional numbers | required_error option not supported, use min(1) pattern |
 | 03-05 | Multi-section Card form layout | Logical grouping for complex forms (Identificare, Document, Contabile, Amortizare) |
 | 03-05 | useWatch for dependent dropdown | Gestiune selection dynamically filters LocFolosinta options |
+| 03-06 | valoareInitiala must be sent in form payload | Server schema requires it, same as valoareInventar for new assets |
 
 ### Blockers
 
@@ -85,24 +84,18 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 
 - Project initialized 2026-01-22
 - Roadmap created with 6 phases covering 34 v1 requirements
-- 01-01 Foundation complete: monorepo with Bun, Hono, React, Vite, Turbo
-- 01-02 Database complete: Drizzle ORM with MySQL schema for all 8 tables
-- 01-03 UI & Shared complete: shadcn/ui, Tailwind v4, Money class, entity types
-- 01-04 Integration complete: Health API, decimal test, demo UI verified
-- Phase 1 COMPLETE - Ready for Phase 2 Nomenclatoare
-- 02-01 Infrastructure complete: routing, DataTable, Zod schemas, API client
-- 02-02 Gestiuni CRUD complete: API endpoints + UI with DataTable and dialog form
-- 02-03 Surse Finantare CRUD + Clasificari catalog complete
-- 02-04 Locuri Folosinta CRUD complete: API with gestiune filter + UI
-- 02-05 Plan de Conturi CRUD complete: API + UI with conditional amortizare field
-- **Phase 2 COMPLETE** - All 5 nomenclatoare requirements done
-- 03-01 UI Components & TipDocument complete: shadcn Badge/Command/Popover/Card/Separator + TipDocument API
-- 03-02 MijloaceFixe API complete: CRUD endpoints with filtering, pagination, joins, uniqueness validation
-- 03-03 Reusable components complete: ClasificarePicker, StareBadge, MijlocFixFilters, useDebounce
-- 03-04 MijloaceFixe list page complete: DataTable with filters, pagination, row click navigation, routing
-- 03-05 MijlocFixForm complete: 669-line multi-section form with validation, classification auto-fill, dependent dropdowns
+- **Phase 1 COMPLETE** - Foundation with Bun, Hono, React, Vite, Drizzle, shadcn/ui
+- **Phase 2 COMPLETE** - All 5 nomenclatoare (Gestiuni, Locuri, Surse, Conturi, Clasificari)
+- **Phase 3 COMPLETE** - Full asset CRUD with filtering, classification picker, validation
+  - 03-01: shadcn components + TipDocument nomenclator
+  - 03-02: MijloaceFixe API (610 lines, 7-table joins)
+  - 03-03: Reusable components (ClasificarePicker, StareBadge, Filters)
+  - 03-04: List page with filtering and pagination
+  - 03-05: Multi-section form (669 lines)
+  - 03-06: Detail page + human verification passed
+- Ready for Phase 4: Operatiuni (transfers, disposal, audit trail)
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed 03-05-PLAN.md*
+*Stopped at: Phase 3 complete, ready for Phase 4*
 *Resume file: None*
