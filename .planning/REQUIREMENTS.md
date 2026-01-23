@@ -9,11 +9,11 @@ Requirements pentru release-ul initial. Fiecare se mapeaza la faze din roadmap.
 
 ### Setup & Infrastructura
 
-- [ ] **SETUP-01**: Proiect initializat cu bhvr template (Bun, Hono, React, Vite)
-- [ ] **SETUP-02**: Baza de date MySQL configurata cu Drizzle ORM
-- [ ] **SETUP-03**: shadcn/ui instalat si configurat
-- [ ] **SETUP-04**: Tipuri shared intre client si server
-- [ ] **SETUP-05**: decimal.js integrat pentru calcule financiare
+- [x] **SETUP-01**: Proiect initializat cu bhvr template (Bun, Hono, React, Vite)
+- [x] **SETUP-02**: Baza de date MySQL configurata cu Drizzle ORM
+- [x] **SETUP-03**: shadcn/ui instalat si configurat
+- [x] **SETUP-04**: Tipuri shared intre client si server
+- [x] **SETUP-05**: decimal.js integrat pentru calcule financiare
 
 ### Nomenclatoare
 
@@ -109,11 +109,11 @@ Care faze acopera care requirements. Actualizat in timpul crearii roadmap-ului.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SETUP-01 | Phase 1 | Pending |
-| SETUP-02 | Phase 1 | Pending |
-| SETUP-03 | Phase 1 | Pending |
-| SETUP-04 | Phase 1 | Pending |
-| SETUP-05 | Phase 1 | Pending |
+| SETUP-01 | Phase 1 | Complete |
+| SETUP-02 | Phase 1 | Complete |
+| SETUP-03 | Phase 1 | Complete |
+| SETUP-04 | Phase 1 | Complete |
+| SETUP-05 | Phase 1 | Complete |
 | NOM-01 | Phase 2 | Pending |
 | NOM-02 | Phase 2 | Pending |
 | NOM-03 | Phase 2 | Pending |

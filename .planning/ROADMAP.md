@@ -30,10 +30,10 @@
 **Plans:** 4 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Initialize project from bhvr template
-- [ ] 01-02-PLAN.md — Configure Drizzle ORM with MySQL schema
-- [ ] 01-03-PLAN.md — Setup shadcn/ui, shared types, Money utility
-- [ ] 01-04-PLAN.md — Integration test and verification
+- [x] 01-01-PLAN.md — Initialize project from bhvr template
+- [x] 01-02-PLAN.md — Configure Drizzle ORM with MySQL schema
+- [x] 01-03-PLAN.md — Setup shadcn/ui, shared types, Money utility
+- [x] 01-04-PLAN.md — Integration test and verification
 
 ---
 
@@ -158,15 +158,16 @@ Plans:
 
 | Phase | Name | Status | Requirements |
 |-------|------|--------|--------------|
-| 1 | Foundation & Setup | Planned | 5 |
-| 2 | Nomenclatoare | Not Started | 5 |
-| 3 | Mijloace Fixe Core | Not Started | 6 |
-| 4 | Operatiuni | Not Started | 5 |
-| 5 | Amortizare | Not Started | 6 |
-| 6 | Rapoarte & Autentificare | Not Started | 8 |
+| 1 | Foundation & Setup | ✓ Complete | 5/5 |
+| 2 | Nomenclatoare | Not Started | 0/5 |
+| 3 | Mijloace Fixe Core | Not Started | 0/6 |
+| 4 | Operatiuni | Not Started | 0/5 |
+| 5 | Amortizare | Not Started | 0/6 |
+| 6 | Rapoarte & Autentificare | Not Started | 0/8 |
 
-**Total:** 0/34 requirements complete
+**Total:** 5/34 requirements complete
 
 ---
 *Roadmap created: 2026-01-22*
 *Phase 1 planned: 2026-01-22*
+*Phase 1 complete: 2026-01-23*
