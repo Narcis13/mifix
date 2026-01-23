@@ -1,27 +1,18 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import type { HealthResponse, ApiResponse } from "shared";
+import { healthRoutes } from "./routes/health";
 
 const app = new Hono();
 
 // Middleware
 app.use("/*", cors());
 
-// Health check endpoint
-app.get("/api/health", (c) => {
-  const response: ApiResponse<HealthResponse> = {
-    success: true,
-    data: {
-      status: "ok",
-      timestamp: new Date().toISOString(),
-    },
-  };
-  return c.json(response);
-});
+// Routes
+app.route("/api/health", healthRoutes);
 
-// Root endpoint
+// Root route
 app.get("/", (c) => {
-  return c.json({ message: "MiFix API Server" });
+  return c.json({ message: "MiFix API", version: "1.0.0" });
 });
 
 export default {
