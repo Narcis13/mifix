@@ -2,7 +2,7 @@
 
 **Current Phase:** 4 of 6 (Operatiuni)
 **Phase Status:** In Progress
-**Last Updated:** 2026-01-23
+**Last Updated:** 2026-01-24
 
 ## Project Reference
 
@@ -14,11 +14,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 4 of 6 (Operatiuni)
-Plan: 2 of ? in current phase
+Plan: 3 of ? in current phase
 Status: In progress
-Last activity: 2026-01-23 - Completed 04-02-PLAN.md (Transfer Dialogs)
+Last activity: 2026-01-24 - Completed 04-03-PLAN.md (Casare/Declasare Dialogs)
 
-Progress: [██████░░░░] ~58% (Phase 4 in progress)
+Progress: [██████░░░░] ~60% (Phase 4 in progress)
 
 ## Progress
 
@@ -27,7 +27,7 @@ Progress: [██████░░░░] ~58% (Phase 4 in progress)
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
-| 4 | Operatiuni | In Progress | 2/? |
+| 4 | Operatiuni | In Progress | 3/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
@@ -79,6 +79,9 @@ Progress: [██████░░░░] ~58% (Phase 4 in progress)
 | 04-02 | Dialog pattern for operations | Consistent with nomenclator forms (GestiuniForm.tsx) |
 | 04-02 | Inline error display for API errors | Show above form rather than external toast |
 | 04-02 | useWatch for dependent dropdown | Gestiune selection triggers loc folosinta fetch |
+| 04-03 | Sonner for toast notifications | shadcn toast not available in v4 registry, sonner is lightweight |
+| 04-03 | Live preview for declasare | Shows calculated new remaining value as user types |
+| 04-03 | Destructive button for casare | Visual emphasis on irreversible operation |
 
 ### Blockers
 
@@ -101,12 +104,13 @@ Progress: [██████░░░░] ~58% (Phase 4 in progress)
   - 03-04: List page with filtering and pagination
   - 03-05: Multi-section form (669 lines)
   - 03-06: Detail page + human verification passed
-- **Phase 4 IN PROGRESS** - Operatiuni API + Transfer dialogs complete
+- **Phase 4 IN PROGRESS** - Operatiuni API + all dialogs complete
   - 04-01: API endpoints for transfer-gestiune, transfer-loc, casare, declasare
   - 04-02: TransferGestiuneDialog and TransferLocDialog components
-  - Next: Casare/Declasare dialogs, transaction history timeline
+  - 04-03: CasareDialog and DeclasareDialog components + toast infrastructure
+  - Next: Transaction history timeline, integration into detail page
 
 ---
-*Last session: 2026-01-23*
-*Stopped at: Completed 04-02-PLAN.md*
+*Last session: 2026-01-24*
+*Stopped at: Completed 04-03-PLAN.md*
 *Resume file: None*
