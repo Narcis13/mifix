@@ -60,11 +60,11 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Dependencies, shadcn/ui components, routing, DataTable
-- [ ] 02-02-PLAN.md — Gestiuni CRUD (API + UI)
-- [ ] 02-03-PLAN.md — Surse Finantare CRUD + Clasificari read-only
-- [ ] 02-04-PLAN.md — Locuri de Folosinta CRUD with gestiune dependency
-- [ ] 02-05-PLAN.md — Conturi CRUD with conditional amortizare field
+- [x] 02-01-PLAN.md — Dependencies, shadcn/ui components, routing, DataTable
+- [x] 02-02-PLAN.md — Gestiuni CRUD (API + UI)
+- [x] 02-03-PLAN.md — Surse Finantare CRUD + Clasificari read-only
+- [x] 02-04-PLAN.md — Locuri de Folosinta CRUD with gestiune dependency
+- [x] 02-05-PLAN.md — Conturi CRUD with conditional amortizare field
 
 ---
 
@@ -168,16 +168,17 @@ Plans:
 | Phase | Name | Status | Requirements |
 |-------|------|--------|--------------|
 | 1 | Foundation & Setup | Complete | 5/5 |
-| 2 | Nomenclatoare | Planned | 0/5 |
+| 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Not Started | 0/6 |
 | 4 | Operatiuni | Not Started | 0/5 |
 | 5 | Amortizare | Not Started | 0/6 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/8 |
 
-**Total:** 5/34 requirements complete
+**Total:** 10/34 requirements complete
 
 ---
 *Roadmap created: 2026-01-22*
 *Phase 1 planned: 2026-01-22*
 *Phase 1 complete: 2026-01-23*
 *Phase 2 planned: 2026-01-23*
+*Phase 2 complete: 2026-01-23*
