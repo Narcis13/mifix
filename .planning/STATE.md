@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 4 of 6 (Operatiuni)
-**Phase Status:** In Progress
+**Phase Status:** Complete
 **Last Updated:** 2026-01-24
 
 ## Project Reference
@@ -9,16 +9,16 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** Phase 4 - Operatiuni (asset lifecycle operations)
+**Current focus:** Phase 4 complete - Ready for Phase 5: Amortizare
 
 ## Current Position
 
 Phase: 4 of 6 (Operatiuni)
-Plan: 3 of ? in current phase
-Status: In progress
-Last activity: 2026-01-24 - Completed 04-03-PLAN.md (Casare/Declasare Dialogs)
+Plan: 4 of 4 in current phase
+Status: Phase complete
+Last activity: 2026-01-24 - Completed 04-04-PLAN.md (Transaction History + Detail Integration)
 
-Progress: [██████░░░░] ~60% (Phase 4 in progress)
+Progress: [███████░░░] ~70% (Phase 4 complete)
 
 ## Progress
 
@@ -27,15 +27,15 @@ Progress: [██████░░░░] ~60% (Phase 4 in progress)
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
-| 4 | Operatiuni | In Progress | 3/? |
+| 4 | Operatiuni | Complete | 4/4 |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 16/34 complete
+**Requirements:** 21/34 complete
 - SETUP-01 through SETUP-05 - Done (Phase 1)
 - NOM-01 through NOM-05 - Done (Phase 2)
 - MF-01 through MF-06 - Done (Phase 3)
-- OP-01 through OP-04 - API Done (Phase 4, Plan 1)
+- OP-01 through OP-05 - Done (Phase 4)
 
 ## Session Context
 
@@ -82,6 +82,10 @@ Progress: [██████░░░░] ~60% (Phase 4 in progress)
 | 04-03 | Sonner for toast notifications | shadcn toast not available in v4 registry, sonner is lightweight |
 | 04-03 | Live preview for declasare | Shows calculated new remaining value as user types |
 | 04-03 | Destructive button for casare | Visual emphasis on irreversible operation |
+| 04-04 | Operations dropdown only for active assets | Prevents operations on already processed assets |
+| 04-04 | TranzactieWithRelations type | Full type safety for transaction history with populated relations |
+| 04-04 | Vertical timeline for history | Clean visual representation with type-specific icons |
+| 04-04 | refetch pattern for data refresh | onSuccess callback triggers re-fetch of asset and timeline data |
 
 ### Blockers
 
@@ -104,13 +108,14 @@ Progress: [██████░░░░] ~60% (Phase 4 in progress)
   - 03-04: List page with filtering and pagination
   - 03-05: Multi-section form (669 lines)
   - 03-06: Detail page + human verification passed
-- **Phase 4 IN PROGRESS** - Operatiuni API + all dialogs complete
+- **Phase 4 COMPLETE** - All asset operations with transaction history
   - 04-01: API endpoints for transfer-gestiune, transfer-loc, casare, declasare
   - 04-02: TransferGestiuneDialog and TransferLocDialog components
   - 04-03: CasareDialog and DeclasareDialog components + toast infrastructure
-  - Next: Transaction history timeline, integration into detail page
+  - 04-04: Transaction history timeline + detail page integration
+- **Next:** Phase 5 - Amortizare (monthly depreciation calculations)
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Completed 04-03-PLAN.md*
+*Stopped at: Completed 04-04-PLAN.md (Phase 4 complete)*
 *Resume file: None*
