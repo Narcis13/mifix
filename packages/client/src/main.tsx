@@ -8,7 +8,12 @@ import { SurseFinantarePage } from "./pages/SurseFinantare";
 import { LocuriPage } from "./pages/Locuri";
 import { ConturiPage } from "./pages/Conturi";
 import { ClasificariPage } from "./pages/Clasificari";
+import { MijloaceFixePage } from "./pages/MijloaceFixe";
 import "./index.css";
+
+// Placeholder components for detail/edit pages (created in later plans)
+const MijlocFixDetail = () => <div className="p-6">Detalii mijloc fix - coming soon</div>;
+const MijlocFixEdit = () => <div className="p-6">Adauga/Editeaza mijloc fix - coming soon</div>;
 
 const router = createBrowserRouter([
   {
@@ -38,6 +43,27 @@ const router = createBrowserRouter([
       {
         path: "clasificari",
         element: <ClasificariPage />,
+      },
+      {
+        path: "mijloace-fixe",
+        children: [
+          {
+            index: true,
+            element: <MijloaceFixePage />,
+          },
+          {
+            path: "nou",
+            element: <MijlocFixEdit />,
+          },
+          {
+            path: ":id",
+            element: <MijlocFixDetail />,
+          },
+          {
+            path: ":id/edit",
+            element: <MijlocFixEdit />,
+          },
+        ],
       },
     ],
   },

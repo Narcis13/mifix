@@ -3,6 +3,7 @@ import { cn } from "./lib/utils";
 
 const navItems = [
   { path: "/", label: "Acasa" },
+  { path: "/mijloace-fixe", label: "Mijloace Fixe" },
   { path: "/gestiuni", label: "Gestiuni" },
   { path: "/surse-finantare", label: "Surse Finantare" },
   { path: "/locuri", label: "Locuri Folosinta" },
