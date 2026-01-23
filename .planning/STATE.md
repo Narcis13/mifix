@@ -14,24 +14,24 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 2 of 6 (Nomenclatoare)
-Plan: 2 of ? in current phase
+Plan: 3 of 5 in current phase
 Status: In progress
-Last activity: 2026-01-23 - Completed 02-02-PLAN.md
+Last activity: 2026-01-23 - Completed 02-03-PLAN.md
 
-Progress: [███░░░░░░░] ~25% (Phase 1 complete + Phase 2 plans 1-2)
+Progress: [████░░░░░░] ~35% (Phase 1 complete + Phase 2 plans 1-3)
 
 ## Progress
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
-| 2 | Nomenclatoare | In Progress | 2/? |
+| 2 | Nomenclatoare | In Progress | 3/5 |
 | 3 | Mijloace Fixe Core | Not Started | 0/? |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 6/34 complete (NOM-01 Gestiuni done)
+**Requirements:** 8/34 complete (NOM-01 Gestiuni, NOM-03 Surse Finantare, NOM-05 Clasificari done)
 
 ## Session Context
 
@@ -50,6 +50,9 @@ Progress: [███░░░░░░░] ~25% (Phase 1 complete + Phase 2 plan
 | 02-01 | API client returns ApiResponse wrapper | Standardized response structure for all endpoints |
 | 02-02 | Dialog-based form for create/edit | Single component handles both modes with useEffect reset |
 | 02-02 | Actions column in DataTable | Edit button per row, no delete (use deactivation instead) |
+| 02-03 | Clasificari read-only API | HG 2139/2004 data is preloaded, no user edits allowed |
+| 02-03 | 300ms debounce for search | Balance responsiveness with API efficiency |
+| 02-03 | PaginatedResponse pattern | Standard structure for paginated endpoints |
 
 ### Blockers
 
@@ -70,8 +73,9 @@ Progress: [███░░░░░░░] ~25% (Phase 1 complete + Phase 2 plan
 - Phase 1 COMPLETE - Ready for Phase 2 Nomenclatoare
 - 02-01 Infrastructure complete: routing, DataTable, Zod schemas, API client
 - 02-02 Gestiuni CRUD complete: API endpoints + UI with DataTable and dialog form
+- 02-03 Surse Finantare CRUD + Clasificari catalog complete
 
 ---
-*Last session: 2026-01-23T08:44:08Z*
-*Stopped at: Completed 02-02-PLAN.md*
+*Last session: 2026-01-23T08:44:45Z*
+*Stopped at: Completed 02-03-PLAN.md*
 *Resume file: None*
