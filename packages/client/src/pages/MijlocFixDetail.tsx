@@ -1,11 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { MijlocFix } from "shared";
 import { api } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { StareBadge } from "@/components/mijloace-fixe/StareBadge";
-import { ArrowLeft, Pencil } from "lucide-react";
+import { TransferGestiuneDialog } from "@/components/operatiuni/TransferGestiuneDialog";
+import { TransferLocDialog } from "@/components/operatiuni/TransferLocDialog";
+import { CasareDialog } from "@/components/operatiuni/CasareDialog";
+import { DeclasareDialog } from "@/components/operatiuni/DeclasareDialog";
+import { TranzactiiTimeline } from "@/components/operatiuni/TranzactiiTimeline";
+import {
+  ArrowLeft,
+  Pencil,
+  MoreHorizontal,
+  ArrowRightLeft,
+  MapPin,
+  Ban,
+  TrendingDown,
+  History,
+} from "lucide-react";
 
 export function MijlocFixDetail() {
   const { id } = useParams<{ id: string }>();
@@ -14,9 +35,17 @@ export function MijlocFixDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!id) return;
+  // Dialog states
+  const [transferGestiuneOpen, setTransferGestiuneOpen] = useState(false);
+  const [transferLocOpen, setTransferLocOpen] = useState(false);
+  const [casareOpen, setCasareOpen] = useState(false);
+  const [declasareOpen, setDeclasareOpen] = useState(false);
 
+  // Refresh key for timeline
+  const [timelineKey, setTimelineKey] = useState(0);
+
+  const fetchData = useCallback(() => {
+    if (!id) return;
     setIsLoading(true);
     api.get<MijlocFix>(`/mijloace-fixe/${id}`).then((res) => {
       if (res.success && res.data) {
@@ -27,6 +56,16 @@ export function MijlocFixDetail() {
       setIsLoading(false);
     });
   }, [id]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const refreshData = useCallback(() => {
+    fetchData();
+    // Force timeline to re-fetch
+    setTimelineKey((prev) => prev + 1);
+  }, [fetchData]);
 
   if (isLoading) {
     return (
@@ -75,10 +114,44 @@ export function MijlocFixDetail() {
             <p className="text-muted-foreground font-mono">{mijlocFix.numarInventar}</p>
           </div>
         </div>
-        <Button onClick={() => navigate(`/mijloace-fixe/${id}/edit`)}>
-          <Pencil className="mr-2 h-4 w-4" />
-          Editeaza
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={() => navigate(`/mijloace-fixe/${id}/edit`)}>
+            <Pencil className="mr-2 h-4 w-4" />
+            Editeaza
+          </Button>
+          {mijlocFix.stare === "activ" && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  Operatiuni
+                  <MoreHorizontal className="ml-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setTransferGestiuneOpen(true)}>
+                  <ArrowRightLeft className="mr-2 h-4 w-4" />
+                  Transfer Gestiune
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTransferLocOpen(true)}>
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Transfer Loc Folosinta
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => setDeclasareOpen(true)}>
+                  <TrendingDown className="mr-2 h-4 w-4" />
+                  Declasare
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setCasareOpen(true)}
+                  className="text-destructive"
+                >
+                  <Ban className="mr-2 h-4 w-4" />
+                  Casare
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
       </div>
 
       {/* Section: Date Identificare */}
@@ -173,6 +246,49 @@ export function MijlocFixDetail() {
           />
         </CardContent>
       </Card>
+
+      {/* Section: Istoric Tranzactii */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <History className="h-5 w-5" />
+            Istoric Tranzactii
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <TranzactiiTimeline key={timelineKey} mijlocFixId={mijlocFix.id} />
+        </CardContent>
+      </Card>
+
+      {/* Operation Dialogs */}
+      {mijlocFix && (
+        <>
+          <TransferGestiuneDialog
+            open={transferGestiuneOpen}
+            onOpenChange={setTransferGestiuneOpen}
+            mijlocFix={mijlocFix}
+            onSuccess={refreshData}
+          />
+          <TransferLocDialog
+            open={transferLocOpen}
+            onOpenChange={setTransferLocOpen}
+            mijlocFix={mijlocFix}
+            onSuccess={refreshData}
+          />
+          <CasareDialog
+            open={casareOpen}
+            onOpenChange={setCasareOpen}
+            mijlocFix={mijlocFix}
+            onSuccess={refreshData}
+          />
+          <DeclasareDialog
+            open={declasareOpen}
+            onOpenChange={setDeclasareOpen}
+            mijlocFix={mijlocFix}
+            onSuccess={refreshData}
+          />
+        </>
+      )}
     </div>
   );
 }
