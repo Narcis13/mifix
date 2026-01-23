@@ -14,9 +14,9 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 3 of 6 (Mijloace Fixe Core)
-Plan: 3 of 6 in current phase
+Plan: 3 of 6 in current phase (03-01, 03-02, 03-03 complete)
 Status: In progress
-Last activity: 2026-01-23 - Completed 03-03-PLAN.md
+Last activity: 2026-01-23 - Completed 03-02-PLAN.md
 
 Progress: [███░░░░░░░] 2/6 Phases complete
 
@@ -65,6 +65,8 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 | 03-01 | eAmortizabil field for per-asset override | Allows non-amortizable assets to be marked at entry time |
 | 03-03 | StareBadge uses actual StareMijlocFix enum | Type safety with shared types (activ, conservare, casat, transferat, vandut) |
 | 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
+| 03-02 | Date string coercion in Zod schemas | JSON sends dates as strings, transform to Date objects |
+| 03-02 | Money class for computed depreciation | Ensures decimal precision for cotaAmortizareLunara |
 
 ### Blockers
 
@@ -90,10 +92,10 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 - 02-05 Plan de Conturi CRUD complete: API + UI with conditional amortizare field
 - **Phase 2 COMPLETE** - All 5 nomenclatoare requirements done
 - 03-01 UI Components & TipDocument complete: shadcn Badge/Command/Popover/Card/Separator + TipDocument API
-- 03-02 MijlocFix validation schemas complete: Zod schemas for create/update with Romanian messages
+- 03-02 MijloaceFixe API complete: CRUD endpoints with filtering, pagination, joins, uniqueness validation
 - 03-03 Reusable components complete: ClasificarePicker, StareBadge, MijlocFixFilters, useDebounce
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed 03-03-PLAN.md*
+*Stopped at: Completed 03-02-PLAN.md*
 *Resume file: None*
