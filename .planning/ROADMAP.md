@@ -121,6 +121,14 @@ Plans:
 
 **Dependencies:** Phase 3 (requires assets to exist)
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Schema migration + Operatiuni API routes (transfer, casare, declasare)
+- [ ] 04-02-PLAN.md — Transfer dialogs (TransferGestiune + TransferLoc)
+- [ ] 04-03-PLAN.md — Casare + Declasare dialogs
+- [ ] 04-04-PLAN.md — Transaction history timeline + Detail page integration
+
 ---
 
 ### Phase 5: Amortizare
@@ -180,7 +188,7 @@ Plans:
 | 1 | Foundation & Setup | Complete | 5/5 |
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
-| 4 | Operatiuni | Not Started | 0/5 |
+| 4 | Operatiuni | Planned | 0/5 |
 | 5 | Amortizare | Not Started | 0/6 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/8 |
 
@@ -194,3 +202,4 @@ Plans:
 *Phase 2 complete: 2026-01-23*
 *Phase 3 planned: 2026-01-23*
 *Phase 3 complete: 2026-01-23*
+*Phase 4 planned: 2026-01-23*
