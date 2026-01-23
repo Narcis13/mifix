@@ -10,10 +10,8 @@ import { ConturiPage } from "./pages/Conturi";
 import { ClasificariPage } from "./pages/Clasificari";
 import { MijloaceFixePage } from "./pages/MijloaceFixe";
 import { MijlocFixEdit } from "./pages/MijlocFixEdit";
+import { MijlocFixDetail } from "./pages/MijlocFixDetail";
 import "./index.css";
-
-// Placeholder components for detail page (created in later plans)
-const MijlocFixDetail = () => <div className="p-6">Detalii mijloc fix - coming soon</div>;
 
 const router = createBrowserRouter([
   {
