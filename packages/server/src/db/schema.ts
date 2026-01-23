@@ -34,8 +34,8 @@ export const gestiuni = mysqlTable("gestiuni", {
   denumire: varchar("denumire", { length: 200 }).notNull(),
   responsabil: varchar("responsabil", { length: 200 }),
   activ: boolean("activ").default(true),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
+  createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at").notNull().default(sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`),
 });
 
 // ============================================================================
@@ -130,8 +130,8 @@ export const mijloaceFixe = mysqlTable(
 
     // Metadata
     observatii: varchar("observatii", { length: 1000 }),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+    updatedAt: timestamp("updated_at").notNull().default(sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`),
   },
   (table) => [
     index("idx_mijloace_fixe_gestiune").on(table.gestiuneId),
@@ -178,7 +178,7 @@ export const tranzactii = mysqlTable(
     observatii: varchar("observatii", { length: 1000 }),
 
     // Metadata
-    createdAt: timestamp("created_at").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => [
     index("idx_tranzactii_mijloc_fix").on(table.mijlocFixId),
@@ -212,7 +212,7 @@ export const amortizari = mysqlTable(
     dataCalcul: timestamp("data_calcul"),
 
     // Metadata
-    createdAt: timestamp("created_at").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   },
   (table) => [
     index("idx_amortizari_mijloc_fix_an_luna").on(
