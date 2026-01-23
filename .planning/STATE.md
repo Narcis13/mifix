@@ -14,9 +14,9 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 3 of 6 (Mijloace Fixe Core)
-Plan: 3 of 6 in current phase (03-01, 03-02, 03-03 complete)
+Plan: 4 of 6 in current phase (03-01, 03-02, 03-03, 03-04 complete)
 Status: In progress
-Last activity: 2026-01-23 - Completed 03-02-PLAN.md
+Last activity: 2026-01-23 - Completed 03-04-PLAN.md
 
 Progress: [███░░░░░░░] 2/6 Phases complete
 
@@ -26,7 +26,7 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 |-------|------|--------|-------|
 | 1 | Foundation & Setup | Complete | 4/4 |
 | 2 | Nomenclatoare | Complete | 5/5 |
-| 3 | Mijloace Fixe Core | In Progress | 3/6 |
+| 3 | Mijloace Fixe Core | In Progress | 4/6 |
 | 4 | Operatiuni | Not Started | 0/? |
 | 5 | Amortizare | Not Started | 0/? |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
@@ -64,6 +64,8 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 | 03-01 | TipDocument CRUD follows nomenclator pattern | Consistency with Phase 2 routes |
 | 03-01 | eAmortizabil field for per-asset override | Allows non-amortizable assets to be marked at entry time |
 | 03-03 | StareBadge uses actual StareMijlocFix enum | Type safety with shared types (activ, conservare, casat, transferat, vandut) |
+| 03-04 | DataTable onRowClick prop for row navigation | Reusable pattern for any table requiring row click navigation |
+| 03-04 | URL params sync with filter state | Shareable/bookmarkable filtered views, browser back/forward works |
 | 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
 | 03-02 | Date string coercion in Zod schemas | JSON sends dates as strings, transform to Date objects |
 | 03-02 | Money class for computed depreciation | Ensures decimal precision for cotaAmortizareLunara |
@@ -94,8 +96,9 @@ Progress: [███░░░░░░░] 2/6 Phases complete
 - 03-01 UI Components & TipDocument complete: shadcn Badge/Command/Popover/Card/Separator + TipDocument API
 - 03-02 MijloaceFixe API complete: CRUD endpoints with filtering, pagination, joins, uniqueness validation
 - 03-03 Reusable components complete: ClasificarePicker, StareBadge, MijlocFixFilters, useDebounce
+- 03-04 MijloaceFixe list page complete: DataTable with filters, pagination, row click navigation, routing
 
 ---
 *Last session: 2026-01-23*
-*Stopped at: Completed 03-02-PLAN.md*
+*Stopped at: Completed 03-04-PLAN.md*
 *Resume file: None*
