@@ -4,6 +4,8 @@ import { healthRoutes } from "./routes/health";
 import { gestiuniRoutes } from "./routes/gestiuni";
 import { surseFinantareRoutes } from "./routes/surse-finantare";
 import { clasificariRoutes } from "./routes/clasificari";
+import { conturiRoutes } from "./routes/conturi";
+import { locuriRoutes } from "./routes/locuri";
 
 const app = new Hono();
 
@@ -15,6 +17,8 @@ app.route("/api/health", healthRoutes);
 app.route("/api/gestiuni", gestiuniRoutes);
 app.route("/api/surse-finantare", surseFinantareRoutes);
 app.route("/api/clasificari", clasificariRoutes);
+app.route("/api/conturi", conturiRoutes);
+app.route("/api/locuri", locuriRoutes);
 
 // Root route
 app.get("/", (c) => {
