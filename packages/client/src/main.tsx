@@ -15,6 +15,13 @@ import { MijloaceFixePage } from "./pages/MijloaceFixe";
 import { MijlocFixEdit } from "./pages/MijlocFixEdit";
 import { MijlocFixDetail } from "./pages/MijlocFixDetail";
 import Amortizare from "./pages/Amortizare";
+import {
+  RapoartePage,
+  FisaMijlocFixPage,
+  BalantaVerificarePage,
+  JurnalActePage,
+  SituatieAmortizarePage,
+} from "./pages/Rapoarte";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -57,6 +64,16 @@ const router = createBrowserRouter([
       {
         path: "amortizare",
         element: <Amortizare />,
+      },
+      {
+        path: "rapoarte",
+        children: [
+          { index: true, element: <RapoartePage /> },
+          { path: "fisa", element: <FisaMijlocFixPage /> },
+          { path: "balanta", element: <BalantaVerificarePage /> },
+          { path: "jurnal", element: <JurnalActePage /> },
+          { path: "amortizare", element: <SituatieAmortizarePage /> },
+        ],
       },
       {
         path: "mijloace-fixe",
