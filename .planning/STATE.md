@@ -1,26 +1,26 @@
 # Project State: MiFix
 
-**Current Phase:** 6 of 6 (Rapoarte & Autentificare)
-**Phase Status:** Complete
+**Current Phase:** Milestone complete
+**Milestone Status:** v1.0 shipped
 **Last Updated:** 2026-01-24
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-22)
+See: .planning/PROJECT.md (updated 2026-01-24)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** All phases complete - v1 delivered
+**Current focus:** v1.0 shipped — ready for deployment or v1.1 planning
 
 ## Current Position
 
-Phase: 6 of 6 (Rapoarte & Autentificare)
-Plan: 4 of 4 in current phase
-Status: Complete
-Last activity: 2026-01-24 - Completed 06-04-PLAN.md (Reports UI + Printing)
+Phase: v1.0 complete (6 phases shipped)
+Plan: Not started
+Status: Ready to plan next milestone
+Last activity: 2026-01-24 — v1.0 milestone complete
 
-Progress: [██████████] 100% (6 phases complete)
+Progress: [██████████] 100% (v1.0 shipped)
 
-## Progress
+## v1.0 Summary
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
@@ -31,84 +31,13 @@ Progress: [██████████] 100% (6 phases complete)
 | 5 | Amortizare | Complete | 3/3 |
 | 6 | Rapoarte & Autentificare | Complete | 4/4 |
 
-**Requirements:** 34/34 complete - v1 delivered
-- AUTH-01, AUTH-02, AUTH-03 (authentication)
-- RAP-01, RAP-02, RAP-03, RAP-04 (reports)
-- SETUP-01 through SETUP-05 - Done (Phase 1)
-- NOM-01 through NOM-05 - Done (Phase 2)
-- MF-01 through MF-06 - Done (Phase 3)
-- OP-01 through OP-05 - Done (Phase 4)
-- AMO-01 through AMO-06 - Done (Phase 5)
+**Total:** 6 phases, 26 plans, 34 requirements — all shipped
 
 ## Session Context
 
 ### Key Decisions
 
-| Phase | Decision | Rationale |
-|-------|----------|-----------|
-| 01-01 | Manual scaffold instead of bhvr template | Template CLI failed, equivalent structure created manually |
-| 01-01 | Added packageManager field | Turbo 2.7.x requires it for workspace resolution |
-| 01-03 | shadcn/ui New York style with Neutral base | Cleaner, more professional look |
-| 01-03 | Tailwind v4 with @import syntax | Modern approach, better CSS organization |
-| 01-03 | Immutable Money class | All arithmetic returns new instances, preventing mutation bugs |
-| 01-03 | Monetary values as strings in types | Preserves decimal precision throughout the stack |
-| 02-01 | Zod validation messages in Romanian | User-facing error messages should be in Romanian |
-| 02-01 | DataTable with isLoading/emptyMessage props | Consistent UX across all data tables |
-| 02-01 | API client returns ApiResponse wrapper | Standardized response structure for all endpoints |
-| 02-02 | Dialog-based form for create/edit | Single component handles both modes with useEffect reset |
-| 02-02 | Actions column in DataTable | Edit button per row, no delete (use deactivation instead) |
-| 02-03 | Clasificari read-only API | HG 2139/2004 data is preloaded, no user edits allowed |
-| 02-03 | 300ms debounce for search | Balance responsiveness with API efficiency |
-| 02-03 | PaginatedResponse pattern | Standard structure for paginated endpoints |
-| 02-04 | Locuri filtered by gestiune | GET /api/locuri?gestiuneId=X for gestiune-specific locations |
-| 02-05 | Conditional contAmortizare field | Watch amortizabil to show/hide contAmortizare input |
-| 02-05 | Form pattern with onSubmit/isSubmitting | Consistent with SurseFinantareForm for better separation |
-| 03-01 | TipDocument CRUD follows nomenclator pattern | Consistency with Phase 2 routes |
-| 03-01 | eAmortizabil field for per-asset override | Allows non-amortizable assets to be marked at entry time |
-| 03-02 | Date string coercion in Zod schemas | JSON sends dates as strings, transform to Date objects |
-| 03-02 | Money class for computed depreciation | Ensures decimal precision for cotaAmortizareLunara |
-| 03-03 | StareBadge uses actual StareMijlocFix enum | Type safety with shared types (activ, conservare, casat, transferat, vandut) |
-| 03-03 | MijlocFixFilters exports state type | Parent components can use MijlocFixFiltersState for typing |
-| 03-04 | DataTable onRowClick prop for row navigation | Reusable pattern for any table requiring row click navigation |
-| 03-04 | URL params sync with filter state | Shareable/bookmarkable filtered views, browser back/forward works |
-| 03-05 | Zod v4 uses nullable() for optional numbers | required_error option not supported, use min(1) pattern |
-| 03-05 | Multi-section Card form layout | Logical grouping for complex forms (Identificare, Document, Contabile, Amortizare) |
-| 03-05 | useWatch for dependent dropdown | Gestiune selection dynamically filters LocFolosinta options |
-| 03-06 | valoareInitiala must be sent in form payload | Server schema requires it, same as valoareInventar for new assets |
-| 04-01 | Operations only on stare='activ' assets | Prevents double operations on already processed assets |
-| 04-01 | db.transaction() for atomic operations | Asset update + tranzactie insert in single atomic transaction |
-| 04-01 | Money class for declasare calculations | Ensures decimal precision for value reductions |
-| 04-01 | Transfer-gestiune clears locFolosinta | Logical since loc belongs to gestiune |
-| 04-02 | Dialog pattern for operations | Consistent with nomenclator forms (GestiuniForm.tsx) |
-| 04-02 | Inline error display for API errors | Show above form rather than external toast |
-| 04-02 | useWatch for dependent dropdown | Gestiune selection triggers loc folosinta fetch |
-| 04-03 | Sonner for toast notifications | shadcn toast not available in v4 registry, sonner is lightweight |
-| 04-03 | Live preview for declasare | Shows calculated new remaining value as user types |
-| 04-03 | Destructive button for casare | Visual emphasis on irreversible operation |
-| 04-04 | Operations dropdown only for active assets | Prevents operations on already processed assets |
-| 04-04 | TranzactieWithRelations type | Full type safety for transaction history with populated relations |
-| 04-04 | Vertical timeline for history | Clean visual representation with type-specific icons |
-| 04-04 | refetch pattern for data refresh | onSuccess callback triggers re-fetch of asset and timeline data |
-| 05-01 | uniqueIndex for duplicate prevention | Database-level constraint catches race conditions that application-level checks miss |
-| 05-01 | Money class for all depreciation calculations | Maintains decimal precision, prevents floating-point errors |
-| 05-01 | Final month protection logic | AMO-06 requirement - prevents over-depreciation |
-| 05-02 | AmortizariTable as standalone card component | Self-contained with own fetch, can be reused elsewhere |
-| 05-02 | Romanian month names array | Display months in Romanian (Ianuarie, Februarie, etc.) |
-| 05-03 | Verification on dialog open | Loads month status when user opens dialog, refreshes on year change |
-| 05-03 | Green checkmark for processed months | Visual feedback in dropdown makes month status immediately clear |
-| 05-03 | Stats cards layout | Total depreciation, months processed, average per month in grid |
-| 06-01 | Bun.password with argon2id | Native Bun API, secure algorithm, no extra dependencies |
-| 06-01 | JWT in HttpOnly cookie | XSS protection, not localStorage |
-| 06-01 | Manual JWT verification | hono/jwt middleware throws instead of 401, manual verify() with HS256 |
-| 06-02 | AuthProvider wraps RouterProvider | Ensures auth context available everywhere including login page |
-| 06-02 | ProtectedRoute wraps App | All child routes automatically protected |
-| 06-02 | location.state.from pattern | Preserves intended destination for post-login redirect |
-| 06-03 | SQL aliases for self-joins | gestiuni/locuri tables joined multiple times for source/destination |
-| 06-03 | Money class for totals | Prevents floating point errors in aggregate calculations |
-| 06-03 | Required params validation | dataStart/dataEnd for jurnal, an/luna for amortizare |
-| 06-04 | useReactToPrint with contentRef | Modern API for targeting printable content via ref |
-| 06-04 | CSS @media print styles | Hide nav, reset backgrounds, format tables for printing |
-| 06-04 | PrintLayout wrapper | Consistent header with title, subtitle, date across reports |
+(Archived to PROJECT.md for v1.0 milestone)
 
 ### Blockers
 
@@ -120,33 +49,12 @@ Progress: [██████████] 100% (6 phases complete)
 
 ### Notes
 
-- Project initialized 2026-01-22
-- Roadmap created with 6 phases covering 34 v1 requirements
-- **Phase 1 COMPLETE** - Foundation with Bun, Hono, React, Vite, Drizzle, shadcn/ui
-- **Phase 2 COMPLETE** - All 5 nomenclatoare (Gestiuni, Locuri, Surse, Conturi, Clasificari)
-- **Phase 3 COMPLETE** - Full asset CRUD with filtering, classification picker, validation
-  - 03-01: shadcn components + TipDocument nomenclator
-  - 03-02: MijloaceFixe API (610 lines, 7-table joins)
-  - 03-03: Reusable components (ClasificarePicker, StareBadge, Filters)
-  - 03-04: List page with filtering and pagination
-  - 03-05: Multi-section form (669 lines)
-  - 03-06: Detail page + human verification passed
-- **Phase 4 COMPLETE** - All asset operations with transaction history
-  - 04-01: API endpoints for transfer-gestiune, transfer-loc, casare, declasare
-  - 04-02: TransferGestiuneDialog and TransferLocDialog components
-  - 04-03: CasareDialog and DeclasareDialog components + toast infrastructure
-  - 04-04: Transaction history timeline + detail page integration
-- **Phase 5 COMPLETE** - Amortizare
-  - 05-01: Amortizare API (batch generation, history, summary, verification)
-  - 05-02: Depreciation history view (AmortizariTable component)
-  - 05-03: Amortizare UI (page, dialog, summary table)
-- **Phase 6 COMPLETE** - Rapoarte & Autentificare
-  - 06-01: Authentication backend (users table, JWT middleware, login/logout/me)
-  - 06-02: Authentication UI (AuthContext, ProtectedRoute, LoginPage)
-  - 06-03: Report API endpoints (fisa, balanta, jurnal, amortizare)
-  - 06-04: Reports UI + Printing (Fisa, Balanta, Jurnal, Situatie with react-to-print)
+- v1.0 shipped 2026-01-24
+- All 34 v1 requirements delivered
+- Ready for production deployment or v1.1 planning
+- See `.planning/milestones/v1.0-ROADMAP.md` for full v1.0 archive
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Project v1 complete - all 6 phases delivered*
+*Stopped at: v1.0 milestone complete*
 *Resume file: None*
