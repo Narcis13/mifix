@@ -152,6 +152,13 @@ Plans:
 
 **Dependencies:** Phase 3 (requires assets with values and durations)
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Schema unique constraint + Amortizari API routes (batch generation, history, summary)
+- [ ] 05-02-PLAN.md — Per-asset depreciation history (AmortizariTable + detail page integration)
+- [ ] 05-03-PLAN.md — Amortizare page with generation dialog + summary view
+
 ---
 
 ### Phase 6: Rapoarte & Autentificare
@@ -189,7 +196,7 @@ Plans:
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 5/5 |
-| 5 | Amortizare | Not Started | 0/6 |
+| 5 | Amortizare | Planned | 0/6 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/8 |
 
 **Total:** 21/34 requirements complete
@@ -204,3 +211,4 @@ Plans:
 *Phase 3 complete: 2026-01-23*
 *Phase 4 planned: 2026-01-23*
 *Phase 4 complete: 2026-01-24*
+*Phase 5 planned: 2026-01-24*
