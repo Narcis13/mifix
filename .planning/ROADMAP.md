@@ -186,6 +186,14 @@ Plans:
 
 **Dependencies:** Phase 4 (transactions), Phase 5 (depreciation data)
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Auth schema + API (users table, login/logout/me endpoints, JWT middleware)
+- [ ] 06-02-PLAN.md — Auth UI + Route protection (AuthContext, LoginForm, ProtectedRoute)
+- [ ] 06-03-PLAN.md — Reports API (fisa, balanta, jurnal, amortizare endpoints)
+- [ ] 06-04-PLAN.md — Reports UI + printing (dashboard, 4 report views, react-to-print)
+
 ---
 
 ## Progress
@@ -197,7 +205,7 @@ Plans:
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 5/5 |
 | 5 | Amortizare | Complete | 6/6 |
-| 6 | Rapoarte & Autentificare | Not Started | 0/8 |
+| 6 | Rapoarte & Autentificare | Planned | 0/8 |
 
 **Total:** 27/34 requirements complete
 
@@ -213,3 +221,4 @@ Plans:
 *Phase 4 complete: 2026-01-24*
 *Phase 5 planned: 2026-01-24*
 *Phase 5 complete: 2026-01-24*
+*Phase 6 planned: 2026-01-24*
