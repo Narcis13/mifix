@@ -17,6 +17,7 @@ import { TransferLocDialog } from "@/components/operatiuni/TransferLocDialog";
 import { CasareDialog } from "@/components/operatiuni/CasareDialog";
 import { DeclasareDialog } from "@/components/operatiuni/DeclasareDialog";
 import { TranzactiiTimeline } from "@/components/operatiuni/TranzactiiTimeline";
+import { AmortizariTable } from "@/components/amortizare/AmortizariTable";
 import {
   ArrowLeft,
   Pencil,
@@ -259,6 +260,9 @@ export function MijlocFixDetail() {
           <TranzactiiTimeline key={timelineKey} mijlocFixId={mijlocFix.id} />
         </CardContent>
       </Card>
+
+      {/* Section: Istoric Amortizare */}
+      <AmortizariTable mijlocFixId={mijlocFix.id} />
 
       {/* Operation Dialogs */}
       {mijlocFix && (
