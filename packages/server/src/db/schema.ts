@@ -9,6 +9,7 @@ import {
   json,
   mysqlEnum,
   index,
+  uniqueIndex,
   primaryKey,
 } from "drizzle-orm/mysql-core";
 import { relations, sql } from "drizzle-orm";
@@ -232,6 +233,11 @@ export const amortizari = mysqlTable(
   },
   (table) => [
     index("idx_amortizari_mijloc_fix_an_luna").on(
+      table.mijlocFixId,
+      table.an,
+      table.luna
+    ),
+    uniqueIndex("uniq_amortizari_mijloc_fix_an_luna").on(
       table.mijlocFixId,
       table.an,
       table.luna
