@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 6 of 6 (Rapoarte & Autentificare)
-**Phase Status:** In Progress
+**Phase Status:** Complete
 **Last Updated:** 2026-01-24
 
 ## Project Reference
@@ -9,16 +9,16 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** Phase 6 - Reports & Authentication (final phase)
+**Current focus:** All phases complete - v1 delivered
 
 ## Current Position
 
 Phase: 6 of 6 (Rapoarte & Autentificare)
-Plan: 3 of 4 in current phase
-Status: In Progress
-Last activity: 2026-01-24 - Completed 06-03-PLAN.md (Report API Endpoints)
+Plan: 4 of 4 in current phase
+Status: Complete
+Last activity: 2026-01-24 - Completed 06-04-PLAN.md (Reports UI + Printing)
 
-Progress: [█████████░] ~91% (5 phases + 3 plans complete)
+Progress: [██████████] 100% (6 phases complete)
 
 ## Progress
 
@@ -29,9 +29,11 @@ Progress: [█████████░] ~91% (5 phases + 3 plans complete)
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 4/4 |
 | 5 | Amortizare | Complete | 3/3 |
-| 6 | Rapoarte & Autentificare | In Progress | 3/4 |
+| 6 | Rapoarte & Autentificare | Complete | 4/4 |
 
-**Requirements:** 30/34 complete (AUTH-01, AUTH-02, AUTH-03 done)
+**Requirements:** 34/34 complete - v1 delivered
+- AUTH-01, AUTH-02, AUTH-03 (authentication)
+- RAP-01, RAP-02, RAP-03, RAP-04 (reports)
 - SETUP-01 through SETUP-05 - Done (Phase 1)
 - NOM-01 through NOM-05 - Done (Phase 2)
 - MF-01 through MF-06 - Done (Phase 3)
@@ -104,6 +106,9 @@ Progress: [█████████░] ~91% (5 phases + 3 plans complete)
 | 06-03 | SQL aliases for self-joins | gestiuni/locuri tables joined multiple times for source/destination |
 | 06-03 | Money class for totals | Prevents floating point errors in aggregate calculations |
 | 06-03 | Required params validation | dataStart/dataEnd for jurnal, an/luna for amortizare |
+| 06-04 | useReactToPrint with contentRef | Modern API for targeting printable content via ref |
+| 06-04 | CSS @media print styles | Hide nav, reset backgrounds, format tables for printing |
+| 06-04 | PrintLayout wrapper | Consistent header with title, subtitle, date across reports |
 
 ### Blockers
 
@@ -135,12 +140,13 @@ Progress: [█████████░] ~91% (5 phases + 3 plans complete)
   - 05-01: Amortizare API (batch generation, history, summary, verification)
   - 05-02: Depreciation history view (AmortizariTable component)
   - 05-03: Amortizare UI (page, dialog, summary table)
-- **Phase 6 IN PROGRESS** - Rapoarte & Autentificare
+- **Phase 6 COMPLETE** - Rapoarte & Autentificare
   - 06-01: Authentication backend (users table, JWT middleware, login/logout/me)
   - 06-02: Authentication UI (AuthContext, ProtectedRoute, LoginPage)
   - 06-03: Report API endpoints (fisa, balanta, jurnal, amortizare)
+  - 06-04: Reports UI + Printing (Fisa, Balanta, Jurnal, Situatie with react-to-print)
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Completed 06-03-PLAN.md*
+*Stopped at: Project v1 complete - all 6 phases delivered*
 *Resume file: None*
