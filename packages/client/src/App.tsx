@@ -1,11 +1,14 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "./lib/utils";
 import { Toaster } from "./components/ui/sonner";
+import { Button } from "./components/ui/button";
+import { useAuth } from "./components/auth/AuthContext";
 
 const navItems = [
   { path: "/", label: "Acasa" },
   { path: "/mijloace-fixe", label: "Mijloace Fixe" },
   { path: "/amortizare", label: "Amortizare" },
+  { path: "/rapoarte", label: "Rapoarte" },
   { path: "/gestiuni", label: "Gestiuni" },
   { path: "/surse-finantare", label: "Surse Finantare" },
   { path: "/locuri", label: "Locuri Folosinta" },
@@ -15,6 +18,13 @@ const navItems = [
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  async function handleLogout() {
+    await logout();
+    navigate("/login");
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,6 +57,16 @@ function App() {
                   </Link>
                 );
               })}
+              <div className="ml-4 flex items-center gap-2 border-l pl-4">
+                {user && (
+                  <span className="text-sm text-muted-foreground">
+                    {user.username}
+                  </span>
+                )}
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  Iesire
+                </Button>
+              </div>
             </div>
           </div>
         </div>
