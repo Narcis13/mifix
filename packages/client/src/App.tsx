@@ -5,6 +5,7 @@ import { Toaster } from "./components/ui/sonner";
 const navItems = [
   { path: "/", label: "Acasa" },
   { path: "/mijloace-fixe", label: "Mijloace Fixe" },
+  { path: "/amortizare", label: "Amortizare" },
   { path: "/gestiuni", label: "Gestiuni" },
   { path: "/surse-finantare", label: "Surse Finantare" },
   { path: "/locuri", label: "Locuri Folosinta" },

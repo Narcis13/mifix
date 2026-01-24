@@ -11,6 +11,7 @@ import { ClasificariPage } from "./pages/Clasificari";
 import { MijloaceFixePage } from "./pages/MijloaceFixe";
 import { MijlocFixEdit } from "./pages/MijlocFixEdit";
 import { MijlocFixDetail } from "./pages/MijlocFixDetail";
+import Amortizare from "./pages/Amortizare";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "clasificari",
         element: <ClasificariPage />,
+      },
+      {
+        path: "amortizare",
+        element: <Amortizare />,
       },
       {
         path: "mijloace-fixe",
