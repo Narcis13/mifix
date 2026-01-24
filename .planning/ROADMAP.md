@@ -189,10 +189,10 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Auth schema + API (users table, login/logout/me endpoints, JWT middleware)
-- [ ] 06-02-PLAN.md — Auth UI + Route protection (AuthContext, LoginForm, ProtectedRoute)
-- [ ] 06-03-PLAN.md — Reports API (fisa, balanta, jurnal, amortizare endpoints)
-- [ ] 06-04-PLAN.md — Reports UI + printing (dashboard, 4 report views, react-to-print)
+- [x] 06-01-PLAN.md — Auth schema + API (users table, login/logout/me endpoints, JWT middleware)
+- [x] 06-02-PLAN.md — Auth UI + Route protection (AuthContext, LoginForm, ProtectedRoute)
+- [x] 06-03-PLAN.md — Reports API (fisa, balanta, jurnal, amortizare endpoints)
+- [x] 06-04-PLAN.md — Reports UI + printing (dashboard, 4 report views, react-to-print)
 
 ---
 
@@ -205,9 +205,9 @@ Plans:
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 5/5 |
 | 5 | Amortizare | Complete | 6/6 |
-| 6 | Rapoarte & Autentificare | Planned | 0/8 |
+| 6 | Rapoarte & Autentificare | Complete | 8/8 |
 
-**Total:** 27/34 requirements complete
+**Total:** 34/34 requirements complete ✓
 
 ---
 *Roadmap created: 2026-01-22*
@@ -222,3 +222,5 @@ Plans:
 *Phase 5 planned: 2026-01-24*
 *Phase 5 complete: 2026-01-24*
 *Phase 6 planned: 2026-01-24*
+*Phase 6 complete: 2026-01-24*
+*Milestone v1.0 complete: 2026-01-24*
