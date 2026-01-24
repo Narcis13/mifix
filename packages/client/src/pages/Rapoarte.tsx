@@ -8,6 +8,10 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, FileSpreadsheet, BookOpen, Calculator } from "lucide-react";
+import { FisaMijlocFixReport } from "@/components/rapoarte/FisaMijlocFix";
+import { BalantaVerificareReport } from "@/components/rapoarte/BalantaVerificare";
+import { JurnalActeReport } from "@/components/rapoarte/JurnalActe";
+import { SituatieAmortizareReport } from "@/components/rapoarte/SituatieAmortizare";
 
 const reports = [
   {
@@ -73,35 +77,19 @@ export function RapoartePage() {
   );
 }
 
-// Placeholder pages for routes - will be replaced in Task 3
+// Report page wrappers
 export function FisaMijlocFixPage() {
-  return (
-    <div className="flex items-center justify-center p-8">
-      <p className="text-muted-foreground">In dezvoltare...</p>
-    </div>
-  );
+  return <FisaMijlocFixReport />;
 }
 
 export function BalantaVerificarePage() {
-  return (
-    <div className="flex items-center justify-center p-8">
-      <p className="text-muted-foreground">In dezvoltare...</p>
-    </div>
-  );
+  return <BalantaVerificareReport />;
 }
 
 export function JurnalActePage() {
-  return (
-    <div className="flex items-center justify-center p-8">
-      <p className="text-muted-foreground">In dezvoltare...</p>
-    </div>
-  );
+  return <JurnalActeReport />;
 }
 
 export function SituatieAmortizarePage() {
-  return (
-    <div className="flex items-center justify-center p-8">
-      <p className="text-muted-foreground">In dezvoltare...</p>
-    </div>
-  );
+  return <SituatieAmortizareReport />;
 }
