@@ -14,11 +14,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 6 of 6 (Rapoarte & Autentificare)
-Plan: 2 of 4 in current phase
+Plan: 3 of 4 in current phase
 Status: In Progress
-Last activity: 2026-01-24 - Completed 06-02-PLAN.md (Authentication UI)
+Last activity: 2026-01-24 - Completed 06-03-PLAN.md (Report API Endpoints)
 
-Progress: [████████░░] ~88% (5 phases + 2 plans complete)
+Progress: [█████████░] ~91% (5 phases + 3 plans complete)
 
 ## Progress
 
@@ -29,7 +29,7 @@ Progress: [████████░░] ~88% (5 phases + 2 plans complete)
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 4/4 |
 | 5 | Amortizare | Complete | 3/3 |
-| 6 | Rapoarte & Autentificare | In Progress | 2/4 |
+| 6 | Rapoarte & Autentificare | In Progress | 3/4 |
 
 **Requirements:** 30/34 complete (AUTH-01, AUTH-02, AUTH-03 done)
 - SETUP-01 through SETUP-05 - Done (Phase 1)
@@ -101,6 +101,9 @@ Progress: [████████░░] ~88% (5 phases + 2 plans complete)
 | 06-02 | AuthProvider wraps RouterProvider | Ensures auth context available everywhere including login page |
 | 06-02 | ProtectedRoute wraps App | All child routes automatically protected |
 | 06-02 | location.state.from pattern | Preserves intended destination for post-login redirect |
+| 06-03 | SQL aliases for self-joins | gestiuni/locuri tables joined multiple times for source/destination |
+| 06-03 | Money class for totals | Prevents floating point errors in aggregate calculations |
+| 06-03 | Required params validation | dataStart/dataEnd for jurnal, an/luna for amortizare |
 
 ### Blockers
 
@@ -135,8 +138,9 @@ Progress: [████████░░] ~88% (5 phases + 2 plans complete)
 - **Phase 6 IN PROGRESS** - Rapoarte & Autentificare
   - 06-01: Authentication backend (users table, JWT middleware, login/logout/me)
   - 06-02: Authentication UI (AuthContext, ProtectedRoute, LoginPage)
+  - 06-03: Report API endpoints (fisa, balanta, jurnal, amortizare)
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Completed 06-02-PLAN.md*
+*Stopped at: Completed 06-03-PLAN.md*
 *Resume file: None*
