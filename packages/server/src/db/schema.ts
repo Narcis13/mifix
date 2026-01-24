@@ -335,3 +335,15 @@ export const amortizariRelations = relations(amortizari, ({ one }) => ({
     references: [mijloaceFixe.id],
   }),
 }));
+
+// ============================================================================
+// 9. Users - Application Users for Authentication
+// ============================================================================
+export const users = mysqlTable("users", {
+  id: int("id").primaryKey().autoincrement(),
+  username: varchar("username", { length: 100 }).notNull().unique(),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  activ: boolean("activ").default(true),
+  createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: timestamp("updated_at").notNull().default(sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`),
+});
