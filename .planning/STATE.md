@@ -1,7 +1,7 @@
 # Project State: MiFix
 
-**Current Phase:** 4 of 6 (Operatiuni)
-**Phase Status:** Complete
+**Current Phase:** 5 of 6 (Amortizare)
+**Phase Status:** In Progress
 **Last Updated:** 2026-01-24
 
 ## Project Reference
@@ -9,16 +9,16 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** Phase 4 complete - Ready for Phase 5: Amortizare
+**Current focus:** Phase 5 in progress - Amortizare API complete, UI next
 
 ## Current Position
 
-Phase: 4 of 6 (Operatiuni)
-Plan: 4 of 4 in current phase
-Status: Phase complete
-Last activity: 2026-01-24 - Completed 04-04-PLAN.md (Transaction History + Detail Integration)
+Phase: 5 of 6 (Amortizare)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-01-24 - Completed 05-01-PLAN.md (Amortizare API)
 
-Progress: [███████░░░] ~70% (Phase 4 complete)
+Progress: [████████░░] ~75% (Plan 05-01 complete)
 
 ## Progress
 
@@ -28,14 +28,15 @@ Progress: [███████░░░] ~70% (Phase 4 complete)
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 4/4 |
-| 5 | Amortizare | Not Started | 0/? |
+| 5 | Amortizare | In Progress | 1/2 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 21/34 complete
+**Requirements:** 22/34 complete
 - SETUP-01 through SETUP-05 - Done (Phase 1)
 - NOM-01 through NOM-05 - Done (Phase 2)
 - MF-01 through MF-06 - Done (Phase 3)
 - OP-01 through OP-05 - Done (Phase 4)
+- AMO-01 through AMO-06 - Done (Phase 5, Plan 01)
 
 ## Session Context
 
@@ -86,6 +87,9 @@ Progress: [███████░░░] ~70% (Phase 4 complete)
 | 04-04 | TranzactieWithRelations type | Full type safety for transaction history with populated relations |
 | 04-04 | Vertical timeline for history | Clean visual representation with type-specific icons |
 | 04-04 | refetch pattern for data refresh | onSuccess callback triggers re-fetch of asset and timeline data |
+| 05-01 | uniqueIndex for duplicate prevention | Database-level constraint catches race conditions that application-level checks miss |
+| 05-01 | Money class for all depreciation calculations | Maintains decimal precision, prevents floating-point errors |
+| 05-01 | Final month protection logic | AMO-06 requirement - prevents over-depreciation |
 
 ### Blockers
 
@@ -113,9 +117,11 @@ Progress: [███████░░░] ~70% (Phase 4 complete)
   - 04-02: TransferGestiuneDialog and TransferLocDialog components
   - 04-03: CasareDialog and DeclasareDialog components + toast infrastructure
   - 04-04: Transaction history timeline + detail page integration
-- **Next:** Phase 5 - Amortizare (monthly depreciation calculations)
+- **Phase 5 IN PROGRESS** - Amortizare
+  - 05-01: Amortizare API (batch generation, history, summary, verification)
+  - 05-02: Next - Amortizare UI
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Completed 04-04-PLAN.md (Phase 4 complete)*
+*Stopped at: Completed 05-01-PLAN.md (Amortizare API)*
 *Resume file: None*
