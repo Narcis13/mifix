@@ -1,4 +1,10 @@
-import type { ApiResponse } from "shared";
+import type {
+  ApiResponse,
+  Amortizare,
+  GenereazaAmortizareResult,
+  AmortizareSumar,
+  AmortizareVerificare,
+} from "shared";
 
 const API_BASE = "/api";
 
@@ -61,3 +67,59 @@ export const api = {
       method: "DELETE",
     }),
 };
+
+/**
+ * Fetch depreciation history for a specific asset.
+ */
+export async function getAmortizariIstoric(mijlocFixId: number): Promise<Amortizare[]> {
+  const response = await fetch(`${API_BASE}/amortizari/istoric/${mijlocFixId}`);
+  const data: ApiResponse<Amortizare[]> = await response.json();
+  if (!data.success) {
+    throw new Error(data.message || "Failed to fetch depreciation history");
+  }
+  return data.data || [];
+}
+
+/**
+ * Generate depreciation for a specific month/year.
+ */
+export async function genereazaAmortizare(
+  an: number,
+  luna: number
+): Promise<GenereazaAmortizareResult> {
+  const response = await fetch(`${API_BASE}/amortizari/genereaza`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ an, luna }),
+  });
+  const data: ApiResponse<GenereazaAmortizareResult> = await response.json();
+  if (!data.success) {
+    throw new Error(data.message || "Failed to generate depreciation");
+  }
+  return data.data!;
+}
+
+/**
+ * Get depreciation summary by month/year.
+ */
+export async function getAmortizariSumar(an?: number): Promise<AmortizareSumar[]> {
+  const url = an ? `${API_BASE}/amortizari/sumar?an=${an}` : `${API_BASE}/amortizari/sumar`;
+  const response = await fetch(url);
+  const data: ApiResponse<AmortizareSumar[]> = await response.json();
+  if (!data.success) {
+    throw new Error(data.message || "Failed to fetch summary");
+  }
+  return data.data || [];
+}
+
+/**
+ * Get verification of which months are processed.
+ */
+export async function getAmortizariVerificare(an: number): Promise<AmortizareVerificare[]> {
+  const response = await fetch(`${API_BASE}/amortizari/verificare?an=${an}`);
+  const data: ApiResponse<AmortizareVerificare[]> = await response.json();
+  if (!data.success) {
+    throw new Error(data.message || "Failed to fetch verification");
+  }
+  return data.data || [];
+}
