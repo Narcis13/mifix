@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 6 of 6 (Rapoarte & Autentificare)
-**Phase Status:** Not Started
+**Phase Status:** In Progress
 **Last Updated:** 2026-01-24
 
 ## Project Reference
@@ -14,11 +14,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 6 of 6 (Rapoarte & Autentificare)
-Plan: 0 of ? in current phase (NOT STARTED)
-Status: Ready for Planning
-Last activity: 2026-01-24 - Phase 5 verified and complete
+Plan: 1 of 4 in current phase
+Status: In Progress
+Last activity: 2026-01-24 - Completed 06-01-PLAN.md (Authentication Backend)
 
-Progress: [████████░░] ~80% (5 of 6 phases complete)
+Progress: [████████░░] ~85% (5 phases + 1 plan complete)
 
 ## Progress
 
@@ -29,9 +29,9 @@ Progress: [████████░░] ~80% (5 of 6 phases complete)
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 4/4 |
 | 5 | Amortizare | Complete | 3/3 |
-| 6 | Rapoarte & Autentificare | Not Started | 0/? |
+| 6 | Rapoarte & Autentificare | In Progress | 1/4 |
 
-**Requirements:** 27/34 complete
+**Requirements:** 30/34 complete (AUTH-01, AUTH-02, AUTH-03 done)
 - SETUP-01 through SETUP-05 - Done (Phase 1)
 - NOM-01 through NOM-05 - Done (Phase 2)
 - MF-01 through MF-06 - Done (Phase 3)
@@ -95,6 +95,9 @@ Progress: [████████░░] ~80% (5 of 6 phases complete)
 | 05-03 | Verification on dialog open | Loads month status when user opens dialog, refreshes on year change |
 | 05-03 | Green checkmark for processed months | Visual feedback in dropdown makes month status immediately clear |
 | 05-03 | Stats cards layout | Total depreciation, months processed, average per month in grid |
+| 06-01 | Bun.password with argon2id | Native Bun API, secure algorithm, no extra dependencies |
+| 06-01 | JWT in HttpOnly cookie | XSS protection, not localStorage |
+| 06-01 | Manual JWT verification | hono/jwt middleware throws instead of 401, manual verify() with HS256 |
 
 ### Blockers
 
@@ -126,8 +129,10 @@ Progress: [████████░░] ~80% (5 of 6 phases complete)
   - 05-01: Amortizare API (batch generation, history, summary, verification)
   - 05-02: Depreciation history view (AmortizariTable component)
   - 05-03: Amortizare UI (page, dialog, summary table)
+- **Phase 6 IN PROGRESS** - Rapoarte & Autentificare
+  - 06-01: Authentication backend (users table, JWT middleware, login/logout/me)
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Phase 5 complete - Ready for Phase 6 planning*
+*Stopped at: Completed 06-01-PLAN.md*
 *Resume file: None*
