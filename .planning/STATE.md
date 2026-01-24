@@ -14,11 +14,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 6 of 6 (Rapoarte & Autentificare)
-Plan: 1 of 4 in current phase
+Plan: 2 of 4 in current phase
 Status: In Progress
-Last activity: 2026-01-24 - Completed 06-01-PLAN.md (Authentication Backend)
+Last activity: 2026-01-24 - Completed 06-02-PLAN.md (Authentication UI)
 
-Progress: [████████░░] ~85% (5 phases + 1 plan complete)
+Progress: [████████░░] ~88% (5 phases + 2 plans complete)
 
 ## Progress
 
@@ -29,7 +29,7 @@ Progress: [████████░░] ~85% (5 phases + 1 plan complete)
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 4/4 |
 | 5 | Amortizare | Complete | 3/3 |
-| 6 | Rapoarte & Autentificare | In Progress | 1/4 |
+| 6 | Rapoarte & Autentificare | In Progress | 2/4 |
 
 **Requirements:** 30/34 complete (AUTH-01, AUTH-02, AUTH-03 done)
 - SETUP-01 through SETUP-05 - Done (Phase 1)
@@ -98,6 +98,9 @@ Progress: [████████░░] ~85% (5 phases + 1 plan complete)
 | 06-01 | Bun.password with argon2id | Native Bun API, secure algorithm, no extra dependencies |
 | 06-01 | JWT in HttpOnly cookie | XSS protection, not localStorage |
 | 06-01 | Manual JWT verification | hono/jwt middleware throws instead of 401, manual verify() with HS256 |
+| 06-02 | AuthProvider wraps RouterProvider | Ensures auth context available everywhere including login page |
+| 06-02 | ProtectedRoute wraps App | All child routes automatically protected |
+| 06-02 | location.state.from pattern | Preserves intended destination for post-login redirect |
 
 ### Blockers
 
@@ -131,8 +134,9 @@ Progress: [████████░░] ~85% (5 phases + 1 plan complete)
   - 05-03: Amortizare UI (page, dialog, summary table)
 - **Phase 6 IN PROGRESS** - Rapoarte & Autentificare
   - 06-01: Authentication backend (users table, JWT middleware, login/logout/me)
+  - 06-02: Authentication UI (AuthContext, ProtectedRoute, LoginPage)
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Completed 06-01-PLAN.md*
+*Stopped at: Completed 06-02-PLAN.md*
 *Resume file: None*
