@@ -163,13 +163,38 @@ export interface Amortizare {
   id: number;
   mijlocFixId: number;
   mijlocFix?: MijlocFix;
-  luna: number;
   an: number;
+  luna: number;
   valoareLunara: string;
   valoareCumulata: string;
   valoareRamasa: string;
+  valoareInventar: string;
+  durataRamasa: number;
+  calculat: boolean;
+  dataCalcul?: string;
+  createdAt: string;
+}
+
+// Batch generation response
+export interface GenereazaAmortizareResult {
+  processed: number;
+  skipped: number;
+  totalEligible: number;
+}
+
+// Monthly summary for AMO-05
+export interface AmortizareSumar {
+  an: number;
+  luna: number;
+  totalLunar: string;
+  numarActive: number;
+}
+
+// Verification response
+export interface AmortizareVerificare {
+  luna: number;
   procesat: boolean;
-  dataGenerare: string;
+  numarActive: number;
 }
 
 // ═══════════════════════════════════════════════════════════════
