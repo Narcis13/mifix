@@ -1,7 +1,7 @@
 # Project State: MiFix
 
 **Current Phase:** 5 of 6 (Amortizare)
-**Phase Status:** In Progress
+**Phase Status:** Complete
 **Last Updated:** 2026-01-24
 
 ## Project Reference
@@ -9,16 +9,16 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Contabilitatea poate genera amortizarea lunara corect si la timp pentru toate mijloacele fixe active
-**Current focus:** Phase 5 in progress - Amortizare history view complete, generation UI next
+**Current focus:** Phase 5 complete - Ready for Phase 6 (Reports & Authentication)
 
 ## Current Position
 
 Phase: 5 of 6 (Amortizare)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-01-24 - Completed 05-02-PLAN.md (Depreciation History View)
+Plan: 3 of 3 in current phase (COMPLETE)
+Status: Phase Complete
+Last activity: 2026-01-24 - Completed 05-03-PLAN.md (Amortizare UI)
 
-Progress: [████████░░] ~80% (Plan 05-02 complete)
+Progress: [████████░░] ~85% (Phase 5 complete)
 
 ## Progress
 
@@ -28,16 +28,15 @@ Progress: [████████░░] ~80% (Plan 05-02 complete)
 | 2 | Nomenclatoare | Complete | 5/5 |
 | 3 | Mijloace Fixe Core | Complete | 6/6 |
 | 4 | Operatiuni | Complete | 4/4 |
-| 5 | Amortizare | In Progress | 2/3 |
+| 5 | Amortizare | Complete | 3/3 |
 | 6 | Rapoarte & Autentificare | Not Started | 0/? |
 
-**Requirements:** 22/34 complete
+**Requirements:** 28/34 complete
 - SETUP-01 through SETUP-05 - Done (Phase 1)
 - NOM-01 through NOM-05 - Done (Phase 2)
 - MF-01 through MF-06 - Done (Phase 3)
 - OP-01 through OP-05 - Done (Phase 4)
-- AMO-01 through AMO-06 - Done (Phase 5, Plan 01)
-- AMO-04 (History View) - Done (Phase 5, Plan 02)
+- AMO-01 through AMO-06 - Done (Phase 5)
 
 ## Session Context
 
@@ -93,6 +92,9 @@ Progress: [████████░░] ~80% (Plan 05-02 complete)
 | 05-01 | Final month protection logic | AMO-06 requirement - prevents over-depreciation |
 | 05-02 | AmortizariTable as standalone card component | Self-contained with own fetch, can be reused elsewhere |
 | 05-02 | Romanian month names array | Display months in Romanian (Ianuarie, Februarie, etc.) |
+| 05-03 | Verification on dialog open | Loads month status when user opens dialog, refreshes on year change |
+| 05-03 | Green checkmark for processed months | Visual feedback in dropdown makes month status immediately clear |
+| 05-03 | Stats cards layout | Total depreciation, months processed, average per month in grid |
 
 ### Blockers
 
@@ -120,12 +122,12 @@ Progress: [████████░░] ~80% (Plan 05-02 complete)
   - 04-02: TransferGestiuneDialog and TransferLocDialog components
   - 04-03: CasareDialog and DeclasareDialog components + toast infrastructure
   - 04-04: Transaction history timeline + detail page integration
-- **Phase 5 IN PROGRESS** - Amortizare
+- **Phase 5 COMPLETE** - Amortizare
   - 05-01: Amortizare API (batch generation, history, summary, verification)
   - 05-02: Depreciation history view (AmortizariTable component)
-  - 05-03: Next - Depreciation generation UI
+  - 05-03: Amortizare UI (page, dialog, summary table)
 
 ---
 *Last session: 2026-01-24*
-*Stopped at: Completed 05-02-PLAN.md (Depreciation History View)*
+*Stopped at: Completed 05-03-PLAN.md (Amortizare UI)*
 *Resume file: None*
