@@ -10,7 +10,7 @@ CREATE TABLE `amortizari` (
 	`durata_ramasa` int NOT NULL,
 	`calculat` boolean DEFAULT false,
 	`data_calcul` timestamp,
-	`created_at` timestamp NOT NULL DEFAULT (now()),
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT `amortizari_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -42,8 +42,8 @@ CREATE TABLE `gestiuni` (
 	`denumire` varchar(200) NOT NULL,
 	`responsabil` varchar(200),
 	`activ` boolean DEFAULT true,
-	`created_at` timestamp NOT NULL DEFAULT (now()),
-	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT `gestiuni_id` PRIMARY KEY(`id`),
 	CONSTRAINT `gestiuni_cod_unique` UNIQUE(`cod`)
 );
@@ -83,8 +83,8 @@ CREATE TABLE `mijloace_fixe` (
 	`data_iesire` date,
 	`motiv_iesire` varchar(500),
 	`observatii` varchar(1000),
-	`created_at` timestamp NOT NULL DEFAULT (now()),
-	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT `mijloace_fixe_id` PRIMARY KEY(`id`),
 	CONSTRAINT `mijloace_fixe_numar_inventar_unique` UNIQUE(`numar_inventar`)
 );
@@ -112,7 +112,7 @@ CREATE TABLE `tranzactii` (
 	`valoare_dupa` decimal(15,2),
 	`descriere` varchar(500),
 	`observatii` varchar(1000),
-	`created_at` timestamp NOT NULL DEFAULT (now()),
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT `tranzactii_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
