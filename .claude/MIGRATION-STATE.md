@@ -3,7 +3,7 @@
 <!-- Update after completing each phase/task -->
 
 ## Current Phase: 1
-## Current Task: 1.9 - Add UI pages for new nomenclature tables
+## Current Task: 2.1 - Create migration script skeleton
 ## Last Session: 2026-02-19
 ## Branch: import
 
@@ -27,7 +27,7 @@
 - [x] 1.6 Add `operatiuni` table (operation headers for batch grouping)
 - [x] 1.7 Generate + run migrations
 - [x] 1.8 Add CRUD routes + validation for new tables
-- [ ] 1.9 Add UI pages for new nomenclature tables
+- [x] 1.9 Add UI pages for new nomenclature tables
 
 ### Phase 2: Legacy Data Migration Script
 - [ ] 2.1 Create migration script skeleton (TypeScript, reads SQLite)

@@ -11,6 +11,9 @@ import { SurseFinantarePage } from "./pages/SurseFinantare";
 import { LocuriPage } from "./pages/Locuri";
 import { ConturiPage } from "./pages/Conturi";
 import { ClasificariPage } from "./pages/Clasificari";
+import { ProvenientaPage } from "./pages/Provenienta";
+import { TipuriStocPage } from "./pages/TipuriStoc";
+import { UnitatiMasuraPage } from "./pages/UnitatiMasura";
 import { MijloaceFixePage } from "./pages/MijloaceFixe";
 import { MijlocFixEdit } from "./pages/MijlocFixEdit";
 import { MijlocFixDetail } from "./pages/MijlocFixDetail";
@@ -60,6 +63,18 @@ const router = createBrowserRouter([
       {
         path: "clasificari",
         element: <ClasificariPage />,
+      },
+      {
+        path: "provenienta",
+        element: <ProvenientaPage />,
+      },
+      {
+        path: "tipuri-stoc",
+        element: <TipuriStocPage />,
+      },
+      {
+        path: "unitati-masura",
+        element: <UnitatiMasuraPage />,
       },
       {
         path: "amortizare",
