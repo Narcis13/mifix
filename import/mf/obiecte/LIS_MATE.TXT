@@ -1,0 +1,586 @@
+
+
+                      LISTA CU DENUMIREA SI DURATELE OBIECTELOR DE INVENTAR
+                      -----------------------------------------------------
+
+                                                                                    PAGINA:          1
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|     1|     20001   |             |SALOPETE DOC                            |10,  ,  |  ,  ,  |  ,  ,  |
+|     2|     20002   |             |APOMETRU                                |10,  ,  |  ,  ,  |  ,  ,  |
+|     3|     20003   |             |JAMBIERI                                |10,  ,  |  ,  ,  |  ,  ,  |
+|     4|     20004   |             |SORTURI SUDOR                           |10,  ,  |  ,  ,  |  ,  ,  |
+|     5|     20006   |             |CHIUVETA                                |10,  ,  |  ,  ,  |  ,  ,  |
+|     6|     20007   |             |MANUSI PROTECTIE                        |10,  ,  |  ,  ,  |  ,  ,  |
+|     7|     20009   |             |SUBA TIP CFR                            |10,  ,  |  ,  ,  |  ,  ,  |
+|     8|     20010   |             |MANUSI LACATUS                          |10,  ,  |  ,  ,  |  ,  ,  |
+|     9|     20011   |             |PUBELE GUNOI                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    10|     20012   |             |MANUSI SUDOR                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    11|     20013   |             |LOPETI                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    12|     20014   |             |HALATE ALBE                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    13|     20015   |             |MASCA PROTECTIE SUDURA                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    14|     20016   |             |HAQLATE DOC                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    15|     20017   |             |GALETI ZINCATE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    16|     20019   |             |TIRNACOP                                |10,  ,  |  ,  ,  |  ,  ,  |
+|    17|     20023   |             |POLIZOR                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|    18|     20026   |             |GRILAJ FIER                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    19|     20027   |             |FURTUN D 16                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    20|     20028   |             |STIPLEXURI INSCRIPT                     |10,  ,  |  ,  ,  |  ,  ,  |
+|    21|     20034   |             |RAFT METALIC CINTARE                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    22|     20035   |             |SCAUN KG 212                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    23|     20036   |             |HALATE DOC                              |10,  ,  |  ,  ,  |  ,  ,  |
+|    24|     20038   |             |RAME MOZAIC CU SUPORT                   |10,  ,  |  ,  ,  |  ,  ,  |
+|    25|     20039   |             |GALANTARE                               |10,  ,  |  ,  ,  |  ,  ,  |
+|    26|     20040   |             |BUTOI 200                               |10,  ,  |  ,  ,  |  ,  ,  |
+|    27|     20041   |             |LACATE                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    28|     20042   |             |BLATURI MOZAICATE                       |10,  ,  |  ,  ,  |  ,  ,  |
+|    29|     20043   |             |MOCHETA                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|    30|     20044   |             |PELERINE PLOAIE                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    31|     20046   |             |BORSETE                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|    32|     20047   |             |CHIUVETA FONTA                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    33|     20048   |             |LOPETI TIP FARAS                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    34|     20049   |             |HALATE ALBE                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    35|     20050   |             |RAFTURI METALICE                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    36|     20052   |             |SALOPETE DOC                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    37|     20053   |             |PRELUNGITOR                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    38|     20054   |             |PERDEA RELON                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    39|     20055   |             |BIROU STEJAR                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    40|     20056   |             |STINGATOR PCI                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    41|     20057   |             |CUIER                                   |10,  ,  |  ,  ,  |  ,  ,  |
+|    42|     20058   |             |DULAP 2 CORPURI                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    43|     20059   |             |GALERIE                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|    44|     20060   |             |RAFTURI METALICE VECHI                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    45|     20061   |             |SUPORT BULETINE                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    46|     20062   |             |BROASCA YALA                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    47|     20064   |             |CUIERE PERETE                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    48|     20065   |             |FISET METALIC 2 USI                     |10,  ,  |  ,  ,  |  ,  ,  |
+|    49|     20066   |             |COSURI GUNOI                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    50|     20067   |             |TAVI INOX                               |10,  ,  |  ,  ,  |  ,  ,  |
+|    51|     20069   |             |CHIUVETA FONTA                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    52|     20070   |             |FURTUN D 25                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    53|     20072   |             |\RAME METALICE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    54|     20073   |             |STELAJE PT CAR4CASE                     |10,  ,  |  ,  ,  |  ,  ,  |
+|    55|     20075   |             |SORTURI ALBE                            |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          2
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|    56|     20076   |             |PINZA DECORATIVA                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    57|     20077   |             |AEROTERMA                               |10,  ,  |  ,  ,  |  ,  ,  |
+|    58|     20078   |             |SCAUNE PLOIESTI                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    59|     20079   |             |MESE MOZAICATE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    60|     20080   |             |GRILAJ FIER GEAM                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    61|     20081   |             |GRILAJ USA                              |10,  ,  |  ,  ,  |  ,  ,  |
+|    62|     20082   |             |LUSTRA CU 3 BRATE                       |10,  ,  |  ,  ,  |  ,  ,  |
+|    63|     20083   |             |BIROU LAMIITA                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    64|     20084   |             |VESTIARE 4 COMP                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    65|     20085   |             |ACOPERIS MESE INOX                      |10,  ,  |  ,  ,  |  ,  ,  |
+|    66|     20087   |             |PUBELE GUNOI                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    67|     20088   |             |STAMPILA TRIUNGHIULARA                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    68|     20089   |             |APOMETRU                                |10,  ,  |  ,  ,  |  ,  ,  |
+|    69|     20090   |             |TIRNACOP                                |10,  ,  |  ,  ,  |  ,  ,  |
+|    70|     20091   |             |MESE BUFET                              |10,  ,  |  ,  ,  |  ,  ,  |
+|    71|     20092   |             |CINTARE 20 KG                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    72|     20093   |             |CINTARE 10 KG                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    73|     20094   |             |CINTARE 5 KG                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    74|     20095   |             |GREUTATI 5 KG                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    75|     20096   |             |GREUTATI 2 KG                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    76|     20097   |             |GREUTATI 1 KG                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    77|     20098   |             |GREUTATI O.500 KG                       |10,  ,  |  ,  ,  |  ,  ,  |
+|    78|     20099   |             |GREUTATI 0.200 KG                       |10,  ,  |  ,  ,  |  ,  ,  |
+|    79|     20100   |             |GREUTATI  A 0.100 KG                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    80|     20101   |             |CONFECTII METALICE                      |10,  ,  |  ,  ,  |  ,  ,  |
+|    81|     20102   |             |MICROFON                                |10,  ,  |  ,  ,  |  ,  ,  |
+|    82|     20103   |             |CORP MOBIL                              |10,  ,  |  ,  ,  |  ,  ,  |
+|    83|     20104   |             |BOXE RADIO                              |10,  ,  |  ,  ,  |  ,  ,  |
+|    84|     20105   |             |FIRMA PLASTIC                           |10,  ,  |  ,  ,  |  ,  ,  |
+|    85|     20106   |             |FIRME SECTORIZARE                       |10,  ,  |  ,  ,  |  ,  ,  |
+|    86|     20108   |             |CARUCIOR BASCULA                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    87|     20111   |             |SCARA METALICA                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    88|     20112   |             |FURCULITE                               |10,  ,  |  ,  ,  |  ,  ,  |
+|    89|     20113   |             |CUTITE                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    90|     20114   |             |SERVICIU MASA 6                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    91|     20116   |             |BIROU B1 V3                             |10,  ,  |  ,  ,  |  ,  ,  |
+|    92|     20117   |             |CONTOR TRIFAZIC                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    93|     20120   |             |OGLINDA                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|    94|     20123   |             |USA METALICA                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    95|     20125   |             |TONETE INCASARI                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    96|     20126   |             |GALETI ZINCATE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|    97|     20127   |             |PAHARE                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    98|     20128   |             |TABLA SECTORIZARE                       |10,  ,  |  ,  ,  |  ,  ,  |
+|    99|     20129   |             |SALTELE                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   100|     20130   |             |PLITA CU RAMA                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   101|     20131   |             |VAS WC                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   102|     20134   |             |PATURI MELANA                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   103|     20136   |             |REZERVOR WC                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   104|     20137   |             |BARIERA                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   105|     20145   |             |CUIERE PERETE HOTEL                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   106|     20146   |             |DULAP CRUCE ROSIE                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   107|     20147   |             |GARNITURI PAT                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   108|     20149   |             |LIGHEANE                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   109|     20151   |             |PERNE BURDUF                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   110|     20152   |             |RAME REGULAMENT                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   111|     20154   |             |MASA FANTEZIE                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   112|     20155   |             |FOTOLII                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   113|     20156   |             |MASA PERSONAL                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   114|     20157   |             |SCAUNE WC                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   115|     20158   |             |APLICE DREPTE                           |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          3
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   116|     20159   |             |PENDULE                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   117|     20160   |             |RAFTURI LENJERIE                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   118|     20162   |             |MASINI CALCULAT AURORA                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   119|     20163   |             |SET PT SARE PIPER                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   120|     20164   |             |ALARMA CASIERIE                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   121|     20165   |             |DULAP METALIC PT SCULE                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   122|     20166   |             |APARAT TELEFONIC                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   123|     20168   |             |OFICCE 2000                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   124|     20169   |             |LAMPA BIROU                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   125|     20177   |             |LINGURITE                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   126|     20179   |             |GEANTA DIPLOMAT                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   127|     20180   |             |FILTRU CAFEA                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   128|     20181   |             |HUSE MONITOR                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   129|     20182   |             |STAMPILE                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   130|     20183   |             |CUTIE MET CARTI MUNCA                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   131|     20186   |             |BIROU FEMEI                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   132|     20188   |             |APARAT RADIO                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   133|     20189   |             |MASA SEDINTA                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   134|     20191   |             |SCAUNE 234 NEGRE                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   135|     20192   |             |LUSTRE CU VENTILATOR                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   136|     20193   |             |OCHELARI PROTECTIE                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   137|     20195   |             |MENGHINA                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   138|     20197   |             |RULETA                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   139|     20201   |             |CIOCANE 0500                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   140|     20204   |             |CHEI INELARE                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   141|     20208   |             |SPACLU                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   142|     20212   |             |TRUSA SUDURA O7.95                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   143|     20217   |             |CLESTE MOX                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   144|     20219   |             |FIERASTRAU                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   145|     20222   |             |TRUSA CHEI FIXE                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   146|     20226   |             |RADIOCASET AUTO                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   147|     20227   |             |COVORASE AUTO                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   148|     20231   |             |MASA HOL MD 121                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   149|     20232   |             |FOTOLIU EXT                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   150|     20233   |             |COLOP STAMPILE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   151|     20235   |             |TRUSA SCULE                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   152|     20236   |             |JALUZELE                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   153|     20238   |             |SOBA TERACOTA                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   154|     20239   |             |CIOCAN 1.5 KG                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   155|     20241   |             |MASINA CUSUT                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   156|     20242   |             |TELEVIZOR SPORT                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   157|     20243   |             |TELEVIZOR CU ANTENA                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   158|     20264   |             |TONETE TIP APROZAR                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   159|     20265   |             |MESE MOZAICATE TIP I                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   160|     20266   |             |MESE MOZ TIP II                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   161|     20267   |             |CLESTE TAIAT                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   162|     20268   |             |CLESTE SUEDEZ                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   163|     20270   |             |SURUBELNITE                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   164|     20271   |             |BOILER 5O L                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   165|     20272   |             |BOILER 85 L                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   166|     20274   |             |BROASCA BIROU                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   167|     20275   |             |CISME PVC                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   168|     20276   |             |BROASCA YALA                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   169|     20277   |             |HUSA NOKIA                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   170|     20278   |             |MATASE DECORATIVA                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   171|     20279   |             |STIPLEXURI INSCRIPTIONATE               |10,  ,  |  ,  ,  |  ,  ,  |
+|   172|     20280   |             |CAPSATOR                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   173|     20281   |             |PERFORATOR                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   174|     20282   |             |LACATE                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   175|     20283   |             |TRUSA CHEI                              |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          4
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   176|     20284   |             |TREPIED SUPORT CIRLIGE                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   177|     20285   |             |BOILER 5 L                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   178|     20286   |             |VITRINE BOXE 150X40X60                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   179|     20287   |             |VITRINE 100X60X80                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   180|     20288   |             |FERSTRE MOBILE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   181|     20289   |             |PROSOAPE CRISTAL                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   182|     20290   |             |CLESTE COMBINAT                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   183|     20291   |             |SET LENJERIE PAT                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   184|     20292   |             |LUSTRA CU VENTILAT/5 PAL.               |10,  ,  |  ,  ,  |  ,  ,  |
+|   185|     20293   |             |DRAPELE MATASE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   186|     20294   |             |PATURI LINA                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   187|     20295   |             |GARNIT LENJ 2 PER                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   188|     20296   |             |TABLOU ELECTRIC C 3                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   189|     20297   |             |HUSE SALTELE 90X190                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   190|     20298   |             |HUSE SALTELE 120X190                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   191|     20299   |             |GRILAJ USI SMIRD.35KG/BUC               |10,  ,  |  ,  ,  |  ,  ,  |
+|   192|     20300   |             |CANCIOG                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   193|     20301   |             |PREFABRICATE BETON                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   194|     20302   |             |LUSTRA CU VENTILATOR                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   195|     20303   |             |PISTOL LIPIT                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   196|     20307   |             |DISPOZITIV TAIAT FAIANTA                |10,  ,  |  ,  ,  |  ,  ,  |
+|   197|     20308   |             |TOMBEROANE GUNOI                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   198|     20309   |             |COLTAR-BIROU                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   199|     20310   |             |SUPORT CIRLIGE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   200|     20312   |             |CEAS REDUCTOR BUTELIE                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   201|     20313   |             |ARAGAZ 2 OCHIURI                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   202|     20314   |             |BUTELIE ARAGAZ                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   203|     20315   |             |POMPA ZUGRAV                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   204|     20316   |             |CIUBERE FLORI                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   205|     20317   |             |CAPAC WC                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   206|     20318   |             |SPALATOR INOX                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   207|     20319   |             |CALCULATOR CITIZEN 8820                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   208|     20320   |             |CALCULATOR CITIZEN 8873                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   209|     20321   |             |CALCULATOR CITIZEN 888                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   210|     20322   |             |PRELUNGITOR                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   211|     20323   |             |VITRINE BOXE SMARD.190/54/85            |10,  ,  |  ,  ,  |  ,  ,  |
+|   212|     20324   |             |MESE MOZAICATE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   213|     20326   |             |VITRINA EXPUNERE MARFA                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   214|     20327   |             |GALANTARE ALUMINIU                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   215|     20328   |             |CALCULATOR CITIZEN CT 7OO               |10,  ,  |  ,  ,  |  ,  ,  |
+|   216|     20330   |             |TELEFON PANASONIC 2261                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   217|     20331   |             |TELEFONIC PANASONIC 2315                |10,  ,  |  ,  ,  |  ,  ,  |
+|   218|     20332   |             |SALTELE 1 PERS                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   219|     20333   |             |BOILER 50                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   220|     20334   |             |ANTENA MAGNET CU CONECTOR               |10,  ,  |  ,  ,  |  ,  ,  |
+|   221|     20335   |             |TABLOU ELECTRIC                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   222|     20336   |             |SCARA LOEMN                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   223|     20338   |             |PATURI STEJAR                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   224|     20339   |             |LAVOAR                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   225|     20342   |             |DRISCA                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   226|     20343   |             |CENTURI SIGURANTA                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   227|     20344   |             |BOILER 6O L                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   228|     20345   |             |REZERVOR WC                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   229|     20346   |             |BOILER 15 L                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   230|     20347   |             |PELERINE PLOAIE                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   231|     20348   |             |STINGATOARE P5-CO2                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   232|     20349   |             |MESE MOZAICATE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   233|     20352   |             |SUPORTI-COLOP STAMP.4926 PRET           |10,  ,  |  ,  ,  |  ,  ,  |
+|   234|     20353   |             |AMPRENTE PRET STAMP                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   235|     20355   |             |VITRINE TIP GALANTARE                   |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          5
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   236|     20356   |             |SCRUMIERE                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   237|     20357   |             |CANI APA                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   238|     20358   |             |PAHARE                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   239|     20359   |             |TOMBEROANE GUNOI                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   240|     20360   |             |FURTUN DESF CANAL                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   241|     20361   |             |HIDRANTI                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   242|     20362   |             |CALORIFER ZASS 12 EL.                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   243|     20363   |             |BALANTA SEMIAUTOMATA                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   244|     20364   |             |TELEVIZOR GOLDSTAR                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   245|     20365   |             |DUBLU RADIO CASET MEKOSONIC             |10,  ,  |  ,  ,  |  ,  ,  |
+|   246|     20366   |             |COS GUNOI                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   247|     20367   |             |CALORIFER EL. 9 EL.WHIRLPOOL            |10,  ,  |  ,  ,  |  ,  ,  |
+|   248|     20368   |             |CALORIFER EL.7 EL.WHIRLPOOL             |10,  ,  |  ,  ,  |  ,  ,  |
+|   249|     20369   |             |CALORIFER 12 EL.WHIRLPOOL               |10,  ,  |  ,  ,  |  ,  ,  |
+|   250|     20370   |             |GHETE PIELE                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   251|     20372   |             |COS GUNOI                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   252|     20373   |             |CONTOR MONOFAZAT                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   253|     20374   |             |OGLINDA BAIE                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   254|     20375   |             |RINDEA                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   255|     20376   |             |GEANTA DIPLOMAT                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   256|     20377   |             |LAVOAR PAFS                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   257|     20378   |             |TELEFON MOBIL ALCAT.OTE 01.00           |10,  ,  |  ,  ,  |  ,  ,  |
+|   258|     20379   |             |SCARA AL SM 2X11R                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   259|     20380   |             |SCARA 1X9 R AL.                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   260|     20381   |             |CENTURA SIG.ELECTR.                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   261|     20382   |             |FURTUN PSI                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   262|     20383   |             |FRIGIDER 24O L                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   263|     20384   |             |BIROU B4V3                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   264|     20386   |             |MASA BLAT INOX                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   265|     20387   |             |DULAP 141                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   266|     20388   |             |SCAUN DOR                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   267|     20389   |             |CALORIFER ZASS 9 EL                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   268|     20390   |             |TELEVIZOR DAEWO                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   269|     20391   |             |RADIOCASET DAEWO                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   270|     20392   |             |BRAT AFISAJ CANTAR ELECTR               |10,  ,  |  ,  ,  |  ,  ,  |
+|   271|     20393   |             |DISTRIBUITOR PROSOAPE                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   272|     20394   |             |DISTRIBUITOR H1 8904                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   273|     20395   |             |DISTRIBUITOR SAPUN                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   274|     20396   |             |DISTRIBUITOR SAPUN 6906                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   275|     20399   |             |COS PLASTIC WINDOWS                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   276|     20401   |             |USA LEMN                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   277|     20403   |             |DULAP D 211                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   278|     20404   |             |FRIGIDER 180 L                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   279|     20406   |             |RAFT METALIC PT CINTARE                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   280|     20407   |             |PARAVAN METALIC WC                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   281|     20408   |             |MESE DUBLE                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   282|     20409   |             |VITRINE MET CU GEAM                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   283|     20410   |             |RAFT MET.POLITE EXP MARFA               |10,  ,  |  ,  ,  |  ,  ,  |
+|   284|     20411   |             |DUBLU RADIOCASET                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   285|     20412   |             |MASA CONSILIU                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   286|     20413   |             |RADIOCASET ELECTRA                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   287|     20414   |             |PANOU OBLIGATII                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   288|     20415   |             |DULAP 121N                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   289|     20416   |             |MASA VITRINA CU PAL                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   290|     20418   |             |BOXE MET VARZA                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   291|     20420   |             |CARUCIOARE POMPIERI                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   292|     20421   |             |FISET METALIC 3 USI                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   293|     20422   |             |FIRMA SUCCES IN AFACERI˜˜               |10,  ,  |  ,  ,  |  ,  ,  |
+|   294|     20423   |             |MASINA SPALAT AUTOM                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   295|     20424   |             |CANAPEA CU 2 FOTOLII                    |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          6
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   296|     20425   |             |DULAP CU 2 USI                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   297|     20426   |             |SCAUN EURO ROTATIV                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   298|     20428   |             |PANOU STIPLEX HOTEL                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   299|     20429   |             |ANTENA AUTO                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   300|     20430   |             |COMBINA AUDIO TV                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   301|     20431   |             |BIROU 1.6-3301                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   302|     20432   |             |CORP 4 SERTARE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   303|     20433   |             |RETUR BIROU                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   304|     20434   |             |DULAP 3314                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   305|     20435   |             |CORP INF 2 USI                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   306|     20436   |             |VITRINA 3320                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   307|     20437   |             |CLASOR- DULAP                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   308|     20438   |             |BIROU COLT NEGRU                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   309|     20439   |             |SCAUN DACTILO                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   310|     20440   |             |BIROU 3101                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   311|     20441   |             |ANEXA 3102                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   312|     20442   |             |COMODA                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   313|     20443   |             |DULAP 3113                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   314|     20444   |             |FOTOLIU PIELE                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   315|     20445   |             |BIROU FEMEI                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   316|     20446   |             |BIROU MINISTRU                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   317|     20447   |             |SUPORT CALCULATOR                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   318|     20448   |             |ETAJERAM 4 SERTARE                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   319|     20449   |             |MASINA SCRIS HERMES                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   320|     20450   |             |SET IMBUIS                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   321|     20451   |             |LERA                                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   322|     20452   |             |PRELATA AUTO GUNOIERA                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   323|     20453   |             |CHEIE PT ROT. 30/32                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   324|     20454   |             |CRIC HIDRAULUC 80T                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   325|     20455   |             |TRIUNGHI REFLECT.                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   326|     20456   |             |CONTOR APA RECE MULTIJET                |10,  ,  |  ,  ,  |  ,  ,  |
+|   327|     20457   |             |FIER CALCAT NIDA                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   328|     20458   |             |POLIZOR GWS                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   329|     20461   |             |ROTOPERCT GBH 224                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   330|     20462   |             |CISME CAUCIUC                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   331|     20465   |             |SORTURI ALBE                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   332|     20466   |             |TRUSE SANITARE AUTO                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   333|     20467   |             |TRIUNGHIURI REFLECT.                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   334|     20469   |             |CLESTE PATENT                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   335|     20470   |             |CHIUVETA PAFS                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   336|     20471   |             |TELEV.PHILIPS 14 PT                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   337|     20472   |             |SUPORT PROSOP                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   338|     20473   |             |SAVONIERE                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   339|     20475   |             |CALCT CITIZEN SDC8840 CONTRACT          |10,  ,  |  ,  ,  |  ,  ,  |
+|   340|     20476   |             |SAPA                                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   341|     20477   |             |SAPALIGA                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   342|     20479   |             |MASINA GAURIT MG 10/08.2000             |10,  ,  |  ,  ,  |  ,  ,  |
+|   343|     20480   |             |COS GUNOI-T GALV.-PUBELE                |10,  ,  |  ,  ,  |  ,  ,  |
+|   344|     20481   |             |HALATE DOC FEMEI.IX.2000                |10,  ,  |  ,  ,  |  ,  ,  |
+|   345|     20482   |             |SCARA AL ARHIVA IX.2000                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   346|     20483   |             |RAFT EXP MARFA SIST BAR                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   347|     20484   |             |RADIATOR EL 2000W/XI.2000               |10,  ,  |  ,  ,  |  ,  ,  |
+|   348|     20485   |             |MOCHETA BLEUMARIN                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   349|     20486   |             |SINE PVC                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   350|     20487   |             |GECI MATLASATE.XII.2000                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   351|     20488   |             |COMODA XII/2000                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   352|     20489   |             |ANTENA TV FIF.XII.2000                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   353|     20490   |             |SCAUNE TAPITATE.XII.2000                |10,  ,  |  ,  ,  |  ,  ,  |
+|   354|     20491   |             |BOILER INSTANT                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   355|     20492   |             |LAVOAR CU PICIOR                        |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          7
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   356|     20493   |             |PLUS PT FATA MASA                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   357|     20494   |             |SCAUN ROT.CU BRATE XII.2000             |10,  ,  |  ,  ,  |  ,  ,  |
+|   358|     20496   |             |IMPRIMANTA EPSON LX30                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   359|     20497   |             |DALTI                                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   360|     20498   |             |CONVECTOR 01/001                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   361|     20499   |             |CALCL CITIZEN SDC 395 01/001            |10,  ,  |  ,  ,  |  ,  ,  |
+|   362|     20500   |             |TRANSFORM.SUDURA 180 A                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   363|     20501   |             |BOILER 100L                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   364|     20502   |             |STAMP.COD FISCAL                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   365|     20503   |             |STAMP.NR.1 UNIT.                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   366|     20504   |             |STAMP.DATIERA SECRETARIAT               |10,  ,  |  ,  ,  |  ,  ,  |
+|   367|     20505   |             |STAMP.CONTR.PREVENT.2                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   368|     20506   |             |STAMP.INSP.RESURSE UMANE                |10,  ,  |  ,  ,  |  ,  ,  |
+|   369|     20507   |             |VAS WC FONTA TURCESC                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   370|     20508   |             |CALCULAT.BIROU CANON WS1600             |10,  ,  |  ,  ,  |  ,  ,  |
+|   371|     20509   |             |COSURI GUNOI-PUBELE 06.2001             |10,  ,  |  ,  ,  |  ,  ,  |
+|   372|     20510   |             |MESE METAL.PLIANTE 800/800/750          |10,  ,  |  ,  ,  |  ,  ,  |
+|   373|     20511   |             |GALANTARE RAME AL.GEAM                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   374|     20512   |             |COSURI GUNOI PUBELE XII.2001            |10,  ,  |  ,  ,  |  ,  ,  |
+|   375|     20513   |             |TOMBERON GUNOI 3 ROTI                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   376|     20514   |             |MESE PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   377|     20515   |             |MESE PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   378|     20516   |             |MESE PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   379|     20517   |             |MESE PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   380|     20518   |             |GARD METALIC                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   381|     20519   |             |CHIUVETA DIN BETON                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   382|     20520   |             |MASA PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   383|     20521   |             |CONTOR APA GRUP SANIT TRAIAN            |10,  ,  |  ,  ,  |  ,  ,  |
+|   384|     20522   |             |CONTOR APA GRUP SANIT TRAIAN            |10,  ,  |  ,  ,  |  ,  ,  |
+|   385|     20523   |             |MESE PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   386|     20524   |             |TARC PEPENI                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   387|     20525   |             |GARD METALIC 12ML BIG                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   388|     20526   |             |APOMETRU BIG                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   389|     20527   |             |MESE PIATA ADP                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   390|     20528   |             |TARC PEPENI ADP                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   391|     20529   |             |FOTOLIU PRESIDENT                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   392|     20530   |             |APARAT TELEF RELATE 550                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   393|     20531   |             |APARAT TELEF VANGUARD                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   394|     20532   |             |TELEFON MOBIL NOKIA 6210                |10,  ,  |  ,  ,  |  ,  ,  |
+|   395|     20533   |             |AFISIER                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   396|     20534   |             |POMPA ZUGRAVIT                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   397|     20535   |             |CUTII SESIZARI PT CETATENI              |10,  ,  |  ,  ,  |  ,  ,  |
+|   398|     20536   |             |CLESTE PT SIGILAT                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   399|     20537   |             |BACK UPS MULTI PATH 500VA               |10,  ,  |  ,  ,  |  ,  ,  |
+|   400|     20538   |             |BONETE ALBE                             |10,  ,  |  ,  ,  |  ,  ,  |
+|   401|     20539   |             |COS GUNOI CU PEDALA                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   402|     20540   |             |MANUSI MENAJ                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   403|     20541   |             |PERDELE BAIE                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   404|     20542   |             |CADITA                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   405|     20543   |             |PAHARE                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   406|     20544   |             |SET PAT ROZALIU ALB                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   407|     20545   |             |VESTE VATUITE                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   408|     20546   |             |SCAUN LEDA                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   409|     20547   |             |PROSOP                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   410|     20549   |             |CLUPA                                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   411|     20550   |             |TRUSA CHEI FIXE SI INELARE              |10,  ,  |  ,  ,  |  ,  ,  |
+|   412|     20551   |             |TRUSA CHEI FIXE                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   413|     20552   |             |TRUSA ELECTRICA TUBULARA                |10,  ,  |  ,  ,  |  ,  ,  |
+|   414|     20553   |             |CLESTE TEVI MIC                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   415|     20554   |             |CLESTE TEVI 1                           |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          8
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   416|     20555   |             |PATENT                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   417|     20556   |             |BONFAIER                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   418|     20557   |             |CIOCAN 2KG                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   419|     20558   |             |CIOCAN 1.5KG                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   420|     20559   |             |CIOCAN 0.8KG                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   421|     20560   |             |CIOCAN 0.5KG                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   422|     20561   |             |BAROS                                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   423|     20562   |             |MISTRIE                                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   424|     20563   |             |NIVELA                                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   425|     20564   |             |APARAT TAIAT FAIANTA                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   426|     20580   |             |STORCATOR                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   427|     20581   |             |MONITOR 17                              |10,  ,  |  ,  ,  |  ,  ,  |
+|   428|     20582   |             |STAMPILA "BUN DE PLATA"                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   429|     20583   |             |ASPIRATOR                               |10,  ,  |  ,  ,  |  ,  ,  |
+|   430|     20584   |             |USA METALICA CASERIE                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   431|     30153   |             |COMPRESOR AER                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   432|     30508   |             |SPLIT APARAT AER CONDITIONAT            |10,  ,  |  ,  ,  |  ,  ,  |
+|   433|     30509   |             |COMPRESOR APARAT AER CONDITIONAT        |10,  ,  |  ,  ,  |  ,  ,  |
+|   434|     30510   |             |CHIT INSTALARE APARAT AER CONDITIONAT   |10,  ,  |  ,  ,  |  ,  ,  |
+|   435|     30511   |             |UNITATE COMANDA AER CONDITIONAT         |10,  ,  |  ,  ,  |  ,  ,  |
+|   436|     30522   |             |CALORIFER ELECTRIC                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   437|     30566   |             |POLIDISC                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   438|     30567   |             |TELEFON NOKIA 72501                     |10,  ,  |  ,  ,  |  ,  ,  |
+|   439|     30568   |             |ACCESORII AER CONDITIONAT               |10,  ,  |  ,  ,  |  ,  ,  |
+|   440|     30569   |             |STINGATOR TIP POPRES                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   441|     30570   |             |STINGATOR TIP P50                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   442|     30572   |             |BIROU 180X80X74                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   443|     30573   |             |BIROU 80X80X74                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   444|     30574   |             |COLT                                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   445|     30575   |             |MASA CONSILIU 200X100                   |10,  ,  |  ,  ,  |  ,  ,  |
+|   446|     30576   |             |JUMATATE CERC                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   447|     30577   |             |BIBLIOTECA 95X32X157                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   448|     30578   |             |USA STICLA SYMPHONY 108X45              |10,  ,  |  ,  ,  |  ,  ,  |
+|   449|     30579   |             |BIBLIOTECA 90X32X220                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   450|     30580   |             |BIBLIOTECA 45X32X220                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   451|     30581   |             |CANAPEA PASSION                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   452|     30582   |             |HUSA CANAPEA GRENA                      |10,  ,  |  ,  ,  |  ,  ,  |
+|   453|     30583   |             |FOTOLIU PASSION                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   454|     30584   |             |SCAUN 1120/N                            |10,  ,  |  ,  ,  |  ,  ,  |
+|   455|     30585   |             |TELEVIZOR COLOR PHILIPS 4426            |10,  ,  |  ,  ,  |  ,  ,  |
+|   456|     30586   |             |PHILIPS SISTEM HI-FI C330 3CD           |10,  ,  |  ,  ,  |  ,  ,  |
+|   457|     30587   |             |PHILIPS FC 6841-ASP SPAL 1500W          |10,  ,  |  ,  ,  |  ,  ,  |
+|   458|     30588   |             |HP MULTIFUNCTIONAL PSC 1110             |10,  ,  |  ,  ,  |  ,  ,  |
+|   459|     30589   |             |IMPRIMANTA EPSON STYLUS COLOR C42SX     |10,  ,  |  ,  ,  |  ,  ,  |
+|   460|     30590   |             |ELECTROMURES RADIAT.9 ELEMENTI          |10,  ,  |  ,  ,  |  ,  ,  |
+|   461|     30591   |             |ALASKA ER2510-RADIAT.ULEI 12 ELEM. 2500W|10,  ,  |  ,  ,  |  ,  ,  |
+|   462|     30592   |             |VORTEX EOR9 RADIAT. ULEI 9 ELEM.   2000W|10,  ,  |  ,  ,  |  ,  ,  |
+|   463|     30593   |             |ELECTROLUX ER2512-RADIATOR ULEI         |10,  ,  |  ,  ,  |  ,  ,  |
+|   464|     30594   |             |TURBOHOT CONVECTOR 2000W                |10,  ,  |  ,  ,  |  ,  ,  |
+|   465|     30595   |             |AEROTERMA METAL DELONGHI HTMO2     2000W|10,  ,  |  ,  ,  |  ,  ,  |
+|   466|     30596   |             |AEROTERMA NEVADA 2000W                  |10,  ,  |  ,  ,  |  ,  ,  |
+|   467|     30597   |             |BOILER ARDO 100L                        |10,  ,  |  ,  ,  |  ,  ,  |
+|   468|     30598   |             |FRIGIDER ZANUSSI ZD22/5 B,217L          |10,  ,  |  ,  ,  |  ,  ,  |
+|   469|     30599   |             |SCAUN ISO LEMN                          |10,  ,  |  ,  ,  |  ,  ,  |
+|   470|     30600   |             |MONITOR FLAT ADI V77F 1280X1024         |10,  ,  |  ,  ,  |  ,  ,  |
+|   471|     30601   |             |RADIO CD+MP3 PHILIPS AZ1538             |10,  ,  |  ,  ,  |  ,  ,  |
+|   472|     30602   |             |MASA CALCULATOR ARIZONA                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   473|     30603   |             |BIROU CALCULATOR SIDNEY                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   474|     30604   |             |CUIER OFFICE CROM                       |10,  ,  |  ,  ,  |  ,  ,  |
+|   475|     30605   |             |MASA SUFRAGERIE LEMN OSLO               |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          9
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   476|     30606   |             |APARAT SUDURA CU ARC CEN200 220/400V    |10,  ,  |  ,  ,  |  ,  ,  |
+|   477|     30607   |             |CAMERA FOTO DIGITALA 2.1.          BTC D|10,  ,  |  ,  ,  |  ,  ,  |
+|   478|     30608   |             |MASA CALCULATOR BS01                    |10,  ,  |  ,  ,  |  ,  ,  |
+|   479|     30609   |             |SCAUN FIX GRI                           |10,  ,  |  ,  ,  |  ,  ,  |
+|   480|     30610   |             |VEIOZA BIROU FLIP ROSU 1X60W E27        |10,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|

@@ -1,0 +1,202 @@
+                                                                          BALANTA ANALITICA
+                                                          A MIJLOACELOR FIXE PENTRU PERIOADA  01/12/2012 - 31/12/2012
+
+
+ 214                    MOBILIER SI APARATURA BIROTICA                                                        
+  -  -   -  -   -                                                                                                            PERIOADA:  01/12/2012 - 31/12/2012            pagina:     1
+|-----|--------|-----------------------------------------|------------|---------|-------------------------------------------|---------------------------------------------------------------|
+|     |        |                                         | UNITATE    |  STARE  |            C A N T I T A T I V            |                   V A L O R I C                               |
+| Crt.| FISA   |             DENUMIREA MATERIALULUI      |   DE       | MATERIAL|-------------------------------------------|---------------------------------------------------------------|
+|     |        |                                         | MASURA     |         |STOC PREC.| INTRARI  |  IESIRI  |   STOC   |  SOLD INITIAL |    DEBIT      |    CREDIT     |     SOLD      |
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+|    1|  300005| COPIATOR N3715                          | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |      11913.35 |          0.00 |          0.00 |      11913.35 |
+|    2|  300020| MICROCALCULATOR TIP 2 CD 496 /1         | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    3|  300021| MICROCALCULATOR TIP2 CD 496 /2          | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    4|  300022| MICROCALCULATOR  TIP2 CD 496/3          | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    5|  300023| MICROCALCULATOR TIP2 CD 496 /4          | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    6|  300024| MICROCALCULATOR TIP2 CD 496/5           | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    7|  300025| MICROCALCULATOR TIP2 CD 496/6           | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    8|  300026| MICROCALCULATOR TIP2 CD 496/7           | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|    9|  300027| MICROCALCULATOR TIP2 CD 496             | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|   10|  300028| MICROCALCULATOR TIP2 CD 496 /9          | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1396.01 |          0.00 |          0.00 |       1396.01 |
+|   11|  300035| PC.486 FD40 MB,VGA,RAM5+3,16            | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        498.99 |          0.00 |          0.00 |        498.99 |
+|   12|  300036| PC.486 MONITOR FUNAY                    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        350.00 |          0.00 |          0.00 |        350.00 |
+|   13|  300037| PC.PENTIUM SUPREME, MONITOR COLOR 14    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        600.00 |          0.00 |          0.00 |        600.00 |
+|   14|  300038| PC.PENTIUM, 100MHZ,8MB,MONITOR COLOR 14 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        470.00 |          0.00 |          0.00 |        470.00 |
+|   15|  300039| PC.PENTIUM,233 MHZ,MONITOR OFICIAL 14   | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        723.50 |          0.00 |          0.00 |        723.50 |
+|   16|  300043| CALCULATOR AT.586                       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        110.00 |          0.00 |          0.00 |        110.00 |
+|   17|  300044| SISTEM PENTIUM 3 1550 MHZ /1            | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2997.00 |          0.00 |          0.00 |       2997.00 |
+|   18|  300045| SISTEM PENTIUM 3 1550 MHZ /2            | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2997.00 |          0.00 |          0.00 |       2997.00 |
+|   19|  300046| CALCULATOR AMD K7,550MHZ HDD15.2,64RAM 1| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   20|  300047| CALCULATOR AMD K7,550MHZ HDD15,2,64RAM 2| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   21|  300048| CALCULATOR AMDK7,550MHZ HDD15.2,5;64RAM3| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   22|  300049| CALCULATOR AMDK7,550MHZ,HDD 15.2,64RAM 4| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   23|  300050| CALCULATOR AMD K7,550MHZ,HDD15.2,64RAM 5| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   24|  300051| CALCULATOR AMD K7 550 MHZ,HDD15.2,64RAM6| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   25|  300052| CALCULATOR AMD K7,550MHZ,HDD15.2,64RAM7 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   26|  300053| CALCULATOR AMDK7,550MHZ,HDD 15.2,64RAM8 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.50 |          0.00 |          0.00 |       2082.50 |
+|   27|  300054| CALCULATOR AMDK7800MHZ,TUNDERBIRD,HDD128| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3050.68 |          0.00 |          0.00 |       3050.68 |
+|   28|  300055| CALCULATOR AMDK7,800MHZ,TUNDERBIRD,2    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3050.68 |          0.00 |          0.00 |       3050.68 |
+|   29|  300056| CALCULATOR AMD K7,800MHZ,20GB,MONITOR19"| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       4176.90 |          0.00 |          0.00 |       4176.90 |
+|   30|  300065| SISTEM DE CALCUL AMD K7 DUROM 750 MHZ 1 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   31|  300066| SISTEM DE CALCUL AMD K7 DUROM 750 MHZ 2 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   32|  300067| SISTEM DE CALCUL AMD K7 DURON 750MHZ 3  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   33|  300068| SISTEM DE CALCUL AMD K7 DURON 750 MHZ 4 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   34|  300069| SISTEM DE CALCUL AMD K7 DURON 750 MHZ 5 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   35|  300070| SISTEM DE CALCUL AMD K7 DURON 750 MHZ 6 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   36|  300071| SISTEM DE CALCUL AMD K7 DURON 750 MHZ 7 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5760.00 |          0.00 |          0.00 |       5760.00 |
+|   37|  300072| NOOTEBOOK ASOS L8400/1                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |      10440.00 |          0.00 |          0.00 |      10440.00 |
+|   38|  300073| NOTEBOOK ASOS L8400 /2                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |      10440.00 |          0.00 |          0.00 |      10440.00 |
+|   39|  300074| NOTEBOOK ASOS L 8400 /3                 | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |      10440.00 |          0.00 |          0.00 |      10440.00 |
+|   40|  300075| SISTEM CALCUL P4                        | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2663.87 |          0.00 |          0.00 |       2663.87 |
+|   41|  300076| SISTEM CALCUL PENTIUM IV                | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2285.67 |          0.00 |          0.00 |       2285.67 |
+|   42|  300077| SISTEM P4                               | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2285.67 |          0.00 |          0.00 |       2285.67 |
+|   43|  300078| SISTEM CALCUL P.4                       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1221.61 |          0.00 |          0.00 |       1221.61 |
+|   44|  300079| SISTEM CALCUL P4 NOU                    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2082.81 |          0.00 |          0.00 |       2082.81 |
+|   45|  300080| SISTEM CALCU P4/1                       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1674.20 |          0.00 |          0.00 |       1674.20 |
+|   46|  300081| SISTEM CALCUL P4/2                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1674.20 |          0.00 |          0.00 |       1674.20 |
+|   47|  300082| SISTEM CALCUL P4/3                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3815.38 |          0.00 |          0.00 |       3815.38 |
+|   48|  300085| SISTEM CALCUL P4/4                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1577.71 |          0.00 |          0.00 |       1577.71 |
+|   49|  300086| SISTEM CALCUL P4/5                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1577.71 |          0.00 |          0.00 |       1577.71 |
+|   50|  300087| SISTEM CALCUL P4/6                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1577.71 |          0.00 |          0.00 |       1577.71 |
+|   51|  300088| SISTEM CALCUL P4/7                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1577.71 |          0.00 |          0.00 |       1577.71 |
+|   52|  300089| SISTEM CALCUL P4/8                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1577.71 |          0.00 |          0.00 |       1577.71 |
+|   53|  300090| SISTEM DE CALCUL PIV/1                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1490.00 |          0.00 |          0.00 |       1490.00 |
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+                                                                                                                                                                                  11/02/2013
+
+ 214                    MOBILIER SI APARATURA BIROTICA                                                        
+  -  -   -  -   -                                                                                                            PERIOADA:  01/12/2012 - 31/12/2012            pagina:     2
+|-----|--------|-----------------------------------------|------------|---------|-------------------------------------------|---------------------------------------------------------------|
+|     |        |                                         | UNITATE    |  STARE  |            C A N T I T A T I V            |                   V A L O R I C                               |
+| Crt.| FISA   |             DENUMIREA MATERIALULUI      |   DE       | MATERIAL|-------------------------------------------|---------------------------------------------------------------|
+|     |        |                                         | MASURA     |         |STOC PREC.| INTRARI  |  IESIRI  |   STOC   |  SOLD INITIAL |    DEBIT      |    CREDIT     |     SOLD      |
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+|   54|  300091| SISTEM DE CALCUL PIV/2                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1480.00 |          0.00 |          0.00 |       1480.00 |
+|   55|  300092| SISTEM DE CALCUL PIV/3                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1660.00 |          0.00 |          0.00 |       1660.00 |
+|   56|  300093| SISTEM DE CALCUL PIV/4                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1540.00 |          0.00 |          0.00 |       1540.00 |
+|   57|  300094| SISTEM DE CALCUL PIV/5                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1729.00 |          0.00 |          0.00 |       1729.00 |
+|   58|  300095| SISTEM DE CALCUL PIV/6                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1511.00 |          0.00 |          0.00 |       1511.00 |
+|   59|  300096| COMPLET RETEA                           | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |      10441.00 |          0.00 |          0.00 |      10441.00 |
+|   60|  300097| SISTEM DE CALCUL P4/9                   | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1639.51 |          0.00 |          0.00 |       1639.51 |
+|   61|  300098| SISTEM DE CALCUL P II FUJITSU           | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |        150.00 |          0.00 |          0.00 |        150.00 |
+|   62|  300099| COMPUTER ALPIS INTEL CORE 2 DUO         | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   63|  300100| COMPUTER ALPIS INTEL CORE 2 DUO/1       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   64|  300101| COMPUTER ALPIS INTEL CORE 2 DUO/2       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   65|  300102| COMPUTER INTEL CORE 2 DUO/3             | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   66|  300103| COMPUTER ALPIS INTEL CORE 2 DUO/4       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   67|  300104| COMPUTER ALPIS INTEL CORE 2 DUO/5       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   68|  300105| COMPUTER ALPIS INTEL CORE DUO/6         | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   69|  300106| COMPUTER ALPIS CORE DUO/7               | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   70|  300107| COMPUTER ALPIS INTEL CORE DUO/8         | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   71|  300108| COMPUTER ALPIS INTEL CORE 2 DUO/9       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3406.00 |          0.00 |          0.00 |       3406.00 |
+|   72|  300109| COMPUTER ALPIS INTEL CORE 2 QUAD        | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3857.00 |          0.00 |          0.00 |       3857.00 |
+|   73|  300110| COMPUTER ALPIS INTEL CORE 2 QUAD/1      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3857.00 |          0.00 |          0.00 |       3857.00 |
+|   74|  300111| COMPUTER ALPIS INTEL CORE 2 QUAD/2      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3857.00 |          0.00 |          0.00 |       3857.00 |
+|   75|  300112| COMPUTER ALPIS INTEL CORE 2 QUAD/3      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3857.00 |          0.00 |          0.00 |       3857.00 |
+|   76|  300113| COMPUTER ALPIS INTEL CORE 2 QUAD/4      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3857.00 |          0.00 |          0.00 |       3857.00 |
+|   77|  300114| CALCULATOR OFFICE POWER TIP OP 31       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   78|  300115| CALCULATOR OFFICE POWER TIP OP-31/1     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   79|  300116| CALCULATOR OFFICE POWER TIP OP-31/2     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   80|  300117| CALCULATOR OFFICE POWER TIP OP-31/3     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   81|  300118| CALCULATOR OFFICE POWER TIP OP-31/4     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   82|  300119| CALCULATOR OFFICE POWER TIP OP-31/5     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   83|  300120| CALCULATOR OFFICE POWER TIP OP-31/6     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   84|  300121| CALCULATOR OFFICE POWER TIP OP-31/7     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   85|  300122| CALCULATOR OFFICE POWER TIP OP-31/9     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   86|  300123| CALCULATOR OFFICE POWER TIP OP-31/8     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   87|  300124| CALCULATOR OFFICE POWER TIP OP-31/10    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   88|  300125| CALCULATOR OFFICE POWER TIP OP-31/12    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   89|  300126| CALCULATOR OFFICE POWER TIP OP-31/11    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   90|  300127| CALCULATOR OFFICE POWER TIP OP-31/13    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   91|  300128| CALCULATOR OFFICE POWER TIP OP-31/15    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   92|  300129| CALCULATOR OFFICE POWER TIP OP-31/14    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   93|  300130| CALCULATOR OFFICE POWER TIP OP-31/16    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   94|  300131| CALCULATOR OFFICE POWER TIP OP-31/17    | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2584.68 |          0.00 |          0.00 |       2584.68 |
+|   95|  300132| SISTEM DE MANAG.INFORM.MEDICAL LOC.PITES| bucati     | FOLOS.  |    1     |    0     |    0     |    1     |     162067.31 |          0.00 |          0.00 |     162067.31 |
+|   96|  300133| LAPTOP SONY VAIO                        | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3000.00 |          0.00 |          0.00 |       3000.00 |
+|   97|  300134| LAPTOP SONY VAIO.                       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       3000.00 |          0.00 |          0.00 |       3000.00 |
+|   98|  300135| LAPTOP SONY VAIO/3                      | bucati     | FOLOS.  |    0     |    1     |    0     |    1     |          0.00 |       2999.00 |          0.00 |       2999.00 |
+|   99|  620191| COPIATOR DEVELOP                        | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2340.00 |          0.00 |          0.00 |       2340.00 |
+|  100|  620500| COPIATOR MINOLATA EP 1054               | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       5380.00 |          0.00 |          0.00 |       5380.00 |
+|  101|  640043| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.1  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  102|  640044| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.2  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  103|  640045| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.3  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  104|  640046| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.4  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  105|  640047| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.5  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  106|  640048| PISTOL CALIBRU 7.62 MM MODEL 1933       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  107|  640049| PSTOL CALIBRU 7.62 MM MODEL 1933 NR.7   | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  108|  640050| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.8  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  109|  640051| PISTOL CALIBRU 7.62 MM MODEL 1933 NR.9  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |          0.17 |          0.00 |          0.00 |          0.17 |
+|  110|  640077| PISTOL CALIBRU 7.62 MM MODEL 1933 1     | bucati     | FOLOS.  |    34    |    34    |    34    |    34    |          5.78 |          5.78 |          5.78 |          5.78 |
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+                                                                                                                                                                                  11/02/2013
+
+ 214                    MOBILIER SI APARATURA BIROTICA                                                        
+  -  -   -  -   -                                                                                                            PERIOADA:  01/12/2012 - 31/12/2012            pagina:     3
+|-----|--------|-----------------------------------------|------------|---------|-------------------------------------------|---------------------------------------------------------------|
+|     |        |                                         | UNITATE    |  STARE  |            C A N T I T A T I V            |                   V A L O R I C                               |
+| Crt.| FISA   |             DENUMIREA MATERIALULUI      |   DE       | MATERIAL|-------------------------------------------|---------------------------------------------------------------|
+|     |        |                                         | MASURA     |         |STOC PREC.| INTRARI  |  IESIRI  |   STOC   |  SOLD INITIAL |    DEBIT      |    CREDIT     |     SOLD      |
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+|  111|  640078| PISTOL MITRALIERA 7.62 MM CU PAT N MD63 | bucati     | FOLOS.  |   211    |   211    |   211    |   211    |         52.75 |         52.75 |         52.75 |         52.75 |
+|  112|  640079| PISTOL SEMNALIZARE  CALIBRU 26 MM       | bucati     | FOLOS.  |    1     |    1     |    1     |    1     |          0.14 |          0.14 |          0.14 |          0.14 |
+|  113|  640080| PISTOL SEMNALIZARE CALIBRU 26 MM        | bucati     | FOLOS.  |    1     |    1     |    1     |    1     |          0.14 |          0.14 |          0.14 |          0.14 |
+|  114|  640081| PUSCA MITRALIERA 7.62MM PAT NOR.MD1964  | bucati     | FOLOS.  |    1     |    1     |    1     |    1     |          0.46 |          0.46 |          0.46 |          0.46 |
+|  115|  640082| ARUNCATOR DE GRENADE 1                  | bucati     | FOLOS.  |    1     |    1     |    1     |    1     |          1.50 |          1.50 |          1.50 |          1.50 |
+|  116|  640083| ARUNCATOR GRENADE 2                     | bucati     | FOLOS.  |    1     |    1     |    1     |    1     |          1.50 |          1.50 |          1.50 |          1.50 |
+|  117|  641080| PISTOL SEMNALIZARE CALIBRU  26 MM 1     | bucati     | FOLOS.  |    1     |    1     |    1     |    1     |          0.14 |          0.14 |          0.14 |          0.14 |
+|  118|  900001| CALCULATOR PENTIUM 4-1                  | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2243.47 |          0.00 |          0.00 |       2243.47 |
+|  119|  900003| SISTEM CALCUL P4-3                      | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       2285.67 |          0.00 |          0.00 |       2285.67 |
+|  120|  900004| PC CEL D 320/240017                     | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1749.62 |          0.00 |          0.00 |       1749.62 |
+|  121|  900005| SISTEM AMDK7-4                          | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |       1865.46 |          0.00 |          0.00 |       1865.46 |
+|  122|  900006| MICROCALCULATOR AT 286 MDKIT            | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |         90.00 |          0.00 |          0.00 |         90.00 |
+|  123|  902001| COPIATOR N 3 H5-3                       | bucati     | FOLOS.  |    1     |    0     |    0     |    1     |      11913.35 |          0.00 |          0.00 |      11913.35 |
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+|                  T O T A L     G E N E R A L                                                                              |     474902.72 |       3061.41 |         62.41 |     477901.72 |
+|---------------------------------------------------------------------------------------------------------------------------|---------------|---------------|---------------|---------------|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|-----|--------|-----------------------------------------|------------|---------|----------|----------|----------|----------|---------------|---------------|---------------|---------------|
+                                                                                                                                                                                  11/02/2013
+
+

@@ -1,0 +1,84 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('den_loc') .OR. UPPER(WTITLE('DEN_LOC'))=='DEN_LOC.PJX' .OR. UPPER(WTITLE('DEN_LOC'))=='DEN_LOC.SCX' .OR. UPPER(WTITLE('DEN_LOC'))=='DEN_LOC.MNX' .OR. UPPER(WTITLE('DEN_LOC'))=='DEN_LOC.PRG' .OR. UPPER(WTITLE('DEN_LOC'))=='DEN_LOC.FRX' .OR. UPPER(WTITLE('DEN_LOC'))=='DEN_LOC.QPR'
+      DEFI WINDOW den_loc FROM INT((SROWS()-13)/2), INT((SCOLS()-35)/2) TO INT((SROWS()-13)/2)+12, INT((SCOLS()-35)/2)+34 NOFLOAT NOCLOSE SHADOW TITLE 'Introducere loc de dispunere' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLOS ALL
+ USE dispus
+ M.denumire = '                    '
+ M.cod = 0
+ SHOW GETS
+ IF WVISIBLE('den_loc')
+      ACTI WINDOW SAME den_loc
+ ELSE
+      ACTI WINDOW NOSHOW den_loc
+ ENDI
+ @ 2, 7 GET M.denumire DEFAULT ' ' SIZE 1, 20 VALID _sbc0sx8si()
+ @ 4, 20 GET M.cod DEFAULT 0 SIZE 1, 2 RANGE 1,99 VALID _sbc0sx8v9() WHEN _sbc0sx8u2() ERROR 'Exista loc de dispunere cu acest cod. Consultati registrul cu coduri.'
+ @ 6, 4 GET M.salvare DEFAULT 1 SIZE 1, 26, 1 PICTURE '@*HT SALVARE LOC DE DISPUNERE' VALID _sbc0sx8y9() WHEN _sbc0sx8wx()
+ @ 8, 6 GET M.ies DEFAULT 1 SIZE 1, 21, 1 PICTURE '@*HT \!\?\<IESIRE'
+ @ 10, 5 GET M.mod DEFAULT 1 SIZE 1, 23, 1 PICTURE '@*HT MODIFICARE DENUMIRE' VALID _sbc0sx8zx()
+ @ 4, 2 SAY 'Codul locului:' SIZE 1, 14, 0
+ @ 0, 1 SAY 'Denumirea locului de dispunere' SIZE 1, 30, 0
+ IF  .NOT. WVISIBLE('den_loc')
+      ACTI WINDOW den_loc
+ ENDI
+ READ CYCLE
+ RELE WINDOW den_loc
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ CLOS ALL
+*
+PROC _sbc0sx8si
+ LOCA ALL FOR ALLTRIM(UPPER(denumire))==ALLTRIM(UPPER(M.denumire))
+ IF FOUND()
+      M.denumire = '                    '
+      SHOW GET M.denumire
+      _CUROBJ = 1
+ ENDI
+*
+FUNC _sbc0sx8u2
+ IF LEN(ALLTRIM(M.denumire))=0
+      RETU .F.
+ ENDI
+*
+FUNC _sbc0sx8v9
+ SET ORDER TO cod
+ SEEK M.cod
+ IF FOUND()
+      M.cod = 0
+      SHOW GET M.cod
+      RETU .F.
+ ENDI
+ RETU .T.
+*
+FUNC _sbc0sx8wx
+ IF LEN(ALLTRIM(M.denumire))=0
+      RETU .F.
+ ENDI
+ IF M.cod=0
+      RETU .F.
+ ENDI
+*
+PROC _sbc0sx8y9
+ M.denumire = UPPER(M.denumire)
+ APPE BLANK
+ GATH MEMVAR
+ USE
+*
+PROC _sbc0sx8zx
+ SET ORDER TO DENUMIRE
+ BROW FOR cod<>0 FIELDS cod, denumire FREEZE denumire NOAPPEND NODELETE TITLE 'IESIRE CU CTRL-W' COLOR SCHEME 5
+ USE
+*

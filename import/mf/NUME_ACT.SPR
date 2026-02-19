@@ -1,0 +1,118 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('_00k0i50uv')
+      DEFI WINDOW _00k0i50uv FROM INT((SROWS()-14)/2), INT((SCOLS()-60)/2) TO INT((SROWS()-14)/2)+13, INT((SCOLS()-60)/2)+59 NOFLOAT NOCLOSE SHADOW NOMINIMIZE COLOR SCHEME 1
+ ENDI
+ CLOS ALL
+ M.nr_oper = 0
+ SET CENTURY ON
+ SET DATE TO briti
+ M.anul = YEAR(DATE())
+ USE acte
+ SET ORDER TO cod
+ COUN ALL TO nr_elem
+ DIME sir_act[ nr_elem, 2]
+ COPY TO ARRAY sir_act FIELDS den, cod ALL
+ USE
+ USE operatii
+ M.c_data = {}
+ M.ce_act = 0
+ M.nr_doc = '          '
+ M.c_comanda = 0
+ M.c_an = 0
+ M.ok = 1
+ M.esc = 1
+ SHOW GETS
+ IF WVISIBLE('_00k0i50uv')
+      ACTI WINDOW SAME _00k0i50uv
+ ELSE
+      ACTI WINDOW NOSHOW _00k0i50uv
+ ENDI
+ @ 0, 30 SAY 'din anul' SIZE 1, 8, 0
+ @ 4, 27 SAY '{ZZ/LL/AAAA}' SIZE 1, 12, 0
+ @ 5, 1 SAY 'Denumirea actului:' SIZE 1, 18, 0
+ @ 4, 1 SAY 'Data operarii:' SIZE 1, 14, 0
+ @ 2, 14 SAY 'DATELE CORECTE VOR FI:' SIZE 1, 22, 0
+ @ 0, 1 SAY 'Operatiunea numarul' SIZE 1, 19, 0
+ @ 9, 25 SAY 'Comanda' SIZE 1, 7, 0
+ @ 9, 44 SAY 'din anul' SIZE 1, 8, 0
+ @ 0, 22 GET M.nr_oper DEFAULT 0 SIZE 1, 6 RANGE 0
+ @ 0, 39 GET M.anul DEFAULT 0 SIZE 1, 4 RANGE 1997 VALID val_oper()
+ @ 4, 16 GET M.c_data DEFAULT {} SIZE 1, 10 RANGE {01/01/00},{01/01/2100} PICTURE '@E' DISABLE VALID IIF(YEAR(M.c_data)=M.anul, .T., .F.)
+ @ 6, 1 GET M.ce_act DEFAULT 1 SIZE 3, 56 FROM sir_act PICTURE '@^' DISABLE VALID _00k0i51a5() COLOR SCHEME 1,2
+ @ 9, 12 GET M.nr_doc DEFAULT ' ' SIZE 1, 10 DISABLE
+ @ 9, 33 GET M.c_comanda DEFAULT 0 SIZE 1, 10 PICTURE '@Z' DISABLE
+ @ 9, 53 GET M.c_an DEFAULT 0 SIZE 1, 4 PICTURE '@Z' DISABLE
+ @ 11, 5 GET M.ok DEFAULT 1 SIZE 1, 22, 1 PICTURE '@*HN SALVARE MODIFICARI' DISABLE VALID _00k0i51c7()
+ @ 11, 37 GET M.esc DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HT ANULARE'
+ @ 9, 1 SAY 'Numar act:' SIZE 1, 10, 0
+ IF  .NOT. WVISIBLE('_00k0i50uv')
+      ACTI WINDOW _00k0i50uv
+ ENDI
+ READ CYCLE
+ RELE WINDOW _00k0i50uv
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*
+PROC val_oper
+ SELE operatii
+ SET ORDER TO pun_oper
+ GOTO TOP
+ SEEK STR(M.anul, 4)+STR(M.nr_oper, 6)
+ IF  .NOT. FOUND()
+      M.nr_oper = 0
+      M.ce_act = 0
+      M.nr_oper = 0
+      M.anul = YEAR(DATE())
+      M.c_data = {}
+      M.nr_doc = '          '
+      M.c_comanda = 0
+      M.c_an = 0
+      SHOW GETS DISABLE
+      SHOW GET M.nr_oper ENABLE
+      SHOW GET M.anul ENABLE
+      SHOW GET M.esc ENABLE
+      _CUROBJ = OBJNUM(M.nr_oper)
+      RETU
+ ENDI
+ SCAT MEMVAR
+ M.ce_act = 1
+ DO WHILE M.ce_act<=nr_elem
+      IF sir_act(M.ce_act,2)=M.cod_doc
+           EXIT
+      ENDI
+      M.ce_act = M.ce_act+1
+ ENDD
+ SHOW GETS ENABLE
+*
+PROC _00k0i51a5
+ M.cod_doc = sir_act(M.ce_act,2)
+*
+PROC _00k0i51c7
+ SELE operatii
+ M.cod_doc = sir_act(M.ce_act,2)
+ GATH MEMVAR
+ M.ce_act = 0
+ M.nr_oper = 0
+ M.anul = YEAR(DATE())
+ M.c_data = {}
+ M.nr_doc = '          '
+ M.c_comanda = 0
+ M.c_an = 0
+ SHOW GETS DISABLE
+ SHOW GET M.nr_oper ENABLE
+ SHOW GET M.anul ENABLE
+ SHOW GET M.esc ENABLE
+ _CUROBJ = OBJNUM(M.nr_oper)
+*

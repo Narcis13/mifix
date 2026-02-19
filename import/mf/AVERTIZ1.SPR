@@ -1,0 +1,36 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('avertiz') .OR. UPPER(WTITLE('AVERTIZ'))=='AVERTIZ.PJX' .OR. UPPER(WTITLE('AVERTIZ'))=='AVERTIZ.SCX' .OR. UPPER(WTITLE('AVERTIZ'))=='AVERTIZ.MNX' .OR. UPPER(WTITLE('AVERTIZ'))=='AVERTIZ.PRG' .OR. UPPER(WTITLE('AVERTIZ'))=='AVERTIZ.FRX' .OR. UPPER(WTITLE('AVERTIZ'))=='AVERTIZ.QPR'
+      DEFI WINDOW avertiz FROM INT((SROWS()-9)/2), INT((SCOLS()-40)/2) TO INT((SROWS()-9)/2)+8, INT((SCOLS()-40)/2)+39 NOFLOAT NOCLOSE SHADOW TITLE 'ATENTIE !!!' NOMINIMIZE COLOR SCHEME 1
+ ENDI
+ IF WVISIBLE('avertiz')
+      ACTI WINDOW SAME avertiz
+ ELSE
+      ACTI WINDOW NOSHOW avertiz
+ ENDI
+ @ 6, 12 GET M.ies DEFAULT 1 SIZE 1, 13, 1 PICTURE '@*HT \!\?\<Iesire'
+ @ 0, 5 SAY 'A-ti introdus pentru operatiunea' SIZE 1, 32, 0
+ @ 1, 1 SAY 'curenta deja 999 de inregistrari.' SIZE 1, 33, 0
+ @ 2, 1 SAY 'Pentru contiunuare trebuie sa iesiti' SIZE 1, 36, 0
+ @ 3, 1 SAY 'din macheta si sa incepeti o alta' SIZE 1, 33, 0
+ @ 5, 1 SAY 'in continuare a inregistrarilor.' SIZE 1, 32, 0
+ @ 4, 1 SAY 'operatiune pentru introducerea ' SIZE 1, 31, 0
+ IF  .NOT. WVISIBLE('avertiz')
+      ACTI WINDOW avertiz
+ ENDI
+ READ CYCLE
+ RELE WINDOW avertiz
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*

@@ -1,0 +1,909 @@
+
+
+                  LISTA CU CORESPONDENTA MATERIAL-CONT
+                  ------------------------------------
+
+                                                          PAGINA:          1
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   110000              | CENTRALA   TERMICA                                |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200008              | BOILER 85 L ELECTRIC                              |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200009              | APARAT AER CONDITIONAT 1                          |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   200009              | APARAT AER CONDITIONAT 1                          |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   200019              | MASINA DE GATIT CU ARDERE INDEPENDENTA            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200022              | MASINA DE SPALAT ELECTRICA 1                      |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   200023              | MASINA DE SPALAT RUFE 1                           |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   200024              | MASINA DE SPALAT RUFE 2                           |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   200029              | STORCATOR RUFE                                    |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   200055              | TRANSFORMATOR  SUDURA  ELECTRICA S24453           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200327              | APARAT AER CONDITIONAT 2                          |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   200327              | APARAT AER CONDITIONAT 2                          |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   200330              | GRUP TERMIC 85KW                                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200331              | APARAT COTRACURENT                                |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200332              | APARAT CONTRACURENT 58962                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200333              | CAZAN ABUR MP NR.650                              |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200334              | GENERATOR ACETILENA                               |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200335              | GRUP ELECTROGEN                                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          2
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   200336              | MASINA DE GAURIT                                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200337              | MASINA DE GAURIT ELECTRICA TIP G10                |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200338              | MASINA UNIVERSALA DE TAMPLARIT  MT.40             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200339              | MODUL DE PREPARARE APA CALDA MENAJERA             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200340              | POLIZOR P.D. 300 CM                               |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200341              | SCHIMBATOR DE CALDURA CU CU PLACI V 28            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200342              | CAZAN ABUR I.P. NR 210                            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   200550              | PAT SPITAL TIP ATI 1                              |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   200550              | PAT SPITAL TIP ATI 1                              |
+| 2131.02.25.08         | ECHIP TEHN - OCROTIREA SANATATII - INSTRUMENTAR   |
+|-----------------------|---------------------------------------------------|
+|   200553              | PAT SPITAL TIP ATI 4                              |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   200553              | PAT SPITAL TIP ATI 4                              |
+| 2131.02.25.08         | ECHIP TEHN - OCROTIREA SANATATII - INSTRUMENTAR   |
+|-----------------------|---------------------------------------------------|
+|   200554              | PAT SPITAL TIP ATI 5                              |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   200554              | PAT SPITAL TIP ATI 5                              |
+| 2131.02.25.08         | ECHIP TEHN - OCROTIREA SANATATII - INSTRUMENTAR   |
+|-----------------------|---------------------------------------------------|
+|   220390              | MASINA CALCAT RUFE 1                              |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   220393              | PAT A.T.I                                         |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   220536              | MASINA DE SPALAT RUFE 3                           |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   220537              | USCATOR RUFE                                      |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   220539              | APARAT AER CONDITIONAT DAEWO 121 LH               |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   220594              | PAT SPITAL TIP ATI                                |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   400018              | ASCENSOR PT.PERSOANE                              |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          3
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   400021              | ASCENSOR PT.MATERIALE 75 KG                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   400022              | ASCENSOR PT.MATERIALE                             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   620229              | APARAT AER CONDITIONAT L6Ls-J0962  HL             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620229              | APARAT AER CONDITIONAT L6Ls-J0962  HL             |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620230              | APARAT AER COND. LG LS-J 1261HL                   |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620230              | APARAT AER COND. LG LS-J 1261HL                   |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620231              | APARAT AER COND. LGLS-K 1860J                     |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620231              | APARAT AER COND. LGLS-K 1860J                     |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620232              | APARAT AER CONDITIONAT LG LM-1963 H2L             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620232              | APARAT AER CONDITIONAT LG LM-1963 H2L             |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620233              | APARAT AER CONDITIONAT LG LM -1963 H2L 3          |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620233              | APARAT AER CONDITIONAT LG LM -1963 H2L 3          |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620234              | APARAT AER CONDITIONAT LG LM1963 H2L              |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620234              | APARAT AER CONDITIONAT LG LM1963 H2L              |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620300              | APARAT AER CONDITIONAT                            |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620300              | APARAT AER CONDITIONAT                            |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620301              | APARAT AER CONDITIONAT /2                         |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620301              | APARAT AER CONDITIONAT /2                         |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   620302              | APARAT AER CONDITIONAT /1                         |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   620302              | APARAT AER CONDITIONAT /1                         |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          4
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640001              | CONTAINER TIP GRUP SANITAR(WC)/2                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640002              | SCARA ACCES CU BALUSTRADA SI PLATFORMA/2          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640003              | CONTAINER ADMINISTRATIV                           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640004              | CONTAINER ADMINISTRATIV/1                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640005              | CONTAINER ADMINISTRATIV/2                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640006              | CONTAINER ADMINISTRATIV/3                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640007              | CONTAINER ADMINISTRATIV/4                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640008              | CONTAINER ADMINISTRATIV/5                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640009              | CONTAINER ADMINISTRATIV/6                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640010              | CONTAINER ADMINISTRATIV/7                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640011              | CONTAINER ADMINISTRATIV/8                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640012              | CONTAINER ADMINISTRATIV/9                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640013              | CONTAINER ADMINISTRATIV/10                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640085              | PAT SPITAL 1                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640086              | PAT SPITAL 2                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640087              | PAT SPITAL 3                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640088              | PAT SPITAL 4                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640089              | PAT SPITAL 5                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640090              | PAT SPITAL 6                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640091              | PAT SPITAL 7                                      |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          5
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640092              | APARAT AER CONDITIONAT 24000 BTU                  |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640092              | APARAT AER CONDITIONAT 24000 BTU                  |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640093              | APARAT AER CONDITIONTA 9000 BTU 1                 |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640093              | APARAT AER CONDITIONTA 9000 BTU 1                 |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640094              | APARAT DE AER CONDITIONAT 9000 BTU 2              |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640094              | APARAT DE AER CONDITIONAT 9000 BTU 2              |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640095              | APARAT AER CONDITIONAT 9000 BTU 3                 |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640095              | APARAT AER CONDITIONAT 9000 BTU 3                 |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640096              | APARAT AER CONDITIONAT 9000 BTU                   |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640096              | APARAT AER CONDITIONAT 9000 BTU                   |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640097              | CANAPEA 3 LOCURI EXTENSIBILA STOFA                |
+| 214.02.01.02.04       | ECHiPAMENTR MOBILIER CAZARMARE                    |
+|-----------------------|---------------------------------------------------|
+|   640098              | BARIERA AUTOMATA                                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640099              | SISTEM MONITORIZ.SI SUPRAVEG.VIDEO PAV.E          |
+| 2131.02.22.04         | ECHIPAMENTE TELECOMUNICATII CAZARMARE             |
+|-----------------------|---------------------------------------------------|
+|   640100              | SISTEM AUTOMATIZAT 884                            |
+| 2131.02.22.04         | ECHIPAMENTE TELECOMUNICATII CAZARMARE             |
+|-----------------------|---------------------------------------------------|
+|   640101              | CENTRALA DE PURIFICAT AERUL                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640102              | INST.PURIF./STERILIZ.AER BLOC OPERATOR            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640103              | INSTAL.DE PURIF.AER SI DETEN.OXIG.PAV.H           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640104              | SISTEM DETECTIE SI ALARM.LA INCEND.PAV.H          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640200              | CONTAINER TIP DORMITOR ECHIPAT TIP 1              |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640201              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/1            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          6
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640202              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/2            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640203              | CONTAINER TIP DORMITOR ECHIPAT TIP1/3             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640204              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/4            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640205              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/5            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640206              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/6            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640207              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/7            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640208              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/8            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640209              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/9            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640210              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/10           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640211              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/11           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640212              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/12           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640213              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/13           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640214              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/14           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640215              | CONTAINER TIP DORMITOR ECHIPAT TIP1/15            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640216              | CONTAINER TIP DORMITOR ECHIPAT TIP 1/16           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640217              | CONTAINER TIP GRUP SANITAR(WC) CU DUS             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640218              | CONTAINER TIP GRUP SANITAR (WC )CU DUS/1          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640219              | CONTAINER TIP GRUP SANITAR (WC) CU DUS/2          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640640              | ASCENSOR                                          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640641              | APARAT AER CONDITIONAT S.C2G 80559258             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          7
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640641              | APARAT AER CONDITIONAT S.C2G 80559258             |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640642              | APARAT AER CONDITIONAT S.C2G 80375593             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640642              | APARAT AER CONDITIONAT S.C2G 80375593             |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640643              | APARAT AER CONDITIONAT S.C2G 80496983             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640643              | APARAT AER CONDITIONAT S.C2G 80496983             |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640644              | APARAT AER CONDITIONAT S. C2G 80419221            |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640644              | APARAT AER CONDITIONAT S. C2G 80419221            |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640645              | CALANDRU ELECTRIC PS-5125E                        |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640646              | USCATOR ELECTRIC IME-ES 34 PE S 32131             |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640647              | USCATOR ELECTRIC IME-ES 34 PE S 32132             |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640648              | MASINA DE SPALAT RUFE W.F.18G4E-1                 |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640649              | MASINA DE SPALAT RUFE W.F.18G4E                   |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640650              | APARAT STERILIZAT AER BLOC OPERATOR-1             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640650              | APARAT STERILIZAT AER BLOC OPERATOR-1             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640651              | APARAT STERILIZAT AER BLOC OPERATOR-2             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640651              | APARAT STERILIZAT AER BLOC OPERATOR-2             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640652              | APARAT STERILIZAT AER BLOC OPERATOR-3             |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640652              | APARAT STERILIZAT AER BLOC OPERATOR-3             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640653              | MASINA DE GATIT                                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640653              | MASINA DE GATIT                                   |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          8
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640654              | MASINA DE GATIT CU CUPTOR-1                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640654              | MASINA DE GATIT CU CUPTOR-1                       |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640655              | MASINA DE GATIT CU CUPTOR-2                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640655              | MASINA DE GATIT CU CUPTOR-2                       |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640656              | FRY TOP CU SUP+USI                                |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640657              | MARMITA-PD7-6G5                                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640658              | MARMITA-2                                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640659              | MARMITA-3                                         |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640660              | ELEMENT NEUTRU                                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640661              | POMPA DOZATOARE DOSITEC                           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640662              | GRUP ELECTROGEN 125 KVA                           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640663              | BARIERA RUTIERA                                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640664              | SISTEM VIDEO CU CIRCUIT INCHIS                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640664              | SISTEM VIDEO CU CIRCUIT INCHIS                    |
+| 2131.02.22.04         | ECHIPAMENTE TELECOMUNICATII CAZARMARE             |
+|-----------------------|---------------------------------------------------|
+|   640665              | CENTRALA TERMICA 33 KW CU BOILER INOX             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640666              | SISTEM CONTROL ACCES VIDEO-4 POSTURI              |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640666              | SISTEM CONTROL ACCES VIDEO-4 POSTURI              |
+| 2131.02.22.04         | ECHIPAMENTE TELECOMUNICATII CAZARMARE             |
+|-----------------------|---------------------------------------------------|
+|   640667              | SISTEM CONTROL ACCES VIDEO-16 POSTURI             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640667              | SISTEM CONTROL ACCES VIDEO-16 POSTURI             |
+| 2131.02.22.04         | ECHIPAMENTE TELECOMUNICATII CAZARMARE             |
+|-----------------------|---------------------------------------------------|
+|   640669              | CENTRALA PONTAJ POLICLINICA                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:          9
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640670              | SISTEM.MONIT.VIDEO LA DISTANTA                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640670              | SISTEM.MONIT.VIDEO LA DISTANTA                    |
+| 2131.02.22.04         | ECHIPAMENTE TELECOMUNICATII CAZARMARE             |
+|-----------------------|---------------------------------------------------|
+|   640671              | FREZA ZAPADA                                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640672              | APARAT AER CONDITIONAT 18000BTU                   |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640672              | APARAT AER CONDITIONAT 18000BTU                   |
+| 2131.02.25.08         | ECHIP TEHN - OCROTIREA SANATATII - INSTRUMENTAR   |
+|-----------------------|---------------------------------------------------|
+|   640672              | APARAT AER CONDITIONAT 18000BTU                   |
+| 2131.02.26.04         | ALTE MASINI INSTALATII CAZARMARE                  |
+|-----------------------|---------------------------------------------------|
+|   640673              | MASINA DE SPALAT RUFE 25 KG                       |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640674              | MASINA DE SPALAT PODELE CU ACUMULATORI            |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640675              | INSTAL.INOX CU 2 POST.PT.PROD.APA STER.           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640676              | INST.INOX.CU 1 POST PT.PROD.APA STERILA           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640677              | TABLOU ALARM.SI CONTROL(OXIG.SI AER COM)          |
+| 2131.02.28.09         | ECHIPAMENTE TEHNOLOGICE - ALTE  RAM               |
+|-----------------------|---------------------------------------------------|
+|   640678              | USA GLISANTA AUTOM.DIN INOX                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640679              | USA GLISANTA AUTOMATA DIN INOX/1                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640680              | USA BATANTA AUTOMATA DIN INOX                     |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640681              | USA BATANTA AUTOMATA DIN INOX/1                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640682              | BARIERA 4M                                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640683              | SISTEM IRIGATIE                                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640684              | SISTEM CLIMATIZ.TIP VRF TOSHIBA ETJ.1             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640685              | SISTEM CLIMATIZARE TIP VRF TOSHIBA ETJ.2          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640686              | ASPIRATORFRUNZE CU TOCATOR                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:         10
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640687              | MASINA PROFESION. DE SPALAT RUFE W5240H           |
+| 2131.02.24.04         | ECHIPAMENTE TEHNICE SPALATORII CAZARMARE          |
+|-----------------------|---------------------------------------------------|
+|   640688              | DISPENSER PANTOFI ORMA                            |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640689              | DISPENSER PANTOFI ORMA/1                          |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640690              | DISPENSER PANTOFI ORMA/2                          |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640691              | DISPENSER PANTOFI ORMA/3                          |
+| 2131.02.25.04         | ECHIP TEHN - OCROTIREA SANATATII  - CAZARMARE     |
+|-----------------------|---------------------------------------------------|
+|   640692              | SIST.CLIM.VRY/VRF TODHIBA-ETII/CTA BUC            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640693              | SIST.CLIM.VRV/VRF TOSHIBA-DEMIS.ET1.CTA           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640694              | DULAP SUSPENDAT CU USI GLISANTE                   |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640695              | DULAP VERTICAL CU 2 USI GLISANTE                  |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640696              | MASA DE LUCRU CU REBORD                           |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640697              | MASA DE LUCRU CU REBORD 2000*700*850MM            |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640698              | MASA DE LUCRU CU REBORD SI 2 SERTARE              |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640699              | MASA DE LUCRU DEMONTABILA CU POLITA               |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640700              | MASA PRELUCRARE CARNE                             |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640701              | MASA PRELUCRARE LEGUME                            |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640702              | RASTEL INOX CU 4 RAFTURI                          |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640703              | RASTEL INOX CU 4 RAFTURI 1800*580*2000MM          |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640704              | DULAP VERTICAL CU 2 USI GLISANTE*                 |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640705              | MASA DE LUCRU CU REBORD SI 2 SERTARE*             |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+|   640706              | RASTEL INOX CU 4 RAFTURI*                         |
+| 2131.02.14.04         | ECHIPAMENT INDUSTRIA ALIEMNTARA CAZARMARE         |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:         11
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640707              | SISTEM CLIMAT.VRV/VRF TOSHIBA PART.PAV.A          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640708              | CONTAINER TIP ADMINISTRATIV III                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640709              | CONTAINER TIP ADMINISTRATIV III/1                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640710              | CONTAINER TIP INTERMEDIAR III/2                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640711              | CONTAINER TIP HOL INTERMEDIAR III                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640712              | SCARI ACCES CU BALUSTRADA SI PLATF.II             |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640713              | CONTAINER TIP ADMINISTRATIV IV                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640714              | CONTAINER TIP HOL INTERMEDIAR IV                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640715              | CONTAINER TIP GRUP SANITAR CU DUS                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640716              | CONTAINER TIP ADMINISTRATIV V                     |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640717              | CONTAINER TIP ADMINISTRATIV I                     |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640718              | CONTAINER TIP ADMINISTRATIV I/1                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640719              | CONTAINER TIP ADMINISTRATIV I/2                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640720              | CONTAINER TIP ADMINISTRATIV I/3                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640721              | CONTAINER TIP ADMINISTRATIV I/4                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640722              | CONTAINER TIP ADMONISTRATIV I/5                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640723              | CONTAINER TIP ADMINISTRATIV I/6                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640724              | CONTAINER TIP ADMINISTRATIV I/7                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640725              | CONTAINER TIP ADMINISTRATIV I/8                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640726              | CONTAINER ADMINISTRATIV I/9                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:         12
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640727              | CONTAINER TIP ADMINISTRATIV I/10                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640728              | CONTAINER TIP ADMINISTRATIV I/11                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640729              | CONTAINER TIP HOL CU FEREASTRA                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640730              | CONTAINER TIP HOL CU 2 USI                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640731              | CONTAINER TIP HOL INARMEDIAR I                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640732              | CONTAINER TIP ADMINISTRATIV II                    |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640733              | CONTAINER TIP ADMINISTRATIV II/1                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640734              | CONTAINER TIP ADMINISTRATIV II/2                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640735              | CONTAINER TIP ADMINISTRATIV II/3                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640736              | CONTAINER TIP ADMINISTRATIV II/4                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640737              | CONTAINER TIP ADMINISTRATIV II/5                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640738              | CONTAINER TIP ADMINISTRATIV II/6                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640739              | CONTAINER TIP ADMINISTRATIV II/7                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640740              | CONTAINER TIP ADMINISTRATIV II/8                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640741              | CONTAINER TIP ADMINISTRATIV II/9                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640742              | CONTAINER TIP ADMINISTRATI II/10                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640743              | CONTAINER TIP ADMINISTRATIV II/11                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640744              | CONTAINER TIP ADMINISTRATIV II/12                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640745              | CONTAINER TIP ADMINISTRATIV II/13                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640746              | CONTAINER TIP ADMINISTRATIV II/14                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:         13
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640747              | CONTAINER TIP ADMINISTRATIV II/15                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640748              | CONTAINER TIP ADMINISTRATIV II/16                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640749              | CONTAINER TIP ADMINISTATIV II/17                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640750              | CONTAINER TIP ADMINISTRATIV II/18                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640751              | CONTAINER TIP ADMINISTRATIV II/19                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640752              | CONTAINER TIP MAG.ECHIP.                          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640753              | CONTAINER TIP MAG.ECHIP./1                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640754              | CONTAINER TIP MAG.ECHIP./2                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640755              | CONTAINER TIP MAG.ECHIP./3                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640756              | CONTAINER TIP MAG.ECHIP./4                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640757              | CONTAINER TIP HOL INTERMEDIAR II                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640758              | CONTAINER TIP HOL CU 2 USI II                     |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640759              | CONTAINER TIP HOL CU 2 USI/1                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640760              | CONTAINER TIP GRUP SANITAR/WC                     |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640761              | SCARI ACCES CU BALUSTRADA SI PLATFORM.1           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640762              | INSTALATIE PROTECTIE LA TRASNET                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640763              | APARAT AER CONDITIONAT INVERTOR PREMIUM           |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640764              | ASCENSOR TRANSPORT PACIENTI                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640765              | CONTAINER TIP ADMINISTRATIV(II)                   |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640766              | CONTAINER TIP ADMINISTRATIV(II)/1                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+                                                          PAGINA:         14
+|-----------------------|---------------------------------------------------|
+|  NUMARUL FISEI /      |            DENUMIREA MATERIALULUI  /              |
+|  CONTUL AFERENT       |            DENUMIREA CONTULUI                     |
+|-----------------------|---------------------------------------------------|
+|   640767              | CONTAINER TIP ADMINISTRATIV(II)/2                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640768              | CONTAINER TIP ADMINISTRATIV(II)/3                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640769              | CONTAINER TIP ADMINISTRATIV(II)/4                 |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640770              | CONTAINER TIP ADMINISTRATIV(II)5                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640771              | SCARA ACCES CU BALUSTRADA SI PLATFORMA            |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640772              | CONTAINER TIP MAGAZIE(I)                          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640773              | CONTAINER TIP MKAGAZIE(I)/1                       |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640774              | CONTAINER TIP MAGAZIE(I)/2                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640775              | CONTAINER TIP MAGAZIE(I)/3                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640776              | CONTAINER TIP MAGAZIE(I)/4                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640777              | CONTAINER TIP MAGAZIE(I)/5                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640778              | CONTAINER TIP HOL CU 2 USI/2                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640779              | CONTAINER TIP HOL CU 2 USI/3                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640780              | CONTAINER TIP HOL CU 2 USI/4                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640781              | CONTAINER TIP HOL CU 2 USI/5                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640782              | CONTAINER TIP HOL CU 2 USI/6                      |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640783              | CONTAINER TIP GRUP SANITAR                        |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640784              | CONTAINER TIP ADMINISTRATIV(III)                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640785              | CONTAINER TIP GRUP SANITAR(WC)/1                  |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|
+|   640786              | CASCADA/INSTALATIE ARTEZIANA DEC,DE EXT.          |
+| 2131.02.28.04         | ECHIP TEHN -  CAZARMARE                           |
+|-----------------------|---------------------------------------------------|

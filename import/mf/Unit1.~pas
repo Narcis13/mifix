@@ -1,0 +1,66 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Grids, DBGrids, Db, DBTables;
+
+type
+  TForm1 = class(TForm)
+    Table1: TTable;
+    Table2: TTable;
+    DataSource1: TDataSource;
+    DataSource2: TDataSource;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    Button1: TButton;
+    procedure FormActivate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.DFM}
+
+procedure TForm1.FormActivate(Sender: TObject);
+begin
+table1.active:=false;
+table1.TableName:=getcurrentdir()+'\tranzact.dbf';
+table1.active:=true;
+
+table2.active:=false;
+table2.TableName:=getcurrentdir()+'\anexa5.dbf';
+table2.active:=true;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+table2.first;
+
+while not table2.eof do
+begin
+
+   table1.first;
+   while not table1.eof do
+    begin
+  if table1['cod_den']=table2['b'] then
+  begin
+       table1.edit;
+       table1['pret']:=table2['m'];
+       table1.post;
+
+  end;
+    end;
+table2.Next;
+end;
+end;
+
+end.

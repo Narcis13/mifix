@@ -1,0 +1,83 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('den_um') .OR. UPPER(WTITLE('DEN_UM'))=='DEN_UM.PJX' .OR. UPPER(WTITLE('DEN_UM'))=='DEN_UM.SCX' .OR. UPPER(WTITLE('DEN_UM'))=='DEN_UM.MNX' .OR. UPPER(WTITLE('DEN_UM'))=='DEN_UM.PRG' .OR. UPPER(WTITLE('DEN_UM'))=='DEN_UM.FRX' .OR. UPPER(WTITLE('DEN_UM'))=='DEN_UM.QPR'
+      DEFI WINDOW den_um FROM INT((SROWS()-13)/2), INT((SCOLS()-35)/2) TO INT((SROWS()-13)/2)+12, INT((SCOLS()-35)/2)+34 NOFLOAT NOCLOSE SHADOW TITLE 'Introducere unitate de masura' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLOS ALL
+ USE unit_mas
+ M.nume_u = '          '
+ M.cod_u = 0
+ SHOW GETS
+ IF WVISIBLE('den_um')
+      ACTI WINDOW SAME den_um
+ ELSE
+      ACTI WINDOW NOSHOW den_um
+ ENDI
+ @ 2, 11 GET M.nume_u DEFAULT ' ' SIZE 1, 10 VALID _sbc0sx9hv()
+ @ 4, 28 GET M.cod_u DEFAULT 0 SIZE 1, 2 RANGE 1,99 VALID _sbc0sx9kn() WHEN _sbc0sx9jf() ERROR 'Exista unitate de masura cu acest cod. Consultati registrul cu coduri.'
+ @ 6, 4 GET M.salvare DEFAULT 1 SIZE 1, 27, 1 PICTURE '@*HT SALVARE UNITATE DE MASURA' VALID _sbc0sx9nm() WHEN _sbc0sx9mb()
+ @ 8, 6 GET M.ies DEFAULT 1 SIZE 1, 21, 1 PICTURE '@*HT \!\?\<IESIRE'
+ @ 10, 5 GET M.mod DEFAULT 1 SIZE 1, 23, 1 PICTURE '@*HT MODIFICARE DENUMIRE' VALID _sbc0sx9p7()
+ @ 0, 3 SAY 'Denumirea unitatii de masura' SIZE 1, 28, 0
+ @ 4, 2 SAY 'Codul unitatii de masura:' SIZE 1, 25, 0
+ IF  .NOT. WVISIBLE('den_um')
+      ACTI WINDOW den_um
+ ENDI
+ READ CYCLE
+ RELE WINDOW den_um
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ CLOS ALL
+*
+PROC _sbc0sx9hv
+ LOCA ALL FOR ALLTRIM(UPPER(nume_u))==ALLTRIM(UPPER(M.nume_u))
+ IF FOUND()
+      M.nume_u = '          '
+      SHOW GET M.nume_u
+      _CUROBJ = 1
+ ENDI
+*
+FUNC _sbc0sx9jf
+ IF LEN(ALLTRIM(M.nume_u))=0
+      RETU .F.
+ ENDI
+*
+FUNC _sbc0sx9kn
+ SET ORDER TO cod_u
+ SEEK M.cod_u
+ IF FOUND()
+      M.cod_u = 0
+      SHOW GET M.cod_u
+      RETU .F.
+ ENDI
+ RETU .T.
+*
+FUNC _sbc0sx9mb
+ IF LEN(ALLTRIM(M.nume_u))=0
+      RETU .F.
+ ENDI
+ IF M.cod_u=0
+      RETU .F.
+ ENDI
+*
+PROC _sbc0sx9nm
+ APPE BLANK
+ GATH MEMVAR
+ USE
+*
+PROC _sbc0sx9p7
+ SET ORDER TO NUME_U
+ BROW FOR cod_u<>6 FIELDS cod_u, nume_u FREEZE nume_u NOAPPEND NODELETE TITLE 'IESIRE CU CTRL-W' COLOR SCHEME 5
+ USE
+*

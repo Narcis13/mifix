@@ -1,0 +1,172 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('fer_mater') .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.PJX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.SCX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.MNX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.PRG' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.FRX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.QPR'
+      DEFI WINDOW fer_mater FROM INT((SROWS()-20)/2), INT((SCOLS()-75)/2) TO INT((SROWS()-20)/2)+19, INT((SCOLS()-75)/2)+74 NOFLOAT NOCLOSE SHADOW TITLE 'MODIFICARE GESTIUNE MATERIAL' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLEA
+ SET DATE TO BRITISH
+ SET CENTURY ON
+ DIME nume1[ 40]
+ DIME sir_ges1[ 1, 2], sir_ges[ 1, 2]
+ CLOS ALL
+ SELE 1
+ USE MATERIAL
+ SET ORDER TO COD
+ SELE 2
+ USE solduri
+ SET ORDER TO COD_DEN
+ SELE 3
+ USE TRANZACT
+ SELE 4
+ USE GESTIUNI
+ SET ORDER TO cod ASCENDING
+ COUN ALL TO nr
+ DIME sir_ges[ nr, 2]
+ GOTO TOP
+ i = 1
+ DO WHILE  .NOT. EOF()
+      sir_ges[ i, 1] = denumire
+      sir_ges[ i, 2] = cod
+      i = i+1
+      SKIP 1
+ ENDD
+ M.ce_ges = 0
+ M.ce_ges1 = 0
+ fisa1 = 1
+ nume1 = '  '
+ cod1 = 0
+ M.ok = 0
+ M.esc = 0
+ M.recalc = .F.
+ SHOW GETS
+ IF WVISIBLE('fer_mater')
+      ACTI WINDOW SAME fer_mater
+ ELSE
+      ACTI WINDOW NOSHOW fer_mater
+ ENDI
+ @ 5, 2 SAY 'NUMELE MATERIAL=' SIZE 1, 16, 0
+ @ 7, 2 SAY 'CODUL MATERIAL =' SIZE 1, 16, 0
+ @ 3, 2 SAY 'NUMARUL FISEI  =' SIZE 1, 16, 0
+ @ 2, 1 TO 8, 71
+ @ 1, 2 SAY 'DATELE FISEI' SIZE 1, 12, 0
+ @ 3, 19 GET fisa1 DEFAULT 0 SIZE 1, 6 PICTURE '@KBZ' VALID vl_fisa()
+ @ 5, 19 GET nume1 DEFAULT ' ' SIZE 1, 40 DISABLE
+ @ 7, 19 GET cod1 DEFAULT 0 SIZE 1, 13 PICTURE '@KBZ' DISABLE
+ @ 10, 0 GET M.ce_ges1 DEFAULT 1 SIZE 3, 73 FROM sir_ges1 PICTURE '@^' VALID _03e1c3qox() COLOR SCHEME 1,2
+ @ 14, 0 GET M.ce_ges DEFAULT 1 SIZE 3, 73 FROM sir_ges PICTURE '@^' VALID _03e1c3qqn() COLOR SCHEME 1,2
+ @ 17, 15 GET M.ok DEFAULT 1 SIZE 1, 10, 1 PICTURE '@*HN \!Salvare' DISABLE VALID salvez()
+ @ 17, 33 GET M.esc DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HT \?Iesire'
+ @ 9, 2 SAY 'GESTIUNEA VECHE:' SIZE 1, 16, 0
+ @ 13, 2 SAY 'GESTIUNEA NOUA:' SIZE 1, 15, 0
+ @ 3, 29 SAY '( -1 pentru modificarea tuturor fiselor )' SIZE 1, 41, 0
+ IF  .NOT. WVISIBLE('fer_mater')
+      ACTI WINDOW fer_mater
+ ENDI
+ READ CYCLE
+ RELE WINDOW fer_mater
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ CLOS ALL
+ IF M.recalc=.T.
+      DO cc_sold
+ ENDI
+*
+FUNC vl_fisa
+ SHOW GET M.ok DISABLE
+ SELE material
+ SEEK fisa1
+ IF fisa1=-1 .OR. FOUND()
+      IF fisa1<>-1
+           SELE solduri
+           SET ORDER TO cod_den
+           SEEK fisa1
+           IF  .NOT. FOUND()
+                = reset()
+                RETU .T.
+           ENDI
+      ENDI
+      SELE DISTINCT solduri.cod_ges FROM SOLDURI WHERE IIF(fisa1=-1, .T., solduri.cod_den=fisa1) GROUP BY solduri.cod_ges ORDER BY solduri.cod_ges INTO CURSOR QUERY
+      SELE query
+      COUN ALL TO nr
+      DIME sir_ges1[ nr, 2]
+      GOTO TOP
+      i = 1
+      DO WHILE  .NOT. EOF()
+           SELE gestiuni
+           SET ORDER TO COD
+           SEEK query.cod_ges
+           sir_ges1[ i, 1] = denumire
+           sir_ges1[ i, 2] = cod
+           i = i+1
+           SELE query
+           SKIP 1
+      ENDD
+      SELE query
+      USE
+      SELE material
+      IF fisa1<>-1
+           nume1 = nume
+           cod1 = cod_m
+      ELSE
+           nume1 = 'TOATE MATERIALELE DE LA GEST. SELECTATA'
+      ENDI
+      SHOW GET cod1 DISABLE
+      SHOW GET nume1 DISABLE
+      SHOW GET M.ok ENABLE
+      M.ce_ges1 = 1
+      SHOW GET M.ce_ges1 ENABLE
+      SHOW GETS
+ ELSE
+      = reset()
+      RETU .T.
+ ENDI
+*
+FUNC reset
+ cod1 = 0
+ nume1 = '  '
+ fisa1 = 1
+ M.ce_ges1 = 0
+ SHOW GET M.ce_ges1 ENABLE
+ M.ce_ges = 0
+ SHOW GET M.ce_ges ENABLE
+ SHOW GET fisa1 ENABLE
+ SHOW GET nume1 DISABLE
+ SHOW GET cod1 DISABLE
+ SHOW GET M.ok DISABLE
+ RETU .T.
+*
+PROC salvez
+ IF M.ce_ges1=0
+      _CUROBJ = OBJNUM(M.ce_ges1)
+      RETU
+ ENDI
+ IF M.ce_ges=0
+      _CUROBJ = OBJNUM(M.ce_ges)
+      RETU
+ ENDI
+ SELE tranzact
+ REPL cod_ges WITH sir_ges(M.ce_ges,2) ALL FOR IIF(fisa1=-1, .T., cod_den=fisa1) .AND. cod_ges=sir_ges1(M.ce_ges1,2)
+ SELE solduri
+ REPL cod_ges WITH sir_ges(M.ce_ges,2) ALL FOR IIF(fisa1=-1, .T., cod_den=fisa1) .AND. cod_ges=sir_ges1(M.ce_ges1,2)
+ M.recalc = .T.
+ SHOW GET M.ok DISABLE
+ _CUROBJ = 1
+ = reset()
+*
+PROC _03e1c3qox
+ M.ges1 = sir_ges1(M.ce_ges1,2)
+*
+PROC _03e1c3qqn
+ M.ges = sir_ges(M.ce_ges,2)
+*

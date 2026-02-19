@@ -1,0 +1,294 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('interog') .OR. UPPER(WTITLE('INTEROG'))=='INTEROG.PJX' .OR. UPPER(WTITLE('INTEROG'))=='INTEROG.SCX' .OR. UPPER(WTITLE('INTEROG'))=='INTEROG.MNX' .OR. UPPER(WTITLE('INTEROG'))=='INTEROG.PRG' .OR. UPPER(WTITLE('INTEROG'))=='INTEROG.FRX' .OR. UPPER(WTITLE('INTEROG'))=='INTEROG.QPR'
+      DEFI WINDOW interog FROM INT((SROWS()-24)/2), INT((SCOLS()-77)/2) TO INT((SROWS()-24)/2)+23, INT((SCOLS()-77)/2)+76 NOFLOAT NOCLOSE SHADOW TITLE 'Definire criterii de raport' NOMINIMIZE COLOR SCHEME 1
+ ENDI
+ SET TALK OFF
+ SET ECHO OFF
+ CLOS ALL
+ DEFI WINDOW fer_brow FROM INT((SROWS()-14)/2), INT((SCOLS()-72)/2) TO INT((SROWS()-14)/2)+13, INT((SCOLS()-72)/2)+71 NOFLOAT NOCLOSE SHADOW NOMINIMIZE COLOR SCHEME 1
+ PUBL i[ 9]
+ PUBL den[ 8, 1]
+ CLOS ALL
+ SELE 1
+ USE material
+ SET ORDER TO COD
+ DIME sir_cont[ 1, 2]
+ DIME sir_fin[ 1, 2]
+ DIME sir_pro[ 1, 2]
+ DIME sir_uz[ 1, 2]
+ DIME sir_ges[ 1, 2]
+ DIME sir_loc[ 1, 2]
+ DIME sir_um[ 1, 2]
+ DIME sir_stare[ 1, 2]
+ PUBL M.cont, M.nume
+ PUBL M.cod_ges, M.cod_dis, M.c_stoc, M.cod_prov, M.cod_fin
+ PUBL M.unit_mas, M.stare, M.cod_den
+ PUBL M.ce_cont
+ M.cod_den = 0
+ M.nume = '      '
+ SET DATE TO briti
+ SET CENTURY ON
+ SELE 2
+ USE conturi
+ SET ORDER TO cont ASCENDING
+ COUN ALL TO nr
+ DIME sir_cont[ nr, 2]
+ GOTO TOP
+ i = 1
+ DO WHILE  .NOT. EOF()
+      sir_cont[ i, 1] = cont+'   '+denumire
+      sir_cont[ i, 2] = cod_cont
+      i = i+1
+      SKIP 1
+ ENDD
+ M.ce_cont = 0
+ USE
+ SELE 2
+ USE finantat
+ SET ORDER TO COD
+ COUN ALL TO nr_elem
+ DIME sir_fin[ nr_elem, 2]
+ COPY TO ARRAY sir_fin FIELDS den, cod ALL
+ M.ce_fin = 0
+ USE
+ USE provenie
+ SET ORDER TO cod
+ COUN ALL TO nr_elem
+ DIME sir_pro[ nr_elem, 2]
+ COPY TO ARRAY sir_pro FIELDS den, cod ALL
+ M.ce_pro = 0
+ USE
+ USE stoc_uz
+ COUN ALL TO nr_elem
+ DIME sir_uz[ nr_elem, 2]
+ COPY TO ARRAY sir_uz FIELDS den, cod ALL
+ M.ce_uz = 0
+ USE
+ USE gestiuni
+ SET ORDER TO denumire
+ COUN ALL TO M.max_gest
+ DIME sir_ges[ M.max_gest, 2]
+ COPY TO ARRAY sir_ges FIELDS denumire, cod ALL
+ M.ce_ges = 0
+ USE
+ USE dispus
+ SET ORDER TO DENUMIRE
+ COUN ALL TO M.max_loc
+ DIME sir_loc[ M.max_loc, 2]
+ COPY TO ARRAY sir_loc FIELDS denumire, cod ALL
+ USE
+ M.ce_loc = 0
+ USE unit_mas
+ SET ORDER TO NUME_U
+ COUN ALL TO nr_elem
+ DIME sir_um[ nr_elem, 2]
+ COPY TO ARRAY sir_um FIELDS nume_u, cod_u ALL
+ M.ce_um = 0
+ USE
+ USE stare
+ SET ORDER TO cod
+ COUN ALL TO nr_elem
+ DIME sir_stare[ nr_elem, 2]
+ COPY TO ARRAY sir_stare FIELDS den, cod ALL
+ M.ce_stare = 0
+ USE
+ M.executa = 0
+ FOR j = 1 TO 8
+      i[ j] = 1
+      den[ j, 1] = '     '
+ ENDF
+ SHOW GETS
+ IF WVISIBLE('interog')
+      ACTI WINDOW SAME interog
+ ELSE
+      ACTI WINDOW NOSHOW interog
+ ENDI
+ @ 6, 3 SAY 'Nr.fisa:' SIZE 1, 8, 0
+ @ 0, 3 GET i[ 1] DEFAULT 0 SIZE 1, 19 PICTURE '@*C Toate conturile' VALID _sbd0pu3yx()
+ @ 1, 3 GET M.ce_cont DEFAULT 1 SIZE 3, 69 FROM sir_cont PICTURE '@^' WHEN IIF(i(1)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 4, 3 GET i[ 2] DEFAULT 0 SIZE 1, 43 PICTURE '@*C Toate materialele de la contul selectat' VALID _sbd0pu40q()
+ @ 6, 12 GET M.cod_den DEFAULT 0 SIZE 1, 6 RANGE 0,999999 PICTURE '@BZ' VALID setare_den() WHEN IIF(i(2)=1, .F., .T.)
+ @ 6, 20 GET M.nume DEFAULT ' ' SIZE 1, 40 WHEN .F.
+ @ 8, 3 GET i[ 3] DEFAULT 0 SIZE 1, 20 PICTURE '@*C Toate gestiunile' VALID _sbd0pu42n()
+ @ 9, 3 GET M.ce_ges DEFAULT 1 SIZE 3, 22 FROM sir_ges PICTURE '@^' WHEN IIF(i(3)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 8, 49 GET i[ 4] DEFAULT 0 SIZE 1, 14 PICTURE '@*C UZ si STOC' VALID _sbd0pu44e()
+ @ 9, 49 GET M.ce_uz DEFAULT 1 SIZE 3, 18 FROM sir_uz PICTURE '@^' WHEN IIF(i(4)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 12, 3 GET i[ 5] DEFAULT 0 SIZE 1, 31 PICTURE '@*C Toate locurile de dispunere' VALID _sbd0pu466()
+ @ 13, 3 GET M.ce_loc DEFAULT 1 SIZE 3, 22 FROM sir_loc PICTURE '@^' WHEN IIF(i(5)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 12, 49 GET i[ 6] DEFAULT 0 SIZE 1, 23 PICTURE '@*C Toate provenientele' VALID _sbd0pu47x()
+ @ 13, 49 GET M.ce_pro DEFAULT 1 SIZE 3, 18 FROM sir_pro PICTURE '@^' WHEN IIF(i(6)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 16, 3 GET i[ 7] DEFAULT 0 SIZE 1, 30 PICTURE '@*C Toate sursele de finantare' VALID _sbd0pu49n()
+ @ 17, 3 GET M.ce_fin DEFAULT 1 SIZE 3, 18 FROM sir_fin PICTURE '@^' WHEN IIF(i(7)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 16, 49 GET i[ 8] DEFAULT 0 SIZE 1, 17 PICTURE '@*C Toate starile' VALID _sbd0pu4bg()
+ @ 17, 49 GET M.ce_stare DEFAULT 1 SIZE 3, 22 FROM sir_stare PICTURE '@^' WHEN IIF(i(8)=1, .F., .T.) COLOR SCHEME 1,2
+ @ 21, 9 GET M.ok DEFAULT 1 SIZE 1, 18, 1 PICTURE '@*HT \!\<EXECUTA RAPORT' VALID _sbd0pu4d7()
+ @ 21, 44 GET M.esc DEFAULT 1 SIZE 1, 11, 1 PICTURE '@*HT \?\<ANULARE'
+ IF  .NOT. WVISIBLE('interog')
+      ACTI WINDOW interog
+ ENDI
+ READ CYCLE
+ RELE WINDOW interog
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ CLOS ALL
+*
+PROC setare_den
+ SELE material
+ SET ORDER TO COD
+ GOTO TOP
+ SEEK M.cod_den
+ IF FOUND()
+      M.nume = material.nume
+      SHOW GET M.nume
+ ELSE
+      i[ 2] = 1
+      M.cod_den = 0
+      M.nume = '   '
+      SHOW GET i[ 2]
+      SHOW GET M.cod_den
+      SHOW GET M.nume
+ ENDI
+*
+PROC rezulta
+ USE conturi
+ IF i(1)=1
+      i[ 1] = ''
+      den[ 1] = ''
+ ELSE
+      SELE conturi
+      SET ORDER TO COD_cont
+      SEEK sir_cont(M.ce_cont,2)
+      i[ 1] = conturi.cont
+      den[ 1] = conturi.cont+'  '+conturi.denumire
+ ENDI
+ i[ 2] = IIF(i(2)=1 .OR. M.cod_den=0, -1, M.cod_den)
+ i[ 3] = IIF(i(3)=1, -1, sir_ges(M.ce_ges,2))
+ i[ 4] = IIF(i(4)=1, -1, sir_uz(M.ce_uz,2))
+ i[ 5] = IIF(i(5)=1, -1, sir_loc(M.ce_loc,2))
+ i[ 6] = IIF(i(6)=1, -1, sir_pro(M.ce_pro,2))
+ i[ 7] = IIF(i(7)=1, -1, sir_fin(M.ce_fin,2))
+ i[ 8] = IIF(i(8)=1, -1, sir_stare(M.ce_stare,2))
+ i[ 9] = LEN(ALLTRIM(i(1)))
+ CLOS ALL
+ USE gestiuni
+ LOCA FOR cod=i(3)
+ IF FOUND()
+      den[ 3, 1] = A.denumire
+ ENDI
+ USE
+ USE stoc_uz
+ LOCA FOR cod=i(4)
+ IF FOUND()
+      den[ 4, 1] = A.den
+ ENDI
+ USE
+ USE dispus
+ LOCA FOR cod=i(5)
+ IF FOUND()
+      den[ 5, 1] = A.denumire
+ ENDI
+ USE
+ USE provenie
+ LOCA FOR cod=i(6)
+ IF FOUND()
+      den[ 6, 1] = A.den
+ ENDI
+ USE
+ USE finantat
+ LOCA FOR cod=i(7)
+ IF FOUND()
+      den[ 7, 1] = A.den
+ ENDI
+ USE
+ USE stare
+ LOCA FOR cod=i(8)
+ IF FOUND()
+      den[ 8, 1] = A.den
+ ENDI
+ USE
+*
+PROC _sbd0pu3yx
+ IF i(1)=1
+      M.ce_cont = 0
+      SHOW GET M.ce_cont
+ ELSE
+      M.ce_cont = 1
+      SHOW GET M.ce_cont
+ ENDI
+*
+PROC _sbd0pu40q
+ M.cod_den = 0
+ M.nume = '   '
+ SHOW GET M.cod_den
+ SHOW GET M.nume
+*
+PROC _sbd0pu42n
+ IF i(3)=1
+      M.ce_ges = 0
+      SHOW GET M.ce_ges
+ ELSE
+      M.ce_ges = 1
+      SHOW GET M.ce_ges
+ ENDI
+*
+PROC _sbd0pu44e
+ IF i(4)=1
+      M.ce_uz = 0
+      SHOW GET M.ce_uz
+ ELSE
+      M.ce_uz = 1
+      SHOW GET M.ce_uz
+ ENDI
+*
+PROC _sbd0pu466
+ IF i(5)=1
+      M.ce_loc = 0
+      SHOW GET M.ce_loc
+ ELSE
+      M.ce_loc = 1
+      SHOW GET M.ce_loc
+ ENDI
+*
+PROC _sbd0pu47x
+ IF i(6)=1
+      M.ce_pro = 0
+      SHOW GET M.ce_pro
+ ELSE
+      M.ce_pro = 1
+      SHOW GET M.ce_pro
+ ENDI
+*
+PROC _sbd0pu49n
+ IF i(7)=1
+      M.ce_fin = 0
+      SHOW GET M.ce_fin
+ ELSE
+      M.ce_fin = 1
+      SHOW GET M.ce_fin
+ ENDI
+*
+PROC _sbd0pu4bg
+ IF i(8)=1
+      M.ce_stare = 0
+      SHOW GET M.ce_stare
+ ELSE
+      M.ce_stare = 1
+      SHOW GET M.ce_stare
+ ENDI
+*
+PROC _sbd0pu4d7
+ M.executa = 1
+ = rezulta()
+*

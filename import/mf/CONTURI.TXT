@@ -1,0 +1,196 @@
+
+              PLANUL CE CONTURI PENTRU GESTIUNEA OBIECTELOR DE INVENTAR
+
+
+|----|-----------------------|---|----------------------------------------------------|
+|Cod |  SIMBOLUL CONTULUI    |   |             DENUMIREA CONTULUI                     |
+|----|-----------------------|---|----------------------------------------------------|
+|  1 | 602                   |   | OBIECTE DE INVENTAR IN MAGAZIE                     |
+|  2 | 602.01                |   | OB.DE INV.DE RESORTUL MEDICAMENTELOR SI MAT.SANIT. |
+|  3 | 602.01.01             |   | OB. DE INV. DE RESORTUL MEDICAMENTELOR             |
+|  4 | 602.01.01.01.23.01    | * | OB. DE INV. DE RESORTUL MED.PT. CAB.MEDICAL        |
+|  5 | 602.01.01.02.23.01    | * | OB. DE INV. DE RESORTUL MED.PT.CAB.STOMATOLOGIC    |
+|  6 | 602.01.01.03.23.01    | * | OB. DE INV. DE RESORTUL MED.PT.UZ VETERINAR        |
+|  7 | 602.01.02             |   | OB. DE INV. DE RESORTUL MAT. SANITARE              |
+|  8 | 602.01.02.01.23.02    | * | OB. DE INV.DE RESORTUL MAT.SANITARE PT.CAB.MED.    |
+|  9 | 602.01.02.02.23.02    | * | OB. DE INV.DE RESORTUL MAT.SAN.PT.CAB.STOMATOLOGIC |
+| 10 | 602.01.02.03.23.02    | * | OB. DE INV. DE RESORTUL MAT.SANIT.PT.UZ VETERINAR  |
+| 11 | 602.02                |   | OB. DE INV. DE UZ GOSPODARESC SI ADMINISTRATIV     |
+| 12 | 602.02.01.24.01       | * | OB. DE INV.PT.INTRETINEREA INST.DE INCALZIT        |
+| 13 | 602.02.02.24.02       | * | OB. DE INV.PENTRU ILUMINAT                         |
+| 14 | 602.02.03.24.03       | * | OB. DE INV.PT.INTRETINEREA INST. DE APA            |
+| 15 | 602.02.04.24.04       | * | OB. DE INV. PT. TELECOMUNICATII                    |
+| 16 | 602.02.05.24.05       | * | OB. DE INV.DE RESORTUL RECHIZITE SI FURNIT.BIROU   |
+| 17 | 602.02.06.24.06       | * | OB. DE INV.PT.CURATENIE                            |
+| 18 | 602.02.07.24.07       | * | OB. DE INV.PT.PSI SI ALTE OB.I.UZ GOSP.SI INTR.    |
+| 19 | 602.03                |   | OB. DE INV. DE RESORTUL ALIMENTELOR                |
+| 20 | 602.03.01.22.01       | * | OB DE INV. PT.ALIMENTE (VESELA)                    |
+| 21 | 602.03.02.22.02       | * | OB. DE INV.PT.FURAJE (LAZI,ETC.)                   |
+| 22 | 602.04                |   | OB. DE INV. CU CARACTER FUNCTIONAL                 |
+| 23 | 602.04.01             |   | OB. DE INV.PT.PREG.DE LUPTA SI EDUCATIE            |
+| 24 | 602.04.01.01.25.00.01 | * | OB. DE INV.PT.PREGATIREA DE LUPTA                  |
+| 25 | 602.04.01.02.25.00.01 | * | OB. DE INV.PT.CULTURA SI EDUCATIE                  |
+| 26 | 602.04.02             |   | OB. DE INV.PT.INTRETINEREA SI REPARAREA TEHNICII   |
+| 27 | 602.04.02.01.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHN TC,AUTOMOB.SI TRAC.  |
+| 28 | 602.04.02.02.25.00.02 | * | OB.DE INV.PT.INTR.SI REP TEHNICII A.T.A.M.         |
+| 29 | 602.04.02.03.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHNICII GENIU            |
+| 30 | 602.04.02.04.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHNICII CHIMIC           |
+| 31 | 602.04.02.05.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHNICII TRANSMISIUNI     |
+| 32 | 602.04.02.06.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHNICII A.C.T.           |
+| 33 | 602.04.02.07.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHNICII LOGISTICA        |
+| 34 | 602.04.02.08.25.00.02 | * | OB.DE INV.PT.INTR.SI REP. TEHNICII TOPO            |
+| 35 | 602.04.02.09.25.00.02 | * | OB.DE INV.PT.INTR.SI REP.TEHNICII G.A.Z            |
+| 36 | 602.04.02.10.25.00.02 | * | OB.DE INV.PT.INTR.SI REP. TEHNICII-ALTE            |
+| 37 | 602.04.03             | * | OB. DE INV.PT.C.L.                                 |
+| 38 | 602.04.04             |   | OB. DE INV.DE RESORTUL ECHIPAMENTULUI              |
+| 39 | 602.04.04.01.26.01    | * | OB. DE INV.PT.LENJERIE DE PAT SI ACCESORII         |
+| 40 | 602.04.04.02.26.02    | * | OB.DE INV.PT.ECHIPAMENT                            |
+| 41 | 602.04.04.03.26.03    |   | ALTE OB.DE INV.DE MICA VALOARE SAU SCURTA DURATA   |
+| 42 | 602.04.04.03.26.03.01 | * | ALTE O.I. - TANCURI, AUTOMOBILE, TRACTOARE         |
+| 43 | 602.04.04.03.26.03.02 | * | ALTE O.I. - A.T.A.M.                               |
+| 44 | 602.04.04.03.26.03.03 | * | ALTE O.I. - GENIU                                  |
+| 45 | 602.04.04.03.26.03.04 | * | ALTE O.I. - CHIMIC                                 |
+| 46 | 602.04.04.03.26.03.05 | * | ALTE O.I. - TRANSMISIUNI                           |
+| 47 | 602.04.04.03.26.03.06 | * | ALTE O.I. - A.C.T.                                 |
+| 48 | 602.04.04.03.26.03.07 | * | ALTE O.I. - LOGISTICA                              |
+| 49 | 602.04.04.03.26.03.08 | * | ALTE O.I. - TOPO                                   |
+| 50 | 602.04.04.03.26.03.09 | * | ALTE O.I. - G.A.Z.                                 |
+| 51 | 602.04.04.03.26.03.10 | * | ALTE O.I. - CAZARMARE                              |
+| 52 | 602.04.04.03.26.03.11 | * | ALTE OBIECTE DE INVENTAR                           |
+| 53 | 602.09                |   | ALTE OB. DE INV.                                   |
+| 54 | 602.09.03.27          | * | ALTE OB.DE INV.PT.REPARATII                        |
+| 55 | 602.09.05.30.03       | * | ALTE OB.DE INV.PT.PROTECTIA MUNCII                 |
+| 56 | 602.09.06.30.07       | * | ALTE OB.DE INV.PT.ALTE CHELTUIELI                  |
+| 57 | 602.09.07             | * | OB.DE INV.REZULT.LA SCOATEREA DIN FUNCT.A MIJ.FIXE |
+|137 | 602.09.08.25          | * | O.I. IN ACTE PENTRU PREGATIREA DE LUPTA            |
+|----|-----------------------|---|----------------------------------------------------||----|-----------------------|---|----------------------------------------------------|
+|Cod |  SIMBOLUL CONTULUI    |   |             DENUMIREA CONTULUI                     |
+|----|-----------------------|---|----------------------------------------------------|
+|138 | 602.09.08.26          | * | O.I. IN ACTE PENTRU ECHIPAMENT SI ALTE O.I.        |
+| 58 | 603                   |   | OB.DE INV.IN FOLOSINTA                             |
+| 59 | 603.01                |   | OB.DE INV.IN FOLOS.-RESORTUL MED.SI MAT.SANITARE   |
+| 60 | 603.01.01             |   | OB.DE INV.IN FOLOS.-RESORTUL MEDICAMENTELOR        |
+| 61 | 603.01.01.01.23.01    | * | OB.DE INV.IN FOLOS.-RESORT.MED.PT.CAB.MEDICALE     |
+| 62 | 603.01.01.02.23.01    | * | OB.DE INV.IN FOLOS.-RESORT.MED.PT.CAB.STOMATOLOG.  |
+| 63 | 603.01.01.03.23.01    | * | OB.DE INV.IN FOLOSINTA PT.UZ VETERINAR             |
+| 64 | 603.01.02             |   | OB.DE INV.IN FOLOS.-RESORT MAT.SANITARE            |
+| 65 | 603.01.02.01.23.02    | * | OB.DE INV.IN FOLOS.-RESORT MAT.SANIT.CAB.MEDICAL   |
+| 66 | 603.01.02.02.23.02    | * | OB.DE INV.IN FOLOS.-RESORT MAT.SANIT.CAB.STOMAT.   |
+| 67 | 603.01.02.03.23.02    | * | OB.DE INV.IN FOLOS.PT.UZ VETERINAR                 |
+| 68 | 603.02                |   | OB.DE INV.IN FOLOS.DE UZ GOSP.SI ADMINISTRATIV     |
+| 69 | 603.02.01.24.01       | * | OB.DE INV.IN FOLOS.PT.INTRETINEREA INST.INCALZIRE  |
+| 70 | 603.02.02.24.02       | * | OB.DE INV.IN FOLOS.PT.ILUMINAT                     |
+| 71 | 603.02.03.24.03       | * | OB.DE INV.IN FOLOS.PT.INTRETINEREA INST.DE APA     |
+| 72 | 603.02.04.24.04       | * | OB.DE INV.IN FOLOS.PT. TELECOMUNICATII             |
+| 73 | 603.02.05.24.05       | * | OB.DE INV.IN FOLOS.-RESORT RECHIZ.SI FURNIT.BIROU  |
+| 74 | 603.02.06.24.06       | * | OB.DE INV.IN FOLOS.PT.CURATENIE                    |
+| 75 | 603.02.07.24.07       | * | OB.DE INV.IN FOLOS.PT.PSI SI ALTE OB.I UZ GOS-INTR |
+| 76 | 603.03                |   | OB.DE INV.IN FOLOS.-RESORT HRANA OAMENI SI ANIMALE |
+| 77 | 603.03.01.22.01       | * | OB.DE INV.IN FOLOS.-RESORTUL HRANA OAMENI          |
+| 78 | 603.03.02.22.02       | * | OB.DE INV.IN FOLOS.-RESORTUL FURAJELOR             |
+| 79 | 603.04                |   | OB DE INV.IN FOLOS.CU CARACTER FUNCTIONAL          |
+| 80 | 603.04.01             |   | OB.DE INV.IN FOLOS.PT.PREG.LUPTA SI EDUCATIE       |
+| 81 | 603.04.01.01.25.00.01 | * | OB.DE INV.IN FOLOS.PT.PREG.LUPTA                   |
+| 82 | 603.04.01.02.25.00.01 | * | OB.DE INV.IN FOLOS.PT.EDUCATIE                     |
+| 83 | 603.04.02             |   | OB.DE INV.IN FOLOS.PT.INTRET.SI REP.TEHNICII       |
+| 84 | 603.04.02.01.25.00.02 | * | OB.DE INV.IN FOL.PT.INTR.SI REP.TEH:TC,AUTO,TRACT. |
+| 85 | 603.04.02.02.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH. A.T.A.M.    |
+| 86 | 603.04.02.03.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH.GENIU        |
+| 87 | 603.04.02.04.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH.CHIMIC       |
+| 88 | 603.04.02.05.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH.TRANSMISIUNI |
+| 89 | 603.04.02.06.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH. A.C.T.      |
+| 90 | 603.04.02.07.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH.LOGISTICA    |
+| 91 | 603.04.02.08.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH.TOPO         |
+| 92 | 603.04.02.09.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH. G.A.Z.      |
+| 93 | 603.04.02.10.25.00.02 | * | OB.DE INV.IN FOLOS.PT.INTR.SI REP.TEH:ALTELE       |
+| 94 | 603.04.03             | * | OB DE INV.IN FOLOS.PT. C.L.                        |
+| 95 | 603.04.04             |   | OB DE INV.IN FOLOS.DE RESORTUL ECHIPAMENTULUI      |
+| 96 | 603.04.04.01.26.01    | * | OB.DE INV.IN FOLOS.PT.LENJERIE PAT SI ACCESORII    |
+| 97 | 603.04.04.02.26.02    | * | OB.DE INV.IN FOLOS.PT.ECHIPAMENT                   |
+| 98 | 603.04.04.03.26.03    |   | OB.INV.IN FOL.DE NAT.ALTOR O.I.MICA VAL.SC.DURATA  |
+| 99 | 603.04.04.03.26.03.01 | * | ALTE O.I. - TANCURI, AUTOMOBILE, TRACTOARE         |
+|100 | 603.04.04.03.26.03.02 | * | ALTE O.I. - ATAM                                   |
+|101 | 603.04.04.03.26.03.03 | * | ALTE O.I. - GENIU                                  |
+|102 | 603.04.04.03.26.03.04 | * | ALTE O.I. - CHIMIC                                 |
+|103 | 603.04.04.03.26.03.05 | * | ALTE O.I. - TRANSMISIUNI                           |
+|104 | 603.04.04.03.26.03.06 | * | ALTE O.I. - ACT                                    |
+|105 | 603.04.04.03.26.03.07 | * | ALTE O.I. - LOGISTICA                              |
+|106 | 603.04.04.03.26.03.08 | * | ALTE O.I. - TOPO                                   |
+|107 | 603.04.04.03.26.03.09 | * | ALTE O.I. - G.A.Z.                                 |
+|108 | 603.04.04.03.26.03.10 | * | ALTE O.I. - CAZARMARE                              |
+|109 | 603.04.04.03.26.03.11 | * | ALTE OBIECTE DE INVENTAR                           |
+|110 | 603.09                |   | ALTE OB.DE INV.IN FOLOSINTA                        |
+|111 | 603.09.03.27          | * | ALTE OB.DE INV.IN FOLOS.PT.REPARATII               |
+|112 | 603.09.05.30.03       | * | ALTE OB.DE INV.IN FOLOS.PT.PROTECTIA MUNCII        |
+|113 | 603.09.06.30.07       | * | ALTE OB.DE INV.IN FOLOS.PT.ALTE CHELTUIELI         |
+|114 | 603.09.07             | * | OB.DE INV.IN FOLOS.REZ.LA SC.DIN FUNCT.A MIJ.FIXE  |
+|139 | 603.09.08.25          | * | O.I. IN FOLOS. IN ACTE PENTRU PREGATIREA DE LUPTA  |
+|140 | 603.09.08.26          | * | O.I. IN FOL.IN ACTE PENTRU ECHIPAMENT SI ALTE O.I. |
+|115 | 603.10                |   | OB.DE INV.RESTITUITE LA MAGAZIE                    |
+|116 | 603.10.01             | * | OB.DE INV.REST.LA MAGAZIE:TC.,AUTOMOB,TRACTOARE    |
+|----|-----------------------|---|----------------------------------------------------||----|-----------------------|---|----------------------------------------------------|
+|Cod |  SIMBOLUL CONTULUI    |   |             DENUMIREA CONTULUI                     |
+|----|-----------------------|---|----------------------------------------------------|
+|117 | 603.10.02             | * | OB.DE INV.REST.LA MAGAZIE:A.T.A.M.                 |
+|118 | 603.10.03             | * | OB.DE INV.REST.LA MAGAZIE:GENIU                    |
+|119 | 603.10.04             | * | OB.DE INV.REST.LA MAGAZIE:CHIMIC                   |
+|120 | 603.10.05             | * | OB.DE INV.REST.LA MAGAZIE:TRANSMISIUNI             |
+|121 | 603.10.06             | * | OB.DE INV.REST.LA MAGAZIE: A.C.T.                  |
+|122 | 603.10.07             | * | OB.DE INV.REST.LA MAGAZIE: LOGISTICA               |
+|123 | 603.10.08             | * | OB.DE INV.REST.LA MAGAZIE: TOPO                    |
+|124 | 603.10.09             | * | OB.DE INV.REST.LA MAGAZIE: G.A.Z.                  |
+|125 | 603.10.10             | * | OB.DE INV.REST.LA MAGAZIE: ALTELE                  |
+|126 | 604                   |   | OB.DE INVENTAR AFLATE LA TERTI                     |
+|127 | 604.01                | * | OB.DE INV.LA TERTI: TC.,AUTOMOB.,TRACTOARE         |
+|128 | 604.02                | * | OB.DE INV.LA TERTI: A.T.A.M.                       |
+|129 | 604.03                | * | OB.DE INV.LA TERTI: GENIU                          |
+|130 | 604.04                | * | OB.DE INV.LA TERTI: CHIMIC                         |
+|131 | 604.05                | * | OB.DE INV.LA TERTI: TRANSMISIUNI                   |
+|132 | 604.06                | * | OB.DE INV.LA TERTI: A.C.T.                         |
+|133 | 604.07                | * | OB.DE INV.LA TERTI: LOGISTICA                      |
+|134 | 604.08                | * | OB.DE INV.LA TERTI: TOPO                           |
+|135 | 604.09                | * | OB.DE INV.LA TERTI: G.A.Z.                         |
+|136 | 604.10                | * | OB.DE INV.LA TERTI: ALTELE                         |
+|----|-----------------------|---|----------------------------------------------------|
+
+OBSERVATII: conturile in dreptul carora este semnul "*" sunt conturi pe care se leaga
+            obiectele de inventar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|----|-----------------------|---|----------------------------------------------------|

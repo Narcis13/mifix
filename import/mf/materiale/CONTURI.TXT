@@ -1,0 +1,131 @@
+
+                   PLANUL CE CONTURI PENTRU GESTIUNEA MATERIALA
+
+
+|----|-----------------------|---|----------------------------------------------------|
+|Cod |  SIMBOLUL CONTULUI    |   |             DENUMIREA CONTULUI                     |
+|----|-----------------------|---|----------------------------------------------------|
+| 90 | 159                   |   | ALTE VALORI                                        |
+| 93 | 159.01.01             | * | TIMBRE POSTALE                                     |
+| 91 | 159.04.01             | * | BONURI BENZINA                                     |
+| 92 | 159.04.02             | * | BONURI MOTORINA                                    |
+|  1 | 600                   |   | MATERIALE                                          |
+|  2 | 600.01                |   | MEDICAMENTE SI MATERIALE SANITARE                  |
+|  3 | 600.01.01             |   | MEDICAMENTE                                        |
+|  4 | 600.01.01.01.23.01    | * | MEDICAMENTE PT. CABINETUL MEDICAL                  |
+|  5 | 600.01.01.02.23.01    | * | MEDICAMENTE PT. CABINETUL STOMATOLOGIC             |
+|  6 | 600.01.01.03.23.01    | * | MEDICAMENTE PT. UZ VETERINAR                       |
+|  7 | 600.01.02             |   | MATERIALE                                          |
+|  8 | 600.01.02.01.23.02    | * | MATERIALE PT CABINETUL MEDICAL                     |
+|  9 | 600.01.02.02.23.02    | * | MATERIALE PT. CABINETUL STOMATOLOGIC               |
+| 10 | 600.01.02.03.23.02    | * | MATERIALE PT. UZ VETERINAR                         |
+| 11 | 600.02                |   | MATERIALE DE INTRETINERE SI GOSPODARIE             |
+| 12 | 600.02.01.24.01       | * | MATERIALE PT. INTRETINEREA INST. DE INCALZIT       |
+| 13 | 600.02.02.24.02       | * | MATERIALE PT. ILUMINAT                             |
+| 14 | 600.02.03.24.03       | * | MATERIALE PT INTRETINEREA INST. DE APA             |
+| 15 | 600.02.04.24.04       | * | MATERIALE DE RESORTUL TELECOMUNICATIILOR           |
+| 16 | 600.02.05.24.05       | * | RECHIZITE DE BIROU SI FURNITURI STOCABILE          |
+| 17 | 600.02.06.24.06       | * | MATERIALE DE CURATENIE                             |
+| 18 | 600.02.07.24.07       | * | MATERIALE PSI SI ALTE MAT. DE INTRETINERE SI GOSP. |
+| 19 | 600.02.08.26.02       | * | MATERIALE DE RESORTUL ECHIPAMENTULUI               |
+| 20 | 600.03                |   | ALIMENTE SI FURAJE                                 |
+| 21 | 600.03.01.22.01       | * | ALIMENTE                                           |
+| 22 | 600.03.02.22.02       | * | FURAJE                                             |
+| 23 | 600.03.03.22.01       | * | ALTE MATER. DE RESORTUL ALIMENTELOR(AMB.TRANS.ETC) |
+| 24 | 600.03.03.22.02       | * | ALTE MATERIALE DE RESORTUL FURAJELOR               |
+| 25 | 600.04                |   | MATERIALE CU CARACTER FUNCTIONAL                   |
+| 26 | 600.04.01             |   | MATERIALE NEC. PROC.PREGATIRII PT. LUPTA, EDUCATIE |
+| 27 | 600.04.01.01.25.00.01 | * | MATERIALE NECESARE PROCESULUI PREGATIRII PT. LUPTA |
+| 28 | 600.04.01.02.25.00.01 | * | MATERIALE PT. CULTURA SI EDUCATIE                  |
+| 29 | 600.04.02             |   | MATERIALE PT. INTRET SI REP TEHNICII DIN INZESTRAR |
+| 30 | 600.04.02.01.25.00.02 | * | TANCURI, AUTOMOBILE SI TRACTOARE                   |
+| 31 | 600.04.02.02.25.00.02 | * | A.T.A.M.                                           |
+| 32 | 600.04.02.03.25.00.02 | * | GENIU                                              |
+| 33 | 600.04.02.04.25.00.02 | * | CHIMIC                                             |
+| 34 | 600.04.02.05.25.00.02 | * | TRANSMISIUNI                                       |
+| 35 | 600.04.02.06.25.00.02 | * | A.C.T.                                             |
+| 36 | 600.04.02.07.25.00.02 | * | LOGISTICA                                          |
+| 37 | 600.04.02.08.25.00.02 | * | TOPOGRAFIE                                         |
+| 38 | 600.04.02.09.25.00.02 | * | G.A.Z.                                             |
+| 39 | 600.04.02.10.25.00.02 | * | MATERIALE PT. ALTE ARME                            |
+| 40 | 600.04.03             |   | C.L.                                               |
+| 41 | 600.04.03.01.25.00.03 | * | BENZINA                                            |
+| 42 | 600.04.03.02.25.00.03 | * | MOTORINA                                           |
+| 43 | 600.04.03.03.25.00.03 | * | ULEI                                               |
+| 44 | 600.04.03.04.25.00.03 | * | ALTE MATERIALE C.L.                                |
+| 45 | 600.09                |   | ALTE MATERIALE                                     |
+| 46 | 600.09.03.27          | * | ALTE MATERIALE PT. REPARATII                       |
+| 47 | 600.09.04.30.02       | * | ALTE MATERIALE PT. PROTOCOL                        |
+| 48 | 600.09.05.30.03       | * | ALTE MATERIALE PT. PROTECTIA MUNCII                |
+| 49 | 600.09.06.30.07       | * | ALTE MATERIALE PT. ALTE CHELTUIELI                 |
+| 50 | 600.09.07             | * | MATERIALE REZULT. DIN SCOAT. DIN FUNCT. A MIJ.FIX. |
+| 86 | 600.09.07.29          | * | ALTE MATERIALE PENTRU CARTI SI PUBLICATII          |
+| 81 | 600.09.08.22          | * | MATERIALE IN ACTE PENTRU ALIMENTE                  |
+| 82 | 600.09.08.25          | * | MATERIALE IN ACTE PENTRU PREGATIREA DE LUPTA       |
+| 51 | 600.10                | * | MATERIALE REZERVA DE STAT SI DE MOBILIZARE         |
+|----|-----------------------|---|----------------------------------------------------||----|-----------------------|---|----------------------------------------------------|
+|Cod |  SIMBOLUL CONTULUI    |   |             DENUMIREA CONTULUI                     |
+|----|-----------------------|---|----------------------------------------------------|
+| 52 | 600.11                | * | AMBALAJE PT.REZERVA DE STAT SI DE MOBILIZARE       |
+| 53 | 600.15                | * | MATERIALE SI UTILAJE PT.INVESTITII                 |
+| 54 | 601                   |   | MATERIALE IN PRELUCRARE                            |
+| 55 | 601.01                | * | MATERIALE DATE SPRE PRELUCRARE IN INSTITUTIE       |
+| 56 | 601.02                | * | MATERIALE DATE SPRE PRELUCRARE LA TERTI            |
+| 57 | 601.03                | * | ANIMALE DATE PT. SACRIFICARE SI PREL. LA TERTI     |
+| 58 | 610                   |   | ANIMALE TINERE SI LA INGRASAT                      |
+| 59 | 610.01                |   | ANIMALE TINERE                                     |
+| 60 | 610.01.01             |   | PORCI                                              |
+| 61 | 610.01.01.01          | * | PURCEI (0-2 LUNI)                                  |
+| 62 | 610.01.01.02          | * | PURCEI (2-4 LUNI)                                  |
+| 63 | 610.01.01.03          | * | PURCEI (4-6 LUNI)                                  |
+| 83 | 610.01.01.04          | * | PORCI VIERI                                        |
+| 84 | 610.01.01.05          | * | PORCI SCROAFE                                      |
+| 85 | 610.01.01.06          | * | PORCI LA INGRASAT                                  |
+| 64 | 610.01.02             |   | MIEI                                               |
+| 65 | 610.01.02.01          | * | MIEI DIN ANUL CURENT                               |
+| 66 | 610.01.02.02          | * | MIEI DIN ANUL PRECEDENT                            |
+| 67 | 610.01.03             |   | VITEI                                              |
+| 68 | 610.01.03.01          | * | VITEI (0-6 LUNI)                                   |
+| 69 | 610.01.03.02          | * | VIETI (6-12 LUNI)                                  |
+| 70 | 610.01.03.03          | * | VITEI (12-18 LUNI)                                 |
+| 71 | 610.01.04             | * | CAI (MINJI)                                        |
+| 72 | 610.01.05             | * | PASARI                                             |
+| 73 | 610.01.06             | * | COLONII DE ALBINE                                  |
+| 74 | 610.02                |   | ANIMALE LA INGRASAT                                |
+| 75 | 610.02.01             | * | PURCEI (PESTE 6 LUNI)                              |
+| 76 | 610.02.02             | * | MIEI (PESTE 2 ANI)                                 |
+| 77 | 610.02.03             | * | VITEI (PESTE 18 LUNI)                              |
+| 78 | 610.02.06             | * | PASARI LA INGRASAT                                 |
+| 79 | 611                   | * | ANIMALE PT. EXPERIENTA                             |
+| 80 | 620                   | * | PRODUSE                                            |
+|----|-----------------------|---|----------------------------------------------------|
+
+OBSERVATII: conturile in dreptul carora este semnul "*" sunt conturi pe care se leaga
+            materiale.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|----|-----------------------|---|----------------------------------------------------|

@@ -1,0 +1,48 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('_sbc0sxau5')
+      DEFI WINDOW _sbc0sxau5 FROM INT((SROWS()-10)/2), INT((SCOLS()-45)/2) TO INT((SROWS()-10)/2)+9, INT((SCOLS()-45)/2)+44 NOFLOAT NOCLOSE SHADOW NOMINIMIZE COLOR SCHEME 1
+ ENDI
+ PUBL M.ok, M.esc
+ PUBL M.anul, M.operat
+ SET CENTURY ON
+ M.anul = YEAR(DATE())
+ M.ok = 0
+ M.esc = 0
+ M.operat = 0
+ SHOW GETS
+ IF WVISIBLE('_sbc0sxau5')
+      ACTI WINDOW SAME _sbc0sxau5
+ ELSE
+      ACTI WINDOW NOSHOW _sbc0sxau5
+ ENDI
+ @ 3, 24 SAY 'din anul' SIZE 1, 8, 0
+ @ 3, 1 SAY 'Operatiunea' SIZE 1, 11, 0
+ @ 3, 15 GET M.operat DEFAULT 0 SIZE 1, 5 RANGE 0
+ @ 3, 34 GET M.anul DEFAULT 0 SIZE 1, 4 RANGE 1997
+ @ 6, 5 GET M.ok DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HT EXECUTA' VALID _sbc0sxazf()
+ @ 6, 27 GET M.esc DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HT ANULARE'
+ @ 0, 10 SAY 'STERGERE OPERATIUNE' SIZE 1, 19, 0
+ @ 1, 10 SAY '-------------------' SIZE 1, 19, 0
+ IF  .NOT. WVISIBLE('_sbc0sxau5')
+      ACTI WINDOW _sbc0sxau5
+ ENDI
+ READ CYCLE
+ RELE WINDOW _sbc0sxau5
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*
+PROC _sbc0sxazf
+ M.executa = 1
+*

@@ -1,0 +1,196 @@
+
+
+                      LISTA CU DENUMIREA MATERIALELOR
+                      -------------------------------
+
+                                                          PAGINA:          1
+|------|-------------|-------------|----------------------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |
+|CURENT|    FISEI    | MATERIALULUI|                                        |
+|------|-------------|-------------|----------------------------------------|
+|     1|     30519   |             |AJAX GEAM                               |
+|     2|     30624   |             |AMORSA 1/1                              |
+|     3|     30622   |             |AMORSA 5/1                              |
+|     4|     30046   |             |ANTIGEL                                 |
+|     5|     10091   |             |ARACET                                  |
+|     6|     10184   |             |AVIZ INSOTIRE MARFA                     |
+|     7|     30098   |             |BALAMALE                                |
+|     8|     30649   |             |BCA                                     |
+|     9|     30507   |             |BCF MOTORINA 300000LEI/FILA             |
+|    10|     30545   |             |BEC INCANDESCENT                        |
+|    11|     10961   |             |BECURI COLORATE                         |
+|    12|     30634   |             |BENZI IZOL.                             |
+|    13|     30500   |             |BENZINA BCF 200000 LEI/FILA             |
+|    14|     10964   |             |BON CU VALOARE FIXA                     |
+|    15|     10963   |             |BON DE CONSUM                           |
+|    16|     30521   |             |BON PREDARE TRANSFER                    |
+|    17|     10494   |             |BON V.FIX MASA MARF.40.000              |
+|    18|     10477   |             |BON VAL FIX DEPOZ NOAPTE 6000           |
+|    19|     10476   |             |BON VAL FIX MASA 20000 LEI              |
+|    20|     10361   |             |BON VAL FIXA 1MP-15000 LEI              |
+|    21|     10979   |             |BON VAL FIXA 20000LEI TIRG              |
+|    22|     10496   |             |BON VAL FIXA INTR AUTO 40000            |
+|    23|     10362   |             |BON VAL FIXA MASA LEG.35000             |
+|    24|     10495   |             |BON VAL FIXA TG .5000 LEI               |
+|    25|     10978   |             |BON VAL.FIXA 100000LEI                  |
+|    26|     10977   |             |BON VAL.FIXA 10000LEI                   |
+|    27|     10593   |             |BON VAL.FIXA 12000LEI/FILA              |
+|    28|     10981   |             |BON VAL.FIXA 20000LEI PIATA             |
+|    29|     10974   |             |BON VAL.FIXA 2000LEI                    |
+|    30|     10980   |             |BON VAL.FIXA 50000                      |
+|    31|     10592   |             |BON VAL.FIXA 50000LEI/FILA              |
+|    32|     10975   |             |BON VAL.FIXA 5000LEI                    |
+|    33|     10982   |             |BON VAL.FIXA 75000LEI A.TURISM          |
+|    34|     10976   |             |BON VAL.FIXA 75000LEI M.A               |
+|    35|     10903   |             |BON VALOARE FIXA                        |
+|    36|     10191   |             |BON VALOARE FIXA 3000 LEI               |
+|    37|     30506   |             |BONURI BENZINA /300000LEI/FILA          |
+|    38|     30073   |             |BROASCA USA                             |
+|    39|     30615   |             |BURETE SLEFUIT                          |
+|    40|     10203   |             |BURGHIE DIF                             |
+|    41|     10161   |             |CABLU                                   |
+|    42|     10958   |             |CALGON AUTOMAT                          |
+|    43|     30630   |             |CATER                                   |
+|    44|     10473   |             |CEC NUMERAR                             |
+|    45|     10092   |             |CHIT                                    |
+|    46|     10965   |             |CHIT.INCHIR.OBIECTE                     |
+|    47|     10966   |             |CHITANTA COD 14-4-1                     |
+|    48|     30518   |             |CIF PASTA CURATAT                       |
+|    49|     12019   |             |CLEMA D20                               |
+|    50|     10987   |             |CLEME  16                               |
+|    51|     10222   |             |CLORURA VAR                             |
+|    52|     10012   |             |COMUTATOR                               |
+|    53|     10084   |             |CONDICA PREZENTA                        |
+|    54|     10973   |             |CONDICII PREZENTA                       |
+|    55|     10104   |             |CORNIER                                 |
+|------|-------------|-------------|----------------------------------------|                                                          PAGINA:          2
+|------|-------------|-------------|----------------------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |
+|CURENT|    FISEI    | MATERIALULUI|                                        |
+|------|-------------|-------------|----------------------------------------|
+|    56|     30541   |             |CORP IL FIRA 4X18                       |
+|    57|     30540   |             |CORP IL.FIRA 2X8                        |
+|    58|     30538   |             |CORP STM                                |
+|    59|     30539   |             |CORP STM 2X36                           |
+|    60|     30618   |             |COT NR 1 1/2                            |
+|    61|     30617   |             |COT NR1 3/4                             |
+|    62|     30645   |             |CUPOLA MARE PAFS                        |
+|    63|     30646   |             |CUPOLA MICA PAFS                        |
+|    64|     30647   |             |CUPOLA PAFS CAPETE                      |
+|    65|     10595   |             |DETERG.SONEGO SUPER-PT PIETE            |
+|    66|     10585   |             |DETERGENT OMO AUT                       |
+|    67|     10099   |             |DILUANT                                 |
+|    68|     10221   |             |DISC                                    |
+|    69|     20167   |             |DISCHETE SONY                           |
+|    70|     10986   |             |DISPOZITIE CASERIE                      |
+|    71|     30526   |             |DOCUMENT CUMULATIV A3                   |
+|    72|     30527   |             |DOCUMENT CUMULATIV A4                   |
+|    73|     30528   |             |DOCUMENT CUMULATIV A4                   |
+|    74|     10269   |             |DOMESTOS FRESH                          |
+|    75|     30517   |             |DOMESTOS GEL                            |
+|    76|     30616   |             |DOP 3/4 F.I.                            |
+|    77|     10019   |             |DULIE                                   |
+|    78|     30532   |             |ELASTIC PUNGUTA                         |
+|    79|     30628   |             |ELECTROZI                               |
+|    80|     30548   |             |ELECTROZI SUPERTIT 2,5                  |
+|    81|     10037   |             |ELECTROZI SUPERTIT3X25                  |
+|    82|     10968   |             |FACTURI FISCALE A                       |
+|    83|     10969   |             |FACTURI FISCALE A6                      |
+|    84|     10270   |             |FACTURI FISCALE MICI                    |
+|    85|     30644   |             |FEREASTRA METALICA                      |
+|    86|     30653   |             |FERESTRE ALUMINIU                       |
+|    87|     10285   |             |FISE MAG FORM REGIM SP.                 |
+|    88|     10072   |             |FISE PT TURISTI                         |
+|    89|     30523   |             |FOAIE COLECTIVA DE PREZENTA             |
+|    90|     10967   |             |FOI PARCURS                             |
+|    91|     30632   |             |FOLIE                                   |
+|    92|     20021   |             |FURTUN INALTA PRESIUNE                  |
+|    93|     10410   |             |GLET                                    |
+|    94|     30650   |             |GURA CANAL                              |
+|    95|     30651   |             |GURA SCURGERE                           |
+|    96|     30529   |             |HARTIE IMPRIMANTA A3-1EXEMPLAR          |
+|    97|     30530   |             |HARTIE IMPRIMANTA A3-2EXEMPLARE         |
+|    98|     10073   |             |HARTIE SCRIS 6OG/500COLI                |
+|    99|     10067   |             |HIDRANT                                 |
+|   100|     10320   |             |HIRTIE IGENICA                          |
+|   101|     10107   |             |HIRTIE IMPRIMANTA A4-2EXEMPLARE         |
+|   102|     10071   |             |HIRTIE XEROX                            |
+|   103|     30524   |             |INDIGO RADEX                            |
+|   104|     10023   |             |INTRERUPATOR ANTIGRON                   |
+|   105|     30626   |             |IPSOS MODELAJ                           |
+|   106|     30642   |             |JGHEAB                                  |
+|   107|     30623   |             |LAVABILA 5.5                            |
+|   108|     10079   |             |LISTE INVENTAR                          |
+|   109|     10055   |             |MATURI SORG                             |
+|   110|     30502   |             |MOTORINA BON VAL FIXA 200000            |
+|   111|     10970   |             |NIR                                     |
+|   112|     10173   |             |NOTA PLATA NUM HOTEL                    |
+|   113|     10130   |             |NOTE RECEPTII                           |
+|   114|     30514   |             |ODORIZANT CAMERA GLADE                  |
+|   115|     30512   |             |ODORIZANT WC SOLID                      |
+|------|-------------|-------------|----------------------------------------|                                                          PAGINA:          3
+|------|-------------|-------------|----------------------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |
+|CURENT|    FISEI    | MATERIALULUI|                                        |
+|------|-------------|-------------|----------------------------------------|
+|   116|     30641   |             |OTEL U80                                |
+|   117|     30531   |             |PASTA CORECTOARE                        |
+|   118|     10087   |             |PENSULA                                 |
+|   119|     30633   |             |PERII SARMA                             |
+|   120|     30629   |             |PISTOL POP                              |
+|   121|     30534   |             |PIX BIC PRISMA BALL                     |
+|   122|     30533   |             |PIX CENTRUM PIONNER                     |
+|   123|     30536   |             |PIX REYNOLDS                            |
+|   124|     30535   |             |PIX SCHNEIDER                           |
+|   125|     30648   |             |PLACA CUTATA PAFS                       |
+|   126|     30631   |             |POP NIT                                 |
+|   127|     10007   |             |PRIZE ST CU CAPAC                       |
+|   128|     30627   |             |PRIZE TRIF.                             |
+|   129|     30619   |             |RACORD PEXAL 16X3/8                     |
+|   130|     10972   |             |REG. DE CASA                            |
+|   131|     30525   |             |REGISTRU ECONOMIC                       |
+|   132|     30614   |             |REZERVE TRAFALET                        |
+|   133|     30516   |             |RIVEX CLOR                              |
+|   134|     10224   |             |SACI AMBALAJ                            |
+|   135|     10591   |             |SACI FOLIE 1200/1100                    |
+|   136|     10955   |             |SAPUN                                   |
+|   137|     30571   |             |SARE                                    |
+|   138|     10574   |             |SILICON                                 |
+|   139|     10962   |             |SIRMA                                   |
+|   140|     10052   |             |SODA CALCINATA                          |
+|   141|     10058   |             |SODA CAUST.                             |
+|   142|     30639   |             |STALP 1 BRAT                            |
+|   143|     30638   |             |STALP 2 BRATE                           |
+|   144|     10004   |             |STARTARE                                |
+|   145|     30543   |             |STARTER 4-20W                           |
+|   146|     30544   |             |STARTER 4-80W                           |
+|   147|     10005   |             |STECHERE                                |
+|   148|     30542   |             |SUPER KILLER                            |
+|   149|     10100   |             |TABLA                                   |
+|   150|     10026   |             |TEAVA REFULARE                          |
+|   151|     10086   |             |TIMBRE POSTALE                          |
+|   152|     30612   |             |TRAFALET                                |
+|   153|     30620   |             |TRAFALET+GRATAR                         |
+|   154|     10014   |             |TUB LFA 2O W                            |
+|   155|     10013   |             |TUB LFA 4O W                            |
+|   156|     10278   |             |TUS ARHI NEGRU                          |
+|   157|     30197   |             |ULEI HIDRAULIC 46A                      |
+|   158|     30214   |             |ULEI MOTOR  DIESEL M30S2 20             |
+|   159|     30215   |             |ULEI TRANSMISIE                         |
+|   160|     30546   |             |USA DALLAS                              |
+|   161|     30643   |             |USA METALICA                            |
+|   162|     30652   |             |USI ALUMINIU                            |
+|   163|     30001   |             |VAL TIP CARNETE BCF                     |
+|   164|     30505   |             |VAL TIP IMPR.BCF MOTORINA               |
+|   165|     20131   |             |VAS WC                                  |
+|   166|     10050   |             |VOPSEA ALBA                             |
+|   167|     30547   |             |VOPSEA ALBASTRU                         |
+|   168|     10049   |             |VOPSEA GALBENA                          |
+|   169|     30625   |             |VOPSEA LAVABILA 1/1                     |
+|   170|     10458   |             |VOPSEA NEAGRA                           |
+|   171|     10490   |             |VOPSEA PLAST LAVABILA                   |
+|   172|     30621   |             |VOPSEA ROMGRIZ                          |
+|   173|     10048   |             |VOPSEA ROSIE                            |
+|   174|     30613   |             |VOPSEA SANITAS                          |
+|------|-------------|-------------|----------------------------------------|
+|------|-------------|-------------|----------------------------------------|

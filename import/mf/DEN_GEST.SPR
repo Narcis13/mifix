@@ -1,0 +1,84 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('den_gest') .OR. UPPER(WTITLE('DEN_GEST'))=='DEN_GEST.PJX' .OR. UPPER(WTITLE('DEN_GEST'))=='DEN_GEST.SCX' .OR. UPPER(WTITLE('DEN_GEST'))=='DEN_GEST.MNX' .OR. UPPER(WTITLE('DEN_GEST'))=='DEN_GEST.PRG' .OR. UPPER(WTITLE('DEN_GEST'))=='DEN_GEST.FRX' .OR. UPPER(WTITLE('DEN_GEST'))=='DEN_GEST.QPR'
+      DEFI WINDOW den_gest FROM INT((SROWS()-13)/2), INT((SCOLS()-35)/2) TO INT((SROWS()-13)/2)+12, INT((SCOLS()-35)/2)+34 NOFLOAT NOCLOSE SHADOW TITLE 'Introducere gestiune noua' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLOS ALL
+ USE gestiuni
+ M.denumire = '                    '
+ M.cod = 0
+ SHOW GETS
+ IF WVISIBLE('den_gest')
+      ACTI WINDOW SAME den_gest
+ ELSE
+      ACTI WINDOW NOSHOW den_gest
+ ENDI
+ @ 0, 7 SAY 'Denumirea gestiunii' SIZE 1, 19, 0
+ @ 4, 2 SAY 'Codul gestiunii:' SIZE 1, 16, 0
+ @ 2, 7 GET M.denumire DEFAULT ' ' SIZE 1, 20 VALID _sbc0sx7zc()
+ @ 4, 20 GET M.cod DEFAULT 0 SIZE 1, 2 RANGE 1,99 VALID _sbc0sx824() WHEN _sbc0sx80x() ERROR 'Exista gestiune cu acest cod. Consultati registrul cu coduri.'
+ @ 6, 6 GET M.salvare DEFAULT 1 SIZE 1, 22, 1 PICTURE '@*HT SALVARE GESTIUNE' VALID _sbc0sx857() WHEN _sbc0sx83u()
+ @ 8, 6 GET M.ies DEFAULT 1 SIZE 1, 21, 1 PICTURE '@*HT \!\?\<IESIRE'
+ @ 10, 5 GET M.mod DEFAULT 1 SIZE 1, 23, 1 PICTURE '@*HT MODIFICARE DENUMIRE' VALID _sbc0sx86u()
+ IF  .NOT. WVISIBLE('den_gest')
+      ACTI WINDOW den_gest
+ ENDI
+ READ CYCLE
+ RELE WINDOW den_gest
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ CLOS ALL
+*
+PROC _sbc0sx7zc
+ LOCA ALL FOR ALLTRIM(UPPER(denumire))==ALLTRIM(UPPER(M.denumire))
+ IF FOUND()
+      M.denumire = '                    '
+      SHOW GET M.denumire
+      _CUROBJ = 1
+ ENDI
+*
+FUNC _sbc0sx80x
+ IF LEN(ALLTRIM(M.denumire))=0
+      RETU .F.
+ ENDI
+*
+FUNC _sbc0sx824
+ SET ORDER TO cod
+ SEEK M.cod
+ IF FOUND()
+      M.cod = 0
+      SHOW GET M.cod
+      RETU .F.
+ ENDI
+ RETU .T.
+*
+FUNC _sbc0sx83u
+ IF LEN(ALLTRIM(M.denumire))=0
+      RETU .F.
+ ENDI
+ IF M.cod=0
+      RETU .F.
+ ENDI
+*
+PROC _sbc0sx857
+ M.denumire = UPPER(M.denumire)
+ APPE BLANK
+ GATH MEMVAR
+ USE
+*
+PROC _sbc0sx86u
+ SET ORDER TO DENUMIRE
+ BROW FOR cod<>0 FIELDS cod, denumire FREEZE denumire NOAPPEND NODELETE TITLE 'IESIRE CU CTRL-W' COLOR SCHEME 5
+ USE
+*

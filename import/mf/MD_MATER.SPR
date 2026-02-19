@@ -1,0 +1,302 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('fer_mater') .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.PJX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.SCX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.MNX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.PRG' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.FRX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.QPR'
+      DEFI WINDOW fer_mater FROM INT((SROWS()-24)/2), INT((SCOLS()-64)/2) TO INT((SROWS()-24)/2)+23, INT((SCOLS()-64)/2)+63 NOFLOAT NOCLOSE SHADOW TITLE 'MODIFICARE FISA, NUME, COD MATERIAL' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLEA
+ SET DATE TO BRITISH
+ SET CENTURY ON
+ DIME nume1[ 40], nume2[ 40]
+ CLOS ALL
+ SELE 1
+ USE MATERIAL
+ SET ORDER TO COD
+ SELE 2
+ USE TRANZACT
+ SET ORDER TO COD_DEN
+ SELE 3
+ USE SOLDURI
+ SET ORDER TO COD_DEN
+ SELE material
+ fisa1 = 1
+ nume1 = '  '
+ cod1 = 0
+ fisa2 = 0
+ nume2 = '  '
+ M.ani_f1 = 0
+ M.luni_f1 = 0
+ M.zile_f1 = 0
+ M.ani_f11 = 0
+ M.luni_f11 = 0
+ M.zile_f11 = 0
+ M.ani_f12 = 0
+ M.luni_f12 = 0
+ M.zile_f12 = 0
+ M.ani_f2 = 0
+ M.luni_f2 = 0
+ M.zile_f2 = 0
+ M.ani_f21 = 0
+ M.luni_f21 = 0
+ M.zile_f21 = 0
+ M.ani_f22 = 0
+ M.luni_f22 = 0
+ M.zile_f22 = 0
+ cod2 = 0
+ M.ok = 0
+ M.esc = 0
+ rec_sold = .F.
+ SHOW GETS
+ IF WVISIBLE('fer_mater')
+      ACTI WINDOW SAME fer_mater
+ ELSE
+      ACTI WINDOW NOSHOW fer_mater
+ ENDI
+ @ 4, 2 SAY 'NUMELE MATERIAL=' SIZE 1, 16, 0
+ @ 5, 2 SAY 'CODUL MATERIAL =' SIZE 1, 16, 0
+ @ 3, 2 SAY 'NUMARUL FISEI  =' SIZE 1, 16, 0
+ @ 2, 1 TO 9, 60
+ @ 1, 2 SAY 'DATELE FISEI VECHI' SIZE 1, 18, 0
+ @ 11, 2 SAY 'DATELE FISEI NOI' SIZE 1, 16, 0
+ @ 12, 1 TO 19, 60
+ @ 13, 2 SAY 'NUMARUL FISEI  =' SIZE 1, 16, 0
+ @ 14, 2 SAY 'NUMELE MATERIAL=' SIZE 1, 16, 0
+ @ 15, 2 SAY 'CODUL MATERIAL =' SIZE 1, 16, 0
+ @ 6, 38 SAY 'ani' SIZE 1, 3, 0
+ @ 6, 46 SAY 'luni' SIZE 1, 4, 0
+ @ 6, 55 SAY 'zile' SIZE 1, 4, 0
+ @ 16, 38 SAY 'ani' SIZE 1, 3, 0
+ @ 16, 46 SAY 'luni' SIZE 1, 4, 0
+ @ 16, 55 SAY 'zile' SIZE 1, 4, 0
+ @ 6, 2 SAY 'DURATA DE VIATA IN FOLOSINTA =' SIZE 1, 30, 0
+ @ 7, 38 SAY 'ani' SIZE 1, 3, 0
+ @ 7, 46 SAY 'luni' SIZE 1, 4, 0
+ @ 7, 55 SAY 'zile' SIZE 1, 4, 0
+ @ 8, 38 SAY 'ani' SIZE 1, 3, 0
+ @ 8, 46 SAY 'luni' SIZE 1, 4, 0
+ @ 8, 55 SAY 'zile' SIZE 1, 4, 0
+ @ 16, 2 SAY 'DURATA DE VIATA IN FOLOSINTA =' SIZE 1, 30, 0
+ @ 7, 2 SAY 'DURATA DE VIATA IN MAGAZIE   =' SIZE 1, 30, 0
+ @ 8, 2 SAY 'DURATA DE VIATA LA STOC      =' SIZE 1, 30, 0
+ @ 17, 38 SAY 'ani' SIZE 1, 3, 0
+ @ 17, 46 SAY 'luni' SIZE 1, 4, 0
+ @ 17, 55 SAY 'zile' SIZE 1, 4, 0
+ @ 18, 38 SAY 'ani' SIZE 1, 3, 0
+ @ 18, 46 SAY 'luni' SIZE 1, 4, 0
+ @ 18, 55 SAY 'zile' SIZE 1, 4, 0
+ @ 3, 19 GET fisa1 DEFAULT 0 SIZE 1, 6 PICTURE '@KBZ' VALID vl_fisa()
+ @ 4, 19 GET nume1 DEFAULT ' ' SIZE 1, 40 DISABLE
+ @ 5, 19 GET cod1 DEFAULT 0 SIZE 1, 13 PICTURE '@KBZ' DISABLE
+ @ 6, 34 GET M.ani_f1 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z' DISABLE
+ @ 6, 43 GET M.luni_f1 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z' DISABLE
+ @ 6, 52 GET M.zile_f1 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z' DISABLE
+ @ 7, 34 GET M.ani_f11 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z' DISABLE
+ @ 7, 43 GET M.luni_f11 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z' DISABLE
+ @ 7, 52 GET M.zile_f11 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z' DISABLE
+ @ 8, 34 GET M.ani_f12 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z' DISABLE
+ @ 8, 43 GET M.luni_f12 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z' DISABLE
+ @ 8, 52 GET M.zile_f12 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z' DISABLE
+ @ 13, 19 GET fisa2 DEFAULT 0 SIZE 1, 6 RANGE 1,9999999999 PICTURE '@KBZ' DISABLE VALID vl_fis2()
+ @ 14, 19 GET nume2 DEFAULT ' ' SIZE 1, 40 DISABLE
+ @ 15, 19 GET cod2 DEFAULT 0 SIZE 1, 13 PICTURE '@KBZ' DISABLE
+ @ 16, 34 GET M.ani_f2 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z' DISABLE
+ @ 16, 43 GET M.luni_f2 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z' DISABLE
+ @ 16, 52 GET M.zile_f2 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z' DISABLE
+ @ 17, 34 GET M.ani_f21 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z' DISABLE
+ @ 17, 43 GET M.luni_f21 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z' DISABLE
+ @ 17, 52 GET M.zile_f21 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z' DISABLE
+ @ 18, 34 GET M.ani_f22 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z' DISABLE
+ @ 18, 43 GET M.luni_f22 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z' DISABLE
+ @ 18, 52 GET M.zile_f22 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z' DISABLE
+ @ 21, 15 GET M.ok DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HN \!Salvare' VALID slv_mat() WHEN _sbc0sx6x2()
+ @ 21, 33 GET M.esc DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HT \?Iesire'
+ @ 17, 2 SAY 'DURATA DE VIATA IN MAGAZIE   =' SIZE 1, 30, 0
+ @ 18, 2 SAY 'DURATA DE VIATA LA STOC      =' SIZE 1, 30, 0
+ IF  .NOT. WVISIBLE('fer_mater')
+      ACTI WINDOW fer_mater
+ ENDI
+ READ CYCLE
+ RELE WINDOW fer_mater
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ IF rec_sold=.T.
+      SET PROCEDURE TO CC_SOLD
+      = recalc()
+      SET PROCEDURE TO
+ ENDI
+*
+FUNC slv_mat
+ IF fisa2=fisa1
+      SELE material
+      SEEK fisa1
+      IF FOUND()
+           REPL nume WITH nume2
+           REPL cod WITH fisa2
+           REPL cod_m WITH cod2
+           REPL zile WITH M.ani_f2*360+M.luni_f2*30+M.zile_f2
+           REPL zile1 WITH M.ani_f21*360+M.luni_f21*30+M.zile_f21
+           REPL zile2 WITH M.ani_f22*360+M.luni_f22*30+M.zile_f22
+           = reset()
+           RETU .T.
+      ENDI
+ ENDI
+ IF fisa2<>fisa1
+      SELE material
+      SEEK fisa1
+      IF FOUND()
+           SEEK fisa2
+           IF FOUND()
+                DELE
+                PACK
+           ENDI
+           SEEK fisa1
+           REPL nume WITH nume2
+           REPL cod WITH fisa2
+           REPL cod_m WITH cod2
+           REPL zile WITH M.ani_f2*360+M.luni_f2*30+M.zile_f2
+           REPL zile1 WITH M.ani_f21*360+M.luni_f21*30+M.zile_f21
+           REPL zile2 WITH M.ani_f22*360+M.luni_f22*30+M.zile_f22
+           SELE tranzact
+           REPL cod_den WITH fisa2 ALL FOR cod_den=fisa1
+           SELE solduri
+           REPL cod_den WITH fisa2 ALL FOR cod_den=fisa1
+           SELE material
+           = reset()
+           RETU .T.
+      ENDI
+ ENDI
+*
+FUNC vl_fisa
+ SELE material
+ SEEK fisa1
+ IF FOUND()
+      nume1 = nume
+      cod1 = cod_m
+      SHOW GET cod1 DISABLE
+      SHOW GET nume1 DISABLE
+      cod2 = cod1
+      nume2 = nume1
+      fisa2 = fisa1
+      M.ani_f1 = INT(material.zile/360)
+      M.luni_f1 = material.zile-M.ani_f1*360
+      M.luni_f1 = INT(M.luni_f1/30)
+      M.zile_f1 = material.zile-M.ani_f1*360-M.luni_f1*30
+      M.ani_f11 = INT(material.zile1/360)
+      M.luni_f11 = material.zile1-M.ani_f11*360
+      M.luni_f11 = INT(M.luni_f11/30)
+      M.zile_f11 = material.zile1-M.ani_f11*360-M.luni_f11*30
+      M.ani_f12 = INT(material.zile2/360)
+      M.luni_f12 = material.zile2-M.ani_f12*360
+      M.luni_f12 = INT(M.luni_f12/30)
+      M.zile_f12 = material.zile2-M.ani_f12*360-M.luni_f12*30
+      M.ani_f2 = M.ani_f1
+      M.luni_f2 = M.luni_f1
+      M.zile_f2 = M.zile_f1
+      M.ani_f21 = M.ani_f11
+      M.luni_f21 = M.luni_f11
+      M.zile_f21 = M.zile_f11
+      M.ani_f22 = M.ani_f12
+      M.luni_f22 = M.luni_f12
+      M.zile_f22 = M.zile_f12
+      SHOW GETS
+      SHOW GET M.ani_f2 ENABLE
+      SHOW GET M.luni_f2 ENABLE
+      SHOW GET M.zile_f2 ENABLE
+      SHOW GET M.ani_f21 ENABLE
+      SHOW GET M.luni_f21 ENABLE
+      SHOW GET M.zile_f21 ENABLE
+      SHOW GET M.ani_f22 ENABLE
+      SHOW GET M.luni_f22 ENABLE
+      SHOW GET M.zile_f22 ENABLE
+      SHOW GET nume2 ENABLE
+      SHOW GET fisa2 ENABLE
+      SHOW GET cod2 ENABLE
+      RETU .T.
+ ELSE
+      = reset()
+      RETU .T.
+ ENDI
+*
+FUNC reset
+ cod1 = 0
+ nume1 = '  '
+ fisa1 = 1
+ cod2 = 0
+ nume2 = '  '
+ fisa2 = 0
+ M.ani_f1 = 0
+ M.luni_f1 = 0
+ M.zile_f1 = 0
+ M.ani_f11 = 0
+ M.luni_f11 = 0
+ M.zile_f11 = 0
+ M.ani_f12 = 0
+ M.luni_f12 = 0
+ M.zile_f12 = 0
+ M.ani_f2 = 0
+ M.luni_f2 = 0
+ M.zile_f2 = 0
+ M.ani_f21 = 0
+ M.luni_f21 = 0
+ M.zile_f21 = 0
+ M.ani_f22 = 0
+ M.luni_f22 = 0
+ M.zile_f22 = 0
+ SHOW GETS DISABLE
+ SHOW GET fisa1 ENABLE
+ SHOW GET M.esc ENABLE
+ RETU .T.
+*
+FUNC vl_fis2
+ IF fisa2=fisa1
+      RETU .T.
+ ENDI
+ SELE material
+ SEEK fisa2
+ IF FOUND()
+      nume2 = material.nume
+      fisa2 = material.cod
+      cod2 = material.cod_m
+      M.ani_f2 = INT(material.zile/360)
+      M.luni_f2 = material.zile-M.ani_f2*360
+      M.luni_f2 = INT(M.luni_f2/30)
+      M.zile_f2 = material.zile-M.ani_f2*360-M.luni_f2*30
+      M.ani_f21 = INT(material.zile1/360)
+      M.luni_f21 = material.zile1-M.ani_f21*360
+      M.luni_f21 = INT(M.luni_f21/30)
+      M.zile_f21 = material.zile1-M.ani_f21*360-M.luni_f21*30
+      M.ani_f22 = INT(material.zile2/360)
+      M.luni_f22 = material.zile2-M.ani_f22*360
+      M.luni_f22 = INT(M.luni_f2/30)
+      M.zile_f22 = material.zile2-M.ani_f22*360-M.luni_f22*30
+      SHOW GET nume2 DISABLE
+      SHOW GET cod2 DISABLE
+      SHOW GET M.ani_f2 DISABLE
+      SHOW GET M.luni_f2 DISABLE
+      SHOW GET M.zile_f2 DISABLE
+      SHOW GET M.ani_f21 DISABLE
+      SHOW GET M.luni_f21 DISABLE
+      SHOW GET M.zile_f21 DISABLE
+      SHOW GET M.ani_f22 DISABLE
+      SHOW GET M.luni_f22 DISABLE
+      SHOW GET M.zile_f22 DISABLE
+      rec_sold = .T.
+ ENDI
+ RETU .T.
+*
+FUNC _sbc0sx6x2
+ IF LEN(ALLTRIM(nume2))=0 .OR. fisa2<=1
+      RETU .F.
+ ENDI
+ RETU .T.
+*

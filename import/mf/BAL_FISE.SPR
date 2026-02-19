@@ -1,0 +1,47 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('_sbc0sxeki')
+      DEFI WINDOW _sbc0sxeki FROM INT((SROWS()-8)/2), INT((SCOLS()-40)/2) TO INT((SROWS()-8)/2)+7, INT((SCOLS()-40)/2)+39 NOFLOAT NOCLOSE SHADOW NOMINIMIZE COLOR SCHEME 1
+ ENDI
+ PUBL M.ok, M.esc
+ PUBL M.datai, M.datas, M.executa
+ SET CENTURY ON
+ M.datai = CTOD(STR(1, 2, 0)+'/'+STR(1, 2, 0)+'/'+STR(YEAR(DATE()), 4, 0))
+ M.datas = DATE()
+ M.executa = 0
+ M.ok = 0
+ M.esc = 0
+ SHOW GETS
+ IF WVISIBLE('_sbc0sxeki')
+      ACTI WINDOW SAME _sbc0sxeki
+ ELSE
+      ACTI WINDOW NOSHOW _sbc0sxeki
+ ENDI
+ @ 1, 21 GET M.datai DEFAULT {} SIZE 1, 10 RANGE {01/01/98},{01/01/2100}
+ @ 2, 21 GET M.datas DEFAULT {} SIZE 1, 10 RANGE {01/01/98},{01/01/2100} VALID IIF(M.datas<=M.datai, .F., .T.)
+ @ 4, 3 GET M.ok DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HT EXECUTA' VALID _sbc0sxepp()
+ @ 4, 22 GET M.esc DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HT ANULARE'
+ @ 1, 3 SAY 'INCEPAND CU DATA:' SIZE 1, 17, 0
+ @ 2, 3 SAY 'PANA LA DATA DE :' SIZE 1, 17, 0
+ IF  .NOT. WVISIBLE('_sbc0sxeki')
+      ACTI WINDOW _sbc0sxeki
+ ENDI
+ READ CYCLE
+ RELE WINDOW _sbc0sxeki
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*
+PROC _sbc0sxepp
+ M.executa = 1
+*

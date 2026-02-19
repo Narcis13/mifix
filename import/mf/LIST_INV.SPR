@@ -1,0 +1,926 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ CLEA
+ SET EXACT OFF
+ SET DELETED ON
+ CLOS ALL
+ USE operatii
+ COUN FOR cod_doc<>1 TO nr
+ IF nr<>0
+      CLOS ALL
+      DO avertiz3.spr
+      RETU
+ ENDI
+ CLOS ALL
+ SELE 1
+ USE tranzact
+ SELE 2
+ USE conturi
+ SELE 3
+ USE material
+ SELE 4
+ USE solduri
+ SELE 5
+ USE operatii
+ DIME sir_cont[ 1, 2]
+ DIME sir_fin[ 1, 2]
+ DIME sir_pro[ 1, 2]
+ DIME sir_uz[ 1, 2]
+ DIME sir_ges[ 1, 2]
+ DIME sir_loc[ 1, 2]
+ DIME sir_um[ 1, 2]
+ DIME sir_stare[ 1, 2]
+ PUBL M.cont, M.modific, M.c_adaug, M.c_data
+ PUBL M.nr_oper, M.nume, M.data_max, M.max_op
+ PUBL M.cod_ges, M.cod_dis, M.c_stoc, M.cod_prov, M.cod_fin
+ PUBL M.data_fol, M.pret, M.cantit, M.unit_mas, M.stare
+ PUBL M.cod_doc, M.nr_doc, M.c_operat, M.crt, M.ce_cont
+ PUBL M.val, M.tot_oper, M.fisa, M.data_intr
+ PUBL M.max_gest, M.max_loc, M.proc, M.zile_f
+ PUBL M.seria, M.pret_comp
+ M.seria = '        '
+ M.pret_comp = 0
+ M.max_data = DATE()
+ M.max_op = 0
+ M.fisa = 0
+ M.nume = '      '
+ M.data_intr = DATE()
+ M.nr_doc = '     '
+ M.val = 0
+ M.tot_oper = 0
+ M.zile_f = 0
+ M.proc = 0.000
+ M.crt_int = -1
+ pun_act = .T.
+ M.c_adaug = 2
+ M.modific = 0
+ SET DATE TO briti
+ SET CENTURY ON
+ SELE conturi
+ SET FILTER TO titlu=.F.
+ SET ORDER TO cont ASCENDING
+ COUN ALL TO nr
+ DIME sir_cont[ nr, 2]
+ GOTO TOP
+ i = 1
+ DO WHILE  .NOT. EOF()
+      sir_cont[ i, 1] = cont+'   '+denumire
+      sir_cont[ i, 2] = cod_cont
+      i = i+1
+      SKIP 1
+ ENDD
+ M.ce_cont = 1
+ M.cont = sir_cont(M.ce_cont,2)
+ SELE 7
+ USE finantat
+ COUN ALL FOR cap=.F. TO nr_elem
+ DIME sir_fin[ nr_elem, 2]
+ COPY TO ARRAY sir_fin FIELDS den, cod ALL FOR cap=.F.
+ M.ce_fin = 1
+ USE
+ USE provenie
+ SET ORDER TO cod
+ COUN ALL TO nr_elem
+ DIME sir_pro[ nr_elem, 2]
+ COPY TO ARRAY sir_pro FIELDS den, cod ALL
+ M.ce_pro = 1
+ USE
+ USE stoc_uz
+ COUN ALL TO nr_elem
+ DIME sir_uz[ nr_elem, 2]
+ COPY TO ARRAY sir_uz FIELDS den, cod ALL
+ M.ce_uz = 1
+ M.c_stoc = sir_uz(M.ce_uz,2)
+ USE
+ USE gestiuni
+ SET ORDER TO denumire
+ COUN ALL TO M.max_gest
+ IF M.max_gest=0
+      CLOS ALL
+      DO avertiz7.spr
+      CLEA
+      RETU
+ ENDI
+ DIME sir_ges[ M.max_gest, 2]
+ COPY TO ARRAY sir_ges FIELDS denumire, cod ALL
+ M.ce_ges = 1
+ M.cod_ges = sir_ges(M.ce_ges,2)
+ USE
+ USE dispus
+ SET ORDER TO DENUMIRE
+ COUN ALL TO M.max_loc
+ IF M.max_loc=0
+      CLOS ALL
+      DO avertiz7.spr
+      CLEA
+      RETU
+ ENDI
+ DIME sir_loc[ M.max_loc, 2]
+ COPY TO ARRAY sir_loc FIELDS denumire, cod ALL
+ USE
+ M.ce_loc = 1
+ M.sect = sir_loc(M.ce_loc,2)
+ M.data_fol = DATE()
+ USE unit_mas
+ SET ORDER TO NUME_U
+ COUN ALL TO nr_elem
+ DIME sir_um[ nr_elem, 2]
+ COPY TO ARRAY sir_um FIELDS nume_u, cod_u ALL
+ M.ce_um = 1
+ USE
+ USE stare
+ SET ORDER TO cod
+ COUN ALL TO nr_elem
+ DIME sir_stare[ nr_elem, 2]
+ COPY TO ARRAY sir_stare FIELDS den, cod ALL
+ M.ce_stare = 1
+ USE
+ USE acte
+ SET ORDER TO cod
+ COUN ALL FOR cod=1 TO nr_elem
+ DIME sir_act[ nr_elem, 2]
+ COPY TO ARRAY sir_act FIELDS den, cod ALL
+ M.ce_act = 1
+ USE
+ SELE 1
+ SELE tranzact
+ GOTO TOP
+ SCAT MEMVAR
+ tot_linii = 0
+ M.c_data = DATE()
+ = reset_date()
+ = init_op()
+ SHOW GETS
+ @ 12, 0 SAY 'Sursa de finantare:' SIZE 1, 19, 0
+ @ 8, 16 SAY 'Gestiune:' SIZE 1, 9, 0
+ @ 15, 60 SAY 'U/M:' SIZE 1, 4, 0
+ @ 18, 57 SAY 'Pret:' SIZE 1, 5, 0
+ @ 0, 1 SAY 'Operatiunea nr.:' SIZE 1, 16, 0
+ @ 0, 26 SAY 'data operarii:' SIZE 1, 14, 0
+ @ 0, 52 SAY '{ZZ/LL/AAAA}' SIZE 1, 12, 0
+ @ 2, 1 SAY 'Act:' SIZE 1, 4, 0
+ @ 2, 62 SAY 'Nr.act:' SIZE 1, 7, 0
+ @ 0, 66 SAY 'linii/act:' SIZE 1, 10, 0
+ @ 5, 0 SAY 'Contul:' SIZE 1, 7, 0
+ @ 15, 0 SAY 'Nr.fisa:' SIZE 1, 8, 0
+ @ 8, 51 SAY 'Locul:' SIZE 1, 6, 0
+ @ 12, 40 SAY 'Sursa de provenienta:' SIZE 1, 21, 0
+ @ 10, 8 SAY '<' SIZE 1, 1, 0
+ @ 10, 14 SAY '>' SIZE 1, 1, 0
+ @ 10, 0 SAY 'Nr.crt.' SIZE 1, 7, 0
+ @ 18, 0 SAY 'Stare:' SIZE 1, 6, 0
+ @ 18, 34 SAY 'Cantitate:' SIZE 1, 10, 0
+ @ 18, 77 SAY 'lei' SIZE 1, 3, 0
+ @ 23, 0 SAY 'TOTAL VALOARE INTRARI PENTRU OPERATIUNE:' SIZE 1, 40, 0
+ @ 23, 59 SAY 'LEI.' SIZE 1, 4, 0
+ @ 20, 79 SAY '%' SIZE 1, 1, 0
+ @ 20, 0 SAY 'Data intrarii:' SIZE 1, 14, 0
+ @ 22, 10 SAY 'Complet (' SIZE 1, 9, 0
+ @ 22, 24 SAY ':' SIZE 1, 1, 0
+ @ 22, 20 SAY 'nume' SIZE 1, 4, 0
+ @ 22, 35 SAY 'val.actuala:' SIZE 1, 12, 0
+ @ 22, 61 SAY 'lei )' SIZE 1, 5, 0
+ @ 0, 18 GET M.nr_oper DEFAULT 0 SIZE 1, 6 RANGE 1,999999 VALID _sbc0sx39s() WHEN data_max()
+ @ 0, 41 GET M.c_data DEFAULT {} SIZE 1, 10 RANGE {01/01/00},{01/01/2100} PICTURE '@E' VALID val_oper()
+ @ 0, 77 GET tot_linii DEFAULT 0 SIZE 1, 3 WHEN .F.
+ @ 1, 5 GET M.ce_act DEFAULT 1 SIZE 3, 56 FROM sir_act PICTURE '@^' DISABLE WHEN pun_act
+ @ 2, 69 GET M.nr_doc DEFAULT ' ' SIZE 1, 10 WHEN pun_act
+ @ 4, 7 GET M.ce_cont DEFAULT 1 SIZE 3, 73 FROM sir_cont PICTURE '@^' VALID _sbc0sx3ck()
+ @ 7, 0 GET M.ce_uz DEFAULT 1 SIZE 3, 14 FROM sir_uz PICTURE '@^' VALID _sbc0sx3du()
+ @ 7, 25 GET M.ce_ges DEFAULT 1 SIZE 3, 22 FROM sir_ges PICTURE '@^' VALID _sbc0sx3f1() WHEN IIF(M.max_gest>1, .T., .F.)
+ @ 7, 58 GET M.ce_loc DEFAULT 1 SIZE 3, 22 FROM sir_loc PICTURE '@^' VALID _sbc0sx3gc() WHEN IIF(M.max_loc>1, .T., .F.)
+ @ 10, 8 GET M.prec DEFAULT 0 SIZE 1, 1, 1 PICTURE '@*IHN ' VALID _sbc0sx3hj() WHEN IIF(M.crt>1, .T., .F.)
+ @ 10, 10 GET M.crt DEFAULT 0 SIZE 1, 3 RANGE 1,999 PICTURE '@Z' VALID val_crt() WHEN wen_crt()
+ @ 10, 14 GET M.urm DEFAULT 0 SIZE 1, 1, 1 PICTURE '@*IHN ' VALID _sbc0sx3j9() WHEN IIF(M.crt<=tot_linii, .T., .F.)
+ @ 11, 20 GET M.ce_fin DEFAULT 1 SIZE 3, 18 FROM sir_fin PICTURE '@^'
+ @ 11, 62 GET M.ce_pro DEFAULT 1 SIZE 3, 18 FROM sir_pro PICTURE '@^'
+ @ 15, 9 GET M.cod_den DEFAULT 0 SIZE 1, 6 RANGE 0,999999 PICTURE '@BZ' VALID setare_den() WHEN wen_den()
+ @ 15, 17 GET M.nume DEFAULT ' ' SIZE 1, 40 WHEN .F.
+ @ 14, 64 GET M.ce_um DEFAULT 1 SIZE 3, 15 FROM sir_um PICTURE '@^' VALID val_um() WHEN val_um()
+ @ 17, 7 GET M.ce_stare DEFAULT 1 SIZE 3, 25 FROM sir_stare PICTURE '@^'
+ @ 18, 45 GET M.cantit DEFAULT 0 SIZE 1, 10 RANGE 0.000,9999999.999 VALID val_cantit() WHEN _sbc0sx3mr()
+ @ 18, 63 GET M.pret DEFAULT 0 SIZE 1, 13 RANGE 0.00,9999999999.99 VALID val_pret()
+ @ 20, 15 GET M.data_intr DEFAULT {} SIZE 1, 10 RANGE ,{01/01/2100} PICTURE '@E'
+ @ 20, 69 GET M.proc DEFAULT 0 SIZE 1, 10 RANGE 0,999999 PICTURE '@Z'
+ @ 22, 25 GET M.seria DEFAULT ' ' SIZE 1, 8 VALID _sbc0sx3p4() WHEN IIF(sir_um(M.ce_um,2)=6, .T., .F.) ERROR 'MAI MULTE COMPLETE CU ACEEASI SERIE.'
+ @ 22, 47 GET M.pret_comp DEFAULT 0 SIZE 1, 13 RANGE 0.00,9999999999.99 WHEN IIF(sir_um(M.ce_um,2)=6, .T., .F.)
+ @ 23, 42 GET M.tot_oper DEFAULT 0 SIZE 1, 16 WHEN .F.
+ @ 24, 0 GET M.salvare DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HN \!\<SALVARE' VALID salvare()
+ @ 24, 23 GET M.sterg DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HN STE\<RGERE' DISABLE VALID sterge()
+ @ 24, 49 GET M.material DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HN \<MATERIAL' VALID get_mater()
+ @ 24, 69 GET M.ies DEFAULT 1 SIZE 1, 10, 1 PICTURE '@*HT \?\<Iesire' VALID iesire()
+ @ 20, 27 SAY 'Procentul de folosire pana la data intr.:' SIZE 1, 41, 0
+ READ CYCLE
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+ CLOS ALL
+ CLEA
+*
+PROC data_max
+ SELE tranzact
+ SET ORDER TO pun_op DESCENDING
+ COUN ALL TO nr
+ IF nr<>0
+      GOTO TOP
+      M.max_data = c_data
+      M.max_op = c_operat
+ ELSE
+      M.max_data = DATE()
+      M.max_op = 0
+ ENDI
+*
+FUNC init_op
+ SELE operatii
+ SET ORDER TO pun_oper DESCENDING
+ GOTO TOP
+ M.c_data = DATE()
+ SEEK STR(YEAR(M.c_data), 4)
+ IF FOUND()
+      M.nr_oper = operatii.nr_oper+1
+ ELSE
+      M.nr_oper = 1
+ ENDI
+ M.c_operat = YEAR(M.c_data)*1000000+M.nr_oper
+ SHOW GET M.nr_oper
+ RETU .T.
+*
+PROC valoare_ac
+ SELE tranzact
+ SET ORDER TO pun_op DESCENDING
+ GOTO TOP
+ SEEK STR(M.c_operat, 10)
+ M.tot_oper = 0
+ DO WHILE M.c_operat==c_operat
+      IF unit_mas<>6
+           M.tot_oper = M.tot_oper+ROUND(cantit*pret, 2)
+      ELSE
+           M.tot_oper = M.tot_oper+ROUND(pret_comp, 2)
+      ENDI
+      SKIP 1
+      IF EOF()
+           EXIT
+      ENDI
+ ENDD
+ SHOW GET M.tot_oper
+*
+PROC val_oper
+ SELE operatii
+ SET ORDER TO pun_oper DESCENDING
+ GOTO TOP
+ SEEK STR(YEAR(M.c_data), 4)+STR(M.nr_oper, 6)
+ IF FOUND()
+      SCAT MEMVAR
+      M.c_operat = YEAR(M.c_data)*1000000+M.nr_oper
+      M.ce_act = 1
+      DO WHILE sir_act(M.ce_act,2)<>M.cod_doc
+           M.ce_act = M.ce_act+1
+      ENDD
+      SHOW GET M.ce_act
+      SHOW GET M.nr_doc
+      = valoare_ac()
+      SELE tranzact
+      GOTO TOP
+      SEEK STR(M.c_operat, 10)
+      M.crt = tranzact.crt
+      = incarc_dat()
+      tot_linii = M.crt
+      IF M.crt<999
+           M.modific = 0
+           M.crt = M.crt+1
+           = reset_var()
+      ELSE
+           M.modific = 1
+      ENDI
+      M.c_adaug = 2
+      pun_act = .F.
+      SHOW GETS
+ ELSE
+      GOTO TOP
+      SEEK STR(YEAR(M.c_data), 4)
+      IF FOUND()
+           IF M.nr_oper>nr_oper+1
+                M.nr_oper = nr_oper+1
+           ENDI
+      ELSE
+           M.nr_oper = 1
+      ENDI
+      M.c_operat = YEAR(M.c_data)*1000000+M.nr_oper
+      SHOW GET M.nr_oper
+      pun_act = .T.
+      M.modific = 0
+      tot_linii = 0
+      = reset_date()
+      M.ce_act = 1
+      M.nr_doc = '        '
+ ENDI
+ SHOW GETS
+*
+PROC reset_var
+ M.cantit = 0.000
+ M.c_adaug = 2
+ M.pret = 0.00
+ M.seria = '        '
+ M.pret_comp = 0.00
+ M.cod_den = 0
+*
+FUNC reset_date
+ M.cantit = 0.000
+ M.c_adaug = 2
+ M.pret = 0.00
+ M.crt = 1
+ M.ce_cont = 1
+ M.ce_fin = 1
+ M.ce_pro = 1
+ M.ce_uz = 1
+ M.ce_ges = 1
+ M.ce_loc = 1
+ M.ce_um = 1
+ M.ce_stare = 1
+ M.data_fol = DATE()
+ M.cod_den = 0
+ M.seria = '        '
+ M.pret_comp = 0.00
+ RETU .T.
+*
+FUNC next_crt
+ SELE tranzact
+ SET ORDER TO pun_op DESCENDING
+ GOTO TOP
+ SEEK STR(M.c_operat, 10)
+ IF FOUND()
+      M.crt = crt+1
+      IF M.crt=1000
+           DO avertiz1.spr
+           GOTO TOP
+           SEEK STR(M.c_operat, 10)
+           M.crt = tranzact.crt
+           = val_crt()
+           _CUROBJ = OBJNUM(M.ies)
+      ENDI
+ ELSE
+      M.crt = 1
+ ENDI
+ SHOW GET M.crt
+ _CUROBJ = OBJNUM(M.cod_den)
+ SHOW GETS
+ RETU .T.
+*
+FUNC val_crt
+ IF M.crt_int<>M.crt
+      M.modific = 0
+ ENDI
+ IF M.modific=1
+      RETU .T.
+ ENDI
+ SELE tranzact
+ SET ORDER TO pun_op
+ SHOW GET M.salvare ENABLE
+ GOTO TOP
+ SEEK STR(M.c_operat, 10)+STR(M.crt, 3)
+ IF FOUND()
+      M.modific = 1
+      SCAT MEMVAR
+      = incarc_dat()
+      SELE material
+      DO FER2.SPR
+      SET ORDER TO COD
+      GOTO TOP
+      SEEK M.cod_den
+      M.nume = nume
+      SHOW GET M.nume
+      SELE tranzact
+      SET PROCEDURE TO librarie
+      se_poate = ver_stg()
+      SET PROCEDURE TO
+      IF se_poate=.T.
+           SHOW GET M.sterg ENABLE
+           SHOW GET M.salvare ENABLE
+      ELSE
+           SHOW GET M.sterg DISABLE
+           SHOW GET M.salvare DISABLE
+      ENDI
+      _CUROBJ = OBJNUM(M.cantit)
+ ELSE
+      GOTO TOP
+      SEEK STR(M.c_operat, 10)
+      IF  .NOT. FOUND()
+           M.crt = 1
+      ELSE
+           IF M.crt>crt
+                M.crt = crt+1
+           ENDI
+      ENDI
+      SHOW GET M.sterg DISABLE
+      M.modific = 0
+      M.cod_den = 0
+      M.nume = '   '
+      M.pret = 0.00
+      M.cantit = 0.000
+      M.seria = '        '
+      M.pret_comp = 0.00
+ ENDI
+ SHOW GETS
+*
+PROC add_caract
+ M.ce_cont = 1
+ DO WHILE sir_cont(M.ce_cont,2)<>M.cont
+      M.ce_cont = M.ce_cont+1
+ ENDD
+ M.ce_fin = 1
+ DO WHILE sir_fin(M.ce_fin,2)<>M.cod_fin
+      M.ce_fin = M.ce_fin+1
+ ENDD
+ M.ce_pro = 1
+ DO WHILE sir_pro(M.ce_pro,2)<>M.cod_prov
+      M.ce_pro = M.ce_pro+1
+ ENDD
+ M.ce_uz = 1
+ DO WHILE sir_uz(M.ce_uz,2)<>M.c_stoc
+      M.ce_uz = M.ce_uz+1
+ ENDD
+ M.ce_ges = 1
+ DO WHILE sir_ges(M.ce_ges,2)<>M.cod_ges
+      M.ce_ges = M.ce_ges+1
+ ENDD
+ M.ce_loc = 1
+ DO WHILE sir_loc(M.ce_loc,2)<>M.sect
+      M.ce_loc = M.ce_loc+1
+ ENDD
+ M.ce_um = 1
+ DO WHILE sir_um(M.ce_um,2)<>M.unit_mas
+      M.ce_um = M.ce_um+1
+ ENDD
+ M.ce_stare = 1
+ DO WHILE sir_stare(M.ce_stare,2)<>M.stare
+      M.ce_stare = M.ce_stare+1
+ ENDD
+*
+FUNC wen_crt
+ M.crt_int = M.crt
+ RETU .T.
+*
+FUNC wen_den
+ M.fisa = M.cod_den
+ RETU .T.
+*
+FUNC setare_den
+ IF M.cod_den=1
+      SELE tranzact
+      SET FILTER TO cod_ges=sir_ges(M.ce_ges,2)
+      SET ORDER TO COD_DEN DESCENDING
+      GOTO TOP
+      M.cod_den = cod_den+1
+      IF M.cod_den=1
+           M.cod_den = 2
+      ENDI
+      SHOW GET M.cod_den
+      SET FILTER TO
+ ENDI
+ IF M.fisa=M.cod_den
+      RETU .T.
+ ENDI
+ IF M.cod_den=0
+      RETU .T.
+ ENDI
+ SELE material
+ SET ORDER TO COD
+ GOTO TOP
+ SEEK M.cod_den
+ IF FOUND()
+      DO FER2.SPR
+      M.nume = nume
+      SELE solduri
+      SET ORDER TO PMP
+      SEEK STR(M.cod_den, 8)
+      IF FOUND()
+           M.unit_mas = unit_mas
+           M.stare = stare
+           M.ce_um = 1
+           DO WHILE sir_um(M.ce_um,2)<>M.unit_mas
+                M.ce_um = M.ce_um+1
+           ENDD
+           M.ce_stare = 1
+           DO WHILE sir_stare(M.ce_stare,2)<>M.stare
+                M.ce_stare = M.ce_stare+1
+           ENDD
+           M.cantit = 0.000
+           M.pret = 0.00
+           M.proc = 0.000
+           M.seria = '        '
+           M.pret_comp = 0.00
+      ENDI
+      SHOW GETS
+      RETU
+ ENDI
+ M.ce_um = 1
+ SHOW GET M.ce_um
+ DO FER1.spr
+ IF LEN(ALLTRIM(M.nume))=0
+      M.cod_den = 0
+      _CUROBJ = OBJNUM(M.cod_doc)
+ ELSE
+      SHOW GET M.nume
+      SHOW GET M.cod_den
+      = setare_den()
+      _CUROBJ = OBJNUM(M.cod_doc)
+      RETU
+ ENDI
+ SHOW GET M.nume
+ SHOW GET M.cod_den
+ RETU
+*
+FUNC val_um
+ IF sir_um(M.ce_um,2)=6 .AND. M.modific=0
+      M.seria = '        '
+      M.cantit = 1.00
+      M.pret_comp = 0.00
+      SHOW GET M.seria
+      SHOW GET M.pret_comp
+      SHOW GET M.cantit
+      RETU .T.
+ ENDI
+ IF sir_um(M.ce_um,2)<>6
+      M.seria = '        '
+      M.pret_comp = 0.00
+      SHOW GET M.seria
+      SHOW GET M.pret_comp
+      RETU .T.
+ ENDI
+ RETU .T.
+*
+FUNC incarc_dat
+ SELE tranzact
+ SET ORDER TO pun_op
+ GOTO TOP
+ SEEK STR(M.c_operat, 10)+STR(M.crt, 3)
+ IF FOUND()
+      SCAT MEMVAR
+      = add_caract()
+      SHOW GETS
+ ENDI
+ RETU .T.
+*
+PROC incarc_var
+ M.cont = sir_cont(M.ce_cont,2)
+ M.cod_doc = sir_act(M.ce_act,2)
+ M.cod_ges = sir_ges(M.ce_ges,2)
+ M.sect = sir_loc(M.ce_loc,2)
+ M.c_stoc = sir_uz(M.ce_uz,2)
+ M.cod_prov = sir_pro(M.ce_pro,2)
+ M.cod_fin = sir_fin(M.ce_fin,2)
+ M.unit_mas = sir_um(M.ce_um,2)
+ M.stare = sir_stare(M.ce_stare,2)
+*
+FUNC ver_salvar
+ IF M.cod_den=0
+      _CUROBJ = OBJNUM(M.cod_den)
+      RETU .F.
+ ENDI
+ IF M.cantit=0.000
+      _CUROBJ = OBJNUM(M.cantit)
+      RETU .F.
+ ENDI
+ IF M.pret=0.00
+      _CUROBJ = OBJNUM(M.pret)
+      RETU .F.
+ ENDI
+ IF M.cod_fin=0
+      _CUROBJ = OBJNUM(M.ce_fin)
+      RETU .F.
+ ENDI
+ IF M.cod_prov=0
+      _CUROBJ = OBJNUM(M.ce_prov)
+      RETU .F.
+ ENDI
+ IF M.stare=0
+      _CUROBJ = OBJNUM(M.ce_stare)
+      RETU .F.
+ ENDI
+ IF M.sect=0
+      _CUROBJ = OBJNUM(M.ce_loc)
+      RETU .F.
+ ENDI
+ IF M.cod_ges=0
+      _CUROBJ = OBJNUM(M.ce_ges)
+      RETU .F.
+ ENDI
+ IF M.unit_mas=6 .AND. M.pret_comp<=0
+      _CUROBJ = OBJNUM(M.pret_comp)
+      RETU .F.
+ ENDI
+ IF M.unit_mas=6 .AND. LEN(ALLTRIM(M.seria))=0
+      M.seria = '        '
+      SHOW GET M.seria
+      _CUROBJ = OBJNUM(M.seria)
+      RETU .F.
+ ENDI
+*
+PROC salvare
+ = incarc_var()
+ bine = ver_salvar()
+ IF bine=.F.
+      RETU
+ ENDI
+ IF pun_act=.T.
+      SELE operatii
+      APPE BLANK
+      GATH MEMVAR
+ ENDI
+ SELE tranzact
+ SET ORDER TO pun_op
+ SEEK STR(M.c_operat, 10)+STR(M.crt, 3)
+ IF  .NOT. FOUND()
+      APPE BLANK
+ ELSE
+      IF unit_mas<>6
+           M.tot_oper = M.tot_oper-ROUND(cantit*pret, 2)
+      ELSE
+           M.tot_oper = M.tot_oper-ROUND(pret_comp, 2)
+      ENDI
+      SELE solduri
+      SET ORDER TO ord_sor
+      filtru = STR(A.cod_den, 8)+STR(A.unit_mas, 2)+STR(A.stare, 1)+STR(A.pret, 13, 2)+DTOS(A.data_intr)+STR(A.proc, 10, 3)+STR(A.cont, 3)+STR(A.cod_ges, 2)+STR(A.c_stoc, 1)+STR(A.sect, 2)+STR(A.cod_fin, 2)+STR(A.cod_prov, 2)
+      SEEK filtru
+      IF FOUND()
+           REPL cantit WITH cantit-A.cantit
+           IF solduri.cantit=0
+                DELE
+           ENDI
+      ENDI
+      SELE tranzact
+ ENDI
+ GATH MEMVAR
+ IF unit_mas<>6
+      M.tot_oper = M.tot_oper+ROUND(cantit*pret, 2)
+ ELSE
+      M.tot_oper = M.tot_oper+ROUND(pret_comp, 2)
+ ENDI
+ SHOW GET M.tot_oper
+ M.modific = 0
+ SET PROCEDURE TO librarie
+ = rec_sold()
+ SET PROCEDURE TO
+ pun_act = .F.
+ SELE tranzact
+ SET ORDER TO pun_op DESCENDING
+ SEEK STR(M.c_operat, 10)
+ IF tranzact.crt<999 .AND. M.crt<tranzact.crt
+      M.crt = M.crt+1
+      M.crt_int = -1
+      = val_crt()
+ ELSE
+      SHOW GET M.sterg DISABLE
+      = next_crt()
+      SHOW GET M.crt
+      IF M.unit_mas<>6
+           M.cantit = 0.00
+           M.pret = 0.00
+           M.seria = '        '
+           M.pret_comp = 0.00
+           M.proc = 0.000
+           _CUROBJ = OBJNUM(M.cod_den)
+      ELSE
+           M.seria = '        '
+           _CUROBJ = OBJNUM(M.seria)
+      ENDI
+      SELE tranzact
+      SET ORDER TO pun_op DESCENDING
+      SEEK STR(M.c_operat, 10)
+      IF FOUND()
+           tot_linii = crt
+      ELSE
+           tot_linii = 0
+      ENDI
+ ENDI
+ SHOW GETS
+*
+PROC sterge
+ SELE tranzact
+ SET ORDER TO pun_op
+ GOTO TOP
+ SEEK STR(M.c_operat, 10)+STR(M.crt, 3)
+ IF FOUND()
+      IF unit_mas<>6
+           M.tot_oper = M.tot_oper-ROUND(cantit*pret, 2)
+      ELSE
+           M.tot_oper = M.tot_oper-ROUND(pret_comp, 2)
+      ENDI
+      SHOW GET M.tot_oper
+      DELE
+      SET PROCEDURE TO LIBRARIE
+      = ren_crt()
+      SET PROCEDURE TO
+      SET PROCEDURE TO LIBRARIE
+      = rec_sold()
+      SET PROCEDURE TO
+      SELE tranzact
+      USE
+      USE tranzact
+      SELE solduri
+      USE
+      USE solduri
+      SELE tranzact
+      SET ORDER TO pun_op DESCENDING
+      SEEK STR(M.c_operat, 10)
+      IF FOUND()
+           tot_linii = crt
+      ELSE
+           tot_linii = 0
+      ENDI
+      SHOW GET tot_linii
+      M.crt = tot_linii+1
+      IF M.crt=1
+           SELE operatii
+           SET ORDER TO pun_oper DESCENDING
+           GOTO TOP
+           SEEK STR(YEAR(M.c_data), 4)+STR(M.nr_oper, 6)
+           IF FOUND()
+                DELE
+                pun_act = .T.
+           ENDI
+      ENDI
+      SHOW GET M.crt
+      M.c_adaug = 2
+      M.modific = 0
+      M.seria = '        '
+      M.pret_comp = 0.00
+      M.cantit = 0.000
+      M.pret = 0.00
+      _CUROBJ = OBJNUM(cod_den)
+      SHOW GET M.sterg DISABLE
+      SHOW GETS
+ ENDI
+*
+PROC iesire
+ SET DELETED OFF
+ SELE tranzact
+ COUN ALL FOR DELETED()=.T. TO nr
+ IF nr<>0
+      CLEA
+      @ 5, 5 SAY 'ASTEPTATI PANA SE REFACE BAZA TRANZACT' COLOR GR+/B,R/W 
+      PACK
+ ENDI
+ USE
+ SELE solduri
+ COUN ALL FOR DELETED()=.T. TO nr
+ IF nr<>0
+      CLEA
+      @ 5, 5 SAY 'ASTEPTATI PANA SE REFACE BAZA SOLDURI' COLOR GR+/B,R/W 
+      PACK
+ ENDI
+ USE
+ SELE operatii
+ COUN ALL FOR DELETED()=.T. TO nr
+ IF nr<>0
+      CLEA
+      @ 5, 5 SAY 'ASTEPTATI PANA SE REFACE BAZA OPERATII' COLOR GR+/B,R/W 
+      PACK
+ ENDI
+ USE
+*
+PROC val_cantit
+ M.unit_mas = sir_um(M.ce_um,2)
+ IF M.c_adaug=2 .AND. M.pret=0.00
+      SELE solduri
+      SET ORDER TO ord_sor DESCENDING
+      SEEK STR(M.cod_den, 8)+STR(M.unit_mas, 2)
+      IF FOUND()
+           M.pret = solduri.pret
+           M.val = ROUND(M.pret*M.cantit, 2)
+           IF M.val<>M.cantit*M.pret .AND. M.cantit<>0.000
+                M.pret = ROUND(M.val/M.cantit, 2)
+           ENDI
+           SHOW GET M.pret
+      ENDI
+ ENDI
+*
+PROC val_pret
+ M.unit_mas = sir_um(M.ce_um,2)
+ IF M.c_adaug=2
+      M.val = ROUND(M.pret*M.cantit, 0)
+      IF M.val<>M.cantit*M.pret .AND. M.cantit<>0.000
+           M.pret = ROUND(M.val/M.cantit, 2)
+      ENDI
+      SHOW GET M.pret
+ ENDI
+ IF M.c_adaug=2 .AND. M.unit_mas=6 .AND. M.pret_comp=0.00
+      M.pret_comp = M.pret
+      SHOW GET M.pret_comp
+ ENDI
+*
+FUNC val_seria
+ M.unit_mas = sir_um(M.ce_um,2)
+ SELE tranzact
+ SET ORDER TO pmp
+ GOTO TOP
+ SEEK STR(M.cod_den, 8)+STR(M.unit_mas, 2)
+ nr_serii = 0
+ DO WHILE M.cod_den=cod_den .AND. M.unit_mas=unit_mas
+      IF ALLTRIM(UPPER(M.seria))==ALLTRIM(UPPER(seria))
+           nr_serii = nr_serii+1
+      ENDI
+      SKIP 1
+      IF EOF()
+           EXIT
+      ENDI
+ ENDD
+ IF nr_serii>0 .AND. M.modific=0
+      RETU .F.
+ ENDI
+ IF nr_serii>1 .AND. M.modific=1
+      RETU .F.
+ ENDI
+ RETU .T.
+*
+PROC get_mater
+ PRIV ce_ncrt
+ SELE tranzact
+ SET ORDER TO pun_op DESCENDING
+ GOTO TOP
+ SEEK STR(M.c_operat, 10)
+ IF FOUND() .AND. crt>998
+      RETU
+ ENDI
+ IF FOUND()
+      ce_ncrt = crt+1
+ ELSE
+      ce_ncrt = 1
+ ENDI
+ SELE material
+ COUN ALL TO nr
+ IF nr=0
+      RETU
+ ENDI
+ SET PROCEDURE TO LIBRARIE
+ M.cod_den = get_materi()
+ SET PROCEDURE TO
+ M.fisa = -1
+ M.crt = ce_ncrt
+ M.modific = 0
+ = setare_den()
+ _CUROBJ = OBJNUM(M.cantit)
+ SHOW GETS
+*
+PROC _sbc0sx39s
+ IF M.c_operat>M.max_op+1
+      M.c_operat = M.max_op+1
+      SHOW GET M.c_operat
+ ENDI
+*
+PROC _sbc0sx3ck
+ M.cont = sir_cont(M.ce_cont,2)
+*
+PROC _sbc0sx3du
+ M.c_stoc = sir_uz(M.ce_uz,2)
+*
+PROC _sbc0sx3f1
+ M.cod_ges = sir_ges(M.ce_ges,2)
+*
+PROC _sbc0sx3gc
+ M.sect = sir_loc(M.ce_loc,2)
+*
+PROC _sbc0sx3hj
+ M.crt = M.crt-1
+ M.modific = 0
+ SHOW GET M.crt
+ = val_crt()
+ _CUROBJ = OBJNUM(M.prec)
+*
+PROC _sbc0sx3j9
+ M.crt = M.crt+1
+ M.modific = 0
+ IF M.crt<=tot_linii
+      SHOW GET M.crt
+      = val_crt()
+      _CUROBJ = OBJNUM(M.urm)
+ ENDI
+ IF M.crt>tot_linii
+      SHOW GET M.crt
+      M.cantit = 0.00
+      SHOW GET M.crt
+      = val_crt()
+      _CUROBJ = OBJNUM(M.cod_den)
+ ENDI
+*
+FUNC _sbc0sx3mr
+ IF sir_um(M.ce_um,2)=6
+      M.cantit = 1.000
+      SHOW GET M.cantit
+      RETU .F.
+ ENDI
+*
+FUNC _sbc0sx3p4
+ bine = val_seria()
+ RETU bine
+*

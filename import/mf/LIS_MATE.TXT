@@ -1,0 +1,326 @@
+
+
+                      LISTA CU DENUMIREA SI DURATELE OBIECTELOR DE INVENTAR
+                      -----------------------------------------------------
+
+                                                                                    PAGINA:          1
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|     1|    110000   |             |CENTRALA   TERMICA                      |40,  ,  |40,  ,  |40,  ,  |
+|     2|    200008   |             |BOILER 85 L ELECTRIC                    |10,  ,  |  ,  ,  |  ,  ,  |
+|     3|    200009   |             |APARAT AER CONDITIONAT 1                |10,  ,  |  ,  ,  |  ,  ,  |
+|     4|    200019   |             |MASINA DE GATIT CU ARDERE INDEPENDENTA  |10,  ,  |  ,  ,  |  ,  ,  |
+|     5|    200022   |             |MASINA DE SPALAT ELECTRICA 1            |10,  ,  |  ,  ,  |  ,  ,  |
+|     6|    200023   |             |MASINA DE SPALAT RUFE 1                 |10,  ,  |  ,  ,  |  ,  ,  |
+|     7|    200024   |             |MASINA DE SPALAT RUFE 2                 |10,  ,  |  ,  ,  |  ,  ,  |
+|     8|    200029   |             |STORCATOR RUFE                          |10,  ,  |  ,  ,  |  ,  ,  |
+|     9|    200055   |             |TRANSFORMATOR  SUDURA  ELECTRICA S24453 |10,  ,  |  ,  ,  |  ,  ,  |
+|    10|    200327   |             |APARAT AER CONDITIONAT 2                |10,  ,  |  ,  ,  |  ,  ,  |
+|    11|    200330   |             |GRUP TERMIC 85KW                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    12|    200331   |             |APARAT COTRACURENT                      |10,  ,  |  ,  ,  |  ,  ,  |
+|    13|    200332   |             |APARAT CONTRACURENT 58962               |10,  ,  |  ,  ,  |  ,  ,  |
+|    14|    200333   |             |CAZAN ABUR MP NR.650                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    15|    200334   |             |GENERATOR ACETILENA                     |10,  ,  |  ,  ,  |  ,  ,  |
+|    16|    200335   |             |GRUP ELECTROGEN                         |10,  ,  |  ,  ,  |  ,  ,  |
+|    17|    200336   |             |MASINA DE GAURIT                        |10,  ,  |  ,  ,  |  ,  ,  |
+|    18|    200337   |             |MASINA DE GAURIT ELECTRICA TIP G10      |10,  ,  |  ,  ,  |  ,  ,  |
+|    19|    200338   |             |MASINA UNIVERSALA DE TAMPLARIT  MT.40   |10,  ,  |  ,  ,  |  ,  ,  |
+|    20|    200339   |             |MODUL DE PREPARARE APA CALDA MENAJERA   |10,  ,  |  ,  ,  |  ,  ,  |
+|    21|    200340   |             |POLIZOR P.D. 300 CM                     |10,  ,  |  ,  ,  |  ,  ,  |
+|    22|    200341   |             |SCHIMBATOR DE CALDURA CU CU PLACI V 28  |10,  ,  |  ,  ,  |  ,  ,  |
+|    23|    200342   |             |CAZAN ABUR I.P. NR 210                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    24|    200550   |             |PAT SPITAL TIP ATI 1                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    25|    200553   |             |PAT SPITAL TIP ATI 4                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    26|    200554   |             |PAT SPITAL TIP ATI 5                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    27|    220390   |             |MASINA CALCAT RUFE 1                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    28|    220393   |             |PAT A.T.I                               |10,  ,  |  ,  ,  |  ,  ,  |
+|    29|    220536   |             |MASINA DE SPALAT RUFE 3                 |10,  ,  |  ,  ,  |  ,  ,  |
+|    30|    220537   |             |USCATOR RUFE                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    31|    220539   |             |APARAT AER CONDITIONAT DAEWO 121 LH     |10,  ,  |  ,  ,  |  ,  ,  |
+|    32|    220594   |             |PAT SPITAL TIP ATI                      | 5,  ,  |  ,  ,  |  ,  ,  |
+|    33|    400018   |             |ASCENSOR PT.PERSOANE                    |10,  ,  |  ,  ,  |  ,  ,  |
+|    34|    400021   |             |ASCENSOR PT.MATERIALE 75 KG             |10,  ,  |  ,  ,  |  ,  ,  |
+|    35|    400022   |             |ASCENSOR PT.MATERIALE                   |10,  ,  |  ,  ,  |  ,  ,  |
+|    36|    620229   |             |APARAT AER CONDITIONAT L6Ls-J0962  HL   |10,  ,  |  ,  ,  |  ,  ,  |
+|    37|    620230   |             |APARAT AER COND. LG LS-J 1261HL         |10,  ,  |  ,  ,  |  ,  ,  |
+|    38|    620231   |             |APARAT AER COND. LGLS-K 1860J           |10,  ,  |  ,  ,  |  ,  ,  |
+|    39|    620232   |             |APARAT AER CONDITIONAT LG LM-1963 H2L   |10,  ,  |  ,  ,  |  ,  ,  |
+|    40|    620233   |             |APARAT AER CONDITIONAT LG LM -1963 H2L 3|10,  ,  |  ,  ,  |  ,  ,  |
+|    41|    620234   |             |APARAT AER CONDITIONAT LG LM1963 H2L    |10,  ,  |  ,  ,  |  ,  ,  |
+|    42|    620300   |             |APARAT AER CONDITIONAT                  |10,  ,  |  ,  ,  |  ,  ,  |
+|    43|    620301   |             |APARAT AER CONDITIONAT /2               |10,  ,  |  ,  ,  |  ,  ,  |
+|    44|    620302   |             |APARAT AER CONDITIONAT /1               |10,  ,  |  ,  ,  |  ,  ,  |
+|    45|    640001   |             |CONTAINER TIP GRUP SANITAR(WC)/2        |12,  ,  |  ,  ,  |  ,  ,  |
+|    46|    640002   |             |SCARA ACCES CU BALUSTRADA SI PLATFORMA/2|12,  ,  |  ,  ,  |  ,  ,  |
+|    47|    640003   |             |CONTAINER ADMINISTRATIV                 |12,  ,  |  ,  ,  |  ,  ,  |
+|    48|    640004   |             |CONTAINER ADMINISTRATIV/1               |12,  ,  |  ,  ,  |  ,  ,  |
+|    49|    640005   |             |CONTAINER ADMINISTRATIV/2               |12,  ,  |  ,  ,  |  ,  ,  |
+|    50|    640006   |             |CONTAINER ADMINISTRATIV/3               |12,  ,  |  ,  ,  |  ,  ,  |
+|    51|    640007   |             |CONTAINER ADMINISTRATIV/4               |12,  ,  |  ,  ,  |  ,  ,  |
+|    52|    640008   |             |CONTAINER ADMINISTRATIV/5               |12,  ,  |  ,  ,  |  ,  ,  |
+|    53|    640009   |             |CONTAINER ADMINISTRATIV/6               |12,  ,  |  ,  ,  |  ,  ,  |
+|    54|    640010   |             |CONTAINER ADMINISTRATIV/7               |12,  ,  |  ,  ,  |  ,  ,  |
+|    55|    640011   |             |CONTAINER ADMINISTRATIV/8               |12,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          2
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|    56|    640012   |             |CONTAINER ADMINISTRATIV/9               |12,  ,  |  ,  ,  |  ,  ,  |
+|    57|    640013   |             |CONTAINER ADMINISTRATIV/10              |12,  ,  |  ,  ,  |  ,  ,  |
+|    58|    640085   |             |PAT SPITAL 1                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    59|    640086   |             |PAT SPITAL 2                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    60|    640087   |             |PAT SPITAL 3                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    61|    640088   |             |PAT SPITAL 4                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    62|    640089   |             |PAT SPITAL 5                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    63|    640090   |             |PAT SPITAL 6                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    64|    640091   |             |PAT SPITAL 7                            |10,  ,  |  ,  ,  |  ,  ,  |
+|    65|    640092   |             |APARAT AER CONDITIONAT 24000 BTU        |10,  ,  |  ,  ,  |  ,  ,  |
+|    66|    640093   |             |APARAT AER CONDITIONTA 9000 BTU 1       |10,  ,  |  ,  ,  |  ,  ,  |
+|    67|    640094   |             |APARAT DE AER CONDITIONAT 9000 BTU 2    |10,  ,  |  ,  ,  |  ,  ,  |
+|    68|    640095   |             |APARAT AER CONDITIONAT 9000 BTU 3       |10,  ,  |  ,  ,  |  ,  ,  |
+|    69|    640096   |             |APARAT AER CONDITIONAT 9000 BTU         |10,  ,  |  ,  ,  |  ,  ,  |
+|    70|    640097   |             |CANAPEA 3 LOCURI EXTENSIBILA STOFA      | 5,  ,  |  ,  ,  |  ,  ,  |
+|    71|    640098   |             |BARIERA AUTOMATA                        |  ,  ,  |  ,  ,  |  ,  ,  |
+|    72|    640099   |             |SISTEM MONITORIZ.SI SUPRAVEG.VIDEO PAV.E| 8,  ,  |  ,  ,  |  ,  ,  |
+|    73|    640100   |             |SISTEM AUTOMATIZAT 884                  | 8,  ,  |  ,  ,  |  ,  ,  |
+|    74|    640101   |             |CENTRALA DE PURIFICAT AERUL             |12,  ,  |  ,  ,  |  ,  ,  |
+|    75|    640102   |             |INST.PURIF./STERILIZ.AER BLOC OPERATOR  |12,  ,  |  ,  ,  |  ,  ,  |
+|    76|    640103   |             |INSTAL.DE PURIF.AER SI DETEN.OXIG.PAV.H |12,  ,  |  ,  ,  |  ,  ,  |
+|    77|    640104   |             |SISTEM DETECTIE SI ALARM.LA INCEND.PAV.H|18,  ,  |  ,  ,  |  ,  ,  |
+|    78|    640105   |             |CENTRALA TERMICA FERROLI 58-60KW        |10,  ,  |  ,  ,  |  ,  ,  |
+|    79|    640106   |             |CONTAINER ADMINISTRATIV(IV)             | 8,  ,  |  ,  ,  |  ,  ,  |
+|    80|    640107   |             |CONTAINER ADMINISTRATIV(IV)/1           | 8,  ,  |  ,  ,  |  ,  ,  |
+|    81|    640108   |             |CONTAINER TIP ADMINISTRATIV(IV)/2       | 8,  ,  |  ,  ,  |  ,  ,  |
+|    82|    640109   |             |CONTAINER TIP ADMINISTRATIV(IV)/3       | 8,  ,  |  ,  ,  |  ,  ,  |
+|    83|    640110   |             |CONTAINER TIP ADMINISTRATIV(IV)/4       | 8,  ,  |  ,  ,  |  ,  ,  |
+|    84|    640111   |             |CONTAINER TIP ADMINISTRATIV(IV)/5       | 8,  ,  |  ,  ,  |  ,  ,  |
+|    85|    640112   |             |CONTAINER TIP BIROU/DORMIT/MAG/ADMINI.  |12,  ,  |  ,  ,  |  ,  ,  |
+|    86|    640113   |             |CONTAINER TIP BIROU/DORM/MAG/ADMNIS.1   |12,  ,  |  ,  ,  |  ,  ,  |
+|    87|    640114   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.2  |12,  ,  |  ,  ,  |  ,  ,  |
+|    88|    640115   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.3  |12,  ,  |  ,  ,  |  ,  ,  |
+|    89|    640116   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.4  |12,  ,  |  ,  ,  |  ,  ,  |
+|    90|    640117   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.5  |12,  ,  |  ,  ,  |  ,  ,  |
+|    91|    640118   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.6  |12,  ,  |  ,  ,  |  ,  ,  |
+|    92|    640119   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIST.7 |12,  ,  |  ,  ,  |  ,  ,  |
+|    93|    640120   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.8  |12,  ,  |  ,  ,  |  ,  ,  |
+|    94|    640121   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.9  |12,  ,  |  ,  ,  |  ,  ,  |
+|    95|    640122   |             |CONTAINER TIP BIROU/DORM/MAG/ADMINIS.10 |12,  ,  |  ,  ,  |  ,  ,  |
+|    96|    640123   |             |CONTAINER TIP GRUP SANITAR (WC)V        | 8,  ,  |  ,  ,  |  ,  ,  |
+|    97|    640200   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1    |12,  ,  |  ,  ,  |  ,  ,  |
+|    98|    640201   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/1  |12,  ,  |  ,  ,  |  ,  ,  |
+|    99|    640202   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/2  |12,  ,  |  ,  ,  |  ,  ,  |
+|   100|    640203   |             |CONTAINER TIP DORMITOR ECHIPAT TIP1/3   |12,  ,  |  ,  ,  |  ,  ,  |
+|   101|    640204   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/4  |12,  ,  |  ,  ,  |  ,  ,  |
+|   102|    640205   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/5  |12,  ,  |  ,  ,  |  ,  ,  |
+|   103|    640206   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/6  |12,  ,  |  ,  ,  |  ,  ,  |
+|   104|    640207   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/7  |12,  ,  |  ,  ,  |  ,  ,  |
+|   105|    640208   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/8  |12,  ,  |  ,  ,  |  ,  ,  |
+|   106|    640209   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/9  |12,  ,  |  ,  ,  |  ,  ,  |
+|   107|    640210   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/10 |12,  ,  |  ,  ,  |  ,  ,  |
+|   108|    640211   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/11 |12,  ,  |  ,  ,  |  ,  ,  |
+|   109|    640212   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/12 |12,  ,  |  ,  ,  |  ,  ,  |
+|   110|    640213   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/13 |12,  ,  |  ,  ,  |  ,  ,  |
+|   111|    640214   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/14 |12,  ,  |  ,  ,  |  ,  ,  |
+|   112|    640215   |             |CONTAINER TIP DORMITOR ECHIPAT TIP1/15  |12,  ,  |  ,  ,  |  ,  ,  |
+|   113|    640216   |             |CONTAINER TIP DORMITOR ECHIPAT TIP 1/16 |12,  ,  |  ,  ,  |  ,  ,  |
+|   114|    640217   |             |CONTAINER TIP GRUP SANITAR(WC) CU DUS   |12,  ,  |  ,  ,  |  ,  ,  |
+|   115|    640218   |             |CONTAINER TIP GRUP SANITAR (WC )CU DUS/1|12,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          3
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   116|    640219   |             |CONTAINER TIP GRUP SANITAR (WC) CU DUS/2|12,  ,  |  ,  ,  |  ,  ,  |
+|   117|    640640   |             |ASCENSOR                                |10,  ,  |  ,  ,  |  ,  ,  |
+|   118|    640641   |             |APARAT AER CONDITIONAT S.C2G 80559258   | 6,  ,  |  ,  ,  |  ,  ,  |
+|   119|    640642   |             |APARAT AER CONDITIONAT S.C2G 80375593   | 6,  ,  |  ,  ,  |  ,  ,  |
+|   120|    640643   |             |APARAT AER CONDITIONAT S.C2G 80496983   | 6,  ,  |  ,  ,  |  ,  ,  |
+|   121|    640644   |             |APARAT AER CONDITIONAT S. C2G 80419221  | 6,  ,  |  ,  ,  |  ,  ,  |
+|   122|    640645   |             |CALANDRU ELECTRIC PS-5125E              |10,  ,  |  ,  ,  |  ,  ,  |
+|   123|    640646   |             |USCATOR ELECTRIC IME-ES 34 PE S 32131   | 5,  ,  |  ,  ,  |  ,  ,  |
+|   124|    640647   |             |USCATOR ELECTRIC IME-ES 34 PE S 32132   | 5,  ,  |  ,  ,  |  ,  ,  |
+|   125|    640648   |             |MASINA DE SPALAT RUFE W.F.18G4E-1       | 5,  ,  |  ,  ,  |  ,  ,  |
+|   126|    640649   |             |MASINA DE SPALAT RUFE W.F.18G4E         | 5,  ,  |  ,  ,  |  ,  ,  |
+|   127|    640650   |             |APARAT STERILIZAT AER BLOC OPERATOR-1   |10,  ,  |  ,  ,  |  ,  ,  |
+|   128|    640651   |             |APARAT STERILIZAT AER BLOC OPERATOR-2   |10,  ,  |  ,  ,  |  ,  ,  |
+|   129|    640652   |             |APARAT STERILIZAT AER BLOC OPERATOR-3   |10,  ,  |  ,  ,  |  ,  ,  |
+|   130|    640653   |             |MASINA DE GATIT                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   131|    640654   |             |MASINA DE GATIT CU CUPTOR-1             |10,  ,  |  ,  ,  |  ,  ,  |
+|   132|    640655   |             |MASINA DE GATIT CU CUPTOR-2             |10,  ,  |  ,  ,  |  ,  ,  |
+|   133|    640656   |             |FRY TOP CU SUP+USI                      | 5,  ,  |  ,  ,  |  ,  ,  |
+|   134|    640657   |             |MARMITA-PD7-6G5                         | 5,  ,  |  ,  ,  |  ,  ,  |
+|   135|    640658   |             |MARMITA-2                               | 5,  ,  |  ,  ,  |  ,  ,  |
+|   136|    640659   |             |MARMITA-3                               | 5,  ,  |  ,  ,  |  ,  ,  |
+|   137|    640660   |             |ELEMENT NEUTRU                          | 5,  ,  |  ,  ,  |  ,  ,  |
+|   138|    640661   |             |POMPA DOZATOARE DOSITEC                 |10,  ,  |  ,  ,  |  ,  ,  |
+|   139|    640662   |             |GRUP ELECTROGEN 125 KVA                 | 6,  ,  |  ,  ,  |  ,  ,  |
+|   140|    640663   |             |BARIERA RUTIERA                         |10,  ,  |  ,  ,  |  ,  ,  |
+|   141|    640664   |             |SISTEM VIDEO CU CIRCUIT INCHIS          | 5,  ,  |  ,  ,  |  ,  ,  |
+|   142|    640665   |             |CENTRALA TERMICA 33 KW CU BOILER INOX   |10,  ,  |  ,  ,  |  ,  ,  |
+|   143|    640666   |             |SISTEM CONTROL ACCES VIDEO-4 POSTURI    |10,  ,  |  ,  ,  |  ,  ,  |
+|   144|    640667   |             |SISTEM CONTROL ACCES VIDEO-16 POSTURI   |10,  ,  |  ,  ,  |  ,  ,  |
+|   145|    640669   |             |CENTRALA PONTAJ POLICLINICA             |10,  ,  |  ,  ,  |  ,  ,  |
+|   146|    640670   |             |SISTEM.MONIT.VIDEO LA DISTANTA          |10,  ,  |  ,  ,  |  ,  ,  |
+|   147|    640671   |             |FREZA ZAPADA                            |  ,  ,  |  ,  ,  |  ,  ,  |
+|   148|    640672   |             |APARAT AER CONDITIONAT 18000BTU         |  ,  ,  |  ,  ,  |  ,  ,  |
+|   149|    640673   |             |MASINA DE SPALAT RUFE 25 KG             |  ,  ,  |  ,  ,  |  ,  ,  |
+|   150|    640674   |             |MASINA DE SPALAT PODELE CU ACUMULATORI  |  ,  ,  |  ,  ,  |  ,  ,  |
+|   151|    640675   |             |INSTAL.INOX CU 2 POST.PT.PROD.APA STER. |  ,  ,  |  ,  ,  |  ,  ,  |
+|   152|    640676   |             |INST.INOX.CU 1 POST PT.PROD.APA STERILA |  ,  ,  |  ,  ,  |  ,  ,  |
+|   153|    640677   |             |TABLOU ALARM.SI CONTROL(OXIG.SI AER COM)|  ,  ,  |  ,  ,  |  ,  ,  |
+|   154|    640678   |             |USA GLISANTA AUTOM.DIN INOX             |  ,  ,  |  ,  ,  |  ,  ,  |
+|   155|    640679   |             |USA GLISANTA AUTOMATA DIN INOX/1        |  ,  ,  |  ,  ,  |  ,  ,  |
+|   156|    640680   |             |USA BATANTA AUTOMATA DIN INOX           |  ,  ,  |  ,  ,  |  ,  ,  |
+|   157|    640681   |             |USA BATANTA AUTOMATA DIN INOX/1         |  ,  ,  |  ,  ,  |  ,  ,  |
+|   158|    640682   |             |BARIERA 4M                              |  ,  ,  |  ,  ,  |  ,  ,  |
+|   159|    640683   |             |SISTEM IRIGATIE                         |  ,  ,  |  ,  ,  |  ,  ,  |
+|   160|    640684   |             |SISTEM CLIMATIZ.TIP VRF TOSHIBA ETJ.1   |  ,  ,  |  ,  ,  |  ,  ,  |
+|   161|    640685   |             |SISTEM CLIMATIZARE TIP VRF TOSHIBA ETJ.2|  ,  ,  |  ,  ,  |  ,  ,  |
+|   162|    640686   |             |ASPIRATORFRUNZE CU TOCATOR              |  ,  ,  |  ,  ,  |  ,  ,  |
+|   163|    640687   |             |MASINA PROFESION. DE SPALAT RUFE W5240H | 6,  ,  |  ,  ,  |  ,  ,  |
+|   164|    640688   |             |DISPENSER PANTOFI ORMA                  |  ,  ,  |  ,  ,  |  ,  ,  |
+|   165|    640689   |             |DISPENSER PANTOFI ORMA/1                | 5,  ,  |  ,  ,  |  ,  ,  |
+|   166|    640690   |             |DISPENSER PANTOFI ORMA/2                | 5,  ,  |  ,  ,  |  ,  ,  |
+|   167|    640691   |             |DISPENSER PANTOFI ORMA/3                | 5,  ,  |  ,  ,  |  ,  ,  |
+|   168|    640692   |             |SIST.CLIM.VRY/VRF TODHIBA-ETII/CTA BUC  |10,  ,  |  ,  ,  |  ,  ,  |
+|   169|    640693   |             |SIST.CLIM.VRV/VRF TOSHIBA-DEMIS.ET1.CTA |10,  ,  |  ,  ,  |  ,  ,  |
+|   170|    640694   |             |DULAP SUSPENDAT CU USI GLISANTE         |  ,  ,  |  ,  ,  |  ,  ,  |
+|   171|    640695   |             |DULAP VERTICAL CU 2 USI GLISANTE        |  ,  ,  |  ,  ,  |  ,  ,  |
+|   172|    640696   |             |MASA DE LUCRU CU REBORD                 |  ,  ,  |  ,  ,  |  ,  ,  |
+|   173|    640697   |             |MASA DE LUCRU CU REBORD 2000*700*850MM  |  ,  ,  |  ,  ,  |  ,  ,  |
+|   174|    640698   |             |MASA DE LUCRU CU REBORD SI 2 SERTARE    |  ,  ,  |  ,  ,  |  ,  ,  |
+|   175|    640699   |             |MASA DE LUCRU DEMONTABILA CU POLITA     |  ,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          4
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   176|    640700   |             |MASA PRELUCRARE CARNE                   |  ,  ,  |  ,  ,  |  ,  ,  |
+|   177|    640701   |             |MASA PRELUCRARE LEGUME                  |  ,  ,  |  ,  ,  |  ,  ,  |
+|   178|    640702   |             |RASTEL INOX CU 4 RAFTURI                |  ,  ,  |  ,  ,  |  ,  ,  |
+|   179|    640703   |             |RASTEL INOX CU 4 RAFTURI 1800*580*2000MM|  ,  ,  |  ,  ,  |  ,  ,  |
+|   180|    640704   |             |DULAP VERTICAL CU 2 USI GLISANTE*       |  ,  ,  |  ,  ,  |  ,  ,  |
+|   181|    640705   |             |MASA DE LUCRU CU REBORD SI 2 SERTARE*   |  ,  ,  |  ,  ,  |  ,  ,  |
+|   182|    640706   |             |RASTEL INOX CU 4 RAFTURI*               |  ,  ,  |  ,  ,  |  ,  ,  |
+|   183|    640707   |             |SISTEM CLIMAT.VRV/VRF TOSHIBA PART.PAV.A|10,  ,  |  ,  ,  |  ,  ,  |
+|   184|    640708   |             |CONTAINER TIP ADMINISTRATIV III         |12,  ,  |  ,  ,  |  ,  ,  |
+|   185|    640709   |             |CONTAINER TIP ADMINISTRATIV III/1       |12,  ,  |  ,  ,  |  ,  ,  |
+|   186|    640710   |             |CONTAINER TIP INTERMEDIAR III/2         |12,  ,  |  ,  ,  |  ,  ,  |
+|   187|    640711   |             |CONTAINER TIP HOL INTERMEDIAR III       |12,  ,  |  ,  ,  |  ,  ,  |
+|   188|    640712   |             |SCARI ACCES CU BALUSTRADA SI PLATF.II   |12,  ,  |  ,  ,  |  ,  ,  |
+|   189|    640713   |             |CONTAINER TIP ADMINISTRATIV IV          |12,  ,  |  ,  ,  |  ,  ,  |
+|   190|    640714   |             |CONTAINER TIP HOL INTERMEDIAR IV        |12,  ,  |  ,  ,  |  ,  ,  |
+|   191|    640715   |             |CONTAINER TIP GRUP SANITAR CU DUS       |12,  ,  |  ,  ,  |  ,  ,  |
+|   192|    640716   |             |CONTAINER TIP ADMINISTRATIV V           |12,  ,  |  ,  ,  |  ,  ,  |
+|   193|    640717   |             |CONTAINER TIP ADMINISTRATIV I           |12,  ,  |  ,  ,  |  ,  ,  |
+|   194|    640718   |             |CONTAINER TIP ADMINISTRATIV I/1         |12,  ,  |  ,  ,  |  ,  ,  |
+|   195|    640719   |             |CONTAINER TIP ADMINISTRATIV I/2         |12,  ,  |  ,  ,  |  ,  ,  |
+|   196|    640720   |             |CONTAINER TIP ADMINISTRATIV I/3         |12,  ,  |  ,  ,  |  ,  ,  |
+|   197|    640721   |             |CONTAINER TIP ADMINISTRATIV I/4         |12,  ,  |  ,  ,  |  ,  ,  |
+|   198|    640722   |             |CONTAINER TIP ADMONISTRATIV I/5         |12,  ,  |  ,  ,  |  ,  ,  |
+|   199|    640723   |             |CONTAINER TIP ADMINISTRATIV I/6         |12,  ,  |  ,  ,  |  ,  ,  |
+|   200|    640724   |             |CONTAINER TIP ADMINISTRATIV I/7         |12,  ,  |  ,  ,  |  ,  ,  |
+|   201|    640725   |             |CONTAINER TIP ADMINISTRATIV I/8         |12,  ,  |  ,  ,  |  ,  ,  |
+|   202|    640726   |             |CONTAINER ADMINISTRATIV I/9             |12,  ,  |  ,  ,  |  ,  ,  |
+|   203|    640727   |             |CONTAINER TIP ADMINISTRATIV I/10        |12,  ,  |  ,  ,  |  ,  ,  |
+|   204|    640728   |             |CONTAINER TIP ADMINISTRATIV I/11        |12,  ,  |  ,  ,  |  ,  ,  |
+|   205|    640729   |             |CONTAINER TIP HOL CU FEREASTRA          |12,  ,  |  ,  ,  |  ,  ,  |
+|   206|    640730   |             |CONTAINER TIP HOL CU 2 USI              |12,  ,  |  ,  ,  |  ,  ,  |
+|   207|    640731   |             |CONTAINER TIP HOL INARMEDIAR I          |12,  ,  |  ,  ,  |  ,  ,  |
+|   208|    640732   |             |CONTAINER TIP ADMINISTRATIV II          |12,  ,  |  ,  ,  |  ,  ,  |
+|   209|    640733   |             |CONTAINER TIP ADMINISTRATIV II/1        |12,  ,  |  ,  ,  |  ,  ,  |
+|   210|    640734   |             |CONTAINER TIP ADMINISTRATIV II/2        |12,  ,  |  ,  ,  |  ,  ,  |
+|   211|    640735   |             |CONTAINER TIP ADMINISTRATIV II/3        |12,  ,  |  ,  ,  |  ,  ,  |
+|   212|    640736   |             |CONTAINER TIP ADMINISTRATIV II/4        |12,  ,  |  ,  ,  |  ,  ,  |
+|   213|    640737   |             |CONTAINER TIP ADMINISTRATIV II/5        |12,  ,  |  ,  ,  |  ,  ,  |
+|   214|    640738   |             |CONTAINER TIP ADMINISTRATIV II/6        |12,  ,  |  ,  ,  |  ,  ,  |
+|   215|    640739   |             |CONTAINER TIP ADMINISTRATIV II/7        |12,  ,  |  ,  ,  |  ,  ,  |
+|   216|    640740   |             |CONTAINER TIP ADMINISTRATIV II/8        |12,  ,  |  ,  ,  |  ,  ,  |
+|   217|    640741   |             |CONTAINER TIP ADMINISTRATIV II/9        |12,  ,  |  ,  ,  |  ,  ,  |
+|   218|    640742   |             |CONTAINER TIP ADMINISTRATI II/10        |12,  ,  |  ,  ,  |  ,  ,  |
+|   219|    640743   |             |CONTAINER TIP ADMINISTRATIV II/11       |12,  ,  |  ,  ,  |  ,  ,  |
+|   220|    640744   |             |CONTAINER TIP ADMINISTRATIV II/12       |12,  ,  |  ,  ,  |  ,  ,  |
+|   221|    640745   |             |CONTAINER TIP ADMINISTRATIV II/13       |12,  ,  |  ,  ,  |  ,  ,  |
+|   222|    640746   |             |CONTAINER TIP ADMINISTRATIV II/14       |12,  ,  |  ,  ,  |  ,  ,  |
+|   223|    640747   |             |CONTAINER TIP ADMINISTRATIV II/15       |12,  ,  |  ,  ,  |  ,  ,  |
+|   224|    640748   |             |CONTAINER TIP ADMINISTRATIV II/16       |12,  ,  |  ,  ,  |  ,  ,  |
+|   225|    640749   |             |CONTAINER TIP ADMINISTATIV II/17        |12,  ,  |  ,  ,  |  ,  ,  |
+|   226|    640750   |             |CONTAINER TIP ADMINISTRATIV II/18       |12,  ,  |  ,  ,  |  ,  ,  |
+|   227|    640751   |             |CONTAINER TIP ADMINISTRATIV II/19       |12,  ,  |  ,  ,  |  ,  ,  |
+|   228|    640752   |             |CONTAINER TIP MAG.ECHIP.                |12,  ,  |  ,  ,  |  ,  ,  |
+|   229|    640753   |             |CONTAINER TIP MAG.ECHIP./1              |12,  ,  |  ,  ,  |  ,  ,  |
+|   230|    640754   |             |CONTAINER TIP MAG.ECHIP./2              |12,  ,  |  ,  ,  |  ,  ,  |
+|   231|    640755   |             |CONTAINER TIP MAG.ECHIP./3              |12,  ,  |  ,  ,  |  ,  ,  |
+|   232|    640756   |             |CONTAINER TIP MAG.ECHIP./4              |12,  ,  |  ,  ,  |  ,  ,  |
+|   233|    640757   |             |CONTAINER TIP HOL INTERMEDIAR II        |12,  ,  |  ,  ,  |  ,  ,  |
+|   234|    640758   |             |CONTAINER TIP HOL CU 2 USI II           |12,  ,  |  ,  ,  |  ,  ,  |
+|   235|    640759   |             |CONTAINER TIP HOL CU 2 USI/1            |12,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|                                                                                    PAGINA:          5
+|------|-------------|-------------|----------------------------------------|--------------------------|
+|NUMAR |   NUMARUL   |    CODUL    |       DENUMIREA MATERIALULUI           |     DURATA AA,LL,ZZ      |
+|CURENT|    FISEI    | MATERIALULUI|                                        |FOLOSINT|MAGAZIE |  STOC  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+|   236|    640760   |             |CONTAINER TIP GRUP SANITAR/WC           |12,  ,  |  ,  ,  |  ,  ,  |
+|   237|    640761   |             |SCARI ACCES CU BALUSTRADA SI PLATFORM.1 |12,  ,  |  ,  ,  |  ,  ,  |
+|   238|    640762   |             |INSTALATIE PROTECTIE LA TRASNET         |12,  ,  |  ,  ,  |  ,  ,  |
+|   239|    640763   |             |APARAT AER CONDITIONAT INVERTOR PREMIUM | 6,  ,  |  ,  ,  |  ,  ,  |
+|   240|    640764   |             |ASCENSOR TRANSPORT PACIENTI             |10,  ,  |  ,  ,  |  ,  ,  |
+|   241|    640765   |             |CONTAINER TIP ADMINISTRATIV(II)         |12,  ,  |  ,  ,  |  ,  ,  |
+|   242|    640766   |             |CONTAINER TIP ADMINISTRATIV(II)/1       |12,  ,  |  ,  ,  |  ,  ,  |
+|   243|    640767   |             |CONTAINER TIP ADMINISTRATIV(II)/2       |12,  ,  |  ,  ,  |  ,  ,  |
+|   244|    640768   |             |CONTAINER TIP ADMINISTRATIV(II)/3       |12,  ,  |  ,  ,  |  ,  ,  |
+|   245|    640769   |             |CONTAINER TIP ADMINISTRATIV(II)/4       |12,  ,  |  ,  ,  |  ,  ,  |
+|   246|    640770   |             |CONTAINER TIP ADMINISTRATIV(II)5        |12,  ,  |  ,  ,  |  ,  ,  |
+|   247|    640771   |             |SCARA ACCES CU BALUSTRADA SI PLATFORMA  |12,  ,  |  ,  ,  |  ,  ,  |
+|   248|    640772   |             |CONTAINER TIP MAGAZIE(I)                |12,  ,  |  ,  ,  |  ,  ,  |
+|   249|    640773   |             |CONTAINER TIP MKAGAZIE(I)/1             |12,  ,  |  ,  ,  |  ,  ,  |
+|   250|    640774   |             |CONTAINER TIP MAGAZIE(I)/2              |12,  ,  |  ,  ,  |  ,  ,  |
+|   251|    640775   |             |CONTAINER TIP MAGAZIE(I)/3              |12,  ,  |  ,  ,  |  ,  ,  |
+|   252|    640776   |             |CONTAINER TIP MAGAZIE(I)/4              |12,  ,  |  ,  ,  |  ,  ,  |
+|   253|    640777   |             |CONTAINER TIP MAGAZIE(I)/5              |12,  ,  |  ,  ,  |  ,  ,  |
+|   254|    640778   |             |CONTAINER TIP HOL CU 2 USI/2            |12,  ,  |  ,  ,  |  ,  ,  |
+|   255|    640779   |             |CONTAINER TIP HOL CU 2 USI/3            |12,  ,  |  ,  ,  |  ,  ,  |
+|   256|    640780   |             |CONTAINER TIP HOL CU 2 USI/4            |12,  ,  |  ,  ,  |  ,  ,  |
+|   257|    640781   |             |CONTAINER TIP HOL CU 2 USI/5            |12,  ,  |  ,  ,  |  ,  ,  |
+|   258|    640782   |             |CONTAINER TIP HOL CU 2 USI/6            |12,  ,  |  ,  ,  |  ,  ,  |
+|   259|    640783   |             |CONTAINER TIP GRUP SANITAR              |12,  ,  |  ,  ,  |  ,  ,  |
+|   260|    640784   |             |CONTAINER TIP ADMINISTRATIV(III)        |12,  ,  |  ,  ,  |  ,  ,  |
+|   261|    640785   |             |CONTAINER TIP GRUP SANITAR(WC)/1        |12,  ,  |  ,  ,  |  ,  ,  |
+|   262|    640786   |             |CASCADA/INSTALATIE ARTEZIANA DEC,DE EXT.|12,  ,  |  ,  ,  |  ,  ,  |
+|   263|    640787   |             |RAMPA ACCES CONTAINER                   |12,  ,  |  ,  ,  |  ,  ,  |
+|   264|    640788   |             |GRUP ELECTROGEN 110KVA                  |15,  ,  |  ,  ,  |  ,  ,  |
+|   265|    640789   |             |MASINA DE SPALAT RUFE 25KG*             | 6,  ,  |  ,  ,  |  ,  ,  |
+|   266|    640790   |             |MODUL CONTAINERIZAT MC1-MED./DEP.FARM.  |12,  ,  |  ,  ,  |  ,  ,  |
+|   267|    640791   |             |MODUL CONTAINERIZAT MC2-COMANDAMENT P+1E|12,  ,  |  ,  ,  |  ,  ,  |
+|   268|    640793   |             |MODUL CONTAINERIZAT MC3-FARMACIE PARTER |12,  ,  |  ,  ,  |  ,  ,  |
+|   269|    640794   |             |MODUL CONTAINERIZAT MC3-ADMINISTRATIV   |12,  ,  |  ,  ,  |  ,  ,  |
+|   270|    640795   |             |CONTAINER TIP GRUP SANIT.+WC CU DUS     | 8,  ,  |  ,  ,  |  ,  ,  |
+|   271|    640796   |             |MODUL CONTAINERIZAT MC4-ARHIVA P+1E     |12,  ,  |  ,  ,  |  ,  ,  |
+|   272|    640797   |             |MODUL CONTAINERIZAT MC5-MEDICAL/TRIAJ/EX|12,  ,  |  ,  ,  |  ,  ,  |
+|   273|    640798   |             |MODUL CONTAINERIZAT MC6-VESTIAR CAZARM. |12,  ,  |  ,  ,  |  ,  ,  |
+|   274|    640799   |             |MODUL CONTAINERIZ. MC7-ADMIN/ANEXA CONTR|12,  ,  |  ,  ,  |  ,  ,  |
+|   275|    640800   |             |GRUP ELECTROGEN 110KVA/MD.ECOYD-110     |15,  ,  |  ,  ,  |  ,  ,  |
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|------|-------------|-------------|----------------------------------------|--------|--------|--------|

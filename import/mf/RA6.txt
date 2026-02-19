@@ -1,0 +1,22 @@
+NL(66);AR(4:15);AP(8:8);CT(15:17);DD(18:18);SP(19:19);SR(20:22);
+;1(D,A,L,21);2(D,B,L,30);3(D,C,C,38);4(D,D,C,48);5(D,N5,R,60);6(D,N6,L,57);7(D,N7,L,67);8(D,N8,L,75);9(D,N9,L,94);22(D,N19,R,90);11(D,AL,R,105);33(D,NRL,C,116);44(D,AC,R,133);55(D,AR,R,150);66(D,N20,L,168);77(F,PAGINA,L,174)
+;1(L,125)
+
+SPITALUL MILITAR DE URGENTA "DR. ION JIANU" PITESTI                              S I T U A T I A                                                        APROBAT
+                                                             privind determinarea valorii lunare de amortizat la ~1                                Ordonator de credite
+
+                                                                                                                                                                                 
+========================================================================================================================================================================
+|      Denumire      |  Numar | Cod de|  Anul   |Durata  |Durata  |Durata  |   Valoarea   |  Amortizare  | Nr. luni |   Amortisment  |    Valoarea    |       Gestiunea|
+|      activ fix     |inventar| clasif| si luna |normala |normala |normala |      de      |    lunara    |  calcul  |     cumulat    |    ramasa de   |                |
+|                    |        |  din  |  intr.  |de util.|de util.|de util.|   amortizat  |              |amortizare|                |    amortizat   |                |
+|                    |        |Catalog|   in    |din     |consum. |ramasa  |              |              |          |                |                |                |
+|                    |        |       |patrimon.|Catalog |la 31.12|la 31.12|              |              |          |                |                |                |
+========================================================================================================================================================================
+|         1          |    2   |   3   |    4    |    6   |    7   |    8   |      10      |       11     |     12   |       13       |        14      |           15   |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|#1                  |#2      |#3     |#4       |#6      |#7      |#8      |#22           |#11           |#33       |#44             |#55             |#66             |
+======================================================================================================================================================================== 
+
+
+                       INTOCMIT                                                                                                     VERIFICAT   

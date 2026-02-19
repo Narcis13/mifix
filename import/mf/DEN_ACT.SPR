@@ -1,0 +1,85 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('den_act') .OR. UPPER(WTITLE('DEN_ACT'))=='DEN_ACT.PJX' .OR. UPPER(WTITLE('DEN_ACT'))=='DEN_ACT.SCX' .OR. UPPER(WTITLE('DEN_ACT'))=='DEN_ACT.MNX' .OR. UPPER(WTITLE('DEN_ACT'))=='DEN_ACT.PRG' .OR. UPPER(WTITLE('DEN_ACT'))=='DEN_ACT.FRX' .OR. UPPER(WTITLE('DEN_ACT'))=='DEN_ACT.QPR'
+      DEFI WINDOW den_act FROM INT((SROWS()-13)/2), INT((SCOLS()-57)/2) TO INT((SROWS()-13)/2)+12, INT((SCOLS()-57)/2)+56 NOFLOAT NOCLOSE SHADOW TITLE 'Introducere nou tip de act' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLOS ALL
+ USE ACTE
+ M.den = '                                                  '
+ M.cod = 0
+ M.scurt = '          '
+ SHOW GETS
+ IF WVISIBLE('den_act')
+      ACTI WINDOW SAME den_act
+ ELSE
+      ACTI WINDOW NOSHOW den_act
+ ENDI
+ @ 4, 2 SAY 'Denumirea prescurtata' SIZE 1, 21, 0
+ @ 0, 2 SAY 'Denumirea actului :' SIZE 1, 19, 0
+ @ 4, 23 SAY ':' SIZE 1, 1, 0
+ @ 2, 2 GET M.den DEFAULT ' ' SIZE 1, 50
+ @ 4, 25 GET M.scurt DEFAULT ' ' SIZE 1, 10
+ @ 6, 11 GET M.salvare DEFAULT 1 SIZE 1, 33, 1 PICTURE '@*HT SALVARE DENUMIRE NOU TIP DE ACT' VALID _00o0jowcs() WHEN _00o0jowbc()
+ @ 8, 17 GET M.ies DEFAULT 1 SIZE 1, 21, 1 PICTURE '@*HT \!\?\<IESIRE'
+ @ 10, 6 GET M.mod DEFAULT 1 SIZE 1, 44, 1 PICTURE '@*HT MODIFICARE, STERGERE DENUMIRE ACT EXISTENT' VALID _00o0joweq()
+ IF  .NOT. WVISIBLE('den_act')
+      ACTI WINDOW den_act
+ ENDI
+ READ CYCLE
+ RELE WINDOW den_act
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*
+FUNC _00o0jowbc
+ IF LEN(ALLTRIM(M.den))=0
+      RETU .F.
+ ENDI
+ IF LEN(ALLTRIM(M.scurt))=0
+      RETU .F.
+ ENDI
+*
+PROC _00o0jowcs
+ M.den = UPPER(ALLTRIM(M.den))
+ M.scurt = ALLTRIM(M.scurt)
+ CALC MAX (cod) TO M.cod
+ M.cod = M.cod+1
+ IF M.cod<100
+      APPE BLANK
+      GATH MEMVAR
+ ENDI
+ CLOS ALL
+*
+PROC _00o0joweq
+ SET ORDER TO DEN
+ GOTO TOP
+ BROW FOR cod<>1 .AND. cod<>13 FIELDS den, scurt NOAPPEND TITLE 'IESIRE CU CTRL-W, STERGERE CU CTRL-T'
+ SELE 2
+ USE OPERATII
+ SELE 1
+ SET DELETED OFF
+ LOCA ALL FOR DELETED()=.T.
+ DO WHILE FOUND()
+      SELE 2
+      LOCA FOR cod_doc=A.cod
+      IF FOUND()
+           SELE 1
+           RECA
+      ENDI
+      SELE 1
+      CONT
+ ENDD
+ SELE 1
+ PACK
+ CLOS ALL
+*

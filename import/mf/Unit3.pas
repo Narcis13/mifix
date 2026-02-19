@@ -1,0 +1,200 @@
+unit Unit3;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons,db,unit4;
+
+type
+  TForm3 = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    Label2: TLabel;
+    ComboBox3: TComboBox;
+    ComboBox4: TComboBox;
+    Label3: TLabel;
+    ComboBox5: TComboBox;
+    ComboBox6: TComboBox;
+    Label4: TLabel;
+    ComboBox7: TComboBox;
+    ComboBox8: TComboBox;
+    ComboBox9: TComboBox;
+    ComboBox10: TComboBox;
+    ComboBox11: TComboBox;
+    ComboBox12: TComboBox;
+    SpeedButton1: TSpeedButton;
+    Label5: TLabel;
+    ComboBox13: TComboBox;
+    Label6: TLabel;
+    ComboBox14: TComboBox;
+    CheckBox1: TCheckBox;
+    procedure ComboBox2Change(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure ComboBox4Change(Sender: TObject);
+    procedure ComboBox14Change(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+uses Unit1;
+{$R *.DFM}
+
+procedure TForm3.ComboBox2Change(Sender: TObject);
+begin
+
+If combobox2.Text='=' then
+begin
+combobox9.Items.Clear;
+form1.Table3.First;
+while not form1.Table3.eof do
+begin
+if combobox9.Items.IndexOf(form1.Table3.Fields[combobox1.Itemindex].AsString)=-1 then
+begin
+combobox9.items.Add(form1.Table3.Fields[combobox1.Itemindex].AsString);
+
+end;
+
+form1.Table3.next;
+end;
+ end;
+
+
+ end;
+
+//form1.Query1.active:=false;
+//form1.Query1.SQL.Clear;
+//form1.Query1.Active:=true;
+
+
+procedure TForm3.SpeedButton1Click(Sender: TObject);
+VAR
+S:double;
+i:byte;
+nume:string;
+begin
+form1.Query1.Active:=false;
+form1.Query1.sql.clear;
+form1.Query1.sql.Add('SELECT A, B, C, D, N5, N6, N7, N8, N9, N10, N11, N12, N13, N14, N15, N16, N17, N18, N19, N20, N21, N22, GRUPA');
+//SELECT A, B, C, D, N5, N6, N7, N8, N9, N10, N11, N12, N13, N14, N15, N16, N17, N18, N19, N20, N21
+{
+IF combobox1.Text=' TOTI...' THEN
+qrf.SQL.add('WHERE   (FURNIZOR <> '+''''+'X'+''''+')')
+else
+qrf.SQL.add('WHERE   (FURNIZOR = '+''''+cOMBOBOX1.TEXT+''''+')');
+IF combobox2.Text=' TOATE...' THEN
+qrf.SQL.add('AND   (GESTIUNE <> '+''''+'X'+''''+')')
+else
+qrf.SQL.add('AND   (GESTIUNE = '+''''+cOMBOBOX2.TEXT+''''+')');
+IF combobox3.Text=' TOATE...' THEN
+qrf.SQL.add('AND   (CONTABIL <> '+''''+'X'+''''+')')}
+
+
+
+form1.Query1.sql.Add('FROM "'+form1.table3.TableName+'"');
+if combobox1.text<>'' then
+form1.Query1.sql.Add('WHERE   ('+form1.Table3.Fields[combobox1.Itemindex].FieldName+' '+combobox2.text+' '+''''+Combobox9.Text+''''+')');
+//showmessage('WHERE   ('+form1.Table3.Fields[combobox1.Itemindex].FieldName+' '+combobox2.text+' '+''''+Combobox9.Text+''''+')');
+IF combobox3.Text<>'' THEN
+form1.Query1.sql.add('AND   ('+form1.Table3.Fields[combobox3.Itemindex].FieldName+' '+combobox4.text+' '+''''+Combobox10.Text+''''+')')  ;
+IF combobox13.Text<>'' THEN
+form1.Query1.sql.add('ORDER BY '+form1.Table3.Fields[combobox13.Itemindex].FieldName);
+
+form1.Query1.active:=true;
+
+if combobox14.text<>'' then
+begin
+S:=0;
+ form1.query1.first;
+ WHILE NOT form1.QUERY1.EOF DO
+ BEGIN
+s:=s+form1.QUERY1.Fields[combobox14.Itemindex].AsCurrency;
+
+ form1.QUERY1.NEXT;
+ END;
+ end;
+  if ((checkbox1.checked) and (combobox14.text<>'')) then
+  begin
+  i:=1;
+  while not (i=form1.QUERY1.Fields[combobox14.Itemindex].FieldNo) do
+  begin
+  if form1.QUERY1.Fields[i-1].datatype=ftstring then nume:=form1.QUERY1.Fields[i-1].fieldname;
+
+   i:=i+1;
+  end;
+     form1.datasource5.dataset:=form4.adaugasubtotaluri(form1.Query1,form1.QUERY1.Fields[combobox14.Itemindex].fieldname,form1.QUERY1.Fields[combobox13.Itemindex].fieldname,nume);
+   form1.dbgrid1.DataSource:=form1.datasource5;
+form1.dbnavigator1.DataSource:=form1.datasource5;
+
+  end
+  else
+  begin
+form1.StatusBar1.Panels[0].text:=combobox14.Text+' - total : '+floattostr(s);
+form1.dbgrid1.DataSource:=form1.datasource2;
+form1.dbnavigator1.DataSource:=form1.datasource2;
+end;
+form3.close;
+end;
+
+procedure TForm3.ComboBox4Change(Sender: TObject);
+begin
+If combobox4.Text='=' then
+begin
+combobox10.Items.Clear;
+form1.Table3.First;
+while not form1.Table3.eof do
+begin
+if combobox10.Items.IndexOf(form1.Table3.Fields[combobox3.Itemindex].AsString)=-1 then
+begin
+combobox10.items.Add(form1.Table3.Fields[combobox3.Itemindex].AsString);
+
+end;
+
+form1.Table3.next;
+end;
+
+ end;
+end;
+
+procedure TForm3.ComboBox14Change(Sender: TObject);
+begin
+
+if form1.Table3.Fields[combobox14.Itemindex].datatype=ftfloat then
+combobox14.Tag:=0
+else
+showmessage('Cimpul nu este numeric!!!');
+end;
+
+procedure TForm3.FormActivate(Sender: TObject);
+begin
+checkbox1.Checked:=false;
+combobox1.text:='';
+combobox2.text:='';
+combobox3.text:='';
+combobox4.text:='';
+combobox5.text:='';
+combobox6.text:='';
+combobox7.text:='';
+combobox8.text:='';
+combobox9.text:='';
+combobox10.text:='';
+combobox11.text:='';
+combobox12.text:='';
+combobox13.text:='';
+combobox14.text:='';
+
+
+
+
+end;
+
+end.

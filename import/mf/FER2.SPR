@@ -1,0 +1,137 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('fereastra2') .OR. UPPER(WTITLE('FEREASTRA2'))=='FEREASTRA2.PJX' .OR. UPPER(WTITLE('FEREASTRA2'))=='FEREASTRA2.SCX' .OR. UPPER(WTITLE('FEREASTRA2'))=='FEREASTRA2.MNX' .OR. UPPER(WTITLE('FEREASTRA2'))=='FEREASTRA2.PRG' .OR. UPPER(WTITLE('FEREASTRA2'))=='FEREASTRA2.FRX' .OR. UPPER(WTITLE('FEREASTRA2'))=='FEREASTRA2.QPR'
+      DEFI WINDOW fereastra2 FROM INT((SROWS()-16)/2), INT((SCOLS()-60)/2) TO INT((SROWS()-16)/2)+15, INT((SCOLS()-60)/2)+59 NOFLOAT NOCLOSE SHADOW TITLE 'INTRODUCERE DURATE DE FUNCTIONARE' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ SELE material
+ SET ORDER TO cod
+ GOTO TOP
+ SEEK M.cod_den
+ IF  .NOT. FOUND()
+      RETU
+ ENDI
+ IF M.c_stoc=0 .AND. material.zile<>0
+      RETU
+ ENDI
+ IF M.c_stoc=1 .AND. material.zile1<>0
+      RETU
+ ENDI
+ IF M.c_stoc=2 .AND. material.zile2<>0
+      RETU
+ ENDI
+ M.ani_f = 0
+ M.luni_f = 0
+ M.zile_f = 0
+ M.zile = M.ani_f*360+M.luni_f*30+M.zile_f
+ M.ani_f1 = 0
+ M.luni_f1 = 0
+ M.zile_f1 = 0
+ M.zile1 = M.ani_f1*360+M.luni_f1*30+M.zile_f1
+ M.ani_f2 = 0
+ M.luni_f2 = 0
+ M.zile_f2 = 0
+ M.zile2 = M.ani_f2*360+M.luni_f2*30+M.zile_f2
+ M.nume = '                                        '
+ M.cod_m = '    '
+ = val_nume()
+ IF WVISIBLE('fereastra2')
+      ACTI WINDOW SAME fereastra2
+ ELSE
+      ACTI WINDOW NOSHOW fereastra2
+ ENDI
+ @ 2, 0 SAY 'NUMELE MATERIAL=' SIZE 1, 16, 0
+ @ 4, 0 SAY 'CODUL MATERIAL =' SIZE 1, 16, 0
+ @ 0, 0 SAY 'NUMAR FISA     =' SIZE 1, 16, 0
+ @ 6, 15 SAY '=' SIZE 1, 1, 0
+ @ 6, 36 SAY 'ani' SIZE 1, 3, 0
+ @ 6, 44 SAY 'luni' SIZE 1, 4, 0
+ @ 6, 53 SAY 'zile' SIZE 1, 4, 0
+ @ 6, 0 SAY 'Durata de viata in folosinta =' SIZE 1, 30, 0
+ @ 8, 36 SAY 'ani' SIZE 1, 3, 0
+ @ 8, 44 SAY 'luni' SIZE 1, 4, 0
+ @ 8, 53 SAY 'zile' SIZE 1, 4, 0
+ @ 10, 36 SAY 'ani' SIZE 1, 3, 0
+ @ 10, 44 SAY 'luni' SIZE 1, 4, 0
+ @ 10, 53 SAY 'zile' SIZE 1, 4, 0
+ @ 8, 0 SAY 'Durata de viata in magazie   =' SIZE 1, 30, 0
+ @ 10, 0 SAY 'Durata de viata la stoc      =' SIZE 1, 30, 0
+ @ 0, 17 GET M.cod_den DEFAULT ' ' SIZE 1, 6 WHEN ce_durata()
+ @ 2, 17 GET M.nume DEFAULT ' ' SIZE 1, 40 WHEN .F.
+ @ 4, 17 GET M.cod_m DEFAULT ' ' SIZE 1, 13 WHEN .F.
+ @ 6, 32 GET M.ani_f DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z'
+ @ 6, 41 GET M.luni_f DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z'
+ @ 6, 50 GET M.zile_f DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z'
+ @ 8, 32 GET M.ani_f1 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z'
+ @ 8, 41 GET M.luni_f1 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z'
+ @ 8, 50 GET M.zile_f1 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z'
+ @ 10, 32 GET M.ani_f2 DEFAULT 0 SIZE 1, 3 RANGE 0,200 PICTURE '@Z'
+ @ 10, 41 GET M.luni_f2 DEFAULT 0 SIZE 1, 2 RANGE 0,11 PICTURE '@Z'
+ @ 10, 50 GET M.zile_f2 DEFAULT 0 SIZE 1, 2 RANGE 0,29 PICTURE '@Z'
+ @ 12, 11 GET salvare_f DEFAULT 1 SIZE 1, 9, 1 PICTURE '@*HT \!Salvare' VALID ad_mat() WHEN _sbc0sxifp()
+ @ 12, 29 GET abandon_f DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HT \?Abandonare'
+ IF  .NOT. WVISIBLE('fereastra2')
+      ACTI WINDOW fereastra2
+ ENDI
+ READ CYCLE
+ RELE WINDOW fereastra2
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*
+FUNC ce_durata
+ IF M.c_stoc=0
+      _CUROBJ = 4
+      RETU .F.
+ ENDI
+ IF M.c_stoc=1
+      _CUROBJ = 7
+      RETU .F.
+ ENDI
+ IF M.c_stoc=2
+      _CUROBJ = 10
+      RETU .F.
+ ENDI
+ RETU .F.
+*
+FUNC ad_mat
+ REPL nume WITH M.nume
+ REPL cod WITH M.cod_den
+ REPL cod_m WITH M.cod_m
+ REPL zile WITH M.zile
+ REPL zile1 WITH M.zile1
+ REPL zile2 WITH M.zile2
+ RETU .T.
+*
+PROC val_nume
+ M.cod_den = material.cod
+ M.nume = material.nume
+ M.cod_m = cod_m
+ M.ani_f = INT(material.zile/360)
+ M.luni_f = material.zile-M.ani_f*360
+ M.luni_f = INT(M.luni_f/30)
+ M.zile_f = material.zile-M.ani_f*360-M.luni_f*30
+ M.ani_f1 = INT(material.zile1/360)
+ M.luni_f1 = material.zile1-M.ani_f1*360
+ M.luni_f1 = INT(M.luni_f1/30)
+ M.zile_f1 = material.zile1-M.ani_f1*360-M.luni_f1*30
+ M.ani_f2 = INT(material.zile2/360)
+ M.luni_f2 = material.zile2-M.ani_f2*360
+ M.luni_f2 = INT(M.luni_f2/30)
+ M.zile_f2 = material.zile2-M.ani_f2*360-M.luni_f2*30
+ SHOW GETS ENABLE
+*
+PROC _sbc0sxifp
+ M.zile = M.ani_f*360+M.luni_f*30+M.zile_f
+ M.zile1 = M.ani_f1*360+M.luni_f1*30+M.zile_f1
+ M.zile2 = M.ani_f2*360+M.luni_f2*30+M.zile_f2
+*

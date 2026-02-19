@@ -1,0 +1,99 @@
+ PRIV M.currarea, M.talkstat, M.compstat
+ IF SET('TALK')='ON'
+      SET TALK OFF
+      M.talkstat = 'ON'
+ ELSE
+      M.talkstat = 'OFF'
+ ENDI
+ M.compstat = SET('COMPATIBLE')
+ SET COMPATIBLE TO FOXPLUS
+ IF  .NOT. WEXIST('fer_mater') .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.PJX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.SCX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.MNX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.PRG' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.FRX' .OR. UPPER(WTITLE('FER_MATER'))=='FER_MATER.QPR'
+      DEFI WINDOW fer_mater FROM INT((SROWS()-13)/2), INT((SCOLS()-64)/2) TO INT((SROWS()-13)/2)+12, INT((SCOLS()-64)/2)+63 NOFLOAT NOCLOSE SHADOW TITLE 'STERGERE MATERIAL FARA CORESPONDENT' NOMINIMIZE DOUBLE COLOR SCHEME 1
+ ENDI
+ CLEA
+ SET DATE TO BRITISH
+ SET CENTURY ON
+ DIME nume1[ 40]
+ CLOS ALL
+ SELE 1
+ USE MATERIAL
+ SET ORDER TO COD
+ SELE 2
+ USE TRANZACT
+ SET ORDER TO COD_DEN
+ fisa1 = 1
+ nume1 = '  '
+ cod1 = 0
+ M.ok = 0
+ M.esc = 0
+ SHOW GETS
+ IF WVISIBLE('fer_mater')
+      ACTI WINDOW SAME fer_mater
+ ELSE
+      ACTI WINDOW NOSHOW fer_mater
+ ENDI
+ @ 5, 2 SAY 'NUMELE MATERIAL=' SIZE 1, 16, 0
+ @ 7, 2 SAY 'CODUL MATERIAL =' SIZE 1, 16, 0
+ @ 3, 2 SAY 'NUMARUL FISEI  =' SIZE 1, 16, 0
+ @ 2, 1 TO 8, 60
+ @ 3, 19 GET fisa1 DEFAULT 0 SIZE 1, 6 PICTURE '@KBZ' VALID vl_fisa()
+ @ 5, 19 GET nume1 DEFAULT ' ' SIZE 1, 40 DISABLE
+ @ 7, 19 GET cod1 DEFAULT 0 SIZE 1, 13 PICTURE '@KBZ' DISABLE
+ @ 10, 12 GET M.ok DEFAULT 1 SIZE 1, 10, 1 PICTURE '@*HN \!Stergere' DISABLE VALID _sbc0sxh4s()
+ @ 10, 38 GET M.esc DEFAULT 1 SIZE 1, 12, 1 PICTURE '@*HT \?Iesire'
+ @ 1, 2 SAY 'DATELE FISEI' SIZE 1, 12, 0
+ IF  .NOT. WVISIBLE('fer_mater')
+      ACTI WINDOW fer_mater
+ ENDI
+ READ CYCLE
+ RELE WINDOW fer_mater
+ IF M.talkstat='ON'
+      SET TALK ON
+ ENDI
+ IF M.compstat='ON'
+      SET COMPATIBLE TO DB4
+ ENDI
+*
+FUNC vl_fisa
+ SHOW GET M.ok DISABLE
+ SELE material
+ SEEK fisa1
+ IF FOUND()
+      SELE tranzact
+      SET ORDER TO cod_den
+      SEEK fisa1
+      IF FOUND()
+           = reset()
+           RETU .T.
+      ENDI
+      SELE material
+      nume1 = nume
+      cod1 = cod_m
+      SHOW GET cod1 DISABLE
+      SHOW GET nume1 DISABLE
+      SHOW GET M.ok ENABLE
+      SHOW GETS
+ ELSE
+      = reset()
+      RETU .T.
+ ENDI
+*
+FUNC reset
+ cod1 = 0
+ nume1 = '  '
+ fisa1 = 1
+ SHOW GET fisa1 ENABLE
+ SHOW GET nume1 DISABLE
+ SHOW GET cod1 DISABLE
+ SHOW GET M.ok DISABLE
+ RETU .T.
+*
+PROC _sbc0sxh4s
+ SELE material
+ GOTO TOP
+ SEEK fisa1
+ DELE
+ PACK
+ = reset()
+ _CUROBJ = 1
+*
