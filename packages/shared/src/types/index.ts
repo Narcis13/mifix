@@ -57,6 +57,9 @@ export interface SursaFinantare {
   id: number;
   cod: string;
   denumire: string;
+  capitol: boolean;
+  codCapitol1?: number;
+  codCapitol2?: number;
   activ: boolean;
 }
 
@@ -65,6 +68,7 @@ export interface Cont {
   simbol: string;
   denumire: string;
   tip: TipCont;
+  titlu: boolean;
   amortizabil: boolean;
   contAmortizare?: string;
   activ: boolean;
@@ -75,6 +79,40 @@ export interface TipDocument {
   cod: string;
   denumire: string;
   activ: boolean;
+}
+
+export interface Provenienta {
+  id: number;
+  cod: string;
+  denumire: string;
+  activ: boolean;
+}
+
+export interface TipStoc {
+  id: number;
+  cod: string;
+  denumire: string;
+  activ: boolean;
+}
+
+export interface UnitateMasura {
+  id: number;
+  cod: string;
+  denumire: string;
+  activ: boolean;
+}
+
+export interface Operatiune {
+  id: number;
+  numarOperatie: number;
+  an: number;
+  dataOperare: string;
+  tipDocumentId?: number;
+  tipDocument?: TipDocument;
+  numarDocument?: string;
+  dataDocument?: string;
+  descriere?: string;
+  createdAt: string;
 }
 
 export interface MijlocFix {

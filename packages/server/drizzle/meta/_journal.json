@@ -15,6 +15,13 @@
       "when": 1769251612087,
       "tag": "0001_handy_the_spike",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771507683683,
+      "tag": "0002_rapid_black_bird",
+      "breakpoints": true
     }
   ]
 }

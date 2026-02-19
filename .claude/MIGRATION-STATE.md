@@ -2,10 +2,10 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: NOT_STARTED
-## Current Task: None
-## Last Session: None
-## Branch: main
+## Current Phase: 1
+## Current Task: 1.9 - Add UI pages for new nomenclature tables
+## Last Session: 2026-02-19
+## Branch: import
 
 ---
 
@@ -16,17 +16,17 @@
 - [x] Create migration skill
 - [x] Create MIGRATION-STATE.md tracker
 - [x] Create CLAUDE.md project context
-- [ ] Verify dev environment works (bun dev, db connection)
+- [x] Verify dev environment works (bun dev, db connection)
 
 ### Phase 1: Schema Completions (Missing Reference Tables)
-- [ ] 1.1 Add `provenienta` table (14 records from legacy)
-- [ ] 1.2 Add `tipuri_stoc` table (3 records from legacy)
-- [ ] 1.3 Add `unitati_masura` table (16 records from legacy)
-- [ ] 1.4 Add `titlu` boolean to `conturi` (account hierarchy)
-- [ ] 1.5 Add funding source hierarchy fields to `surse_finantare`
-- [ ] 1.6 Add `operatiuni` table (operation headers for batch grouping)
-- [ ] 1.7 Generate + run migrations
-- [ ] 1.8 Add CRUD routes + validation for new tables
+- [x] 1.1 Add `provenienta` table (14 records from legacy)
+- [x] 1.2 Add `tipuri_stoc` table (3 records from legacy)
+- [x] 1.3 Add `unitati_masura` table (16 records from legacy)
+- [x] 1.4 Add `titlu` boolean to `conturi` (account hierarchy)
+- [x] 1.5 Add funding source hierarchy fields to `surse_finantare`
+- [x] 1.6 Add `operatiuni` table (operation headers for batch grouping)
+- [x] 1.7 Generate + run migrations
+- [x] 1.8 Add CRUD routes + validation for new tables
 - [ ] 1.9 Add UI pages for new nomenclature tables
 
 ### Phase 2: Legacy Data Migration Script
@@ -75,6 +75,7 @@
 | Session | Date | Phase | Tasks Completed | Notes |
 |---------|------|-------|-----------------|-------|
 | 0 | 2026-02-19 | Planning | Phase 0 setup | Created skill, state tracker, CLAUDE.md |
+| 1 | 2026-02-19 | Phase 1 | Tasks 1.1-1.8 | Schema + routes for provenienta, tipuriStoc, unitatiMasura, operatiuni; titlu on conturi; hierarchy on surseFinantare; FKs on mijloaceFixe + tranzactii |
 
 ---
 
