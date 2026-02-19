@@ -1,0 +1,114 @@
+# MiFix Migration State Tracker
+<!-- This file is read at the start of every session to restore context -->
+<!-- Update after completing each phase/task -->
+
+## Current Phase: NOT_STARTED
+## Current Task: None
+## Last Session: None
+## Branch: main
+
+---
+
+## Phase Completion Status
+
+### Phase 0: Foundation & State Management
+- [x] Create .claude/ directory structure
+- [x] Create migration skill
+- [x] Create MIGRATION-STATE.md tracker
+- [x] Create CLAUDE.md project context
+- [ ] Verify dev environment works (bun dev, db connection)
+
+### Phase 1: Schema Completions (Missing Reference Tables)
+- [ ] 1.1 Add `provenienta` table (14 records from legacy)
+- [ ] 1.2 Add `tipuri_stoc` table (3 records from legacy)
+- [ ] 1.3 Add `unitati_masura` table (16 records from legacy)
+- [ ] 1.4 Add `titlu` boolean to `conturi` (account hierarchy)
+- [ ] 1.5 Add funding source hierarchy fields to `surse_finantare`
+- [ ] 1.6 Add `operatiuni` table (operation headers for batch grouping)
+- [ ] 1.7 Generate + run migrations
+- [ ] 1.8 Add CRUD routes + validation for new tables
+- [ ] 1.9 Add UI pages for new nomenclature tables
+
+### Phase 2: Legacy Data Migration Script
+- [ ] 2.1 Create migration script skeleton (TypeScript, reads SQLite)
+- [ ] 2.2 Migrate reference tables (gestiuni, dispus, conturi, acte, finantat, provenie, stoc_uz, unit_mas, stare)
+- [ ] 2.3 Migrate materials -> mijloace_fixe (complex transform)
+- [ ] 2.4 Migrate tranzact + operatii -> tranzactii (with operation headers)
+- [ ] 2.5 Compute initial solduri/balances
+- [ ] 2.6 Verification: cross-check record counts and totals
+- [ ] 2.7 Create seed script from migration output
+
+### Phase 3: Missing Operations
+- [ ] 3.1 Operation reversal/deletion (ST_OPER equivalent)
+- [ ] 3.2 Transfer to different account (MOD_CONT equivalent)
+- [ ] 3.3 Delete unused asset (ST_MATER equivalent)
+- [ ] 3.4 Mass transfer operations (batch update)
+- [ ] 3.5 UI dialogs for new operations
+
+### Phase 4: Critical Reports
+- [ ] 4.1 Balanta Analitica (per-item analytical balance)
+- [ ] 4.2 Centralizator Acte (operations centralizer)
+- [ ] 4.3 Lista de Inventariere (inventory list generation)
+- [ ] 4.4 Extend report filters (shared filter builder)
+
+### Phase 5: Secondary Reports
+- [ ] 5.1 Single act report (extend jurnal)
+- [ ] 5.2 Situatia Obiectelor (inventory situation report)
+- [ ] 5.3 Obiecte cu durata depasita (exceeded duration)
+- [ ] 5.4 Lista de inventariere goala (empty inventory list)
+- [ ] 5.5 Locuri cu obiecte (locations with assets report)
+- [ ] 5.6 Corespondenta material-cont
+- [ ] 5.7 Lista materiale (catalog listing)
+
+### Phase 6: Data Integrity & Polish
+- [ ] 6.1 Data integrity verification endpoint
+- [ ] 6.2 Negative balance checks
+- [ ] 6.3 Amortizari consistency validation
+- [ ] 6.4 Print/export improvements for all reports
+- [ ] 6.5 Final end-to-end testing
+
+---
+
+## Session Log
+<!-- Append entries as sessions complete -->
+
+| Session | Date | Phase | Tasks Completed | Notes |
+|---------|------|-------|-----------------|-------|
+| 0 | 2026-02-19 | Planning | Phase 0 setup | Created skill, state tracker, CLAUDE.md |
+
+---
+
+## Known Issues
+<!-- Track blockers and issues found during migration -->
+
+(none yet)
+
+---
+
+## Architecture Decisions
+<!-- Record key decisions made during migration -->
+
+1. **Asset-centered model preserved**: Modern app uses mijloace_fixe as primary entity (not transaction-centered like legacy)
+2. **Operation headers added**: New `operatiuni` table bridges legacy batch-operation concept
+3. **Single duration model**: Legacy had 3 durations (use/warehouse/stock); modern uses single `durata_normala`
+4. **Enum for states**: Legacy STARE table -> modern enum (activ, casare, declasare, transfer)
+5. **Balances computed on-demand**: No SOLDURI equivalent; balances derived from transactions + amortizari
+
+---
+
+## Data Volume Reference (Legacy)
+| Table | Records |
+|-------|---------|
+| tranzact | 7,936 |
+| operatii | 1,614 |
+| solduri | 4,396 |
+| material | 2,228 |
+| conturi | 47 |
+| gestiuni | 20 |
+| dispus | 99 |
+| finantat | 20 |
+| provenie | 14 |
+| stoc_uz | 3 |
+| unit_mas | 16 |
+| stare | 5 |
+| acte | 23 |
