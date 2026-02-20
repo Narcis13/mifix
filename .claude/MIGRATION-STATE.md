@@ -2,8 +2,8 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: 5
-## Current Task: 5.7 - Lista materiale (COMPLETED)
+## Current Phase: 6 (COMPLETED)
+## Current Task: ALL PHASES COMPLETE
 ## Last Session: 2026-02-20
 ## Branch: import
 
@@ -61,11 +61,11 @@
 - [x] 5.7 Lista materiale (catalog listing)
 
 ### Phase 6: Data Integrity & Polish
-- [ ] 6.1 Data integrity verification endpoint
-- [ ] 6.2 Negative balance checks
-- [ ] 6.3 Amortizari consistency validation
-- [ ] 6.4 Print/export improvements for all reports
-- [ ] 6.5 Final end-to-end testing
+- [x] 6.1 Data integrity verification endpoint
+- [x] 6.2 Negative balance checks
+- [x] 6.3 Amortizari consistency validation
+- [x] 6.4 Print/export improvements for all reports
+- [x] 6.5 Final end-to-end testing
 
 ---
 
@@ -80,6 +80,7 @@
 | 3 | 2026-02-20 | Phase 3 | Tasks 3.1-3.5 | All missing operations: delete/reverse transaction (ST_OPER), transfer cont (MOD_CONT), delete unused asset (ST_MATER), mass transfer gestiune/loc (MOD_GEST/MOD_DISP), UI dialogs + OperatiuniMasa page |
 | 4 | 2026-02-20 | Phase 4 | Tasks 4.3-4.4 | Lista de Inventariere report (GEN_INVE.PRG equiv): single-date snapshot, book values. Extended ReportFilters with showSingleDate + showCont (account filter). Added contId filter to BalantaAnalitica, Centralizator, ListaInventariere. |
 | 5 | 2026-02-20 | Phase 5 | Tasks 5.1-5.7 | All 7 secondary reports: Raport Act (LIS_ACTE), Situatie Obiecte (SIT_OBIE), Durata Depasita (TERMENE), Lista Inventariere Goala (INV_GOL), Locuri cu Obiecte (LOCURI), Corespondenta Material-Cont (MAT_CONT), Lista Materiale (LIS_MATE). Added clickable rows in Centralizator to navigate to act detail. |
+| 6 | 2026-02-20 | Phase 6 | Tasks 6.1-6.5 | Data integrity verification endpoint (18 checks across 3 categories: integritate, balante, amortizari - VERIFIC.PRG equivalent). CSV export added to all 11 tabular reports. E2E testing: all CRUD, reports, operations, verification working. Found 3 real legacy data issues (50 invalid clasificari refs, 1 negative balance, 1 over-depreciated). |
 
 ---
 

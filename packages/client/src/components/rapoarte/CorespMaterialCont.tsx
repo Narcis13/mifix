@@ -6,7 +6,8 @@ import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { CorespMaterialContResponse } from "shared";
-import { Printer, ArrowLeft, Link2 } from "lucide-react";
+import { Printer, ArrowLeft, Link2, Download } from "lucide-react";
+import { exportCsv } from "@/lib/export-csv";
 import { Link } from "react-router-dom";
 
 export function CorespMaterialContReport() {
@@ -19,6 +20,15 @@ export function CorespMaterialContReport() {
     contentRef,
     documentTitle: "Corespondenta_Material_Cont",
   });
+
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      "Coresp_Material_Cont",
+      ["Nr. Inventar", "Denumire", "Simbol Cont", "Denumire Cont"],
+      data.rows.map((r) => [r.numarInventar, r.denumire, r.contSimbol || "", r.contDenumire || ""])
+    );
+  };
 
   const handleFilter = async (filters: ReportFiltersState) => {
     setIsLoading(true);
@@ -75,10 +85,16 @@ export function CorespMaterialContReport() {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 

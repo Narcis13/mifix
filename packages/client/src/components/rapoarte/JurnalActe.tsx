@@ -6,7 +6,8 @@ import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { JurnalResponse } from "shared";
-import { Printer, ArrowLeft, BookOpen } from "lucide-react";
+import { Printer, ArrowLeft, BookOpen, Download } from "lucide-react";
+import { exportCsv } from "@/lib/export-csv";
 import { Link } from "react-router-dom";
 
 export function JurnalActeReport() {
@@ -52,6 +53,15 @@ export function JurnalActeReport() {
     }
   };
 
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      "Jurnal_Acte",
+      ["Nr. Inventar", "Denumire", "Tip", "Data Operare", "Nr. Document", "Gestiune Sursa", "Gestiune Destinatie", "Valoare"],
+      data.rows.map((r) => [r.numarInventar, r.denumireMijlocFix, r.tip, r.dataOperare, r.documentNumar || "", r.gestiuneSursaCod || "", r.gestiuneDestinatieCod || "", r.valoareOperatie || ""])
+    );
+  };
+
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("ro-RO");
   };
@@ -93,10 +103,16 @@ export function JurnalActeReport() {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 

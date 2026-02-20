@@ -6,7 +6,8 @@ import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { SituatieObiectResponse } from "shared";
-import { Printer, ArrowLeft, Package } from "lucide-react";
+import { Printer, ArrowLeft, Package, Download } from "lucide-react";
+import { exportCsv } from "@/lib/export-csv";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -56,6 +57,15 @@ export function SituatieObiecteReport({ durataDepasita = false }: Props) {
     }
   };
 
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      durataDepasita ? "Obiecte_Durata_Depasita" : "Situatie_Obiecte",
+      ["Nr. Inventar", "Denumire", "Stare", "Gestiune", "Loc Folosinta", "Cont", "Data Achizitie", "Val. Inventar", "Val. Amortizata", "Val. Ramasa", "Durata (luni)", "% Folosire"],
+      data.rows.map((r) => [r.numarInventar, r.denumire, r.stare, r.gestiuneCod, r.locFolosintaCod || "", r.contSimbol || "", r.dataAchizitie, r.valoareInventar, r.valoareAmortizata, r.valoareRamasa, String(r.durataNormala), String(r.procentFolosire)])
+    );
+  };
+
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("ro-RO");
   };
@@ -100,10 +110,16 @@ export function SituatieObiecteReport({ durataDepasita = false }: Props) {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 

@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { LocuriObiectResponse } from "shared";
-import { Printer, ArrowLeft, MapPin, FileText } from "lucide-react";
+import { Printer, ArrowLeft, MapPin, FileText, Download } from "lucide-react";
+import { exportCsv } from "@/lib/export-csv";
 import { Link } from "react-router-dom";
 
 export function LocuriObiecteReport() {
@@ -18,6 +19,15 @@ export function LocuriObiecteReport() {
     contentRef,
     documentTitle: "Locuri_Obiecte",
   });
+
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      "Locuri_Obiecte",
+      ["Gestiune Cod", "Gestiune Denumire", "Loc Folosinta Cod", "Loc Folosinta Denumire", "Nr. Active"],
+      data.rows.map((r) => [r.gestiuneCod, r.gestiuneDenumire, r.locFolosintaCod || "", r.locFolosintaDenumire || "", String(r.numarActive)])
+    );
+  };
 
   const handleGenerate = async () => {
     setIsLoading(true);
@@ -61,10 +71,16 @@ export function LocuriObiecteReport() {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 

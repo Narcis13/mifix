@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { RaportActResponse } from "shared";
-import { Printer, ArrowLeft, FileSearch, Search } from "lucide-react";
+import { Printer, ArrowLeft, FileSearch, Search, Download } from "lucide-react";
+import { exportCsv } from "@/lib/export-csv";
 import { Link, useSearchParams } from "react-router-dom";
 
 export function RaportActReport() {
@@ -24,6 +25,15 @@ export function RaportActReport() {
       ? `Raport_Act_${data.operatiune.numarOperatie}_${data.operatiune.an}`
       : "Raport_Act",
   });
+
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      "Raport_Act",
+      ["Nr. Inventar", "Denumire", "Tip", "Valoare", "Gestiune Sursa", "Gestiune Destinatie", "Cont", "Descriere"],
+      data.rows.map((r) => [r.numarInventar, r.denumireMijlocFix, r.tip, r.valoareOperatie || "", r.gestiuneSursaCod || "", r.gestiuneDestinatieCod || "", r.contSimbol || "", r.descriere || ""])
+    );
+  };
 
   const fetchReport = async (id: number) => {
     setIsLoading(true);
@@ -114,10 +124,16 @@ export function RaportActReport() {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 

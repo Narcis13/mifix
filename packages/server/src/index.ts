@@ -15,6 +15,7 @@ import { mijloaceFixeRoutes } from "./routes/mijloace-fixe";
 import { operatiuniRoutes } from "./routes/operatiuni";
 import { amortizariRoutes } from "./routes/amortizari";
 import { rapoarteRoutes } from "./routes/rapoarte";
+import { verificareRoutes } from "./routes/verificare";
 import { authMiddleware } from "./middleware/auth";
 
 const app = new Hono();
@@ -42,6 +43,7 @@ app.route("/api/mijloace-fixe", mijloaceFixeRoutes);
 app.route("/api/operatiuni", operatiuniRoutes);
 app.route("/api/amortizari", amortizariRoutes);
 app.route("/api/rapoarte", rapoarteRoutes);
+app.route("/api/verificare", verificareRoutes);
 
 // Root route
 app.get("/", (c) => {

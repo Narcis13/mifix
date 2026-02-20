@@ -6,7 +6,8 @@ import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { ListaMaterialeResponse } from "shared";
-import { Printer, ArrowLeft, List } from "lucide-react";
+import { Printer, ArrowLeft, List, Download } from "lucide-react";
+import { exportCsv } from "@/lib/export-csv";
 import { Link } from "react-router-dom";
 
 export function ListaMaterialeReport() {
@@ -43,6 +44,15 @@ export function ListaMaterialeReport() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      "Lista_Materiale",
+      ["Nr. Inventar", "Denumire", "Durata (luni)", "Data Achizitie", "Val. Inventar", "Stare"],
+      data.rows.map((r) => [r.numarInventar, r.denumire, String(r.durataNormala), r.dataAchizitie, r.valoareInventar, r.stare])
+    );
   };
 
   const formatDate = (dateStr: string) => {
@@ -87,10 +97,16 @@ export function ListaMaterialeReport() {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 

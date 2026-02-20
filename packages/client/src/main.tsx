@@ -36,6 +36,7 @@ import {
   ListaMaterialePage,
 } from "./pages/Rapoarte";
 import { OperatiuniMasaPage } from "./pages/OperatiuniMasa";
+import { VerificarePage } from "./pages/Verificare";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
       {
         path: "operatiuni-masa",
         element: <OperatiuniMasaPage />,
+      },
+      {
+        path: "verificare",
+        element: <VerificarePage />,
       },
       {
         path: "mijloace-fixe",

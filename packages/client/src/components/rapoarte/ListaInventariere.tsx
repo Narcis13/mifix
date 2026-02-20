@@ -6,8 +6,9 @@ import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { ListaInventariereResponse } from "shared";
-import { Printer, ArrowLeft, ClipboardList } from "lucide-react";
+import { Printer, ArrowLeft, ClipboardList, Download } from "lucide-react";
 import { Link } from "react-router-dom";
+import { exportCsv } from "@/lib/export-csv";
 
 export function ListaInventariereReport() {
   const [data, setData] = useState<ListaInventariereResponse | null>(null);
@@ -53,6 +54,15 @@ export function ListaInventariereReport() {
     }
   };
 
+  const handleExport = () => {
+    if (!data) return;
+    exportCsv(
+      "Lista_Inventariere",
+      ["Nr. Inventar", "Denumire", "Stare", "Gestiune", "Loc Folosinta", "Cont", "Data Achizitie", "Val. Inventar"],
+      data.rows.map((r) => [r.numarInventar, r.denumire, r.stare, r.gestiuneCod, r.locFolosintaCod || "", r.contSimbol || "", r.dataAchizitie, r.valoareInventar])
+    );
+  };
+
   const formatCurrency = (value: string) => {
     return parseFloat(value).toLocaleString("ro-RO", {
       minimumFractionDigits: 2,
@@ -84,10 +94,16 @@ export function ListaInventariereReport() {
           </div>
         </div>
         {data && (
-          <Button variant="outline" onClick={() => handlePrint()}>
-            <Printer className="mr-2 h-4 w-4" />
-            Printeaza
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button variant="outline" onClick={() => handlePrint()}>
+              <Printer className="mr-2 h-4 w-4" />
+              Printeaza
+            </Button>
+          </div>
         )}
       </div>
 
