@@ -26,6 +26,8 @@ import type {
   SituatieAmortizareRow,
   BalantaAnaliticaResponse,
   BalantaAnaliticaRow,
+  CentralizatorActResponse,
+  CentralizatorActRow,
 } from "shared";
 
 export const rapoarteRoutes = new Hono();
@@ -629,6 +631,131 @@ rapoarteRoutes.get("/balanta-analitica", async (c) => {
     return c.json<ApiResponse>({
       success: false,
       message: "Eroare la generarea balantei analitice",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /centralizator - RAP-06: Centralizator Acte (Operations Centralizer)
+// Legacy equivalent: CENTRAL.PRG
+// Aggregated debit/credit totals per operation/document in a date range
+// ============================================================================
+rapoarteRoutes.get("/centralizator", async (c) => {
+  const dataStart = c.req.query("dataStart");
+  const dataEnd = c.req.query("dataEnd");
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const contIdParam = c.req.query("contId");
+
+  if (!dataStart || !dataEnd) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Parametrii dataStart si dataEnd sunt obligatorii",
+    }, 400);
+  }
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(dataStart) || !dateRegex.test(dataEnd)) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Format data invalid. Folositi YYYY-MM-DD",
+    }, 400);
+  }
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+    const contId = contIdParam ? parseInt(contIdParam) : undefined;
+
+    // Build optional filters on the asset (via transaction join)
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    if (contId) {
+      extraConditions.push(sql`AND mf.cont_id = ${contId}`);
+    }
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    // Group transactions by operation, computing debit/credit totals
+    const result = await db.execute(sql`
+      SELECT
+        op.id as operatiune_id,
+        op.numar_operatie,
+        op.an,
+        op.data_operare,
+        td.denumire as tip_document_denumire,
+        op.numar_document,
+        op.descriere,
+        CAST(COALESCE(SUM(CASE
+          WHEN t.tip IN ('intrare', 'modernizare', 'reevaluare') THEN COALESCE(t.valoare_operatie, 0)
+          ELSE 0
+        END), 0) AS DECIMAL(15,2)) as valoare_debit,
+        CAST(COALESCE(SUM(CASE
+          WHEN t.tip IN ('casare', 'declasare', 'iesire') THEN COALESCE(t.valoare_operatie, 0)
+          ELSE 0
+        END), 0) AS DECIMAL(15,2)) as valoare_credit
+      FROM operatiuni op
+      LEFT JOIN tipuri_document td ON op.tip_document_id = td.id
+      INNER JOIN tranzactii t ON t.operatiune_id = op.id
+      LEFT JOIN mijloace_fixe mf ON t.mijloc_fix_id = mf.id
+      WHERE op.data_operare >= ${dataStart}
+        AND op.data_operare <= ${dataEnd}
+        ${extraWhere}
+      GROUP BY op.id, op.numar_operatie, op.an, op.data_operare,
+               td.denumire, op.numar_document, op.descriere
+      HAVING valoare_debit != 0 OR valoare_credit != 0
+      ORDER BY op.data_operare, op.numar_operatie
+    `);
+
+    const resultRows = result[0] as any[];
+
+    let totalDebit = Money.zero();
+    let totalCredit = Money.zero();
+
+    const rows: CentralizatorActRow[] = resultRows.map((row: any) => {
+      const debit = String(row.valoare_debit ?? "0.00");
+      const credit = String(row.valoare_credit ?? "0.00");
+
+      const debitMoney = Money.fromDb(debit);
+      const creditMoney = Money.fromDb(credit);
+
+      totalDebit = totalDebit.plus(debitMoney);
+      totalCredit = totalCredit.plus(creditMoney);
+
+      return {
+        operatiuneId: row.operatiune_id,
+        numarOperatie: row.numar_operatie,
+        an: row.an,
+        dataOperare: row.data_operare,
+        tipDocumentDenumire: row.tip_document_denumire ?? null,
+        numarDocument: row.numar_document ?? null,
+        descriere: row.descriere ?? null,
+        valoareDebit: debitMoney.toDbString(),
+        valoareCredit: creditMoney.toDbString(),
+      };
+    });
+
+    const data: CentralizatorActResponse = {
+      rows,
+      totals: {
+        valoareDebit: totalDebit.toDbString(),
+        valoareCredit: totalCredit.toDbString(),
+      },
+      filters: {
+        dataStart,
+        dataEnd,
+        gestiuneId,
+        contId,
+      },
+    };
+
+    return c.json<ApiResponse<CentralizatorActResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Centralizator Acte error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea centralizatorului",
     }, 500);
   }
 });

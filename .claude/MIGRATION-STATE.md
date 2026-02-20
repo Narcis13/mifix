@@ -3,7 +3,7 @@
 <!-- Update after completing each phase/task -->
 
 ## Current Phase: 4
-## Current Task: 4.1 - Balanta Analitica (COMPLETED)
+## Current Task: 4.2 - Centralizator Acte (COMPLETED)
 ## Last Session: 2026-02-20
 ## Branch: import
 
@@ -47,7 +47,7 @@
 
 ### Phase 4: Critical Reports
 - [x] 4.1 Balanta Analitica (per-item analytical balance)
-- [ ] 4.2 Centralizator Acte (operations centralizer)
+- [x] 4.2 Centralizator Acte (operations centralizer)
 - [ ] 4.3 Lista de Inventariere (inventory list generation)
 - [ ] 4.4 Extend report filters (shared filter builder)
 

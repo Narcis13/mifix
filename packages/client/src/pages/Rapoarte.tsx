@@ -7,12 +7,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, FileSpreadsheet, BookOpen, Calculator, BarChart3 } from "lucide-react";
+import { FileText, FileSpreadsheet, BookOpen, Calculator, BarChart3, ClipboardList } from "lucide-react";
 import { FisaMijlocFixReport } from "@/components/rapoarte/FisaMijlocFix";
 import { BalantaVerificareReport } from "@/components/rapoarte/BalantaVerificare";
 import { BalantaAnaliticaReport } from "@/components/rapoarte/BalantaAnalitica";
 import { JurnalActeReport } from "@/components/rapoarte/JurnalActe";
 import { SituatieAmortizareReport } from "@/components/rapoarte/SituatieAmortizare";
+import { CentralizatorActeReport } from "@/components/rapoarte/CentralizatorActe";
 
 const reports = [
   {
@@ -44,6 +45,12 @@ const reports = [
     title: "Balanta Analitica",
     description: "Balanta analitica pe obiect de inventar: sold initial, intrari, iesiri, sold final",
     icon: BarChart3,
+  },
+  {
+    path: "/rapoarte/centralizator",
+    title: "Centralizator Acte",
+    description: "Situatie sintetica a documentelor operate pe perioada, cu totaluri debit/credit",
+    icon: ClipboardList,
   },
 ];
 
@@ -103,4 +110,8 @@ export function SituatieAmortizarePage() {
 
 export function BalantaAnaliticaPage() {
   return <BalantaAnaliticaReport />;
+}
+
+export function CentralizatorActePage() {
+  return <CentralizatorActeReport />;
 }

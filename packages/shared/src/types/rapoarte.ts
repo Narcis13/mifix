@@ -198,6 +198,33 @@ export interface BalantaAnaliticaResponse {
   };
 }
 
+// RAP-06: Centralizator Acte (Operations Centralizer)
+export interface CentralizatorActRow {
+  operatiuneId: number;
+  numarOperatie: number;
+  an: number;
+  dataOperare: string;
+  tipDocumentDenumire: string | null;
+  numarDocument: string | null;
+  descriere: string | null;
+  valoareDebit: string;   // Sum of entries (intrare, modernizare, reevaluare)
+  valoareCredit: string;  // Sum of exits (casare, declasare, iesire)
+}
+
+export interface CentralizatorActResponse {
+  rows: CentralizatorActRow[];
+  totals: {
+    valoareDebit: string;
+    valoareCredit: string;
+  };
+  filters: {
+    dataStart: string;
+    dataEnd: string;
+    gestiuneId?: number;
+    contId?: number;
+  };
+}
+
 // Filter parameters
 export interface ReportFilters {
   dataStart?: string;
