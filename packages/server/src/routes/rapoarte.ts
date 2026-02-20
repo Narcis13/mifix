@@ -31,6 +31,18 @@ import type {
   CentralizatorActRow,
   ListaInventariereResponse,
   ListaInventariereRow,
+  RaportActResponse,
+  RaportActTranzactieRow,
+  SituatieObiectResponse,
+  SituatieObiectRow,
+  ListaInventariereGoalaResponse,
+  ListaInventariereGoalaRow,
+  LocuriObiectResponse,
+  LocuriObiectRow,
+  CorespMaterialContResponse,
+  CorespMaterialContRow,
+  ListaMaterialeResponse,
+  ListaMaterialeRow,
 } from "shared";
 
 export const rapoarteRoutes = new Hono();
@@ -898,6 +910,538 @@ rapoarteRoutes.get("/lista-inventariere", async (c) => {
     return c.json<ApiResponse>({
       success: false,
       message: "Eroare la generarea listei de inventariere",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /act/:operatiuneId - RAP-08: Raport Act (Single Operation Detail)
+// Legacy equivalent: LIS_ACTE.PRG
+// All transaction lines for a specific operation with full context
+// ============================================================================
+rapoarteRoutes.get("/act/:operatiuneId", async (c) => {
+  const operatiuneId = parseInt(c.req.param("operatiuneId"), 10);
+
+  if (isNaN(operatiuneId)) {
+    return c.json<ApiResponse>({ success: false, message: "ID operatiune invalid" }, 400);
+  }
+
+  try {
+    // Fetch operation header
+    const [opResult] = await db
+      .select({
+        id: operatiuni.id,
+        numarOperatie: operatiuni.numarOperatie,
+        an: operatiuni.an,
+        dataOperare: operatiuni.dataOperare,
+        tipDocumentDenumire: tipuriDocument.denumire,
+        numarDocument: operatiuni.numarDocument,
+        dataDocument: operatiuni.dataDocument,
+        descriere: operatiuni.descriere,
+      })
+      .from(operatiuni)
+      .leftJoin(tipuriDocument, eq(operatiuni.tipDocumentId, tipuriDocument.id))
+      .where(eq(operatiuni.id, operatiuneId));
+
+    if (!opResult) {
+      return c.json<ApiResponse>({
+        success: false,
+        message: "Operatiunea nu a fost gasita",
+      }, 404);
+    }
+
+    // Fetch all transactions for this operation with full joins
+    const result = await db.execute(sql`
+      SELECT
+        t.id as tranzactie_id,
+        t.mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire as denumire_mijloc_fix,
+        t.tip,
+        CAST(COALESCE(t.valoare_operatie, 0) AS DECIMAL(15,2)) as valoare_operatie,
+        gs.cod as gestiune_sursa_cod,
+        gs.denumire as gestiune_sursa_denumire,
+        gd.cod as gestiune_destinatie_cod,
+        gd.denumire as gestiune_destinatie_denumire,
+        ls.cod as loc_sursa_cod,
+        ld.cod as loc_destinatie_cod,
+        c.simbol as cont_simbol,
+        c.denumire as cont_denumire,
+        t.descriere
+      FROM tranzactii t
+      INNER JOIN mijloace_fixe mf ON t.mijloc_fix_id = mf.id
+      LEFT JOIN gestiuni gs ON t.gestiune_sursa_id = gs.id
+      LEFT JOIN gestiuni gd ON t.gestiune_destinatie_id = gd.id
+      LEFT JOIN locuri_folosinta ls ON t.loc_folosinta_sursa_id = ls.id
+      LEFT JOIN locuri_folosinta ld ON t.loc_folosinta_destinatie_id = ld.id
+      LEFT JOIN conturi c ON mf.cont_id = c.id
+      WHERE t.operatiune_id = ${operatiuneId}
+      ORDER BY mf.numar_inventar
+    `);
+
+    const resultRows = result[0] as any[];
+
+    let totalDebit = Money.zero();
+    let totalCredit = Money.zero();
+
+    const debitTypes = ["intrare", "modernizare", "reevaluare"];
+    const creditTypes = ["casare", "declasare", "iesire"];
+
+    const rows: RaportActTranzactieRow[] = resultRows.map((row: any) => {
+      const valoare = String(row.valoare_operatie ?? "0.00");
+      const valoareMoney = Money.fromDb(valoare);
+
+      if (debitTypes.includes(row.tip)) {
+        totalDebit = totalDebit.plus(valoareMoney);
+      } else if (creditTypes.includes(row.tip)) {
+        totalCredit = totalCredit.plus(valoareMoney);
+      }
+
+      return {
+        tranzactieId: row.tranzactie_id,
+        mijlocFixId: row.mijloc_fix_id,
+        numarInventar: row.numar_inventar,
+        denumireMijlocFix: row.denumire_mijloc_fix,
+        tip: row.tip,
+        valoareOperatie: valoareMoney.isZero() ? null : valoareMoney.toDbString(),
+        gestiuneSursaCod: row.gestiune_sursa_cod ?? null,
+        gestiuneSursaDenumire: row.gestiune_sursa_denumire ?? null,
+        gestiuneDestinatieCod: row.gestiune_destinatie_cod ?? null,
+        gestiuneDestinatieDenumire: row.gestiune_destinatie_denumire ?? null,
+        locFolosintaSursaCod: row.loc_sursa_cod ?? null,
+        locFolosintaDestinatieCod: row.loc_destinatie_cod ?? null,
+        contSimbol: row.cont_simbol ?? null,
+        contDenumire: row.cont_denumire ?? null,
+        descriere: row.descriere ?? null,
+      };
+    });
+
+    const data: RaportActResponse = {
+      operatiune: {
+        id: opResult.id,
+        numarOperatie: opResult.numarOperatie,
+        an: opResult.an,
+        dataOperare: opResult.dataOperare.toISOString().split("T")[0],
+        tipDocumentDenumire: opResult.tipDocumentDenumire ?? null,
+        numarDocument: opResult.numarDocument ?? null,
+        dataDocument: opResult.dataDocument?.toISOString().split("T")[0] ?? null,
+        descriere: opResult.descriere ?? null,
+      },
+      rows,
+      totals: {
+        numarTranzactii: rows.length,
+        valoareDebit: totalDebit.toDbString(),
+        valoareCredit: totalCredit.toDbString(),
+      },
+    };
+
+    return c.json<ApiResponse<RaportActResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Raport Act error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea raportului de act",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /situatie-obiecte - RAP-09: Situatia Obiectelor de Inventar
+// Legacy equivalent: SIT_OBIE.PRG
+// Current snapshot of all assets with values and usage percentages
+// ============================================================================
+rapoarteRoutes.get("/situatie-obiecte", async (c) => {
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const contIdParam = c.req.query("contId");
+  const stare = c.req.query("stare");
+  const durataDepasita = c.req.query("durataDepasita"); // "true" for TERMENE mode
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+    const contId = contIdParam ? parseInt(contIdParam) : undefined;
+
+    const validStari = ["activ", "casare", "declasare", "transfer"];
+    if (stare && !validStari.includes(stare)) {
+      return c.json<ApiResponse>({ success: false, message: "Stare invalida" }, 400);
+    }
+
+    // Build optional filters
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    if (contId) {
+      extraConditions.push(sql`AND mf.cont_id = ${contId}`);
+    }
+    if (stare) {
+      extraConditions.push(sql`AND mf.stare = ${stare}`);
+    }
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    const result = await db.execute(sql`
+      SELECT
+        mf.id as mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire,
+        mf.stare,
+        mf.data_achizitie,
+        mf.durata_normala,
+        CAST(mf.valoare_inventar AS DECIMAL(15,2)) as valoare_inventar,
+        CAST(mf.valoare_amortizata AS DECIMAL(15,2)) as valoare_amortizata,
+        CAST(mf.valoare_ramasa AS DECIMAL(15,2)) as valoare_ramasa,
+        g.cod as gestiune_cod,
+        g.denumire as gestiune_denumire,
+        lf.cod as loc_folosinta_cod,
+        lf.denumire as loc_folosinta_denumire,
+        c.simbol as cont_simbol,
+        sf.cod as sursa_finantare_cod,
+        p.cod as provenienta_cod
+      FROM mijloace_fixe mf
+      INNER JOIN gestiuni g ON mf.gestiune_id = g.id
+      LEFT JOIN locuri_folosinta lf ON mf.loc_folosinta_id = lf.id
+      LEFT JOIN conturi c ON mf.cont_id = c.id
+      LEFT JOIN surse_finantare sf ON mf.sursa_finantare_id = sf.id
+      LEFT JOIN provenienta p ON mf.provenienta_id = p.id
+      WHERE mf.stare = 'activ'
+        ${extraWhere}
+      ORDER BY g.cod, mf.numar_inventar
+    `);
+
+    const resultRows = result[0] as any[];
+
+    let totalValoareInventar = Money.zero();
+    let totalValoareAmortizata = Money.zero();
+    let totalValoareRamasa = Money.zero();
+
+    const now = new Date();
+
+    const allRows: SituatieObiectRow[] = resultRows.map((row: any) => {
+      const valoareInventar = String(row.valoare_inventar ?? "0.00");
+      const valoareAmortizata = String(row.valoare_amortizata ?? "0.00");
+      const valoareRamasa = String(row.valoare_ramasa ?? "0.00");
+
+      // Compute usage percentage: (days_since_acquisition / durata_normala_days) * 100
+      const dataAchizitie = new Date(row.data_achizitie);
+      const daysSinceAcquisition = Math.floor((now.getTime() - dataAchizitie.getTime()) / (1000 * 60 * 60 * 24));
+      const durataNormalaDays = row.durata_normala * 30; // approximate months to days
+      const procentFolosire = durataNormalaDays > 0
+        ? Math.round((daysSinceAcquisition / durataNormalaDays) * 10000) / 100
+        : 0;
+
+      return {
+        mijlocFixId: row.mijloc_fix_id,
+        numarInventar: row.numar_inventar,
+        denumire: row.denumire,
+        stare: row.stare,
+        gestiuneCod: row.gestiune_cod ?? "",
+        gestiuneDenumire: row.gestiune_denumire ?? "",
+        locFolosintaCod: row.loc_folosinta_cod ?? null,
+        locFolosintaDenumire: row.loc_folosinta_denumire ?? null,
+        contSimbol: row.cont_simbol ?? null,
+        sursaFinantareCod: row.sursa_finantare_cod ?? null,
+        provenientaCod: row.provenienta_cod ?? null,
+        dataAchizitie: dataAchizitie.toISOString().split("T")[0],
+        valoareInventar,
+        valoareAmortizata,
+        valoareRamasa,
+        durataNormala: row.durata_normala,
+        procentFolosire,
+      };
+    });
+
+    // Filter for exceeded duration if requested (TERMENE mode)
+    const rows = durataDepasita === "true"
+      ? allRows.filter((r) => r.procentFolosire >= 100)
+      : allRows;
+
+    for (const row of rows) {
+      totalValoareInventar = totalValoareInventar.plus(Money.fromDb(row.valoareInventar));
+      totalValoareAmortizata = totalValoareAmortizata.plus(Money.fromDb(row.valoareAmortizata));
+      totalValoareRamasa = totalValoareRamasa.plus(Money.fromDb(row.valoareRamasa));
+    }
+
+    const data: SituatieObiectResponse = {
+      rows,
+      totals: {
+        numarActive: rows.length,
+        valoareInventar: totalValoareInventar.toDbString(),
+        valoareAmortizata: totalValoareAmortizata.toDbString(),
+        valoareRamasa: totalValoareRamasa.toDbString(),
+      },
+      filters: {
+        gestiuneId,
+        contId,
+        stare,
+      },
+    };
+
+    return c.json<ApiResponse<SituatieObiectResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Situatie Obiecte error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea situatiei obiectelor",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /lista-inventariere-goala - RAP-11: Lista Inventariere Goala
+// Legacy equivalent: INV_GOL.PRG
+// Empty inventory list (just item names for physical counting)
+// ============================================================================
+rapoarteRoutes.get("/lista-inventariere-goala", async (c) => {
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const contIdParam = c.req.query("contId");
+  const stare = c.req.query("stare");
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+    const contId = contIdParam ? parseInt(contIdParam) : undefined;
+
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    if (contId) {
+      extraConditions.push(sql`AND mf.cont_id = ${contId}`);
+    }
+    if (stare) {
+      extraConditions.push(sql`AND mf.stare = ${stare}`);
+    }
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    const result = await db.execute(sql`
+      SELECT
+        mf.id as mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire,
+        g.cod as gestiune_cod,
+        g.denumire as gestiune_denumire
+      FROM mijloace_fixe mf
+      INNER JOIN gestiuni g ON mf.gestiune_id = g.id
+      WHERE mf.stare = 'activ'
+        ${extraWhere}
+      ORDER BY g.cod, mf.numar_inventar
+    `);
+
+    const resultRows = result[0] as any[];
+
+    const rows: ListaInventariereGoalaRow[] = resultRows.map((row: any) => ({
+      mijlocFixId: row.mijloc_fix_id,
+      numarInventar: row.numar_inventar,
+      denumire: row.denumire,
+      gestiuneCod: row.gestiune_cod ?? "",
+      gestiuneDenumire: row.gestiune_denumire ?? "",
+    }));
+
+    const data: ListaInventariereGoalaResponse = {
+      rows,
+      totals: { numarActive: rows.length },
+      filters: { gestiuneId, contId, stare },
+    };
+
+    return c.json<ApiResponse<ListaInventariereGoalaResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Lista Inventariere Goala error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea listei de inventariere goale",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /locuri-obiecte - RAP-12: Locuri cu Obiecte
+// Legacy equivalent: LOCURI.PRG
+// Locations that have active inventory items
+// ============================================================================
+rapoarteRoutes.get("/locuri-obiecte", async (c) => {
+  try {
+    const result = await db.execute(sql`
+      SELECT
+        g.cod as gestiune_cod,
+        g.denumire as gestiune_denumire,
+        lf.cod as loc_folosinta_cod,
+        lf.denumire as loc_folosinta_denumire,
+        COUNT(*) as numar_active
+      FROM mijloace_fixe mf
+      INNER JOIN gestiuni g ON mf.gestiune_id = g.id
+      LEFT JOIN locuri_folosinta lf ON mf.loc_folosinta_id = lf.id
+      WHERE mf.stare = 'activ'
+      GROUP BY g.cod, g.denumire, lf.cod, lf.denumire
+      ORDER BY g.cod, lf.cod
+    `);
+
+    const resultRows = result[0] as any[];
+
+    let totalActive = 0;
+    const rows: LocuriObiectRow[] = resultRows.map((row: any) => {
+      const numarActive = Number(row.numar_active);
+      totalActive += numarActive;
+      return {
+        gestiuneCod: row.gestiune_cod,
+        gestiuneDenumire: row.gestiune_denumire,
+        locFolosintaCod: row.loc_folosinta_cod ?? null,
+        locFolosintaDenumire: row.loc_folosinta_denumire ?? null,
+        numarActive,
+      };
+    });
+
+    const data: LocuriObiectResponse = {
+      rows,
+      totals: {
+        numarLocuri: rows.length,
+        numarActive: totalActive,
+      },
+    };
+
+    return c.json<ApiResponse<LocuriObiectResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Locuri Obiecte error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea raportului de locuri",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /corespondenta-material-cont - RAP-13: Corespondenta Material-Cont
+// Legacy equivalent: MAT_CONT.PRG
+// Which account is assigned to each asset in a gestiune
+// ============================================================================
+rapoarteRoutes.get("/corespondenta-material-cont", async (c) => {
+  const gestiuneIdParam = c.req.query("gestiuneId");
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    const result = await db.execute(sql`
+      SELECT
+        mf.id as mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire,
+        c.simbol as cont_simbol,
+        c.denumire as cont_denumire
+      FROM mijloace_fixe mf
+      LEFT JOIN conturi c ON mf.cont_id = c.id
+      WHERE mf.stare = 'activ'
+        ${extraWhere}
+      ORDER BY c.simbol, mf.numar_inventar
+    `);
+
+    const resultRows = result[0] as any[];
+
+    const rows: CorespMaterialContRow[] = resultRows.map((row: any) => ({
+      mijlocFixId: row.mijloc_fix_id,
+      numarInventar: row.numar_inventar,
+      denumire: row.denumire,
+      contSimbol: row.cont_simbol ?? null,
+      contDenumire: row.cont_denumire ?? null,
+    }));
+
+    const data: CorespMaterialContResponse = {
+      rows,
+      totals: { numarActive: rows.length },
+      filters: { gestiuneId },
+    };
+
+    return c.json<ApiResponse<CorespMaterialContResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Corespondenta Material-Cont error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea corespondentei material-cont",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /lista-materiale - RAP-14: Lista Materiale
+// Legacy equivalent: LIS_MATE.PRG
+// Material catalog with useful life durations
+// ============================================================================
+rapoarteRoutes.get("/lista-materiale", async (c) => {
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const sortBy = c.req.query("sortBy") || "numar_inventar"; // numar_inventar, denumire
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    const orderClause = sortBy === "denumire"
+      ? sql`ORDER BY mf.denumire`
+      : sql`ORDER BY mf.numar_inventar`;
+
+    const result = await db.execute(sql`
+      SELECT
+        mf.id as mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire,
+        mf.durata_normala,
+        mf.data_achizitie,
+        CAST(mf.valoare_inventar AS DECIMAL(15,2)) as valoare_inventar,
+        mf.stare
+      FROM mijloace_fixe mf
+      WHERE mf.stare = 'activ'
+        ${extraWhere}
+      ${orderClause}
+    `);
+
+    const resultRows = result[0] as any[];
+
+    let totalValoareInventar = Money.zero();
+
+    const rows: ListaMaterialeRow[] = resultRows.map((row: any) => {
+      const valoare = String(row.valoare_inventar ?? "0.00");
+      totalValoareInventar = totalValoareInventar.plus(Money.fromDb(valoare));
+
+      return {
+        mijlocFixId: row.mijloc_fix_id,
+        numarInventar: row.numar_inventar,
+        denumire: row.denumire,
+        durataNormala: row.durata_normala,
+        dataAchizitie: new Date(row.data_achizitie).toISOString().split("T")[0],
+        valoareInventar: valoare,
+        stare: row.stare,
+      };
+    });
+
+    const data: ListaMaterialeResponse = {
+      rows,
+      totals: {
+        numarActive: rows.length,
+        valoareInventar: totalValoareInventar.toDbString(),
+      },
+      filters: { gestiuneId, sortBy },
+    };
+
+    return c.json<ApiResponse<ListaMaterialeResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Lista Materiale error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea listei de materiale",
     }, 500);
   }
 });

@@ -27,6 +27,13 @@ import {
   SituatieAmortizarePage,
   CentralizatorActePage,
   ListaInventarierePage,
+  RaportActPage,
+  SituatieObiectePage,
+  DurataDepasitaPage,
+  ListaInventariereGoalaPage,
+  LocuriObiectePage,
+  CorespMaterialContPage,
+  ListaMaterialePage,
 } from "./pages/Rapoarte";
 import { OperatiuniMasaPage } from "./pages/OperatiuniMasa";
 import "./index.css";
@@ -95,6 +102,13 @@ const router = createBrowserRouter([
           { path: "balanta-analitica", element: <BalantaAnaliticaPage /> },
           { path: "centralizator", element: <CentralizatorActePage /> },
           { path: "lista-inventariere", element: <ListaInventarierePage /> },
+          { path: "act", element: <RaportActPage /> },
+          { path: "situatie-obiecte", element: <SituatieObiectePage /> },
+          { path: "durata-depasita", element: <DurataDepasitaPage /> },
+          { path: "lista-inventariere-goala", element: <ListaInventariereGoalaPage /> },
+          { path: "locuri-obiecte", element: <LocuriObiectePage /> },
+          { path: "corespondenta-material-cont", element: <CorespMaterialContPage /> },
+          { path: "lista-materiale", element: <ListaMaterialePage /> },
         ],
       },
       {

@@ -7,7 +7,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, FileSpreadsheet, BookOpen, Calculator, BarChart3, ClipboardList, ClipboardCheck } from "lucide-react";
+import {
+  FileText, FileSpreadsheet, BookOpen, Calculator, BarChart3,
+  ClipboardList, ClipboardCheck, FileSearch, Package, Timer,
+  ClipboardPen, MapPin, Link2, List,
+} from "lucide-react";
 import { FisaMijlocFixReport } from "@/components/rapoarte/FisaMijlocFix";
 import { BalantaVerificareReport } from "@/components/rapoarte/BalantaVerificare";
 import { BalantaAnaliticaReport } from "@/components/rapoarte/BalantaAnalitica";
@@ -15,6 +19,12 @@ import { JurnalActeReport } from "@/components/rapoarte/JurnalActe";
 import { SituatieAmortizareReport } from "@/components/rapoarte/SituatieAmortizare";
 import { CentralizatorActeReport } from "@/components/rapoarte/CentralizatorActe";
 import { ListaInventariereReport } from "@/components/rapoarte/ListaInventariere";
+import { RaportActReport } from "@/components/rapoarte/RaportAct";
+import { SituatieObiecteReport } from "@/components/rapoarte/SituatieObiecte";
+import { ListaInventariereGoalaReport } from "@/components/rapoarte/ListaInventariereGoala";
+import { LocuriObiecteReport } from "@/components/rapoarte/LocuriObiecte";
+import { CorespMaterialContReport } from "@/components/rapoarte/CorespMaterialCont";
+import { ListaMaterialeReport } from "@/components/rapoarte/ListaMateriale";
 
 const reports = [
   {
@@ -58,6 +68,48 @@ const reports = [
     title: "Lista de Inventariere",
     description: "Generare lista de inventariere la o data specificata, cu valori scriptice si spatiu pentru inventar faptic",
     icon: ClipboardCheck,
+  },
+  {
+    path: "/rapoarte/act",
+    title: "Raport Act Operat",
+    description: "Detalii complete pentru o operatiune specifica: toate tranzactiile cu conturi, gestiuni si valori",
+    icon: FileSearch,
+  },
+  {
+    path: "/rapoarte/situatie-obiecte",
+    title: "Situatia Obiectelor",
+    description: "Situatia curenta a tuturor obiectelor de inventar cu valori si procent de folosire",
+    icon: Package,
+  },
+  {
+    path: "/rapoarte/durata-depasita",
+    title: "Obiecte cu Durata Depasita",
+    description: "Obiecte de inventar cu procent de folosire >= 100% (termenul depasit)",
+    icon: Timer,
+  },
+  {
+    path: "/rapoarte/lista-inventariere-goala",
+    title: "Lista Inventariere Goala",
+    description: "Formular gol pentru inventar faptic - doar denumiri si numere de inventar",
+    icon: ClipboardPen,
+  },
+  {
+    path: "/rapoarte/locuri-obiecte",
+    title: "Locuri cu Obiecte",
+    description: "Situatia locurilor de dispunere unde se afla obiecte de inventar",
+    icon: MapPin,
+  },
+  {
+    path: "/rapoarte/corespondenta-material-cont",
+    title: "Corespondenta Material-Cont",
+    description: "Corespondenta intre obiectele de inventar si conturile contabile aferente",
+    icon: Link2,
+  },
+  {
+    path: "/rapoarte/lista-materiale",
+    title: "Lista Materiale",
+    description: "Catalogul materialelor cu denumiri, durate de folosinta si valori",
+    icon: List,
   },
 ];
 
@@ -125,4 +177,32 @@ export function CentralizatorActePage() {
 
 export function ListaInventarierePage() {
   return <ListaInventariereReport />;
+}
+
+export function RaportActPage() {
+  return <RaportActReport />;
+}
+
+export function SituatieObiectePage() {
+  return <SituatieObiecteReport />;
+}
+
+export function DurataDepasitaPage() {
+  return <SituatieObiecteReport durataDepasita />;
+}
+
+export function ListaInventariereGoalaPage() {
+  return <ListaInventariereGoalaReport />;
+}
+
+export function LocuriObiectePage() {
+  return <LocuriObiecteReport />;
+}
+
+export function CorespMaterialContPage() {
+  return <CorespMaterialContReport />;
+}
+
+export function ListaMaterialePage() {
+  return <ListaMaterialeReport />;
 }

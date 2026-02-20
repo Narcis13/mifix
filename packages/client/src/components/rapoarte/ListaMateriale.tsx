@@ -5,39 +5,30 @@ import { Button } from "@/components/ui/button";
 import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
-import type { CentralizatorActResponse } from "shared";
-import { Printer, ArrowLeft, ClipboardList } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import type { ListaMaterialeResponse } from "shared";
+import { Printer, ArrowLeft, List } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export function CentralizatorActeReport() {
-  const navigate = useNavigate();
-  const [data, setData] = useState<CentralizatorActResponse | null>(null);
+export function ListaMaterialeReport() {
+  const [data, setData] = useState<ListaMaterialeResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
     contentRef,
-    documentTitle: "Centralizator_Acte",
+    documentTitle: "Lista_Materiale",
   });
 
   const handleFilter = async (filters: ReportFiltersState) => {
-    if (!filters.dataStart || !filters.dataEnd) {
-      setError("Selectati perioada (de la - pana la)");
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
 
     try {
       const params = new URLSearchParams();
-      params.append("dataStart", filters.dataStart);
-      params.append("dataEnd", filters.dataEnd);
       if (filters.gestiuneId) params.append("gestiuneId", filters.gestiuneId.toString());
-      if (filters.contId) params.append("contId", filters.contId.toString());
 
-      const res = await api.get<CentralizatorActResponse>(`/rapoarte/centralizator?${params}`);
+      const res = await api.get<ListaMaterialeResponse>(`/rapoarte/lista-materiale?${params}`);
 
       if (res.success && res.data) {
         setData(res.data);
@@ -67,6 +58,15 @@ export function CentralizatorActeReport() {
     }) + " RON";
   };
 
+  const formatDuration = (months: number) => {
+    if (months <= 0) return "-";
+    const years = Math.floor(months / 12);
+    const remainingMonths = months % 12;
+    if (years === 0) return `${remainingMonths} luni`;
+    if (remainingMonths === 0) return `${years} ani`;
+    return `${years}a ${remainingMonths}l`;
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between no-print">
@@ -78,11 +78,11 @@ export function CentralizatorActeReport() {
           </Link>
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
-              <ClipboardList className="h-6 w-6" />
-              Centralizator Acte Operate
+              <List className="h-6 w-6" />
+              Lista Materiale
             </h1>
             <p className="text-muted-foreground">
-              Situatie sintetica a documentelor operate pe perioada
+              Catalogul materialelor cu denumiri si durate de folosinta
             </p>
           </div>
         </div>
@@ -96,9 +96,7 @@ export function CentralizatorActeReport() {
 
       <ReportFilters
         onFilter={handleFilter}
-        showPeriod={true}
         showGestiune={true}
-        showCont={true}
         isLoading={isLoading}
       />
 
@@ -112,59 +110,46 @@ export function CentralizatorActeReport() {
 
       {data && (
         <div ref={contentRef}>
-          <PrintLayout
-            title="Centralizator Acte Operate"
-            subtitle={`Perioada: ${formatDate(data.filters.dataStart)} - ${formatDate(data.filters.dataEnd)}`}
-          >
+          <PrintLayout title="Lista cu Denumirea si Duratele Obiectelor de Inventar">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">
-                  Operatiuni ({data.rows.length} documente)
+                  Materiale ({data.totals.numarActive} pozitii)
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 {data.rows.length === 0 ? (
                   <p className="text-muted-foreground text-center py-4">
-                    Nu exista operatiuni in perioada selectata
+                    Nu exista materiale active
                   </p>
                 ) : (
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b">
                         <th className="text-left p-2">Crt.</th>
-                        <th className="text-left p-2">Nr. Op.</th>
-                        <th className="text-left p-2">Data</th>
-                        <th className="text-left p-2">Tip Act</th>
-                        <th className="text-left p-2">Nr. Act</th>
-                        <th className="text-left p-2">Descriere</th>
-                        <th className="text-right p-2">Debit</th>
-                        <th className="text-right p-2">Credit</th>
+                        <th className="text-left p-2">Nr. Inventar</th>
+                        <th className="text-left p-2">Denumire Material</th>
+                        <th className="text-left p-2">Data Achizitie</th>
+                        <th className="text-left p-2">Durata Normala</th>
+                        <th className="text-right p-2">Valoare Inventar</th>
                       </tr>
                     </thead>
                     <tbody>
                       {data.rows.map((row, idx) => (
-                        <tr
-                          key={row.operatiuneId}
-                          className="border-b cursor-pointer hover:bg-muted/50"
-                          onClick={() => navigate(`/rapoarte/act?id=${row.operatiuneId}`)}
-                          title="Click pentru detalii operatiune"
-                        >
+                        <tr key={row.mijlocFixId} className="border-b">
                           <td className="p-2 text-muted-foreground">{idx + 1}</td>
-                          <td className="p-2 font-mono text-primary underline">{row.numarOperatie}</td>
-                          <td className="p-2">{formatDate(row.dataOperare)}</td>
-                          <td className="p-2">{row.tipDocumentDenumire || "-"}</td>
-                          <td className="p-2">{row.numarDocument || "-"}</td>
-                          <td className="p-2 max-w-48 truncate">{row.descriere || "-"}</td>
-                          <td className="p-2 text-right">{formatCurrency(row.valoareDebit)}</td>
-                          <td className="p-2 text-right">{formatCurrency(row.valoareCredit)}</td>
+                          <td className="p-2 font-mono">{row.numarInventar}</td>
+                          <td className="p-2">{row.denumire}</td>
+                          <td className="p-2">{formatDate(row.dataAchizitie)}</td>
+                          <td className="p-2">{formatDuration(row.durataNormala)}</td>
+                          <td className="p-2 text-right">{formatCurrency(row.valoareInventar)}</td>
                         </tr>
                       ))}
                     </tbody>
                     <tfoot>
                       <tr className="border-t-2 font-bold">
-                        <td colSpan={6} className="p-2 text-right">TOTAL:</td>
-                        <td className="p-2 text-right">{formatCurrency(data.totals.valoareDebit)}</td>
-                        <td className="p-2 text-right">{formatCurrency(data.totals.valoareCredit)}</td>
+                        <td colSpan={5} className="p-2 text-right">TOTAL:</td>
+                        <td className="p-2 text-right">{formatCurrency(data.totals.valoareInventar)}</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -179,7 +164,7 @@ export function CentralizatorActeReport() {
         <Card>
           <CardContent className="pt-6">
             <p className="text-muted-foreground text-center">
-              Selectati perioada si apasati "Genereaza Raport" pentru a vizualiza centralizatorul
+              Apasati "Genereaza Raport" pentru a vizualiza lista de materiale
             </p>
           </CardContent>
         </Card>
