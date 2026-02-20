@@ -72,7 +72,7 @@ export const surseFinantare = mysqlTable("surse_finantare", {
 // ============================================================================
 export const conturi = mysqlTable("conturi", {
   id: int("id").primaryKey().autoincrement(),
-  simbol: varchar("simbol", { length: 20 }).notNull().unique(),
+  simbol: varchar("simbol", { length: 30 }).notNull().unique(),
   denumire: varchar("denumire", { length: 300 }).notNull(),
   tip: mysqlEnum("tip", ["activ", "pasiv", "bifunctional"]).notNull(),
   titlu: boolean("titlu").default(false), // true=parent/title account, false=detail/posting account

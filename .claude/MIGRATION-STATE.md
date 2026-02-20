@@ -2,9 +2,9 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: 1
-## Current Task: 2.1 - Create migration script skeleton
-## Last Session: 2026-02-19
+## Current Phase: 2
+## Current Task: 2.5 - Compute initial solduri/balances
+## Last Session: 2026-02-20
 ## Branch: import
 
 ---
@@ -30,12 +30,12 @@
 - [x] 1.9 Add UI pages for new nomenclature tables
 
 ### Phase 2: Legacy Data Migration Script
-- [ ] 2.1 Create migration script skeleton (TypeScript, reads SQLite)
-- [ ] 2.2 Migrate reference tables (gestiuni, dispus, conturi, acte, finantat, provenie, stoc_uz, unit_mas, stare)
-- [ ] 2.3 Migrate materials -> mijloace_fixe (complex transform)
-- [ ] 2.4 Migrate tranzact + operatii -> tranzactii (with operation headers)
+- [x] 2.1 Create migration script skeleton (TypeScript, reads SQLite)
+- [x] 2.2 Migrate reference tables (gestiuni, dispus, conturi, acte, finantat, provenie, stoc_uz, unit_mas, stare)
+- [x] 2.3 Migrate materials -> mijloace_fixe (complex transform)
+- [x] 2.4 Migrate tranzact + operatii -> tranzactii (with operation headers)
 - [ ] 2.5 Compute initial solduri/balances
-- [ ] 2.6 Verification: cross-check record counts and totals
+- [x] 2.6 Verification: cross-check record counts and totals
 - [ ] 2.7 Create seed script from migration output
 
 ### Phase 3: Missing Operations
@@ -76,13 +76,15 @@
 |---------|------|-------|-----------------|-------|
 | 0 | 2026-02-19 | Planning | Phase 0 setup | Created skill, state tracker, CLAUDE.md |
 | 1 | 2026-02-19 | Phase 1 | Tasks 1.1-1.8 | Schema + routes for provenienta, tipuriStoc, unitatiMasura, operatiuni; titlu on conturi; hierarchy on surseFinantare; FKs on mijloaceFixe + tranzactii |
+| 2 | 2026-02-20 | Phase 2 | Tasks 2.1-2.4, 2.6 | Full migration script: 2037/2228 materials, 7936/7936 transactions, value sum EXACT MATCH (257.8M). 191 dead catalog entries skipped. Schema fix: conturi.simbol varchar(20)->30 |
 
 ---
 
 ## Known Issues
 <!-- Track blockers and issues found during migration -->
 
-(none yet)
+1. **191 materials with no INTRARE transactions**: These are dead catalog entries in the legacy MATERIAL table - they exist in the catalog but were never actually entered into inventory. Correctly excluded from migration.
+2. **9 gestiuni with empty names**: Legacy codes 5,6,7,11,12,13,14,16,17 had blank `denumire`. Migrated with placeholder names as inactive.
 
 ---
 
