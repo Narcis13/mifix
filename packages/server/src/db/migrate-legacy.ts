@@ -826,6 +826,165 @@ async function migrateTransactions(
 }
 
 // ============================================================================
+// Phase 2.5: Compute Initial Solduri / Balances
+// ============================================================================
+
+/**
+ * Cross-check net transaction quantities against legacy SOLDURI,
+ * then create baseline amortizari records for each depreciable asset.
+ *
+ * Legacy SOLDURI stores quantity balances per dimension combination.
+ * Modern system computes balances on-demand from transactions + amortizari.
+ * This step:
+ *   1. Verifies that our transaction data produces the same net balances as legacy SOLDURI
+ *   2. Creates one baseline amortizari record per depreciable asset (snapshot of current state)
+ */
+async function computeInitialBalances(
+  legacyDb: Database,
+  idMaps: IdMaps
+): Promise<MigrationStats> {
+  console.log("\n=== Phase 2.5: Computing Initial Balances ===\n");
+
+  const stats: MigrationStats = {
+    table: "amortizari (baseline)",
+    legacyCount: 0,
+    migratedCount: 0,
+    skippedCount: 0,
+    errors: [],
+  };
+
+  // --- Step 1: Cross-check net quantities with legacy SOLDURI ---
+  console.log("  Step 1: Cross-checking transaction balances vs legacy SOLDURI...\n");
+
+  // Get legacy SOLDURI net quantity per material
+  const legacySolduri = legacyDb
+    .query(
+      `SELECT cod_den, SUM(cantit) as net_qty, COUNT(*) as records
+       FROM solduri
+       GROUP BY cod_den`
+    )
+    .all() as { cod_den: number; net_qty: number; records: number }[];
+
+  const legacyBalances = new Map<number, number>();
+  for (const row of legacySolduri) {
+    legacyBalances.set(row.cod_den, row.net_qty);
+  }
+
+  // Compute net quantities from legacy TRANZACT for verification
+  // (c_adaug=2 is entry/+, c_adaug=1 is exit/-)
+  const tranzactBalances = legacyDb
+    .query(
+      `SELECT cod_den,
+              SUM(CASE WHEN c_adaug = 2 THEN cantit ELSE 0 END) as entries,
+              SUM(CASE WHEN c_adaug = 1 THEN cantit ELSE 0 END) as exits
+       FROM tranzact
+       GROUP BY cod_den`
+    )
+    .all() as { cod_den: number; entries: number; exits: number }[];
+
+  let matchCount = 0;
+  let mismatchCount = 0;
+  for (const row of tranzactBalances) {
+    const netFromTranzact = Math.round((row.entries - row.exits) * 1000) / 1000;
+    const netFromSolduri = legacyBalances.get(row.cod_den) ?? 0;
+    const diff = Math.abs(netFromTranzact - netFromSolduri);
+
+    if (diff > 0.01) {
+      mismatchCount++;
+      if (mismatchCount <= 5) {
+        stats.errors.push(
+          `Balance mismatch cod_den=${row.cod_den}: TRANZACT net=${netFromTranzact}, SOLDURI net=${netFromSolduri}`
+        );
+      }
+    } else {
+      matchCount++;
+    }
+  }
+
+  console.log(`  SOLDURI cross-check: ${matchCount} match, ${mismatchCount} mismatch`);
+  if (mismatchCount > 5) {
+    stats.errors.push(`...and ${mismatchCount - 5} more mismatches`);
+  }
+
+  // --- Step 2: Create baseline amortizari records ---
+  console.log("\n  Step 2: Creating baseline amortizari records...\n");
+
+  // Get all depreciable assets from the modern DB
+  const assets = await db
+    .select({
+      id: schema.mijloaceFixe.id,
+      valoareInventar: schema.mijloaceFixe.valoareInventar,
+      valoareAmortizata: schema.mijloaceFixe.valoareAmortizata,
+      valoareRamasa: schema.mijloaceFixe.valoareRamasa,
+      cotaAmortizareLunara: schema.mijloaceFixe.cotaAmortizareLunara,
+      durataRamasa: schema.mijloaceFixe.durataRamasa,
+      eAmortizabil: schema.mijloaceFixe.eAmortizabil,
+      durataNormala: schema.mijloaceFixe.durataNormala,
+    })
+    .from(schema.mijloaceFixe);
+
+  stats.legacyCount = assets.length;
+
+  // Use December 2025 as baseline month (latest transaction month)
+  const baselineYear = 2025;
+  const baselineMonth = 12;
+
+  const batchValues: {
+    mijlocFixId: number;
+    an: number;
+    luna: number;
+    valoareLunara: string;
+    valoareCumulata: string;
+    valoareRamasa: string;
+    valoareInventar: string;
+    durataRamasa: number;
+    calculat: boolean;
+    dataCalcul: Date;
+  }[] = [];
+
+  for (const asset of assets) {
+    if (!asset.eAmortizabil || asset.durataNormala <= 0) {
+      stats.skippedCount++;
+      continue;
+    }
+
+    batchValues.push({
+      mijlocFixId: asset.id,
+      an: baselineYear,
+      luna: baselineMonth,
+      valoareLunara: asset.cotaAmortizareLunara,
+      valoareCumulata: asset.valoareAmortizata,
+      valoareRamasa: asset.valoareRamasa,
+      valoareInventar: asset.valoareInventar,
+      durataRamasa: asset.durataRamasa,
+      calculat: true,
+      dataCalcul: new Date(),
+    });
+
+    // Insert in batches
+    if (batchValues.length >= BATCH_SIZE) {
+      await db.insert(schema.amortizari).values(batchValues);
+      stats.migratedCount += batchValues.length;
+      batchValues.length = 0;
+    }
+  }
+
+  // Insert remaining
+  if (batchValues.length > 0) {
+    await db.insert(schema.amortizari).values(batchValues);
+    stats.migratedCount += batchValues.length;
+  }
+
+  console.log(
+    `  Baseline amortizari created: ${stats.migratedCount}/${stats.legacyCount} assets` +
+      ` (${stats.skippedCount} non-depreciable skipped)`
+  );
+
+  logStats(stats);
+  return stats;
+}
+
+// ============================================================================
 // Phase 2.6: Verification
 // ============================================================================
 
@@ -953,6 +1112,9 @@ async function main() {
     // Phase 2.4: Operations + Transactions
     await migrateOperatii(legacyDb, idMaps);
     await migrateTransactions(legacyDb, idMaps);
+
+    // Phase 2.5: Compute initial balances + baseline amortizari
+    await computeInitialBalances(legacyDb, idMaps);
 
     // Phase 2.6: Verification
     await verify(legacyDb);

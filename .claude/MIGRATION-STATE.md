@@ -34,9 +34,9 @@
 - [x] 2.2 Migrate reference tables (gestiuni, dispus, conturi, acte, finantat, provenie, stoc_uz, unit_mas, stare)
 - [x] 2.3 Migrate materials -> mijloace_fixe (complex transform)
 - [x] 2.4 Migrate tranzact + operatii -> tranzactii (with operation headers)
-- [ ] 2.5 Compute initial solduri/balances
+- [x] 2.5 Compute initial solduri/balances
 - [x] 2.6 Verification: cross-check record counts and totals
-- [ ] 2.7 Create seed script from migration output
+- [x] 2.7 Create seed script from migration output
 
 ### Phase 3: Missing Operations
 - [ ] 3.1 Operation reversal/deletion (ST_OPER equivalent)
