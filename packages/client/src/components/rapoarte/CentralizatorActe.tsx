@@ -34,6 +34,7 @@ export function CentralizatorActeReport() {
       params.append("dataStart", filters.dataStart);
       params.append("dataEnd", filters.dataEnd);
       if (filters.gestiuneId) params.append("gestiuneId", filters.gestiuneId.toString());
+      if (filters.contId) params.append("contId", filters.contId.toString());
 
       const res = await api.get<CentralizatorActResponse>(`/rapoarte/centralizator?${params}`);
 
@@ -96,6 +97,7 @@ export function CentralizatorActeReport() {
         onFilter={handleFilter}
         showPeriod={true}
         showGestiune={true}
+        showCont={true}
         isLoading={isLoading}
       />
 

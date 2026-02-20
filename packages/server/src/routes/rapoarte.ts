@@ -11,6 +11,7 @@ import {
   tipuriDocument,
   tranzactii,
   amortizari,
+  operatiuni,
 } from "../db/schema";
 import { Money } from "shared";
 import type {
@@ -28,6 +29,8 @@ import type {
   BalantaAnaliticaRow,
   CentralizatorActResponse,
   CentralizatorActRow,
+  ListaInventariereResponse,
+  ListaInventariereRow,
 } from "shared";
 
 export const rapoarteRoutes = new Hono();
@@ -756,6 +759,145 @@ rapoarteRoutes.get("/centralizator", async (c) => {
     return c.json<ApiResponse>({
       success: false,
       message: "Eroare la generarea centralizatorului",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /lista-inventariere - RAP-07: Lista de Inventariere (Inventory List)
+// Legacy equivalent: GEN_INVE.PRG
+// Snapshot of all assets at a specific date with book values
+// ============================================================================
+rapoarteRoutes.get("/lista-inventariere", async (c) => {
+  const dataInventar = c.req.query("dataInventar");
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const contIdParam = c.req.query("contId");
+  const stare = c.req.query("stare");
+
+  if (!dataInventar) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Parametrul dataInventar este obligatoriu",
+    }, 400);
+  }
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(dataInventar)) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Format data invalid. Folositi YYYY-MM-DD",
+    }, 400);
+  }
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+    const contId = contIdParam ? parseInt(contIdParam) : undefined;
+
+    const validStari = ["activ", "casare", "declasare", "transfer"];
+    if (stare && !validStari.includes(stare)) {
+      return c.json<ApiResponse>({
+        success: false,
+        message: "Stare invalida",
+      }, 400);
+    }
+
+    // Build optional filters
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    if (contId) {
+      extraConditions.push(sql`AND mf.cont_id = ${contId}`);
+    }
+    if (stare) {
+      extraConditions.push(sql`AND mf.stare = ${stare}`);
+    }
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    // Compute book value at inventory date for each asset:
+    // value = sum(debit transactions up to date) - sum(credit transactions up to date)
+    // Only include assets that have positive book value at the inventory date
+    const result = await db.execute(sql`
+      SELECT
+        mf.id as mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire,
+        mf.stare,
+        mf.data_achizitie,
+        g.cod as gestiune_cod,
+        g.denumire as gestiune_denumire,
+        lf.cod as loc_folosinta_cod,
+        lf.denumire as loc_folosinta_denumire,
+        c.simbol as cont_simbol,
+        sf.cod as sursa_finantare_cod,
+        CAST(COALESCE(SUM(CASE
+          WHEN t.tip IN ('intrare', 'modernizare', 'reevaluare') THEN COALESCE(t.valoare_operatie, 0)
+          WHEN t.tip IN ('casare', 'declasare', 'iesire') THEN -COALESCE(t.valoare_operatie, 0)
+          ELSE 0
+        END), 0) AS DECIMAL(15,2)) as valoare_inventar
+      FROM mijloace_fixe mf
+      INNER JOIN tranzactii t ON t.mijloc_fix_id = mf.id
+      LEFT JOIN gestiuni g ON mf.gestiune_id = g.id
+      LEFT JOIN locuri_folosinta lf ON mf.loc_folosinta_id = lf.id
+      LEFT JOIN conturi c ON mf.cont_id = c.id
+      LEFT JOIN surse_finantare sf ON mf.sursa_finantare_id = sf.id
+      WHERE t.data_operare <= ${dataInventar}
+        ${extraWhere}
+      GROUP BY mf.id, mf.numar_inventar, mf.denumire, mf.stare, mf.data_achizitie,
+               g.cod, g.denumire, lf.cod, lf.denumire, c.simbol, sf.cod
+      HAVING valoare_inventar > 0
+      ORDER BY g.cod, mf.numar_inventar
+    `);
+
+    const resultRows = result[0] as any[];
+
+    let totalValoareInventar = Money.zero();
+
+    const rows: ListaInventariereRow[] = resultRows.map((row: any) => {
+      const valoare = String(row.valoare_inventar ?? "0.00");
+      const valoareMoney = Money.fromDb(valoare);
+      totalValoareInventar = totalValoareInventar.plus(valoareMoney);
+
+      return {
+        mijlocFixId: row.mijloc_fix_id,
+        numarInventar: row.numar_inventar,
+        denumire: row.denumire,
+        stare: row.stare,
+        gestiuneCod: row.gestiune_cod ?? "",
+        gestiuneDenumire: row.gestiune_denumire ?? "",
+        locFolosintaCod: row.loc_folosinta_cod ?? null,
+        locFolosintaDenumire: row.loc_folosinta_denumire ?? null,
+        contSimbol: row.cont_simbol ?? null,
+        sursaFinantareCod: row.sursa_finantare_cod ?? null,
+        dataAchizitie: row.data_achizitie
+          ? new Date(row.data_achizitie).toISOString().split("T")[0]
+          : "",
+        valoareInventar: valoareMoney.toDbString(),
+      };
+    });
+
+    const data: ListaInventariereResponse = {
+      rows,
+      totals: {
+        numarActive: rows.length,
+        valoareInventar: totalValoareInventar.toDbString(),
+      },
+      filters: {
+        dataInventar,
+        gestiuneId,
+        contId,
+        stare,
+      },
+    };
+
+    return c.json<ApiResponse<ListaInventariereResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Lista de Inventariere error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea listei de inventariere",
     }, 500);
   }
 });

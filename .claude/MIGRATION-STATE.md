@@ -3,7 +3,7 @@
 <!-- Update after completing each phase/task -->
 
 ## Current Phase: 4
-## Current Task: 4.2 - Centralizator Acte (COMPLETED)
+## Current Task: 4.4 - Extend report filters (COMPLETED)
 ## Last Session: 2026-02-20
 ## Branch: import
 
@@ -48,8 +48,8 @@
 ### Phase 4: Critical Reports
 - [x] 4.1 Balanta Analitica (per-item analytical balance)
 - [x] 4.2 Centralizator Acte (operations centralizer)
-- [ ] 4.3 Lista de Inventariere (inventory list generation)
-- [ ] 4.4 Extend report filters (shared filter builder)
+- [x] 4.3 Lista de Inventariere (inventory list generation)
+- [x] 4.4 Extend report filters (shared filter builder)
 
 ### Phase 5: Secondary Reports
 - [ ] 5.1 Single act report (extend jurnal)
@@ -78,6 +78,7 @@
 | 1 | 2026-02-19 | Phase 1 | Tasks 1.1-1.8 | Schema + routes for provenienta, tipuriStoc, unitatiMasura, operatiuni; titlu on conturi; hierarchy on surseFinantare; FKs on mijloaceFixe + tranzactii |
 | 2 | 2026-02-20 | Phase 2 | Tasks 2.1-2.4, 2.6 | Full migration script: 2037/2228 materials, 7936/7936 transactions, value sum EXACT MATCH (257.8M). 191 dead catalog entries skipped. Schema fix: conturi.simbol varchar(20)->30 |
 | 3 | 2026-02-20 | Phase 3 | Tasks 3.1-3.5 | All missing operations: delete/reverse transaction (ST_OPER), transfer cont (MOD_CONT), delete unused asset (ST_MATER), mass transfer gestiune/loc (MOD_GEST/MOD_DISP), UI dialogs + OperatiuniMasa page |
+| 4 | 2026-02-20 | Phase 4 | Tasks 4.3-4.4 | Lista de Inventariere report (GEN_INVE.PRG equiv): single-date snapshot, book values. Extended ReportFilters with showSingleDate + showCont (account filter). Added contId filter to BalantaAnalitica, Centralizator, ListaInventariere. |
 
 ---
 

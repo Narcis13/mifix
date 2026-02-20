@@ -7,13 +7,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, FileSpreadsheet, BookOpen, Calculator, BarChart3, ClipboardList } from "lucide-react";
+import { FileText, FileSpreadsheet, BookOpen, Calculator, BarChart3, ClipboardList, ClipboardCheck } from "lucide-react";
 import { FisaMijlocFixReport } from "@/components/rapoarte/FisaMijlocFix";
 import { BalantaVerificareReport } from "@/components/rapoarte/BalantaVerificare";
 import { BalantaAnaliticaReport } from "@/components/rapoarte/BalantaAnalitica";
 import { JurnalActeReport } from "@/components/rapoarte/JurnalActe";
 import { SituatieAmortizareReport } from "@/components/rapoarte/SituatieAmortizare";
 import { CentralizatorActeReport } from "@/components/rapoarte/CentralizatorActe";
+import { ListaInventariereReport } from "@/components/rapoarte/ListaInventariere";
 
 const reports = [
   {
@@ -51,6 +52,12 @@ const reports = [
     title: "Centralizator Acte",
     description: "Situatie sintetica a documentelor operate pe perioada, cu totaluri debit/credit",
     icon: ClipboardList,
+  },
+  {
+    path: "/rapoarte/lista-inventariere",
+    title: "Lista de Inventariere",
+    description: "Generare lista de inventariere la o data specificata, cu valori scriptice si spatiu pentru inventar faptic",
+    icon: ClipboardCheck,
   },
 ];
 
@@ -114,4 +121,8 @@ export function BalantaAnaliticaPage() {
 
 export function CentralizatorActePage() {
   return <CentralizatorActeReport />;
+}
+
+export function ListaInventarierePage() {
+  return <ListaInventariereReport />;
 }

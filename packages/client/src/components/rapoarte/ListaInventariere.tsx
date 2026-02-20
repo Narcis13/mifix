@@ -5,24 +5,24 @@ import { Button } from "@/components/ui/button";
 import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
-import type { BalantaAnaliticaResponse } from "shared";
-import { Printer, ArrowLeft, BarChart3 } from "lucide-react";
+import type { ListaInventariereResponse } from "shared";
+import { Printer, ArrowLeft, ClipboardList } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export function BalantaAnaliticaReport() {
-  const [data, setData] = useState<BalantaAnaliticaResponse | null>(null);
+export function ListaInventariereReport() {
+  const [data, setData] = useState<ListaInventariereResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
     contentRef,
-    documentTitle: "Balanta_Analitica",
+    documentTitle: "Lista_Inventariere",
   });
 
   const handleFilter = async (filters: ReportFiltersState) => {
-    if (!filters.dataStart || !filters.dataEnd) {
-      setError("Selectati perioada (data inceput si data sfarsit)");
+    if (!filters.dataInventar) {
+      setError("Selectati data inventarierii");
       return;
     }
 
@@ -31,13 +31,12 @@ export function BalantaAnaliticaReport() {
 
     try {
       const params = new URLSearchParams();
-      params.append("dataStart", filters.dataStart);
-      params.append("dataEnd", filters.dataEnd);
+      params.append("dataInventar", filters.dataInventar);
       if (filters.gestiuneId) params.append("gestiuneId", filters.gestiuneId.toString());
       if (filters.contId) params.append("contId", filters.contId.toString());
       if (filters.stare) params.append("stare", filters.stare);
 
-      const res = await api.get<BalantaAnaliticaResponse>(`/rapoarte/balanta-analitica?${params}`);
+      const res = await api.get<ListaInventariereResponse>(`/rapoarte/lista-inventariere?${params}`);
 
       if (res.success && res.data) {
         setData(res.data);
@@ -61,10 +60,8 @@ export function BalantaAnaliticaReport() {
     }) + " RON";
   };
 
-  const formatPeriod = (dataStart: string, dataEnd: string) => {
-    const start = new Date(dataStart).toLocaleDateString("ro-RO");
-    const end = new Date(dataEnd).toLocaleDateString("ro-RO");
-    return `${start} - ${end}`;
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString("ro-RO");
   };
 
   return (
@@ -78,11 +75,11 @@ export function BalantaAnaliticaReport() {
           </Link>
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
-              <BarChart3 className="h-6 w-6" />
-              Balanta Analitica
+              <ClipboardList className="h-6 w-6" />
+              Lista de Inventariere
             </h1>
             <p className="text-muted-foreground">
-              Balanta analitica a obiectelor de inventar pe perioada selectata
+              Generare lista de inventariere la o data specificata
             </p>
           </div>
         </div>
@@ -97,7 +94,7 @@ export function BalantaAnaliticaReport() {
       {/* Filters */}
       <ReportFilters
         onFilter={handleFilter}
-        showPeriod={true}
+        showSingleDate={true}
         showGestiune={true}
         showCont={true}
         showStare={true}
@@ -116,13 +113,13 @@ export function BalantaAnaliticaReport() {
       {data && (
         <div ref={contentRef}>
           <PrintLayout
-            title="Balanta Analitica a Obiectelor de Inventar"
-            subtitle={`Perioada: ${formatPeriod(data.filters.dataStart, data.filters.dataEnd)}${data.filters.stare ? ` | Stare: ${data.filters.stare}` : ""}`}
+            title="Lista de Inventariere"
+            subtitle={`La data: ${formatDate(data.filters.dataInventar)}${data.filters.stare ? ` | Stare: ${data.filters.stare}` : ""}`}
           >
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">
-                  Situatie pe mijloace fixe ({data.rows.length} pozitii)
+                  Active inventariate ({data.totals.numarActive} pozitii)
                 </CardTitle>
               </CardHeader>
               <CardContent className="overflow-x-auto">
@@ -133,12 +130,13 @@ export function BalantaAnaliticaReport() {
                       <th className="text-left p-2">Nr. Inventar</th>
                       <th className="text-left p-2">Denumire</th>
                       <th className="text-left p-2">Gestiune</th>
+                      <th className="text-left p-2">Loc Folosinta</th>
                       <th className="text-left p-2">Cont</th>
                       <th className="text-left p-2">Stare</th>
-                      <th className="text-right p-2">Sold Initial</th>
-                      <th className="text-right p-2">Debit</th>
-                      <th className="text-right p-2">Credit</th>
-                      <th className="text-right p-2">Sold Final</th>
+                      <th className="text-left p-2">Data Achizitie</th>
+                      <th className="text-right p-2">Valoare Scriptică</th>
+                      <th className="text-right p-2">Valoare Faptică</th>
+                      <th className="text-right p-2">Diferente</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -148,22 +146,22 @@ export function BalantaAnaliticaReport() {
                         <td className="p-2 font-mono">{row.numarInventar}</td>
                         <td className="p-2">{row.denumire}</td>
                         <td className="p-2">{row.gestiuneCod}</td>
+                        <td className="p-2">{row.locFolosintaCod || "-"}</td>
                         <td className="p-2 font-mono">{row.contSimbol || "-"}</td>
                         <td className="p-2">{row.stare}</td>
-                        <td className="p-2 text-right">{formatCurrency(row.soldInitial)}</td>
-                        <td className="p-2 text-right">{formatCurrency(row.debit)}</td>
-                        <td className="p-2 text-right">{formatCurrency(row.credit)}</td>
-                        <td className="p-2 text-right font-semibold">{formatCurrency(row.soldFinal)}</td>
+                        <td className="p-2">{row.dataAchizitie ? formatDate(row.dataAchizitie) : "-"}</td>
+                        <td className="p-2 text-right">{formatCurrency(row.valoareInventar)}</td>
+                        <td className="p-2 text-right text-muted-foreground">-</td>
+                        <td className="p-2 text-right text-muted-foreground">-</td>
                       </tr>
                     ))}
                   </tbody>
                   <tfoot className="font-bold border-t-2">
                     <tr>
-                      <td className="p-2" colSpan={6}>TOTAL</td>
-                      <td className="p-2 text-right">{formatCurrency(data.totals.soldInitial)}</td>
-                      <td className="p-2 text-right">{formatCurrency(data.totals.debit)}</td>
-                      <td className="p-2 text-right">{formatCurrency(data.totals.credit)}</td>
-                      <td className="p-2 text-right">{formatCurrency(data.totals.soldFinal)}</td>
+                      <td className="p-2" colSpan={8}>TOTAL ({data.totals.numarActive} active)</td>
+                      <td className="p-2 text-right">{formatCurrency(data.totals.valoareInventar)}</td>
+                      <td className="p-2 text-right">-</td>
+                      <td className="p-2 text-right">-</td>
                     </tr>
                   </tfoot>
                 </table>
@@ -177,7 +175,7 @@ export function BalantaAnaliticaReport() {
         <Card>
           <CardContent className="pt-6">
             <p className="text-muted-foreground text-center">
-              Selectati perioada si apasati "Genereaza Raport" pentru a vizualiza balanta analitica
+              Selectati data inventarierii si apasati "Genereaza Raport" pentru a genera lista de inventariere
             </p>
           </CardContent>
         </Card>

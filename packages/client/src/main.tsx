@@ -26,6 +26,7 @@ import {
   JurnalActePage,
   SituatieAmortizarePage,
   CentralizatorActePage,
+  ListaInventarierePage,
 } from "./pages/Rapoarte";
 import { OperatiuniMasaPage } from "./pages/OperatiuniMasa";
 import "./index.css";
@@ -93,6 +94,7 @@ const router = createBrowserRouter([
           { path: "amortizare", element: <SituatieAmortizarePage /> },
           { path: "balanta-analitica", element: <BalantaAnaliticaPage /> },
           { path: "centralizator", element: <CentralizatorActePage /> },
+          { path: "lista-inventariere", element: <ListaInventarierePage /> },
         ],
       },
       {

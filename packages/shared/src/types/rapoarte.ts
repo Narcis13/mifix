@@ -225,6 +225,40 @@ export interface CentralizatorActResponse {
   };
 }
 
+// RAP-07: Lista de Inventariere (Inventory List)
+// Legacy equivalent: GEN_INVE.PRG
+// Snapshot of all assets at a specific date with book values
+export interface ListaInventariereRow {
+  mijlocFixId: number;
+  numarInventar: string;
+  denumire: string;
+  stare: string;
+  gestiuneCod: string;
+  gestiuneDenumire: string;
+  locFolosintaCod: string | null;
+  locFolosintaDenumire: string | null;
+  contSimbol: string | null;
+  sursaFinantareCod: string | null;
+  dataAchizitie: string;
+  // Book value at inventory date
+  valoareInventar: string;
+  // Blank columns for physical inventory (filled on paper)
+}
+
+export interface ListaInventariereResponse {
+  rows: ListaInventariereRow[];
+  totals: {
+    numarActive: number;
+    valoareInventar: string;
+  };
+  filters: {
+    dataInventar: string;
+    gestiuneId?: number;
+    contId?: number;
+    stare?: string;
+  };
+}
+
 // Filter parameters
 export interface ReportFilters {
   dataStart?: string;
