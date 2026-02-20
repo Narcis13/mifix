@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { eq, and, desc } from "drizzle-orm";
+import { eq, and, desc, ne, sql, inArray } from "drizzle-orm";
 import { alias } from "drizzle-orm/mysql-core";
 import { db } from "../db";
 import {
@@ -8,6 +8,7 @@ import {
   tranzactii,
   gestiuni,
   locuriUilizare,
+  conturi,
 } from "../db/schema";
 import { Money } from "shared";
 import type { ApiResponse, Tranzactie } from "shared";
@@ -16,6 +17,11 @@ import {
   transferLocSchema,
   casareSchema,
   declasareSchema,
+  stergeTranzactieSchema,
+  transferContSchema,
+  stergeMijlocFixSchema,
+  transferGestiuneMasaSchema,
+  transferLocMasaSchema,
 } from "../validation/operatiuni-schemas";
 
 export const operatiuniRoutes = new Hono();
@@ -492,6 +498,611 @@ operatiuniRoutes.post(
 
       console.error("Declasare error:", error);
       return c.json<ApiResponse>({ success: false, message: "Eroare la efectuarea declasarii" }, 500);
+    }
+  }
+);
+
+// ============================================================================
+// DELETE /stergere-tranzactie - Reverse and delete a transaction (OP-06)
+// Only the most recent transaction for an asset can be deleted.
+// Reverses the effect on the asset (transfer -> move back, casare -> reactivate, etc.)
+// Legacy equivalent: ST_OPER.PRG
+// ============================================================================
+operatiuniRoutes.post(
+  "/stergere-tranzactie",
+  zValidator("json", stergeTranzactieSchema, (result, c) => {
+    if (!result.success) {
+      const errors: Record<string, string[]> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path.join(".");
+        if (!errors[path]) errors[path] = [];
+        errors[path].push(issue.message);
+      });
+      return c.json<ApiResponse>(
+        { success: false, message: "Validare esuata", errors },
+        400
+      );
+    }
+  }),
+  async (c) => {
+    const data = c.req.valid("json");
+
+    try {
+      await db.transaction(async (tx) => {
+        // 1. Fetch the transaction
+        const [tranzactie] = await tx
+          .select()
+          .from(tranzactii)
+          .where(eq(tranzactii.id, data.tranzactieId));
+
+        if (!tranzactie) {
+          throw new Error("NOT_FOUND:Tranzactia nu a fost gasita");
+        }
+
+        // 2. Check this is the most recent transaction for the asset
+        const [newerTranzactie] = await tx
+          .select({ id: tranzactii.id })
+          .from(tranzactii)
+          .where(
+            and(
+              eq(tranzactii.mijlocFixId, tranzactie.mijlocFixId),
+              ne(tranzactii.id, tranzactie.id)
+            )
+          )
+          .orderBy(desc(tranzactii.dataOperare), desc(tranzactii.createdAt))
+          .limit(1);
+
+        if (newerTranzactie && newerTranzactie.id !== tranzactie.id) {
+          // Verify it's actually newer (the ordered query returned the most recent)
+          const [mostRecent] = await tx
+            .select({ id: tranzactii.id })
+            .from(tranzactii)
+            .where(eq(tranzactii.mijlocFixId, tranzactie.mijlocFixId))
+            .orderBy(desc(tranzactii.dataOperare), desc(tranzactii.createdAt))
+            .limit(1);
+
+          if (mostRecent && mostRecent.id !== tranzactie.id) {
+            throw new Error(
+              "BLOCKED:Nu se poate sterge deoarece exista tranzactii ulterioare pentru acest mijloc fix"
+            );
+          }
+        }
+
+        // 3. Fetch the asset
+        const [asset] = await tx
+          .select()
+          .from(mijloaceFixe)
+          .where(eq(mijloaceFixe.id, tranzactie.mijlocFixId));
+
+        if (!asset) {
+          throw new Error("NOT_FOUND:Mijlocul fix asociat nu a fost gasit");
+        }
+
+        // 4. Reverse the transaction effect based on type
+        switch (tranzactie.tip) {
+          case "transfer": {
+            // Reverse: move asset back to source gestiune/loc
+            const updateSet: Record<string, unknown> = {};
+            if (tranzactie.gestiuneSursaId) {
+              updateSet.gestiuneId = tranzactie.gestiuneSursaId;
+            }
+            // Restore original loc (could be null)
+            if (tranzactie.gestiuneSursaId) {
+              updateSet.locFolosintaId = tranzactie.locFolosintaSursaId;
+            } else {
+              // Loc-only transfer
+              updateSet.locFolosintaId = tranzactie.locFolosintaSursaId;
+            }
+            await tx
+              .update(mijloaceFixe)
+              .set(updateSet)
+              .where(eq(mijloaceFixe.id, tranzactie.mijlocFixId));
+            break;
+          }
+
+          case "casare": {
+            // Reverse: reactivate asset
+            await tx
+              .update(mijloaceFixe)
+              .set({
+                stare: "activ",
+                dataIesire: null,
+                motivIesire: null,
+              })
+              .where(eq(mijloaceFixe.id, tranzactie.mijlocFixId));
+            break;
+          }
+
+          case "declasare": {
+            // Reverse: restore previous value
+            if (tranzactie.valoareInainte) {
+              await tx
+                .update(mijloaceFixe)
+                .set({
+                  valoareRamasa: tranzactie.valoareInainte,
+                })
+                .where(eq(mijloaceFixe.id, tranzactie.mijlocFixId));
+            }
+            break;
+          }
+
+          case "intrare": {
+            // Cannot reverse initial entry - asset would need to be deleted entirely
+            throw new Error(
+              "BLOCKED:Nu se poate sterge tranzactia de intrare. Folositi 'Stergere mijloc fix' pentru a elimina activul"
+            );
+          }
+
+          default: {
+            // For other types (reevaluare, modernizare, iesire), restore value if tracked
+            if (tranzactie.valoareInainte) {
+              await tx
+                .update(mijloaceFixe)
+                .set({
+                  valoareRamasa: tranzactie.valoareInainte,
+                })
+                .where(eq(mijloaceFixe.id, tranzactie.mijlocFixId));
+            }
+            break;
+          }
+        }
+
+        // 5. Delete the transaction
+        await tx
+          .delete(tranzactii)
+          .where(eq(tranzactii.id, data.tranzactieId));
+      });
+
+      return c.json<ApiResponse>({ success: true, message: "Tranzactia a fost stearsa si efectele inversate" });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Eroare la stergere";
+
+      if (message.startsWith("NOT_FOUND:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(10) }, 404);
+      }
+      if (message.startsWith("BLOCKED:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(8) }, 400);
+      }
+
+      console.error("Stergere tranzactie error:", error);
+      return c.json<ApiResponse>({ success: false, message: "Eroare la stergerea tranzactiei" }, 500);
+    }
+  }
+);
+
+// ============================================================================
+// POST /transfer-cont - Mass transfer assets to different account (OP-07)
+// Legacy equivalent: MOD_CONT.SPR
+// ============================================================================
+operatiuniRoutes.post(
+  "/transfer-cont",
+  zValidator("json", transferContSchema, (result, c) => {
+    if (!result.success) {
+      const errors: Record<string, string[]> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path.join(".");
+        if (!errors[path]) errors[path] = [];
+        errors[path].push(issue.message);
+      });
+      return c.json<ApiResponse>(
+        { success: false, message: "Validare esuata", errors },
+        400
+      );
+    }
+  }),
+  async (c) => {
+    const data = c.req.valid("json");
+
+    try {
+      const result = await db.transaction(async (tx) => {
+        // 1. Validate accounts exist and are different
+        if (data.contSursaId === data.contDestinatieId) {
+          throw new Error("INVALID:Contul sursa si destinatie trebuie sa fie diferite");
+        }
+
+        const [contSursa] = await tx
+          .select()
+          .from(conturi)
+          .where(eq(conturi.id, data.contSursaId));
+        if (!contSursa) {
+          throw new Error("NOT_FOUND:Contul sursa nu exista");
+        }
+
+        const [contDest] = await tx
+          .select()
+          .from(conturi)
+          .where(eq(conturi.id, data.contDestinatieId));
+        if (!contDest) {
+          throw new Error("NOT_FOUND:Contul destinatie nu exista");
+        }
+
+        if (contDest.titlu) {
+          throw new Error("INVALID:Contul destinatie nu poate fi un cont titlu (capitol)");
+        }
+
+        // 2. Find matching active assets
+        let conditions = [
+          eq(mijloaceFixe.contId, data.contSursaId),
+          eq(mijloaceFixe.stare, "activ"),
+        ];
+
+        if (data.numarInventar) {
+          conditions.push(eq(mijloaceFixe.numarInventar, data.numarInventar));
+        }
+
+        const assets = await tx
+          .select({ id: mijloaceFixe.id, numarInventar: mijloaceFixe.numarInventar })
+          .from(mijloaceFixe)
+          .where(and(...conditions));
+
+        if (assets.length === 0) {
+          throw new Error("NOT_FOUND:Nu exista mijloace fixe active la contul sursa");
+        }
+
+        // 3. Update all matching assets
+        const assetIds = assets.map((a) => a.id);
+        await tx
+          .update(mijloaceFixe)
+          .set({ contId: data.contDestinatieId })
+          .where(inArray(mijloaceFixe.id, assetIds));
+
+        // 4. Create transaction records for each asset
+        for (const asset of assets) {
+          await tx.insert(tranzactii).values({
+            mijlocFixId: asset.id,
+            tip: "transfer",
+            dataOperare: new Date(data.dataOperare),
+            documentNumar: data.documentNumar || null,
+            documentData: data.documentData ? new Date(data.documentData) : null,
+            descriere: `Transfer cont: ${contSursa.simbol} -> ${contDest.simbol}`,
+            observatii: data.observatii || null,
+          });
+        }
+
+        return assets.length;
+      });
+
+      return c.json<ApiResponse<{ count: number }>>({
+        success: true,
+        data: { count: result },
+        message: `${result} mijloace fixe transferate la noul cont`,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Eroare la transfer cont";
+
+      if (message.startsWith("NOT_FOUND:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(10) }, 404);
+      }
+      if (message.startsWith("INVALID:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(8) }, 400);
+      }
+
+      console.error("Transfer cont error:", error);
+      return c.json<ApiResponse>({ success: false, message: "Eroare la transferul de cont" }, 500);
+    }
+  }
+);
+
+// ============================================================================
+// POST /stergere-mijloc-fix - Delete unused asset (OP-08)
+// Only assets with no transactions beyond initial entry can be deleted.
+// Legacy equivalent: ST_MATER.SPR
+// ============================================================================
+operatiuniRoutes.post(
+  "/stergere-mijloc-fix",
+  zValidator("json", stergeMijlocFixSchema, (result, c) => {
+    if (!result.success) {
+      const errors: Record<string, string[]> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path.join(".");
+        if (!errors[path]) errors[path] = [];
+        errors[path].push(issue.message);
+      });
+      return c.json<ApiResponse>(
+        { success: false, message: "Validare esuata", errors },
+        400
+      );
+    }
+  }),
+  async (c) => {
+    const data = c.req.valid("json");
+
+    try {
+      await db.transaction(async (tx) => {
+        // 1. Fetch asset
+        const [asset] = await tx
+          .select()
+          .from(mijloaceFixe)
+          .where(eq(mijloaceFixe.id, data.mijlocFixId));
+
+        if (!asset) {
+          throw new Error("NOT_FOUND:Mijlocul fix nu a fost gasit");
+        }
+
+        // 2. Check for non-intrare transactions
+        const nonIntrareTransactions = await tx
+          .select({ id: tranzactii.id })
+          .from(tranzactii)
+          .where(
+            and(
+              eq(tranzactii.mijlocFixId, data.mijlocFixId),
+              ne(tranzactii.tip, "intrare")
+            )
+          )
+          .limit(1);
+
+        if (nonIntrareTransactions.length > 0) {
+          throw new Error(
+            "BLOCKED:Mijlocul fix nu poate fi sters deoarece are tranzactii (operatiuni) inregistrate"
+          );
+        }
+
+        // 3. Delete all transactions (intrare records) for this asset
+        await tx
+          .delete(tranzactii)
+          .where(eq(tranzactii.mijlocFixId, data.mijlocFixId));
+
+        // 4. Delete the asset
+        await tx
+          .delete(mijloaceFixe)
+          .where(eq(mijloaceFixe.id, data.mijlocFixId));
+      });
+
+      return c.json<ApiResponse>({ success: true, message: "Mijlocul fix a fost sters" });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Eroare la stergere";
+
+      if (message.startsWith("NOT_FOUND:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(10) }, 404);
+      }
+      if (message.startsWith("BLOCKED:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(8) }, 400);
+      }
+
+      console.error("Stergere mijloc fix error:", error);
+      return c.json<ApiResponse>({ success: false, message: "Eroare la stergerea mijlocului fix" }, 500);
+    }
+  }
+);
+
+// ============================================================================
+// POST /transfer-gestiune-masa - Mass transfer gestiune (OP-09)
+// Legacy equivalent: MOD_GEST.SPR
+// ============================================================================
+operatiuniRoutes.post(
+  "/transfer-gestiune-masa",
+  zValidator("json", transferGestiuneMasaSchema, (result, c) => {
+    if (!result.success) {
+      const errors: Record<string, string[]> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path.join(".");
+        if (!errors[path]) errors[path] = [];
+        errors[path].push(issue.message);
+      });
+      return c.json<ApiResponse>(
+        { success: false, message: "Validare esuata", errors },
+        400
+      );
+    }
+  }),
+  async (c) => {
+    const data = c.req.valid("json");
+
+    try {
+      const result = await db.transaction(async (tx) => {
+        // 1. Validate gestiuni exist and are different
+        if (data.gestiuneSursaId === data.gestiuneDestinatieId) {
+          throw new Error("INVALID:Gestiunea sursa si destinatie trebuie sa fie diferite");
+        }
+
+        const [gestSursa] = await tx
+          .select()
+          .from(gestiuni)
+          .where(eq(gestiuni.id, data.gestiuneSursaId));
+        if (!gestSursa) {
+          throw new Error("NOT_FOUND:Gestiunea sursa nu exista");
+        }
+
+        const [gestDest] = await tx
+          .select()
+          .from(gestiuni)
+          .where(eq(gestiuni.id, data.gestiuneDestinatieId));
+        if (!gestDest) {
+          throw new Error("NOT_FOUND:Gestiunea destinatie nu exista");
+        }
+
+        // 2. Find matching active assets
+        let conditions = [
+          eq(mijloaceFixe.gestiuneId, data.gestiuneSursaId),
+          eq(mijloaceFixe.stare, "activ"),
+        ];
+
+        if (data.numarInventar) {
+          conditions.push(eq(mijloaceFixe.numarInventar, data.numarInventar));
+        }
+
+        const assets = await tx
+          .select({
+            id: mijloaceFixe.id,
+            gestiuneId: mijloaceFixe.gestiuneId,
+            locFolosintaId: mijloaceFixe.locFolosintaId,
+          })
+          .from(mijloaceFixe)
+          .where(and(...conditions));
+
+        if (assets.length === 0) {
+          throw new Error("NOT_FOUND:Nu exista mijloace fixe active in gestiunea sursa");
+        }
+
+        // 3. Update all matching assets (clear locFolosinta since it belongs to old gestiune)
+        const assetIds = assets.map((a) => a.id);
+        await tx
+          .update(mijloaceFixe)
+          .set({ gestiuneId: data.gestiuneDestinatieId, locFolosintaId: null })
+          .where(inArray(mijloaceFixe.id, assetIds));
+
+        // 4. Create transaction records
+        for (const asset of assets) {
+          await tx.insert(tranzactii).values({
+            mijlocFixId: asset.id,
+            tip: "transfer",
+            dataOperare: new Date(data.dataOperare),
+            documentNumar: data.documentNumar || null,
+            documentData: data.documentData ? new Date(data.documentData) : null,
+            gestiuneSursaId: asset.gestiuneId,
+            gestiuneDestinatieId: data.gestiuneDestinatieId,
+            locFolosintaSursaId: asset.locFolosintaId,
+            locFolosintaDestinatieId: null,
+            descriere: `Transfer masa gestiune: ${gestSursa.denumire} -> ${gestDest.denumire}`,
+            observatii: data.observatii || null,
+          });
+        }
+
+        return assets.length;
+      });
+
+      return c.json<ApiResponse<{ count: number }>>({
+        success: true,
+        data: { count: result },
+        message: `${result} mijloace fixe transferate in noua gestiune`,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Eroare la transfer";
+
+      if (message.startsWith("NOT_FOUND:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(10) }, 404);
+      }
+      if (message.startsWith("INVALID:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(8) }, 400);
+      }
+
+      console.error("Transfer gestiune masa error:", error);
+      return c.json<ApiResponse>({ success: false, message: "Eroare la transferul de gestiune" }, 500);
+    }
+  }
+);
+
+// ============================================================================
+// POST /transfer-loc-masa - Mass transfer location (OP-10)
+// Legacy equivalent: MOD_DISP.SPR
+// ============================================================================
+operatiuniRoutes.post(
+  "/transfer-loc-masa",
+  zValidator("json", transferLocMasaSchema, (result, c) => {
+    if (!result.success) {
+      const errors: Record<string, string[]> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path.join(".");
+        if (!errors[path]) errors[path] = [];
+        errors[path].push(issue.message);
+      });
+      return c.json<ApiResponse>(
+        { success: false, message: "Validare esuata", errors },
+        400
+      );
+    }
+  }),
+  async (c) => {
+    const data = c.req.valid("json");
+
+    try {
+      const result = await db.transaction(async (tx) => {
+        // 1. Validate locations exist, are different, and belong to the same gestiune
+        if (data.locFolosintaSursaId === data.locFolosintaDestinatieId) {
+          throw new Error("INVALID:Locul sursa si destinatie trebuie sa fie diferite");
+        }
+
+        const [locSursa] = await tx
+          .select()
+          .from(locuriUilizare)
+          .where(
+            and(
+              eq(locuriUilizare.id, data.locFolosintaSursaId),
+              eq(locuriUilizare.gestiuneId, data.gestiuneId)
+            )
+          );
+        if (!locSursa) {
+          throw new Error("NOT_FOUND:Locul sursa nu exista sau nu apartine gestiunii specificate");
+        }
+
+        const [locDest] = await tx
+          .select()
+          .from(locuriUilizare)
+          .where(
+            and(
+              eq(locuriUilizare.id, data.locFolosintaDestinatieId),
+              eq(locuriUilizare.gestiuneId, data.gestiuneId)
+            )
+          );
+        if (!locDest) {
+          throw new Error("NOT_FOUND:Locul destinatie nu exista sau nu apartine gestiunii specificate");
+        }
+
+        // 2. Find matching active assets
+        let conditions = [
+          eq(mijloaceFixe.gestiuneId, data.gestiuneId),
+          eq(mijloaceFixe.locFolosintaId, data.locFolosintaSursaId),
+          eq(mijloaceFixe.stare, "activ"),
+        ];
+
+        if (data.numarInventar) {
+          conditions.push(eq(mijloaceFixe.numarInventar, data.numarInventar));
+        }
+
+        const assets = await tx
+          .select({
+            id: mijloaceFixe.id,
+            locFolosintaId: mijloaceFixe.locFolosintaId,
+          })
+          .from(mijloaceFixe)
+          .where(and(...conditions));
+
+        if (assets.length === 0) {
+          throw new Error("NOT_FOUND:Nu exista mijloace fixe active la locul sursa");
+        }
+
+        // 3. Update all matching assets
+        const assetIds = assets.map((a) => a.id);
+        await tx
+          .update(mijloaceFixe)
+          .set({ locFolosintaId: data.locFolosintaDestinatieId })
+          .where(inArray(mijloaceFixe.id, assetIds));
+
+        // 4. Create transaction records
+        for (const asset of assets) {
+          await tx.insert(tranzactii).values({
+            mijlocFixId: asset.id,
+            tip: "transfer",
+            dataOperare: new Date(data.dataOperare),
+            documentNumar: data.documentNumar || null,
+            documentData: data.documentData ? new Date(data.documentData) : null,
+            locFolosintaSursaId: asset.locFolosintaId,
+            locFolosintaDestinatieId: data.locFolosintaDestinatieId,
+            descriere: `Transfer masa loc: ${locSursa.denumire} -> ${locDest.denumire}`,
+            observatii: data.observatii || null,
+          });
+        }
+
+        return assets.length;
+      });
+
+      return c.json<ApiResponse<{ count: number }>>({
+        success: true,
+        data: { count: result },
+        message: `${result} mijloace fixe transferate la noul loc de folosinta`,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Eroare la transfer";
+
+      if (message.startsWith("NOT_FOUND:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(10) }, 404);
+      }
+      if (message.startsWith("INVALID:")) {
+        return c.json<ApiResponse>({ success: false, message: message.slice(8) }, 400);
+      }
+
+      console.error("Transfer loc masa error:", error);
+      return c.json<ApiResponse>({ success: false, message: "Eroare la transferul de loc" }, 500);
     }
   }
 );

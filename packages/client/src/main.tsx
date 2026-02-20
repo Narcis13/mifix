@@ -25,6 +25,7 @@ import {
   JurnalActePage,
   SituatieAmortizarePage,
 } from "./pages/Rapoarte";
+import { OperatiuniMasaPage } from "./pages/OperatiuniMasa";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
           { path: "jurnal", element: <JurnalActePage /> },
           { path: "amortizare", element: <SituatieAmortizarePage /> },
         ],
+      },
+      {
+        path: "operatiuni-masa",
+        element: <OperatiuniMasaPage />,
       },
       {
         path: "mijloace-fixe",

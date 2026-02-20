@@ -2,8 +2,8 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: 2
-## Current Task: 2.5 - Compute initial solduri/balances
+## Current Phase: 3
+## Current Task: 3.5 - UI dialogs for new operations (COMPLETED)
 ## Last Session: 2026-02-20
 ## Branch: import
 
@@ -39,11 +39,11 @@
 - [x] 2.7 Create seed script from migration output
 
 ### Phase 3: Missing Operations
-- [ ] 3.1 Operation reversal/deletion (ST_OPER equivalent)
-- [ ] 3.2 Transfer to different account (MOD_CONT equivalent)
-- [ ] 3.3 Delete unused asset (ST_MATER equivalent)
-- [ ] 3.4 Mass transfer operations (batch update)
-- [ ] 3.5 UI dialogs for new operations
+- [x] 3.1 Operation reversal/deletion (ST_OPER equivalent)
+- [x] 3.2 Transfer to different account (MOD_CONT equivalent)
+- [x] 3.3 Delete unused asset (ST_MATER equivalent)
+- [x] 3.4 Mass transfer operations (batch update)
+- [x] 3.5 UI dialogs for new operations
 
 ### Phase 4: Critical Reports
 - [ ] 4.1 Balanta Analitica (per-item analytical balance)
@@ -77,6 +77,7 @@
 | 0 | 2026-02-19 | Planning | Phase 0 setup | Created skill, state tracker, CLAUDE.md |
 | 1 | 2026-02-19 | Phase 1 | Tasks 1.1-1.8 | Schema + routes for provenienta, tipuriStoc, unitatiMasura, operatiuni; titlu on conturi; hierarchy on surseFinantare; FKs on mijloaceFixe + tranzactii |
 | 2 | 2026-02-20 | Phase 2 | Tasks 2.1-2.4, 2.6 | Full migration script: 2037/2228 materials, 7936/7936 transactions, value sum EXACT MATCH (257.8M). 191 dead catalog entries skipped. Schema fix: conturi.simbol varchar(20)->30 |
+| 3 | 2026-02-20 | Phase 3 | Tasks 3.1-3.5 | All missing operations: delete/reverse transaction (ST_OPER), transfer cont (MOD_CONT), delete unused asset (ST_MATER), mass transfer gestiune/loc (MOD_GEST/MOD_DISP), UI dialogs + OperatiuniMasa page |
 
 ---
 
