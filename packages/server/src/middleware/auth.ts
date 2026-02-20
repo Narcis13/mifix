@@ -16,6 +16,7 @@ export const authMiddleware: MiddlewareHandler = async (c, next) => {
   // Skip auth for login, logout, and health endpoints
   if (
     path === "/api/auth/login" ||
+    path === "/api/auth/register" ||
     path === "/api/auth/logout" ||
     path.startsWith("/api/health")
   ) {
