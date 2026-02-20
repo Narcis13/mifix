@@ -2,8 +2,8 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: 3
-## Current Task: 3.5 - UI dialogs for new operations (COMPLETED)
+## Current Phase: 4
+## Current Task: 4.1 - Balanta Analitica (COMPLETED)
 ## Last Session: 2026-02-20
 ## Branch: import
 
@@ -46,7 +46,7 @@
 - [x] 3.5 UI dialogs for new operations
 
 ### Phase 4: Critical Reports
-- [ ] 4.1 Balanta Analitica (per-item analytical balance)
+- [x] 4.1 Balanta Analitica (per-item analytical balance)
 - [ ] 4.2 Centralizator Acte (operations centralizer)
 - [ ] 4.3 Lista de Inventariere (inventory list generation)
 - [ ] 4.4 Extend report filters (shared filter builder)

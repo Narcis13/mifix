@@ -22,6 +22,7 @@ import {
   RapoartePage,
   FisaMijlocFixPage,
   BalantaVerificarePage,
+  BalantaAnaliticaPage,
   JurnalActePage,
   SituatieAmortizarePage,
 } from "./pages/Rapoarte";
@@ -89,6 +90,7 @@ const router = createBrowserRouter([
           { path: "balanta", element: <BalantaVerificarePage /> },
           { path: "jurnal", element: <JurnalActePage /> },
           { path: "amortizare", element: <SituatieAmortizarePage /> },
+          { path: "balanta-analitica", element: <BalantaAnaliticaPage /> },
         ],
       },
       {

@@ -165,6 +165,39 @@ export interface SituatieAmortizareResponse {
   };
 }
 
+// RAP-05: Balanta Analitica (Per-Item Analytical Balance)
+export interface BalantaAnaliticaRow {
+  mijlocFixId: number;
+  numarInventar: string;
+  denumire: string;
+  stare: string;
+  gestiuneCod: string;
+  gestiuneDenumire: string;
+  contSimbol: string | null;
+  // Values as strings for decimal precision
+  soldInitial: string;   // Opening balance (before dataStart)
+  debit: string;         // Entries in period (value increases)
+  credit: string;        // Exits in period (value decreases)
+  soldFinal: string;     // Closing balance = soldInitial + debit - credit
+}
+
+export interface BalantaAnaliticaResponse {
+  rows: BalantaAnaliticaRow[];
+  totals: {
+    soldInitial: string;
+    debit: string;
+    credit: string;
+    soldFinal: string;
+  };
+  filters: {
+    dataStart: string;
+    dataEnd: string;
+    gestiuneId?: number;
+    contId?: number;
+    stare?: string;
+  };
+}
+
 // Filter parameters
 export interface ReportFilters {
   dataStart?: string;

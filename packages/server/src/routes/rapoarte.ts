@@ -24,6 +24,8 @@ import type {
   JurnalActRow,
   SituatieAmortizareResponse,
   SituatieAmortizareRow,
+  BalantaAnaliticaResponse,
+  BalantaAnaliticaRow,
 } from "shared";
 
 export const rapoarteRoutes = new Hono();
@@ -466,6 +468,167 @@ rapoarteRoutes.get("/amortizare", async (c) => {
     return c.json<ApiResponse>({
       success: false,
       message: "Eroare la generarea situatiei de amortizare",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /balanta-analitica - RAP-05: Balanta Analitica (Per-Item Analytical Balance)
+// Legacy equivalent: BAL_MIJL.PRG
+// Shows opening balance, entries, exits, and closing balance per asset
+// ============================================================================
+rapoarteRoutes.get("/balanta-analitica", async (c) => {
+  const dataStart = c.req.query("dataStart");
+  const dataEnd = c.req.query("dataEnd");
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const contIdParam = c.req.query("contId");
+  const stare = c.req.query("stare");
+
+  // Validate required parameters
+  if (!dataStart || !dataEnd) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Parametrii dataStart si dataEnd sunt obligatorii",
+    }, 400);
+  }
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(dataStart) || !dateRegex.test(dataEnd)) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Format data invalid. Folositi YYYY-MM-DD",
+    }, 400);
+  }
+
+  try {
+    const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
+    const contId = contIdParam ? parseInt(contIdParam) : undefined;
+
+    // Validate stare against known enum values
+    const validStari = ["activ", "casare", "declasare", "transfer"];
+    if (stare && !validStari.includes(stare)) {
+      return c.json<ApiResponse>({
+        success: false,
+        message: "Stare invalida",
+      }, 400);
+    }
+
+    // Build dynamic filter conditions (using raw aliases since query uses table aliases)
+    const extraConditions: ReturnType<typeof sql>[] = [];
+    if (gestiuneId) {
+      extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
+    }
+    if (contId) {
+      extraConditions.push(sql`AND mf.cont_id = ${contId}`);
+    }
+    if (stare) {
+      extraConditions.push(sql`AND mf.stare = ${stare}`);
+    }
+
+    // Combine extra conditions into a single sql fragment
+    const extraWhere = extraConditions.length > 0
+      ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
+      : sql``;
+
+    // Single query: compute opening balance, period debits/credits per asset
+    // Debit types (value in): intrare, modernizare, reevaluare
+    // Credit types (value out): casare, declasare, iesire
+    // Neutral (no value change): transfer
+    const result = await db.execute(sql`
+      SELECT
+        mf.id as mijloc_fix_id,
+        mf.numar_inventar,
+        mf.denumire,
+        mf.stare,
+        g.cod as gestiune_cod,
+        g.denumire as gestiune_denumire,
+        c.simbol as cont_simbol,
+        CAST(COALESCE(SUM(CASE
+          WHEN t.data_operare < ${dataStart} AND t.tip IN ('intrare', 'modernizare', 'reevaluare') THEN COALESCE(t.valoare_operatie, 0)
+          WHEN t.data_operare < ${dataStart} AND t.tip IN ('casare', 'declasare', 'iesire') THEN -COALESCE(t.valoare_operatie, 0)
+          ELSE 0
+        END), 0) AS DECIMAL(15,2)) as sold_initial,
+        CAST(COALESCE(SUM(CASE
+          WHEN t.data_operare >= ${dataStart} AND t.data_operare <= ${dataEnd} AND t.tip IN ('intrare', 'modernizare', 'reevaluare') THEN COALESCE(t.valoare_operatie, 0)
+          ELSE 0
+        END), 0) AS DECIMAL(15,2)) as debit,
+        CAST(COALESCE(SUM(CASE
+          WHEN t.data_operare >= ${dataStart} AND t.data_operare <= ${dataEnd} AND t.tip IN ('casare', 'declasare', 'iesire') THEN COALESCE(t.valoare_operatie, 0)
+          ELSE 0
+        END), 0) AS DECIMAL(15,2)) as credit
+      FROM mijloace_fixe mf
+      INNER JOIN tranzactii t ON t.mijloc_fix_id = mf.id
+      LEFT JOIN gestiuni g ON mf.gestiune_id = g.id
+      LEFT JOIN conturi c ON mf.cont_id = c.id
+      WHERE t.data_operare <= ${dataEnd}
+        ${extraWhere}
+      GROUP BY mf.id, mf.numar_inventar, mf.denumire, mf.stare,
+               g.cod, g.denumire, c.simbol
+      HAVING sold_initial != 0 OR debit != 0 OR credit != 0
+      ORDER BY g.cod, mf.numar_inventar
+    `);
+
+    const resultRows = result[0] as any[];
+
+    // Map to typed rows and compute totals
+    let totalSoldInitial = Money.zero();
+    let totalDebit = Money.zero();
+    let totalCredit = Money.zero();
+
+    const rows: BalantaAnaliticaRow[] = resultRows.map((row: any) => {
+      const soldInitial = String(row.sold_initial ?? "0.00");
+      const debit = String(row.debit ?? "0.00");
+      const credit = String(row.credit ?? "0.00");
+
+      const soldInitialMoney = Money.fromDb(soldInitial);
+      const debitMoney = Money.fromDb(debit);
+      const creditMoney = Money.fromDb(credit);
+      const soldFinal = soldInitialMoney.plus(debitMoney).minus(creditMoney);
+
+      totalSoldInitial = totalSoldInitial.plus(soldInitialMoney);
+      totalDebit = totalDebit.plus(debitMoney);
+      totalCredit = totalCredit.plus(creditMoney);
+
+      return {
+        mijlocFixId: row.mijloc_fix_id,
+        numarInventar: row.numar_inventar,
+        denumire: row.denumire,
+        stare: row.stare,
+        gestiuneCod: row.gestiune_cod ?? "",
+        gestiuneDenumire: row.gestiune_denumire ?? "",
+        contSimbol: row.cont_simbol ?? null,
+        soldInitial: soldInitialMoney.toDbString(),
+        debit: debitMoney.toDbString(),
+        credit: creditMoney.toDbString(),
+        soldFinal: soldFinal.toDbString(),
+      };
+    });
+
+    const totalSoldFinal = totalSoldInitial.plus(totalDebit).minus(totalCredit);
+
+    const data: BalantaAnaliticaResponse = {
+      rows,
+      totals: {
+        soldInitial: totalSoldInitial.toDbString(),
+        debit: totalDebit.toDbString(),
+        credit: totalCredit.toDbString(),
+        soldFinal: totalSoldFinal.toDbString(),
+      },
+      filters: {
+        dataStart,
+        dataEnd,
+        gestiuneId,
+        contId,
+        stare,
+      },
+    };
+
+    return c.json<ApiResponse<BalantaAnaliticaResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Balanta Analitica error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea balantei analitice",
     }, 500);
   }
 });
