@@ -1,5 +1,5 @@
 import { createInsertSchema } from "drizzle-zod";
-import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument, mijloaceFixe } from "../db/schema";
+import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument, provenienta, tipuriStoc, unitatiMasura, operatiuni, mijloaceFixe } from "../db/schema";
 import { z } from "zod";
 
 // ============================================================================
@@ -69,6 +69,60 @@ export type InsertTipDocument = z.infer<typeof insertTipDocumentSchema>;
 
 export const updateTipDocumentSchema = insertTipDocumentSchema.partial();
 export type UpdateTipDocument = z.infer<typeof updateTipDocumentSchema>;
+
+// ============================================================================
+// Provenienta - Provenance Sources
+// ============================================================================
+export const insertProvenientaSchema = createInsertSchema(provenienta, {
+  cod: (schema) => schema.min(1, "Cod obligatoriu").max(20, "Cod maxim 20 caractere"),
+  denumire: (schema) => schema.min(1, "Denumire obligatorie").max(200, "Denumire maxim 200 caractere"),
+}).omit({ id: true });
+
+export type InsertProvenienta = z.infer<typeof insertProvenientaSchema>;
+
+export const updateProvenientaSchema = insertProvenientaSchema.partial();
+export type UpdateProvenienta = z.infer<typeof updateProvenientaSchema>;
+
+// ============================================================================
+// Tipuri Stoc - Stock/Usage Types
+// ============================================================================
+export const insertTipStocSchema = createInsertSchema(tipuriStoc, {
+  cod: (schema) => schema.min(1, "Cod obligatoriu").max(20, "Cod maxim 20 caractere"),
+  denumire: (schema) => schema.min(1, "Denumire obligatorie").max(200, "Denumire maxim 200 caractere"),
+}).omit({ id: true });
+
+export type InsertTipStoc = z.infer<typeof insertTipStocSchema>;
+
+export const updateTipStocSchema = insertTipStocSchema.partial();
+export type UpdateTipStoc = z.infer<typeof updateTipStocSchema>;
+
+// ============================================================================
+// Unitati Masura - Units of Measure
+// ============================================================================
+export const insertUnitateMasuraSchema = createInsertSchema(unitatiMasura, {
+  cod: (schema) => schema.min(1, "Cod obligatoriu").max(20, "Cod maxim 20 caractere"),
+  denumire: (schema) => schema.min(1, "Denumire obligatorie").max(200, "Denumire maxim 200 caractere"),
+}).omit({ id: true });
+
+export type InsertUnitateMasura = z.infer<typeof insertUnitateMasuraSchema>;
+
+export const updateUnitateMasuraSchema = insertUnitateMasuraSchema.partial();
+export type UpdateUnitateMasura = z.infer<typeof updateUnitateMasuraSchema>;
+
+// ============================================================================
+// Operatiuni - Operation Headers
+// ============================================================================
+export const insertOperatiuneSchema = createInsertSchema(operatiuni, {
+  numarOperatie: (schema) => schema.min(1, "Numar operatie obligatoriu"),
+  an: (schema) => schema.min(2000, "An minim 2000").max(2100, "An maxim 2100"),
+  descriere: (schema) => schema.max(500, "Descriere maxim 500 caractere").optional(),
+  numarDocument: (schema) => schema.max(100, "Numar document maxim 100 caractere").optional(),
+}).omit({ id: true, createdAt: true });
+
+export type InsertOperatiune = z.infer<typeof insertOperatiuneSchema>;
+
+export const updateOperatiuneSchema = insertOperatiuneSchema.partial();
+export type UpdateOperatiune = z.infer<typeof updateOperatiuneSchema>;
 
 // ============================================================================
 // Mijloace Fixe - Fixed Assets

@@ -1,6 +1,8 @@
 import { useState, useEffect, type ReactNode } from "react";
 import type { Tranzactie, TipTranzactie } from "shared";
 import { api } from "@/lib/api";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Plus,
   ArrowRightLeft,
@@ -10,6 +12,7 @@ import {
   Wrench,
   LogOut,
   History,
+  Trash2,
 } from "lucide-react";
 
 // Type labels in Romanian
@@ -47,13 +50,15 @@ const tipColors: Record<TipTranzactie, string> = {
 
 interface TranzactiiTimelineProps {
   mijlocFixId: number;
+  onTransactionDeleted?: () => void;
 }
 
-export function TranzactiiTimeline({ mijlocFixId }: TranzactiiTimelineProps) {
+export function TranzactiiTimeline({ mijlocFixId, onTransactionDeleted }: TranzactiiTimelineProps) {
   const [tranzactii, setTranzactii] = useState<Tranzactie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  useEffect(() => {
+  const fetchTranzactii = () => {
     setIsLoading(true);
     api
       .get<Tranzactie[]>(`/operatiuni/istoric/${mijlocFixId}`)
@@ -63,7 +68,32 @@ export function TranzactiiTimeline({ mijlocFixId }: TranzactiiTimelineProps) {
         }
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchTranzactii();
   }, [mijlocFixId]);
+
+  async function handleDeleteTransaction(tranzactieId: number) {
+    if (!confirm("Sigur doriti stergerea acestei tranzactii? Efectele vor fi inversate.")) {
+      return;
+    }
+    setIsDeleting(true);
+    try {
+      const res = await api.post("/operatiuni/stergere-tranzactie", { tranzactieId });
+      if (res.success) {
+        toast.success("Tranzactia a fost stearsa");
+        fetchTranzactii();
+        onTransactionDeleted?.();
+      } else {
+        toast.error(res.message || "Eroare la stergere");
+      }
+    } catch {
+      toast.error("Eroare de retea");
+    } finally {
+      setIsDeleting(false);
+    }
+  }
 
   if (isLoading) {
     return (
@@ -143,9 +173,11 @@ export function TranzactiiTimeline({ mijlocFixId }: TranzactiiTimelineProps) {
       <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border" />
 
       <div className="space-y-6">
-        {tranzactii.map((tranzactie) => {
+        {tranzactii.map((tranzactie, index) => {
           const details = getTransactionDetails(tranzactie);
           const colorClass = tipColors[tranzactie.tip];
+          // Only the most recent (first in list) non-intrare transaction can be deleted
+          const canDelete = index === 0 && tranzactie.tip !== "intrare";
 
           return (
             <div key={tranzactie.id} className="relative pl-12">
@@ -161,9 +193,23 @@ export function TranzactiiTimeline({ mijlocFixId }: TranzactiiTimelineProps) {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-medium">{tipLabels[tranzactie.tip]}</span>
-                  <span className="text-sm text-muted-foreground">
-                    {formatDate(tranzactie.dataOperare)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">
+                      {formatDate(tranzactie.dataOperare)}
+                    </span>
+                    {canDelete && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 text-muted-foreground hover:text-destructive"
+                        onClick={() => handleDeleteTransaction(tranzactie.id)}
+                        disabled={isDeleting}
+                        title="Sterge tranzactia"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Details */}

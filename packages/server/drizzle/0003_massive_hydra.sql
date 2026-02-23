@@ -1,0 +1,1 @@
+ALTER TABLE `conturi` MODIFY COLUMN `simbol` varchar(30) NOT NULL;

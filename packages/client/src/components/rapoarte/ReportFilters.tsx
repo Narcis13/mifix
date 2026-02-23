@@ -11,13 +11,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { api } from "@/lib/api";
-import type { Gestiune } from "shared";
+import type { Gestiune, Cont } from "shared";
 import { FileText } from "lucide-react";
 
 export interface ReportFiltersState {
   dataStart?: string;
   dataEnd?: string;
+  dataInventar?: string;
   gestiuneId?: number;
+  contId?: number;
   stare?: string;
   an?: number;
   luna?: number;
@@ -26,7 +28,9 @@ export interface ReportFiltersState {
 interface ReportFiltersProps {
   onFilter: (filters: ReportFiltersState) => void;
   showPeriod?: boolean;
+  showSingleDate?: boolean;
   showGestiune?: boolean;
+  showCont?: boolean;
   showStare?: boolean;
   showYearMonth?: boolean;
   isLoading?: boolean;
@@ -35,12 +39,15 @@ interface ReportFiltersProps {
 export function ReportFilters({
   onFilter,
   showPeriod = false,
+  showSingleDate = false,
   showGestiune = false,
+  showCont = false,
   showStare = false,
   showYearMonth = false,
   isLoading = false,
 }: ReportFiltersProps) {
   const [gestiuni, setGestiuni] = useState<Gestiune[]>([]);
+  const [conturi, setConturi] = useState<Cont[]>([]);
   const [filters, setFilters] = useState<ReportFiltersState>(() => {
     const now = new Date();
     const currentYear = now.getFullYear();
@@ -53,6 +60,7 @@ export function ReportFilters({
     return {
       dataStart: firstDayOfMonth.toISOString().split("T")[0],
       dataEnd: lastDayOfMonth.toISOString().split("T")[0],
+      dataInventar: lastDayOfMonth.toISOString().split("T")[0],
       stare: "activ",
       an: currentYear,
       luna: currentMonth,
@@ -67,7 +75,14 @@ export function ReportFilters({
         }
       });
     }
-  }, [showGestiune]);
+    if (showCont) {
+      api.get<Cont[]>("/conturi").then((res) => {
+        if (res.success && res.data) {
+          setConturi(res.data.filter((c) => c.activ && !c.titlu));
+        }
+      });
+    }
+  }, [showGestiune, showCont]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,6 +135,21 @@ export function ReportFilters({
                 />
               </div>
             </>
+          )}
+
+          {showSingleDate && (
+            <div className="space-y-2">
+              <Label htmlFor="dataInventar">Data inventariere</Label>
+              <Input
+                id="dataInventar"
+                type="date"
+                value={filters.dataInventar || ""}
+                onChange={(e) =>
+                  setFilters({ ...filters, dataInventar: e.target.value })
+                }
+                className="w-[180px]"
+              />
+            </div>
           )}
 
           {showYearMonth && (
@@ -181,6 +211,33 @@ export function ReportFilters({
                   {gestiuni.map((gestiune) => (
                     <SelectItem key={gestiune.id} value={gestiune.id.toString()}>
                       {gestiune.cod} - {gestiune.denumire}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {showCont && (
+            <div className="space-y-2">
+              <Label htmlFor="cont">Cont</Label>
+              <Select
+                value={filters.contId?.toString() || "all"}
+                onValueChange={(value) =>
+                  setFilters({
+                    ...filters,
+                    contId: value === "all" ? undefined : parseInt(value),
+                  })
+                }
+              >
+                <SelectTrigger className="w-[250px]">
+                  <SelectValue placeholder="Toate conturile" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Toate conturile</SelectItem>
+                  {conturi.map((cont) => (
+                    <SelectItem key={cont.id} value={cont.id.toString()}>
+                      {cont.simbol} - {cont.denumire}
                     </SelectItem>
                   ))}
                 </SelectContent>

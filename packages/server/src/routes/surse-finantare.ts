@@ -17,6 +17,9 @@ surseFinantareRoutes.get("/", async (c) => {
     id: s.id,
     cod: s.cod,
     denumire: s.denumire,
+    capitol: s.capitol ?? false,
+    codCapitol1: s.codCapitol1 ?? undefined,
+    codCapitol2: s.codCapitol2 ?? undefined,
     activ: s.activ ?? true,
   }));
 
@@ -41,6 +44,9 @@ surseFinantareRoutes.get("/:id", async (c) => {
     id: result.id,
     cod: result.cod,
     denumire: result.denumire,
+    capitol: result.capitol ?? false,
+    codCapitol1: result.codCapitol1 ?? undefined,
+    codCapitol2: result.codCapitol2 ?? undefined,
     activ: result.activ ?? true,
   };
 
@@ -74,6 +80,9 @@ surseFinantareRoutes.post(
       id: created.id,
       cod: created.cod,
       denumire: created.denumire,
+      capitol: created.capitol ?? false,
+      codCapitol1: created.codCapitol1 ?? undefined,
+      codCapitol2: created.codCapitol2 ?? undefined,
       activ: created.activ ?? true,
     };
 
@@ -123,6 +132,9 @@ surseFinantareRoutes.put(
       id: updated.id,
       cod: updated.cod,
       denumire: updated.denumire,
+      capitol: updated.capitol ?? false,
+      codCapitol1: updated.codCapitol1 ?? undefined,
+      codCapitol2: updated.codCapitol2 ?? undefined,
       activ: updated.activ ?? true,
     };
 

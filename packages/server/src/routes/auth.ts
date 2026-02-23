@@ -18,6 +18,53 @@ interface UserData {
   username: string;
 }
 
+// POST /register - Create a new user
+authRoutes.post("/register", async (c) => {
+  let body: LoginPayload;
+
+  try {
+    body = await c.req.json<LoginPayload>();
+  } catch {
+    return c.json<ApiResponse>(
+      { success: false, message: "Cerere invalida" },
+      400
+    );
+  }
+
+  const { username, password } = body;
+
+  if (!username || !password) {
+    return c.json<ApiResponse>(
+      { success: false, message: "Username si parola sunt obligatorii" },
+      400
+    );
+  }
+
+  // Check if user already exists
+  const [existing] = await db
+    .select()
+    .from(users)
+    .where(eq(users.username, username));
+
+  if (existing) {
+    return c.json<ApiResponse>(
+      { success: false, message: "Username-ul exista deja" },
+      409
+    );
+  }
+
+  // Hash password using Bun.password
+  const passwordHash = await Bun.password.hash(password);
+
+  // Insert user
+  await db.insert(users).values({ username, passwordHash });
+
+  return c.json<ApiResponse<UserData>>(
+    { success: true, data: { username } },
+    201
+  );
+});
+
 // POST /login - Authenticate user and set JWT cookie
 authRoutes.post("/login", async (c) => {
   let body: LoginPayload;

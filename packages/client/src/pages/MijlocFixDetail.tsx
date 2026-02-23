@@ -18,6 +18,7 @@ import { CasareDialog } from "@/components/operatiuni/CasareDialog";
 import { DeclasareDialog } from "@/components/operatiuni/DeclasareDialog";
 import { TranzactiiTimeline } from "@/components/operatiuni/TranzactiiTimeline";
 import { AmortizariTable } from "@/components/amortizare/AmortizariTable";
+import { toast } from "sonner";
 import {
   ArrowLeft,
   Pencil,
@@ -27,6 +28,7 @@ import {
   Ban,
   TrendingDown,
   History,
+  Trash2,
 } from "lucide-react";
 
 export function MijlocFixDetail() {
@@ -67,6 +69,24 @@ export function MijlocFixDetail() {
     // Force timeline to re-fetch
     setTimelineKey((prev) => prev + 1);
   }, [fetchData]);
+
+  async function handleDeleteAsset() {
+    if (!mijlocFix) return;
+    if (!confirm(`Sigur doriti stergerea mijlocului fix "${mijlocFix.denumire}"? Aceasta actiune este ireversibila.`)) {
+      return;
+    }
+    try {
+      const res = await api.post("/operatiuni/stergere-mijloc-fix", { mijlocFixId: mijlocFix.id });
+      if (res.success) {
+        toast.success("Mijlocul fix a fost sters");
+        navigate("/mijloace-fixe");
+      } else {
+        toast.error(res.message || "Eroare la stergere");
+      }
+    } catch {
+      toast.error("Eroare de retea");
+    }
+  }
 
   if (isLoading) {
     return (
@@ -148,6 +168,14 @@ export function MijlocFixDetail() {
                 >
                   <Ban className="mr-2 h-4 w-4" />
                   Casare
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleDeleteAsset}
+                  className="text-destructive"
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Stergere Mijloc Fix
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -257,7 +285,7 @@ export function MijlocFixDetail() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <TranzactiiTimeline key={timelineKey} mijlocFixId={mijlocFix.id} />
+          <TranzactiiTimeline key={timelineKey} mijlocFixId={mijlocFix.id} onTransactionDeleted={refreshData} />
         </CardContent>
       </Card>
 

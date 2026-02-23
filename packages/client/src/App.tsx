@@ -9,11 +9,16 @@ const navItems = [
   { path: "/mijloace-fixe", label: "Mijloace Fixe" },
   { path: "/amortizare", label: "Amortizare" },
   { path: "/rapoarte", label: "Rapoarte" },
+  { path: "/operatiuni-masa", label: "Op. Masa" },
+  { path: "/verificare", label: "Verificare" },
   { path: "/gestiuni", label: "Gestiuni" },
   { path: "/surse-finantare", label: "Surse Finantare" },
   { path: "/locuri", label: "Locuri Folosinta" },
   { path: "/conturi", label: "Plan Conturi" },
   { path: "/clasificari", label: "Clasificari" },
+  { path: "/provenienta", label: "Provenienta" },
+  { path: "/tipuri-stoc", label: "Tipuri Stoc" },
+  { path: "/unitati-masura", label: "Unitati Masura" },
 ];
 
 function App() {

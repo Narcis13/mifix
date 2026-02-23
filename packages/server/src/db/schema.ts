@@ -55,23 +55,27 @@ export const locuriUilizare = mysqlTable(
 );
 
 // ============================================================================
-// 4. Surse Finantare - Funding Sources
+// 4. Surse Finantare - Funding Sources (with hierarchy from legacy FINANTAT)
 // ============================================================================
 export const surseFinantare = mysqlTable("surse_finantare", {
   id: int("id").primaryKey().autoincrement(),
   cod: varchar("cod", { length: 20 }).notNull().unique(),
   denumire: varchar("denumire", { length: 200 }).notNull(),
+  capitol: boolean("capitol").default(false), // true=parent chapter, false=detail level
+  codCapitol1: int("cod_capitol_1"), // self-ref parent chapter ID 1
+  codCapitol2: int("cod_capitol_2"), // self-ref parent chapter ID 2
   activ: boolean("activ").default(true),
 });
 
 // ============================================================================
-// 5. Conturi - Chart of Accounts
+// 5. Conturi - Chart of Accounts (with hierarchy from legacy CONTURI)
 // ============================================================================
 export const conturi = mysqlTable("conturi", {
   id: int("id").primaryKey().autoincrement(),
-  simbol: varchar("simbol", { length: 20 }).notNull().unique(),
+  simbol: varchar("simbol", { length: 30 }).notNull().unique(),
   denumire: varchar("denumire", { length: 300 }).notNull(),
   tip: mysqlEnum("tip", ["activ", "pasiv", "bifunctional"]).notNull(),
+  titlu: boolean("titlu").default(false), // true=parent/title account, false=detail/posting account
   amortizabil: boolean("amortizabil").default(false),
   contAmortizare: varchar("cont_amortizare", { length: 20 }),
   activ: boolean("activ").default(true),
@@ -88,7 +92,59 @@ export const tipuriDocument = mysqlTable("tipuri_document", {
 });
 
 // ============================================================================
-// 7. Mijloace Fixe - Fixed Assets (Main Entity)
+// 7. Provenienta - Provenance Sources (from legacy PROVENIE)
+// ============================================================================
+export const provenienta = mysqlTable("provenienta", {
+  id: int("id").primaryKey().autoincrement(),
+  cod: varchar("cod", { length: 20 }).notNull().unique(),
+  denumire: varchar("denumire", { length: 200 }).notNull(),
+  activ: boolean("activ").default(true),
+});
+
+// ============================================================================
+// 8. Tipuri Stoc - Stock/Usage Types (from legacy STOC_UZ)
+// ============================================================================
+export const tipuriStoc = mysqlTable("tipuri_stoc", {
+  id: int("id").primaryKey().autoincrement(),
+  cod: varchar("cod", { length: 20 }).notNull().unique(),
+  denumire: varchar("denumire", { length: 200 }).notNull(),
+  activ: boolean("activ").default(true),
+});
+
+// ============================================================================
+// 9. Unitati Masura - Units of Measure (from legacy UNIT_MAS)
+// ============================================================================
+export const unitatiMasura = mysqlTable("unitati_masura", {
+  id: int("id").primaryKey().autoincrement(),
+  cod: varchar("cod", { length: 20 }).notNull().unique(),
+  denumire: varchar("denumire", { length: 200 }).notNull(),
+  activ: boolean("activ").default(true),
+});
+
+// ============================================================================
+// 10. Operatiuni - Operation Headers (from legacy OPERATII, batch grouping)
+// ============================================================================
+export const operatiuni = mysqlTable(
+  "operatiuni",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    numarOperatie: int("numar_operatie").notNull(),
+    an: int("an").notNull(),
+    dataOperare: date("data_operare").notNull(),
+    tipDocumentId: int("tip_document_id"),
+    numarDocument: varchar("numar_document", { length: 100 }),
+    dataDocument: date("data_document"),
+    descriere: varchar("descriere", { length: 500 }),
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [
+    uniqueIndex("uniq_operatiuni_an_numar").on(table.an, table.numarOperatie),
+    index("idx_operatiuni_data").on(table.dataOperare),
+  ]
+);
+
+// ============================================================================
+// 11. Mijloace Fixe - Fixed Assets (Main Entity)
 // ============================================================================
 export const mijloaceFixe = mysqlTable(
   "mijloace_fixe",
@@ -113,6 +169,11 @@ export const mijloaceFixe = mysqlTable(
 
     // Document type reference
     tipDocumentId: int("tip_document_id"),
+
+    // Provenance, stock type, unit of measure (from legacy dimensions)
+    provenientaId: int("provenienta_id"),
+    tipStocId: int("tip_stoc_id"),
+    unitateMasuraId: int("unitate_masura_id"),
 
     // Acquisition details
     dataAchizitie: date("data_achizitie").notNull(),
@@ -164,6 +225,7 @@ export const tranzactii = mysqlTable(
   {
     id: int("id").primaryKey().autoincrement(),
     mijlocFixId: int("mijloc_fix_id").notNull(),
+    operatiuneId: int("operatiune_id"), // FK to operatiuni (batch grouping)
 
     tip: mysqlEnum("tip", [
       "intrare",
@@ -275,6 +337,27 @@ export const conturiRelations = relations(conturi, ({ many }) => ({
 
 export const tipuriDocumentRelations = relations(tipuriDocument, ({ many }) => ({
   mijloaceFixe: many(mijloaceFixe),
+  operatiuni: many(operatiuni),
+}));
+
+export const provenientaRelations = relations(provenienta, ({ many }) => ({
+  mijloaceFixe: many(mijloaceFixe),
+}));
+
+export const tipuriStocRelations = relations(tipuriStoc, ({ many }) => ({
+  mijloaceFixe: many(mijloaceFixe),
+}));
+
+export const unitatiMasuraRelations = relations(unitatiMasura, ({ many }) => ({
+  mijloaceFixe: many(mijloaceFixe),
+}));
+
+export const operatiuniRelations = relations(operatiuni, ({ one, many }) => ({
+  tipDocument: one(tipuriDocument, {
+    fields: [operatiuni.tipDocumentId],
+    references: [tipuriDocument.id],
+  }),
+  tranzactii: many(tranzactii),
 }));
 
 export const mijloaceFixeRelations = relations(mijloaceFixe, ({ one, many }) => ({
@@ -302,6 +385,18 @@ export const mijloaceFixeRelations = relations(mijloaceFixe, ({ one, many }) => 
     fields: [mijloaceFixe.tipDocumentId],
     references: [tipuriDocument.id],
   }),
+  provenienta: one(provenienta, {
+    fields: [mijloaceFixe.provenientaId],
+    references: [provenienta.id],
+  }),
+  tipStoc: one(tipuriStoc, {
+    fields: [mijloaceFixe.tipStocId],
+    references: [tipuriStoc.id],
+  }),
+  unitateMasura: one(unitatiMasura, {
+    fields: [mijloaceFixe.unitateMasuraId],
+    references: [unitatiMasura.id],
+  }),
   tranzactii: many(tranzactii),
   amortizari: many(amortizari),
 }));
@@ -310,6 +405,10 @@ export const tranzactiiRelations = relations(tranzactii, ({ one }) => ({
   mijlocFix: one(mijloaceFixe, {
     fields: [tranzactii.mijlocFixId],
     references: [mijloaceFixe.id],
+  }),
+  operatiune: one(operatiuni, {
+    fields: [tranzactii.operatiuneId],
+    references: [operatiuni.id],
   }),
   gestiuneSursa: one(gestiuni, {
     fields: [tranzactii.gestiuneSursaId],

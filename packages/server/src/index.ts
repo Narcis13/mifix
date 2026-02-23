@@ -8,10 +8,14 @@ import { clasificariRoutes } from "./routes/clasificari";
 import { conturiRoutes } from "./routes/conturi";
 import { locuriRoutes } from "./routes/locuri";
 import { tipuriDocumentRoutes } from "./routes/tipuri-document";
+import { provenientaRoutes } from "./routes/provenienta";
+import { tipuriStocRoutes } from "./routes/tipuri-stoc";
+import { unitatiMasuraRoutes } from "./routes/unitati-masura";
 import { mijloaceFixeRoutes } from "./routes/mijloace-fixe";
 import { operatiuniRoutes } from "./routes/operatiuni";
 import { amortizariRoutes } from "./routes/amortizari";
 import { rapoarteRoutes } from "./routes/rapoarte";
+import { verificareRoutes } from "./routes/verificare";
 import { authMiddleware } from "./middleware/auth";
 
 const app = new Hono();
@@ -32,10 +36,14 @@ app.route("/api/clasificari", clasificariRoutes);
 app.route("/api/conturi", conturiRoutes);
 app.route("/api/locuri", locuriRoutes);
 app.route("/api/tipuri-document", tipuriDocumentRoutes);
+app.route("/api/provenienta", provenientaRoutes);
+app.route("/api/tipuri-stoc", tipuriStocRoutes);
+app.route("/api/unitati-masura", unitatiMasuraRoutes);
 app.route("/api/mijloace-fixe", mijloaceFixeRoutes);
 app.route("/api/operatiuni", operatiuniRoutes);
 app.route("/api/amortizari", amortizariRoutes);
 app.route("/api/rapoarte", rapoarteRoutes);
+app.route("/api/verificare", verificareRoutes);
 
 // Root route
 app.get("/", (c) => {

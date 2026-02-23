@@ -61,3 +61,72 @@ export const declasareSchema = z.object({
 });
 
 export type DeclasareInput = z.infer<typeof declasareSchema>;
+
+// ============================================================================
+// Stergere Tranzactie Schema - OP-06
+// Delete/reverse the most recent transaction for an asset
+// ============================================================================
+export const stergeTranzactieSchema = z.object({
+  tranzactieId: z.number().min(1, "ID tranzactie obligatoriu"),
+});
+
+export type StergeTranzactieInput = z.infer<typeof stergeTranzactieSchema>;
+
+// ============================================================================
+// Transfer Cont Schema - OP-07
+// Mass-transfer assets from one account to another (MOD_CONT equivalent)
+// ============================================================================
+export const transferContSchema = z.object({
+  contSursaId: z.number().min(1, "Contul sursa obligatoriu"),
+  contDestinatieId: z.number().min(1, "Contul destinatie obligatoriu"),
+  numarInventar: z.string().optional(), // specific asset, or omit for all at source account
+  dataOperare: z.string().min(1, "Data operarii obligatorie"),
+  documentNumar: z.string().max(100).optional(),
+  documentData: z.string().optional(),
+  observatii: z.string().max(500).optional(),
+});
+
+export type TransferContInput = z.infer<typeof transferContSchema>;
+
+// ============================================================================
+// Stergere Mijloc Fix Schema - OP-08
+// Delete unused asset (no transactions besides initial entry)
+// ============================================================================
+export const stergeMijlocFixSchema = z.object({
+  mijlocFixId: z.number().min(1, "Mijloc fix obligatoriu"),
+});
+
+export type StergeMijlocFixInput = z.infer<typeof stergeMijlocFixSchema>;
+
+// ============================================================================
+// Transfer Gestiune in Masa Schema - OP-09
+// Mass-transfer assets between gestiuni (MOD_GEST equivalent)
+// ============================================================================
+export const transferGestiuneMasaSchema = z.object({
+  gestiuneSursaId: z.number().min(1, "Gestiunea sursa obligatorie"),
+  gestiuneDestinatieId: z.number().min(1, "Gestiunea destinatie obligatorie"),
+  numarInventar: z.string().optional(), // specific asset, or omit for all
+  dataOperare: z.string().min(1, "Data operarii obligatorie"),
+  documentNumar: z.string().max(100).optional(),
+  documentData: z.string().optional(),
+  observatii: z.string().max(500).optional(),
+});
+
+export type TransferGestiuneMasaInput = z.infer<typeof transferGestiuneMasaSchema>;
+
+// ============================================================================
+// Transfer Loc in Masa Schema - OP-10
+// Mass-transfer assets between locations (MOD_DISP equivalent)
+// ============================================================================
+export const transferLocMasaSchema = z.object({
+  gestiuneId: z.number().min(1, "Gestiunea obligatorie"),
+  locFolosintaSursaId: z.number().min(1, "Locul sursa obligatoriu"),
+  locFolosintaDestinatieId: z.number().min(1, "Locul destinatie obligatoriu"),
+  numarInventar: z.string().optional(), // specific asset, or omit for all
+  dataOperare: z.string().min(1, "Data operarii obligatorie"),
+  documentNumar: z.string().max(100).optional(),
+  documentData: z.string().optional(),
+  observatii: z.string().max(500).optional(),
+});
+
+export type TransferLocMasaInput = z.infer<typeof transferLocMasaSchema>;
