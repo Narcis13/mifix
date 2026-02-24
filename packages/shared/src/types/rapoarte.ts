@@ -204,6 +204,8 @@ export interface CentralizatorActRow {
   numarOperatie: number;
   an: number;
   dataOperare: string;
+  tipOperatie: string;              // intrare/iesire/transfer/inventar/ajustare
+  stare: string;                    // deschisa/finalizata/anulata
   tipDocumentDenumire: string | null;
   numarDocument: string | null;
   descriere: string | null;
@@ -222,6 +224,7 @@ export interface CentralizatorActResponse {
     dataEnd: string;
     gestiuneId?: number;
     contId?: number;
+    tipOperatie?: string;
   };
 }
 

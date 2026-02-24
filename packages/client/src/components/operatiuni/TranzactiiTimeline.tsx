@@ -1,4 +1,5 @@
 import { useState, useEffect, type ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Tranzactie, TipTranzactie } from "shared";
 import { api } from "@/lib/api";
 import { toast } from "sonner";
@@ -13,6 +14,7 @@ import {
   LogOut,
   History,
   Trash2,
+  FileText,
 } from "lucide-react";
 
 // Type labels in Romanian
@@ -54,6 +56,7 @@ interface TranzactiiTimelineProps {
 }
 
 export function TranzactiiTimeline({ mijlocFixId, onTransactionDeleted }: TranzactiiTimelineProps) {
+  const navigate = useNavigate();
   const [tranzactii, setTranzactii] = useState<Tranzactie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -231,6 +234,21 @@ export function TranzactiiTimeline({ mijlocFixId, onTransactionDeleted }: Tranza
                 {tranzactie.documentNumar && (
                   <div className="text-xs text-muted-foreground mt-2 pt-2 border-t">
                     Document: {tranzactie.documentNumar}
+                  </div>
+                )}
+
+                {/* Operatiune link */}
+                {tranzactie.operatiuneId && tranzactie.operatiune && (
+                  <div className={`text-xs text-muted-foreground ${tranzactie.documentNumar ? "mt-1" : "mt-2 pt-2 border-t"}`}>
+                    <Button
+                      variant="link"
+                      size="sm"
+                      className="h-auto p-0 text-xs"
+                      onClick={() => navigate(`/operatiuni-acte/${tranzactie.operatiuneId}`)}
+                    >
+                      <FileText className="h-3 w-3 mr-1" />
+                      OP-{tranzactie.operatiune.numarOperatie}/{tranzactie.operatiune.an}
+                    </Button>
                   </div>
                 )}
               </div>

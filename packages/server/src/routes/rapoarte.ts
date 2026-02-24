@@ -665,6 +665,7 @@ rapoarteRoutes.get("/centralizator", async (c) => {
   const dataEnd = c.req.query("dataEnd");
   const gestiuneIdParam = c.req.query("gestiuneId");
   const contIdParam = c.req.query("contId");
+  const tipOperatieParam = c.req.query("tipOperatie");
 
   if (!dataStart || !dataEnd) {
     return c.json<ApiResponse>({
@@ -684,8 +685,9 @@ rapoarteRoutes.get("/centralizator", async (c) => {
   try {
     const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
     const contId = contIdParam ? parseInt(contIdParam) : undefined;
+    const tipOperatie = tipOperatieParam || undefined;
 
-    // Build optional filters on the asset (via transaction join)
+    // Build optional filters
     const extraConditions: ReturnType<typeof sql>[] = [];
     if (gestiuneId) {
       extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
@@ -693,6 +695,12 @@ rapoarteRoutes.get("/centralizator", async (c) => {
     if (contId) {
       extraConditions.push(sql`AND mf.cont_id = ${contId}`);
     }
+    if (tipOperatie) {
+      extraConditions.push(sql`AND op.tip_operatie = ${tipOperatie}`);
+    }
+    // Exclude anulata operations from totals by default
+    extraConditions.push(sql`AND op.stare_operatie != 'anulata'`);
+
     const extraWhere = extraConditions.length > 0
       ? extraConditions.reduce((acc, cond) => sql`${acc} ${cond}`)
       : sql``;
@@ -704,6 +712,8 @@ rapoarteRoutes.get("/centralizator", async (c) => {
         op.numar_operatie,
         op.an,
         op.data_operare,
+        op.tip_operatie,
+        op.stare_operatie,
         td.denumire as tip_document_denumire,
         op.numar_document,
         op.descriere,
@@ -723,6 +733,7 @@ rapoarteRoutes.get("/centralizator", async (c) => {
         AND op.data_operare <= ${dataEnd}
         ${extraWhere}
       GROUP BY op.id, op.numar_operatie, op.an, op.data_operare,
+               op.tip_operatie, op.stare_operatie,
                td.denumire, op.numar_document, op.descriere
       HAVING valoare_debit != 0 OR valoare_credit != 0
       ORDER BY op.data_operare, op.numar_operatie
@@ -748,6 +759,8 @@ rapoarteRoutes.get("/centralizator", async (c) => {
         numarOperatie: row.numar_operatie,
         an: row.an,
         dataOperare: row.data_operare,
+        tipOperatie: row.tip_operatie ?? "transfer",
+        stare: row.stare_operatie ?? "finalizata",
         tipDocumentDenumire: row.tip_document_denumire ?? null,
         numarDocument: row.numar_document ?? null,
         descriere: row.descriere ?? null,
@@ -767,6 +780,7 @@ rapoarteRoutes.get("/centralizator", async (c) => {
         dataEnd,
         gestiuneId,
         contId,
+        tipOperatie,
       },
     };
 

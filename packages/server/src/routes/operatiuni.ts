@@ -52,12 +52,14 @@ operatiuniRoutes.get("/istoric/:mijlocFixId", async (c) => {
         gestiuneDestinatie: gestiuneDestinatie,
         locFolosintaSursa: locFolosintaSursa,
         locFolosintaDestinatie: locFolosintaDestinatie,
+        operatiune: operatiuni,
       })
       .from(tranzactii)
       .leftJoin(gestiuneSursa, eq(tranzactii.gestiuneSursaId, gestiuneSursa.id))
       .leftJoin(gestiuneDestinatie, eq(tranzactii.gestiuneDestinatieId, gestiuneDestinatie.id))
       .leftJoin(locFolosintaSursa, eq(tranzactii.locFolosintaSursaId, locFolosintaSursa.id))
       .leftJoin(locFolosintaDestinatie, eq(tranzactii.locFolosintaDestinatieId, locFolosintaDestinatie.id))
+      .leftJoin(operatiuni, eq(tranzactii.operatiuneId, operatiuni.id))
       .where(eq(tranzactii.mijlocFixId, mijlocFixId))
       .orderBy(desc(tranzactii.dataOperare), desc(tranzactii.createdAt));
 
@@ -65,6 +67,18 @@ operatiuniRoutes.get("/istoric/:mijlocFixId", async (c) => {
     const items: Tranzactie[] = result.map((row) => ({
       id: row.tranzactie.id,
       mijlocFixId: row.tranzactie.mijlocFixId,
+      operatiuneId: row.tranzactie.operatiuneId ?? undefined,
+      operatiune: row.operatiune
+        ? {
+            id: row.operatiune.id,
+            numarOperatie: row.operatiune.numarOperatie,
+            an: row.operatiune.an,
+            dataOperare: row.operatiune.dataOperare?.toISOString().split("T")[0] ?? "",
+            tipOperatie: row.operatiune.tipOperatie,
+            stare: row.operatiune.stare,
+            createdAt: row.operatiune.createdAt?.toISOString() ?? "",
+          }
+        : undefined,
       tip: row.tranzactie.tip,
       dataOperare: row.tranzactie.dataOperare?.toISOString().split("T")[0] ?? "",
       documentNumar: row.tranzactie.documentNumar ?? undefined,

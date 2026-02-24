@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { ReportFilters, type ReportFiltersState } from "./ReportFilters";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
@@ -10,11 +12,26 @@ import { Printer, ArrowLeft, ClipboardList, Download } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { exportCsv } from "@/lib/export-csv";
 
+const tipOperatieLabels: Record<string, string> = {
+  intrare: "Intrare",
+  iesire: "Iesire",
+  transfer: "Transfer",
+  inventar: "Inventar",
+  ajustare: "Ajustare",
+};
+
+const stareLabels: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
+  deschisa: { label: "Deschisa", variant: "outline" },
+  finalizata: { label: "Finalizata", variant: "default" },
+  anulata: { label: "Anulata", variant: "destructive" },
+};
+
 export function CentralizatorActeReport() {
   const navigate = useNavigate();
   const [data, setData] = useState<CentralizatorActResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [tipOperatie, setTipOperatie] = useState<string>("");
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
@@ -37,6 +54,7 @@ export function CentralizatorActeReport() {
       params.append("dataEnd", filters.dataEnd);
       if (filters.gestiuneId) params.append("gestiuneId", filters.gestiuneId.toString());
       if (filters.contId) params.append("contId", filters.contId.toString());
+      if (tipOperatie && tipOperatie !== "all") params.append("tipOperatie", tipOperatie);
 
       const res = await api.get<CentralizatorActResponse>(`/rapoarte/centralizator?${params}`);
 
@@ -59,8 +77,8 @@ export function CentralizatorActeReport() {
     if (!data) return;
     exportCsv(
       "Centralizator_Acte",
-      ["Nr. Operatie", "An", "Data Operare", "Tip Document", "Nr. Document", "Descriere", "Valoare Debit", "Valoare Credit"],
-      data.rows.map((r) => [String(r.numarOperatie), String(r.an), r.dataOperare, r.tipDocumentDenumire || "", r.numarDocument || "", r.descriere || "", r.valoareDebit, r.valoareCredit])
+      ["Nr. Operatie", "An", "Data Operare", "Tip Operatie", "Stare", "Tip Document", "Nr. Document", "Descriere", "Valoare Debit", "Valoare Credit"],
+      data.rows.map((r) => [String(r.numarOperatie), String(r.an), r.dataOperare, tipOperatieLabels[r.tipOperatie] || r.tipOperatie, stareLabels[r.stare]?.label || r.stare, r.tipDocumentDenumire || "", r.numarDocument || "", r.descriere || "", r.valoareDebit, r.valoareCredit])
     );
   };
 
@@ -110,13 +128,33 @@ export function CentralizatorActeReport() {
         )}
       </div>
 
-      <ReportFilters
-        onFilter={handleFilter}
-        showPeriod={true}
-        showGestiune={true}
-        showCont={true}
-        isLoading={isLoading}
-      />
+      <div className="flex items-end gap-4 no-print">
+        <div className="flex-1">
+          <ReportFilters
+            onFilter={handleFilter}
+            showPeriod={true}
+            showGestiune={true}
+            showCont={true}
+            isLoading={isLoading}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="text-sm font-medium mb-1 block">Tip Operatie</label>
+          <Select value={tipOperatie} onValueChange={setTipOperatie}>
+            <SelectTrigger className="w-40">
+              <SelectValue placeholder="Toate" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toate</SelectItem>
+              <SelectItem value="intrare">Intrare</SelectItem>
+              <SelectItem value="iesire">Iesire</SelectItem>
+              <SelectItem value="transfer">Transfer</SelectItem>
+              <SelectItem value="inventar">Inventar</SelectItem>
+              <SelectItem value="ajustare">Ajustare</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
 
       {error && (
         <Card className="border-destructive">
@@ -150,6 +188,8 @@ export function CentralizatorActeReport() {
                         <th className="text-left p-2">Crt.</th>
                         <th className="text-left p-2">Nr. Op.</th>
                         <th className="text-left p-2">Data</th>
+                        <th className="text-left p-2">Tip Op.</th>
+                        <th className="text-left p-2">Stare</th>
                         <th className="text-left p-2">Tip Act</th>
                         <th className="text-left p-2">Nr. Act</th>
                         <th className="text-left p-2">Descriere</th>
@@ -158,27 +198,36 @@ export function CentralizatorActeReport() {
                       </tr>
                     </thead>
                     <tbody>
-                      {data.rows.map((row, idx) => (
-                        <tr
-                          key={row.operatiuneId}
-                          className="border-b cursor-pointer hover:bg-muted/50"
-                          onClick={() => navigate(`/rapoarte/act?id=${row.operatiuneId}`)}
-                          title="Click pentru detalii operatiune"
-                        >
-                          <td className="p-2 text-muted-foreground">{idx + 1}</td>
-                          <td className="p-2 font-mono text-primary underline">{row.numarOperatie}</td>
-                          <td className="p-2">{formatDate(row.dataOperare)}</td>
-                          <td className="p-2">{row.tipDocumentDenumire || "-"}</td>
-                          <td className="p-2">{row.numarDocument || "-"}</td>
-                          <td className="p-2 max-w-48 truncate">{row.descriere || "-"}</td>
-                          <td className="p-2 text-right">{formatCurrency(row.valoareDebit)}</td>
-                          <td className="p-2 text-right">{formatCurrency(row.valoareCredit)}</td>
-                        </tr>
-                      ))}
+                      {data.rows.map((row, idx) => {
+                        const stareInfo = stareLabels[row.stare] || { label: row.stare, variant: "secondary" as const };
+                        return (
+                          <tr
+                            key={row.operatiuneId}
+                            className="border-b cursor-pointer hover:bg-muted/50"
+                            onClick={() => navigate(`/rapoarte/act?id=${row.operatiuneId}`)}
+                            title="Click pentru detalii operatiune"
+                          >
+                            <td className="p-2 text-muted-foreground">{idx + 1}</td>
+                            <td className="p-2 font-mono text-primary underline">{row.numarOperatie}</td>
+                            <td className="p-2">{formatDate(row.dataOperare)}</td>
+                            <td className="p-2">{tipOperatieLabels[row.tipOperatie] || row.tipOperatie}</td>
+                            <td className="p-2">
+                              <Badge variant={stareInfo.variant} className="text-xs">
+                                {stareInfo.label}
+                              </Badge>
+                            </td>
+                            <td className="p-2">{row.tipDocumentDenumire || "-"}</td>
+                            <td className="p-2">{row.numarDocument || "-"}</td>
+                            <td className="p-2 max-w-48 truncate">{row.descriere || "-"}</td>
+                            <td className="p-2 text-right">{formatCurrency(row.valoareDebit)}</td>
+                            <td className="p-2 text-right">{formatCurrency(row.valoareCredit)}</td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                     <tfoot>
                       <tr className="border-t-2 font-bold">
-                        <td colSpan={6} className="p-2 text-right">TOTAL:</td>
+                        <td colSpan={8} className="p-2 text-right">TOTAL:</td>
                         <td className="p-2 text-right">{formatCurrency(data.totals.valoareDebit)}</td>
                         <td className="p-2 text-right">{formatCurrency(data.totals.valoareCredit)}</td>
                       </tr>

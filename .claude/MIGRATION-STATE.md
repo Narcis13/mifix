@@ -2,8 +2,8 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: 7D (COMPLETE)
-## Current Task: Done - all D.1-D.7 tasks completed
+## Current Phase: 7E (COMPLETE) - ALL PHASES DONE
+## Current Task: Done - all E.1-E.5 tasks completed
 ## Last Session: 2026-02-24
 ## Branch: ajustare
 ## Plan detaliat: `.claude/PLAN-OPERATIUNI.md`
@@ -105,11 +105,11 @@
 - [x] D.7 Integrare navigatie (App.tsx routes + nav)
 
 ### Phase 7E: Backfill + Integrare Finala
-- [ ] E.1 Script backfill tranzactii orfane (operatiuneId = NULL)
-- [ ] E.2 Decizie + refactor unificare flux operatiuni
-- [ ] E.3 Integrare link operatiune in MijlocFixDetail
-- [ ] E.4 Extindere raport Centralizator Acte (tipOperatie, stare)
-- [ ] E.5 Verificari integritate noi (tranzactii orfane, operatiuni vechi)
+- [x] E.1 Script backfill tranzactii orfane (operatiuneId = NULL)
+- [x] E.2 Decizie + refactor unificare flux operatiuni
+- [x] E.3 Integrare link operatiune in MijlocFixDetail
+- [x] E.4 Extindere raport Centralizator Acte (tipOperatie, stare)
+- [x] E.5 Verificari integritate noi (tranzactii orfane, operatiuni vechi)
 
 ---
 
@@ -129,6 +129,7 @@
 | 8 | 2026-02-24 | Phase 7B | Tasks B.1-B.5 | Document-centric workflow: linie-intrare (create new MF via operatiune), linie-iesire (casare/declasare/iesire via operatiune), linie-transfer (gestiune/loc/cont transfer via operatiune), delete linie (reverse+delete from open operatiune), cautare rapida MF endpoint (/api/mijloace-fixe/cautare). |
 | 9 | 2026-02-24 | Phase 7C | Tasks C.1-C.4 | Stoc bazat pe tranzactii: getStocLaData/getStocCurent helpers (reconstruct asset location at historical date from transactions), Fisa pe Gestiune report (movements in/out with sold initial/final), Situatia Stocului pe Gestiuni report (snapshot per gestiune at date), dataSnapshot filter on Lista Inventariere (historical gestiune-based stock filtering). |
 | 10 | 2026-02-24 | Phase 7D | Tasks D.1-D.7 | UI Operatiuni: Lista Operatiuni page (paginated table with filters: an, tipOperatie, stare, date range), Creare Operatiune dialog (tipOperatie, data, document, descriere), Detaliu Operatiune page (header card + linii table + finalizare/anulare/sterge linie actions), AddLinieIntrare dialog (full MF creation form), AddLinieTransfer dialog (MF search autocomplete + gestiune/loc/cont destinatie), AddLinieIesire dialog (MF search + casare/declasare/iesire), navigation integrated in App.tsx + main.tsx routes. |
+| 11 | 2026-02-24 | Phase 7E | Tasks E.1-E.5 | Backfill + Integrare: backfill script linked 40 orphaned transactions to new operatiuni headers (7936/7936 total now have operatiuneId). Decision: keep both flows (asset-centric + document-centric). Operatiune link added to TranzactiiTimeline (click OP-xx/yyyy navigates to operatiune detail). Centralizator Acte extended with tipOperatie + stare columns, tipOperatie filter, anulata exclusion. 3 new integrity checks: trx-fara-operatiune, operatiuni-deschise-vechi, stoc-gestiune-inconsistent. ALL PHASES COMPLETE. |
 
 ---
 

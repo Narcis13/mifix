@@ -225,7 +225,88 @@ verificareRoutes.get("/", async (c) => {
       )
     );
 
-    // 8. Transactions without data_operare
+    // 8. Transactions without operatiuneId (should be 0 after backfill)
+    const [orphanedOpTrx] = await db.execute(sql`
+      SELECT t.id, t.mijloc_fix_id as mijlocFixId, t.tip, t.data_operare as dataOperare
+      FROM tranzactii t
+      WHERE t.operatiune_id IS NULL
+      LIMIT 50
+    `);
+    checks.push(
+      buildCheck(
+        "trx-fara-operatiune",
+        "integritate",
+        "Tranzactii fara operatiune",
+        "Tranzactii care nu sunt legate de nicio operatiune (operatiune_id = NULL)",
+        (orphanedOpTrx as any[]).map((r) => ({
+          id: r.id,
+          detaliu: `Tranzactie #${r.id} (tip: ${r.tip}, data: ${r.dataOperare}) nu are operatiune asociata`,
+        }))
+      )
+    );
+
+    // 9. Open operations older than 30 days (possibly forgotten)
+    const [oldOpenOps] = await db.execute(sql`
+      SELECT o.id, o.numar_operatie as numarOperatie, o.an,
+             o.data_operare as dataOperare, o.tip_operatie as tipOperatie
+      FROM operatiuni o
+      WHERE o.stare_operatie = 'deschisa'
+        AND o.data_operare < DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+      LIMIT 50
+    `);
+    checks.push(
+      buildCheck(
+        "operatiuni-deschise-vechi",
+        "integritate",
+        "Operatiuni deschise vechi (>30 zile)",
+        "Operatiuni cu starea 'deschisa' mai vechi de 30 de zile - posibil uitate",
+        (oldOpenOps as any[]).map((r) => ({
+          id: r.id,
+          detaliu: `OP-${r.numarOperatie}/${r.an} (${r.tipOperatie}) din ${r.dataOperare} - deschisa de peste 30 zile`,
+        })),
+        "atentie"
+      )
+    );
+
+    // 10. Consistency: stoc curent vs stoc din tranzactii
+    // Check if any active asset's gestiuneId doesn't match what transactions suggest
+    const [stocInconsistent] = await db.execute(sql`
+      SELECT mf.id, mf.numar_inventar as numarInventar, mf.denumire,
+             mf.gestiune_id as gestiuneCurenta,
+             latest_trx.gestiune_destinatie_id as ultimaGestiuneTrx
+      FROM mijloace_fixe mf
+      INNER JOIN (
+        SELECT t1.mijloc_fix_id, t1.gestiune_destinatie_id
+        FROM tranzactii t1
+        INNER JOIN (
+          SELECT mijloc_fix_id, MAX(id) as max_id
+          FROM tranzactii
+          WHERE tip IN ('intrare', 'transfer')
+            AND gestiune_destinatie_id IS NOT NULL
+          GROUP BY mijloc_fix_id
+        ) t2 ON t1.id = t2.max_id
+      ) latest_trx ON latest_trx.mijloc_fix_id = mf.id
+      WHERE mf.stare = 'activ'
+        AND mf.gestiune_id != latest_trx.gestiune_destinatie_id
+      LIMIT 50
+    `);
+    checks.push(
+      buildCheck(
+        "stoc-gestiune-inconsistent",
+        "integritate",
+        "Gestiune inconsistenta intre activ si tranzactii",
+        "Active cu gestiunea curenta diferita de ultima gestiune din tranzactii",
+        (stocInconsistent as any[]).map((r) => ({
+          id: r.id,
+          numarInventar: r.numarInventar,
+          denumire: r.denumire,
+          detaliu: `${r.numarInventar} - gestiune activ: ${r.gestiuneCurenta}, ultima tranzactie: ${r.ultimaGestiuneTrx}`,
+        })),
+        "atentie"
+      )
+    );
+
+    // 11. Transactions without data_operare
     const [noDate] = await db.execute(sql`
       SELECT t.id, t.mijloc_fix_id as mijlocFixId, t.tip
       FROM tranzactii t
