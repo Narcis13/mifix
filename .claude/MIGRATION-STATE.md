@@ -2,10 +2,14 @@
 <!-- This file is read at the start of every session to restore context -->
 <!-- Update after completing each phase/task -->
 
-## Current Phase: 6 (COMPLETED)
-## Current Task: ALL PHASES COMPLETE
-## Last Session: 2026-02-20
-## Branch: import
+## Current Phase: 7D (COMPLETE)
+## Current Task: Done - all D.1-D.7 tasks completed
+## Last Session: 2026-02-24
+## Branch: ajustare
+## Plan detaliat: `.claude/PLAN-OPERATIUNI.md`
+
+> **Phases 0-6: MIGRARE LEGACY (COMPLETE)**
+> **Phases 7A-7E: OPERATIUNI DOCUMENT-CONTAINER (IN PROGRESS)**
 
 ---
 
@@ -69,6 +73,46 @@
 
 ---
 
+### Phase 7A: Schema + Backend Operatiuni Container
+- [x] A.1 Extindere schema `operatiuni` (tipOperatie, stare)
+- [x] A.2 Extindere shared types (TipOperatie, StareOperatie, Operatiune updated)
+- [x] A.3 Validation schemas operatiuni-header
+- [x] A.4 Helper auto-numerotare operatiuni
+- [x] A.5 Route-uri CRUD operatiuni-acte (lista, detaliu, creare, finalizare, anulare)
+- [x] A.6 Modificare operatii existente (OP-01..OP-10) sa creeze header operatiune
+- [x] A.7 Test manual + verificare
+
+### Phase 7B: Workflow Document-Centric (Intrare/Iesire)
+- [x] B.1 Endpoint linie-intrare (creare MF nou prin operatiune)
+- [x] B.2 Endpoint linie-iesire (casare/declasare prin operatiune)
+- [x] B.3 Endpoint linie-transfer (transfer prin operatiune)
+- [x] B.4 Endpoint sterge linie din operatiune deschisa
+- [x] B.5 Cautare rapida MF pentru adaugare in operatiune
+
+### Phase 7C: Stoc Bazat pe Tranzactii
+- [x] C.1 Query helper "stoc la data" (getStocLaData)
+- [x] C.2 Raport "Fisa pe Gestiune" (miscari intrare/iesire)
+- [x] C.3 Raport "Situatia Stocului pe Gestiuni" (snapshot la data)
+- [x] C.4 Adauga filtru dataSnapshot la Lista Inventariere existenta
+
+### Phase 7D: UI Operatiuni
+- [x] D.1 Pagina "Lista Operatiuni" (tabel + filtre)
+- [x] D.2 Dialog "Creare Operatiune" (header)
+- [x] D.3 Pagina "Detaliu Operatiune" (header + tabel linii + actiuni)
+- [x] D.4 Dialog "Adauga Linie - Intrare" (formular creare MF)
+- [x] D.5 Dialog "Adauga Linie - Transfer" (autocomplete + destinatie)
+- [x] D.6 Dialog "Adauga Linie - Iesire" (autocomplete + motiv)
+- [x] D.7 Integrare navigatie (App.tsx routes + nav)
+
+### Phase 7E: Backfill + Integrare Finala
+- [ ] E.1 Script backfill tranzactii orfane (operatiuneId = NULL)
+- [ ] E.2 Decizie + refactor unificare flux operatiuni
+- [ ] E.3 Integrare link operatiune in MijlocFixDetail
+- [ ] E.4 Extindere raport Centralizator Acte (tipOperatie, stare)
+- [ ] E.5 Verificari integritate noi (tranzactii orfane, operatiuni vechi)
+
+---
+
 ## Session Log
 <!-- Append entries as sessions complete -->
 
@@ -81,6 +125,10 @@
 | 4 | 2026-02-20 | Phase 4 | Tasks 4.3-4.4 | Lista de Inventariere report (GEN_INVE.PRG equiv): single-date snapshot, book values. Extended ReportFilters with showSingleDate + showCont (account filter). Added contId filter to BalantaAnalitica, Centralizator, ListaInventariere. |
 | 5 | 2026-02-20 | Phase 5 | Tasks 5.1-5.7 | All 7 secondary reports: Raport Act (LIS_ACTE), Situatie Obiecte (SIT_OBIE), Durata Depasita (TERMENE), Lista Inventariere Goala (INV_GOL), Locuri cu Obiecte (LOCURI), Corespondenta Material-Cont (MAT_CONT), Lista Materiale (LIS_MATE). Added clickable rows in Centralizator to navigate to act detail. |
 | 6 | 2026-02-20 | Phase 6 | Tasks 6.1-6.5 | Data integrity verification endpoint (18 checks across 3 categories: integritate, balante, amortizari - VERIFIC.PRG equivalent). CSV export added to all 11 tabular reports. E2E testing: all CRUD, reports, operations, verification working. Found 3 real legacy data issues (50 invalid clasificari refs, 1 negative balance, 1 over-depreciated). |
+| 7 | 2026-02-23 | Phase 7A | Tasks A.1-A.7 | Operatiuni container: added tipOperatie+stare columns to operatiuni schema, shared types (TipOperatie, StareOperatie), validation schemas, auto-numerotare helper, CRUD routes for /api/operatiuni-acte (list+detail+create+finalize+cancel), wired all existing operations (OP-01..OP-10) to create operatiune headers. 1614 legacy operatiuni updated to finalizata. |
+| 8 | 2026-02-24 | Phase 7B | Tasks B.1-B.5 | Document-centric workflow: linie-intrare (create new MF via operatiune), linie-iesire (casare/declasare/iesire via operatiune), linie-transfer (gestiune/loc/cont transfer via operatiune), delete linie (reverse+delete from open operatiune), cautare rapida MF endpoint (/api/mijloace-fixe/cautare). |
+| 9 | 2026-02-24 | Phase 7C | Tasks C.1-C.4 | Stoc bazat pe tranzactii: getStocLaData/getStocCurent helpers (reconstruct asset location at historical date from transactions), Fisa pe Gestiune report (movements in/out with sold initial/final), Situatia Stocului pe Gestiuni report (snapshot per gestiune at date), dataSnapshot filter on Lista Inventariere (historical gestiune-based stock filtering). |
+| 10 | 2026-02-24 | Phase 7D | Tasks D.1-D.7 | UI Operatiuni: Lista Operatiuni page (paginated table with filters: an, tipOperatie, stare, date range), Creare Operatiune dialog (tipOperatie, data, document, descriere), Detaliu Operatiune page (header card + linii table + finalizare/anulare/sterge linie actions), AddLinieIntrare dialog (full MF creation form), AddLinieTransfer dialog (MF search autocomplete + gestiune/loc/cont destinatie), AddLinieIesire dialog (MF search + casare/declasare/iesire), navigation integrated in App.tsx + main.tsx routes. |
 
 ---
 

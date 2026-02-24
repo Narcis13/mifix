@@ -36,6 +36,8 @@ import {
   ListaMaterialePage,
 } from "./pages/Rapoarte";
 import { OperatiuniMasaPage } from "./pages/OperatiuniMasa";
+import { OperatiuniActePage } from "./pages/OperatiuniActe";
+import { OperatiuneDetailPage } from "./pages/OperatiuneDetail";
 import { VerificarePage } from "./pages/Verificare";
 import "./index.css";
 
@@ -110,6 +112,13 @@ const router = createBrowserRouter([
           { path: "locuri-obiecte", element: <LocuriObiectePage /> },
           { path: "corespondenta-material-cont", element: <CorespMaterialContPage /> },
           { path: "lista-materiale", element: <ListaMaterialePage /> },
+        ],
+      },
+      {
+        path: "operatiuni-acte",
+        children: [
+          { index: true, element: <OperatiuniActePage /> },
+          { path: ":id", element: <OperatiuneDetailPage /> },
         ],
       },
       {

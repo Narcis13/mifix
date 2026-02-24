@@ -9,7 +9,9 @@ import {
   gestiuni,
   locuriUilizare,
   conturi,
+  operatiuni,
 } from "../db/schema";
+import { getNextNumarOperatie } from "../utils/operatiuni-helpers";
 import { Money } from "shared";
 import type { ApiResponse, Tranzactie } from "shared";
 import {
@@ -201,9 +203,25 @@ operatiuniRoutes.post(
           })
           .where(eq(mijloaceFixe.id, data.mijlocFixId));
 
-        // 5. Create transaction record
+        // 5. Create operatiune header (one-shot = finalizata direct)
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "transfer",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Transfer gestiune: ${asset.gestiuneId} -> ${data.gestiuneDestinatieId}`,
+        });
+
+        // 6. Create transaction record with operatiuneId
         await tx.insert(tranzactii).values({
           mijlocFixId: data.mijlocFixId,
+          operatiuneId: opResult.insertId,
           tip: "transfer",
           dataOperare: new Date(data.dataOperare),
           documentNumar: data.documentNumar || null,
@@ -298,14 +316,29 @@ operatiuniRoutes.post(
           })
           .where(eq(mijloaceFixe.id, data.mijlocFixId));
 
-        // 4. Create transaction record (no gestiune change, only loc change)
+        // 4. Create operatiune header
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "transfer",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Transfer loc: ${asset.locFolosintaId} -> ${data.locFolosintaDestinatieId}`,
+        });
+
+        // 5. Create transaction record with operatiuneId
         await tx.insert(tranzactii).values({
           mijlocFixId: data.mijlocFixId,
+          operatiuneId: opResult.insertId,
           tip: "transfer",
           dataOperare: new Date(data.dataOperare),
           documentNumar: data.documentNumar || null,
           documentData: data.documentData ? new Date(data.documentData) : null,
-          // No gestiune change for loc-only transfer
           gestiuneSursaId: null,
           gestiuneDestinatieId: null,
           locFolosintaSursaId: asset.locFolosintaId,
@@ -379,9 +412,25 @@ operatiuniRoutes.post(
           })
           .where(eq(mijloaceFixe.id, data.mijlocFixId));
 
-        // 3. Create transaction record
+        // 3. Create operatiune header
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "iesire",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Casare: ${data.motivCasare}`,
+        });
+
+        // 4. Create transaction record with operatiuneId
         await tx.insert(tranzactii).values({
           mijlocFixId: data.mijlocFixId,
+          operatiuneId: opResult.insertId,
           tip: "casare",
           dataOperare: new Date(data.dataOperare),
           documentNumar: data.documentNumar || null,
@@ -470,9 +519,25 @@ operatiuniRoutes.post(
           })
           .where(eq(mijloaceFixe.id, data.mijlocFixId));
 
-        // 6. Create transaction record with value tracking
+        // 6. Create operatiune header
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "ajustare",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Declasare: ${data.motivDeclasare}`,
+        });
+
+        // 7. Create transaction record with operatiuneId
         await tx.insert(tranzactii).values({
           mijlocFixId: data.mijlocFixId,
+          operatiuneId: opResult.insertId,
           tip: "declasare",
           dataOperare: new Date(data.dataOperare),
           documentNumar: data.documentNumar || null,
@@ -746,10 +811,26 @@ operatiuniRoutes.post(
           .set({ contId: data.contDestinatieId })
           .where(inArray(mijloaceFixe.id, assetIds));
 
-        // 4. Create transaction records for each asset
+        // 4. Create ONE operatiune header for all transfers
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "transfer",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Transfer cont masa: ${contSursa.simbol} -> ${contDest.simbol} (${assets.length} MF)`,
+        });
+
+        // 5. Create transaction records for each asset with same operatiuneId
         for (const asset of assets) {
           await tx.insert(tranzactii).values({
             mijlocFixId: asset.id,
+            operatiuneId: opResult.insertId,
             tip: "transfer",
             dataOperare: new Date(data.dataOperare),
             documentNumar: data.documentNumar || null,
@@ -941,10 +1022,26 @@ operatiuniRoutes.post(
           .set({ gestiuneId: data.gestiuneDestinatieId, locFolosintaId: null })
           .where(inArray(mijloaceFixe.id, assetIds));
 
-        // 4. Create transaction records
+        // 4. Create ONE operatiune header for all transfers
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "transfer",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Transfer masa gestiune: ${gestSursa.denumire} -> ${gestDest.denumire} (${assets.length} MF)`,
+        });
+
+        // 5. Create transaction records with same operatiuneId
         for (const asset of assets) {
           await tx.insert(tranzactii).values({
             mijlocFixId: asset.id,
+            operatiuneId: opResult.insertId,
             tip: "transfer",
             dataOperare: new Date(data.dataOperare),
             documentNumar: data.documentNumar || null,
@@ -1068,10 +1165,26 @@ operatiuniRoutes.post(
           .set({ locFolosintaId: data.locFolosintaDestinatieId })
           .where(inArray(mijloaceFixe.id, assetIds));
 
-        // 4. Create transaction records
+        // 4. Create ONE operatiune header for all transfers
+        const an = new Date(data.dataOperare).getFullYear();
+        const numarOp = await getNextNumarOperatie(tx, an);
+
+        const [opResult] = await tx.insert(operatiuni).values({
+          numarOperatie: numarOp,
+          an,
+          dataOperare: new Date(data.dataOperare),
+          tipOperatie: "transfer",
+          stare: "finalizata",
+          numarDocument: data.documentNumar || null,
+          dataDocument: data.documentData ? new Date(data.documentData) : null,
+          descriere: `Transfer masa loc: ${locSursa.denumire} -> ${locDest.denumire} (${assets.length} MF)`,
+        });
+
+        // 5. Create transaction records with same operatiuneId
         for (const asset of assets) {
           await tx.insert(tranzactii).values({
             mijlocFixId: asset.id,
+            operatiuneId: opResult.insertId,
             tip: "transfer",
             dataOperare: new Date(data.dataOperare),
             documentNumar: data.documentNumar || null,

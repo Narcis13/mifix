@@ -9,6 +9,7 @@ const navItems = [
   { path: "/mijloace-fixe", label: "Mijloace Fixe" },
   { path: "/amortizare", label: "Amortizare" },
   { path: "/rapoarte", label: "Rapoarte" },
+  { path: "/operatiuni-acte", label: "Operatiuni" },
   { path: "/operatiuni-masa", label: "Op. Masa" },
   { path: "/verificare", label: "Verificare" },
   { path: "/gestiuni", label: "Gestiuni" },

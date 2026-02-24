@@ -424,6 +424,72 @@ export interface ListaMaterialeResponse {
   };
 }
 
+// RAP-15: Fisa pe Gestiune (Gestiune Movement Sheet)
+export interface FisaGestiuneRow {
+  dataOperare: string;
+  numarOperatie: number | null;
+  anOperatie: number | null;
+  tipDocumentDenumire: string | null;
+  numarDocument: string | null;
+  numarInventar: string;
+  denumireMijlocFix: string;
+  tipMiscare: "intrare" | "iesire";
+  valoare: string;
+  descriere: string | null;
+}
+
+export interface FisaGestiuneResponse {
+  gestiune: {
+    id: number;
+    cod: string;
+    denumire: string;
+  };
+  locFolosinta?: {
+    id: number;
+    cod: string;
+    denumire: string;
+  };
+  perioada: { start: string; end: string };
+  soldInitial: number;
+  intrari: number;
+  iesiri: number;
+  soldFinal: number;
+  valoareSoldInitial: string;
+  valoareIntrari: string;
+  valoareIesiri: string;
+  valoareSoldFinal: string;
+  miscari: FisaGestiuneRow[];
+}
+
+// RAP-16: Situatia Stocului pe Gestiuni (Stock per Gestiune Snapshot)
+export interface StocGestiuneRow {
+  gestiuneId: number;
+  gestiuneCod: string;
+  gestiuneDenumire: string;
+  numarMijloaceFixe: number;
+  valoareTotala: string;
+  mijloaceFixe?: Array<{
+    numarInventar: string;
+    denumire: string;
+    valoareInventar: string;
+    contSimbol: string | null;
+  }>;
+}
+
+export interface StocGestiuneResponse {
+  rows: StocGestiuneRow[];
+  totals: {
+    numarGestiuni: number;
+    numarMijloaceFixe: number;
+    valoareTotala: string;
+  };
+  filters: {
+    dataSnapshot: string;
+    contId?: number;
+    detaliat: boolean;
+  };
+}
+
 // Filter parameters
 export interface ReportFilters {
   dataStart?: string;

@@ -180,6 +180,74 @@ mijloaceFixeRoutes.get("/", async (c) => {
 });
 
 // ============================================================================
+// GET /cautare - Quick search for MF (autocomplete for operatiuni) (B.5)
+// ============================================================================
+mijloaceFixeRoutes.get("/cautare", async (c) => {
+  const q = c.req.query("q") || "";
+  const gestiuneId = c.req.query("gestiuneId");
+  const stare = c.req.query("stare") || "activ";
+  const limit = parseInt(c.req.query("limit") || "20");
+
+  const conditions = [];
+
+  if (q.length > 0) {
+    conditions.push(
+      or(
+        like(mijloaceFixe.numarInventar, `%${q}%`),
+        like(mijloaceFixe.denumire, `%${q}%`)
+      )
+    );
+  }
+
+  if (gestiuneId) {
+    conditions.push(eq(mijloaceFixe.gestiuneId, parseInt(gestiuneId)));
+  }
+
+  if (stare) {
+    conditions.push(eq(mijloaceFixe.stare, stare as any));
+  }
+
+  const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+
+  const result = await db
+    .select({
+      id: mijloaceFixe.id,
+      numarInventar: mijloaceFixe.numarInventar,
+      denumire: mijloaceFixe.denumire,
+      gestiuneId: mijloaceFixe.gestiuneId,
+      gestiuneDenumire: gestiuni.denumire,
+      locFolosintaId: mijloaceFixe.locFolosintaId,
+      locFolosintaDenumire: locuriUilizare.denumire,
+      valoareInventar: mijloaceFixe.valoareInventar,
+      valoareRamasa: mijloaceFixe.valoareRamasa,
+      stare: mijloaceFixe.stare,
+      contId: mijloaceFixe.contId,
+    })
+    .from(mijloaceFixe)
+    .leftJoin(gestiuni, eq(mijloaceFixe.gestiuneId, gestiuni.id))
+    .leftJoin(locuriUilizare, eq(mijloaceFixe.locFolosintaId, locuriUilizare.id))
+    .where(whereClause)
+    .limit(limit)
+    .orderBy(mijloaceFixe.numarInventar);
+
+  const items = result.map((row) => ({
+    id: row.id,
+    numarInventar: row.numarInventar,
+    denumire: row.denumire,
+    gestiuneId: row.gestiuneId,
+    gestiuneDenumire: row.gestiuneDenumire ?? "",
+    locFolosintaId: row.locFolosintaId ?? undefined,
+    locFolosintaDenumire: row.locFolosintaDenumire ?? undefined,
+    valoareInventar: row.valoareInventar,
+    valoareRamasa: row.valoareRamasa,
+    stare: row.stare,
+    contId: row.contId ?? undefined,
+  }));
+
+  return c.json<ApiResponse<typeof items>>({ success: true, data: items });
+});
+
+// ============================================================================
 // GET /:id - Get single mijloc fix with full relations
 // ============================================================================
 mijloaceFixeRoutes.get("/:id", async (c) => {

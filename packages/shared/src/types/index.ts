@@ -18,6 +18,8 @@ export type TipTranzactie =
   | "modernizare"
   | "iesire";
 export type TipCont = "activ" | "pasiv" | "bifunctional";
+export type TipOperatie = "intrare" | "iesire" | "transfer" | "inventar" | "ajustare";
+export type StareOperatie = "deschisa" | "finalizata" | "anulata";
 
 // ═══════════════════════════════════════════════════════════════
 // ENTITY INTERFACES
@@ -107,12 +109,17 @@ export interface Operatiune {
   numarOperatie: number;
   an: number;
   dataOperare: string;
+  tipOperatie: TipOperatie;
+  stare: StareOperatie;
   tipDocumentId?: number;
   tipDocument?: TipDocument;
   numarDocument?: string;
   dataDocument?: string;
   descriere?: string;
   createdAt: string;
+  // Populated relations
+  tranzactii?: Tranzactie[];
+  numarLinii?: number;
 }
 
 export interface MijlocFix {
@@ -175,6 +182,8 @@ export interface Tranzactie {
   id: number;
   mijlocFixId: number;
   mijlocFix?: MijlocFix;
+  operatiuneId?: number;
+  operatiune?: Operatiune;
   tip: TipTranzactie;
   dataOperare: string;
   documentNumar?: string;

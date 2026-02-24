@@ -131,6 +131,18 @@ export const operatiuni = mysqlTable(
     numarOperatie: int("numar_operatie").notNull(),
     an: int("an").notNull(),
     dataOperare: date("data_operare").notNull(),
+    tipOperatie: mysqlEnum("tip_operatie", [
+      "intrare",
+      "iesire",
+      "transfer",
+      "inventar",
+      "ajustare",
+    ]).notNull().default("transfer"),
+    stare: mysqlEnum("stare_operatie", [
+      "deschisa",
+      "finalizata",
+      "anulata",
+    ]).notNull().default("deschisa"),
     tipDocumentId: int("tip_document_id"),
     numarDocument: varchar("numar_document", { length: 100 }),
     dataDocument: date("data_document"),
@@ -140,6 +152,8 @@ export const operatiuni = mysqlTable(
   (table) => [
     uniqueIndex("uniq_operatiuni_an_numar").on(table.an, table.numarOperatie),
     index("idx_operatiuni_data").on(table.dataOperare),
+    index("idx_operatiuni_tip").on(table.tipOperatie),
+    index("idx_operatiuni_stare").on(table.stare),
   ]
 );
 

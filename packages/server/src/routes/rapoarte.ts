@@ -43,7 +43,12 @@ import type {
   CorespMaterialContRow,
   ListaMaterialeResponse,
   ListaMaterialeRow,
+  FisaGestiuneResponse,
+  FisaGestiuneRow,
+  StocGestiuneResponse,
+  StocGestiuneRow,
 } from "shared";
+import { getStocLaData, getStocCurent } from "../utils/stoc-helpers";
 
 export const rapoarteRoutes = new Hono();
 
@@ -785,6 +790,10 @@ rapoarteRoutes.get("/lista-inventariere", async (c) => {
   const gestiuneIdParam = c.req.query("gestiuneId");
   const contIdParam = c.req.query("contId");
   const stare = c.req.query("stare");
+  // C.4: Optional dataSnapshot - when provided with gestiuneId, reconstructs
+  // which assets were at that gestiune at the snapshot date using transaction history
+  // instead of the current gestiune assignment on the asset
+  const dataSnapshot = c.req.query("dataSnapshot");
 
   if (!dataInventar) {
     return c.json<ApiResponse>({
@@ -801,6 +810,13 @@ rapoarteRoutes.get("/lista-inventariere", async (c) => {
     }, 400);
   }
 
+  if (dataSnapshot && !dateRegex.test(dataSnapshot)) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Format dataSnapshot invalid. Folositi YYYY-MM-DD",
+    }, 400);
+  }
+
   try {
     const gestiuneId = gestiuneIdParam ? parseInt(gestiuneIdParam) : undefined;
     const contId = contIdParam ? parseInt(contIdParam) : undefined;
@@ -813,9 +829,22 @@ rapoarteRoutes.get("/lista-inventariere", async (c) => {
       }, 400);
     }
 
+    // When dataSnapshot is provided with gestiuneId, use getStocLaData to get asset IDs
+    // that were at that gestiune at the snapshot date, then compute book values for those
+    let snapshotAssetIds: Set<number> | undefined;
+    if (dataSnapshot && gestiuneId) {
+      const stockAtDate = await getStocLaData({
+        dataSnapshot,
+        gestiuneId,
+        contId,
+      });
+      snapshotAssetIds = new Set(stockAtDate.map((a) => a.mijlocFixId));
+    }
+
     // Build optional filters
     const extraConditions: ReturnType<typeof sql>[] = [];
-    if (gestiuneId) {
+    // When using snapshot mode, don't filter by current gestiune - we use snapshotAssetIds instead
+    if (gestiuneId && !dataSnapshot) {
       extraConditions.push(sql`AND mf.gestiune_id = ${gestiuneId}`);
     }
     if (contId) {
@@ -863,7 +892,12 @@ rapoarteRoutes.get("/lista-inventariere", async (c) => {
       ORDER BY g.cod, mf.numar_inventar
     `);
 
-    const resultRows = result[0] as any[];
+    let resultRows = result[0] as any[];
+
+    // If using snapshot mode, filter to only include assets that were at the gestiune at the snapshot date
+    if (snapshotAssetIds) {
+      resultRows = resultRows.filter((row: any) => snapshotAssetIds!.has(row.mijloc_fix_id));
+    }
 
     let totalValoareInventar = Money.zero();
 
@@ -1442,6 +1476,303 @@ rapoarteRoutes.get("/lista-materiale", async (c) => {
     return c.json<ApiResponse>({
       success: false,
       message: "Eroare la generarea listei de materiale",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /fisa-gestiune - RAP-15: Fisa pe Gestiune (Gestiune Movement Sheet)
+// Shows all movements (in/out) at a gestiune in a period, with opening/closing stock
+// ============================================================================
+rapoarteRoutes.get("/fisa-gestiune", async (c) => {
+  const gestiuneIdParam = c.req.query("gestiuneId");
+  const dataStart = c.req.query("dataStart");
+  const dataEnd = c.req.query("dataEnd");
+  const locFolosintaIdParam = c.req.query("locFolosintaId");
+  const contIdParam = c.req.query("contId");
+
+  if (!gestiuneIdParam || !dataStart || !dataEnd) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Parametrii gestiuneId, dataStart si dataEnd sunt obligatorii",
+    }, 400);
+  }
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(dataStart) || !dateRegex.test(dataEnd)) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Format data invalid. Folositi YYYY-MM-DD",
+    }, 400);
+  }
+
+  const gestiuneId = parseInt(gestiuneIdParam);
+  const locFolosintaId = locFolosintaIdParam ? parseInt(locFolosintaIdParam) : undefined;
+  const contId = contIdParam ? parseInt(contIdParam) : undefined;
+
+  try {
+    // 1. Get gestiune info
+    const gestiuneResult = await db.execute(sql`
+      SELECT id, cod, denumire FROM gestiuni WHERE id = ${gestiuneId}
+    `);
+    const gestiuneInfo = (gestiuneResult[0] as any[])[0];
+    if (!gestiuneInfo) {
+      return c.json<ApiResponse>({ success: false, message: "Gestiunea nu a fost gasita" }, 404);
+    }
+
+    // 2. Get loc folosinta info if filtered
+    let locInfo: { id: number; cod: string; denumire: string } | undefined;
+    if (locFolosintaId) {
+      const locResult = await db.execute(sql`
+        SELECT id, cod, denumire FROM locuri_folosinta WHERE id = ${locFolosintaId}
+      `);
+      const loc = (locResult[0] as any[])[0];
+      if (loc) {
+        locInfo = { id: loc.id, cod: loc.cod, denumire: loc.denumire };
+      }
+    }
+
+    // 3. Calculate sold initial = stock at day before dataStart
+    // Use the day before dataStart as the snapshot date
+    const dayBefore = new Date(dataStart);
+    dayBefore.setDate(dayBefore.getDate() - 1);
+    const dataBeforeStart = dayBefore.toISOString().split("T")[0];
+
+    const stockBefore = await getStocLaData({
+      dataSnapshot: dataBeforeStart,
+      gestiuneId,
+      locFolosintaId,
+      contId,
+    });
+
+    const soldInitial = stockBefore.length;
+    let valoareSoldInitial = Money.zero();
+    for (const asset of stockBefore) {
+      valoareSoldInitial = valoareSoldInitial.plus(Money.fromDb(asset.valoareInventar));
+    }
+
+    // 4. Get all movements at this gestiune in the period
+    const locFilter = locFolosintaId
+      ? sql`AND (t.loc_folosinta_destinatie_id = ${locFolosintaId} OR t.loc_folosinta_sursa_id = ${locFolosintaId})`
+      : sql``;
+    const contFilter = contId
+      ? sql`AND mf.cont_id = ${contId}`
+      : sql``;
+
+    const movementsResult = await db.execute(sql`
+      SELECT
+        t.id as tranzactie_id,
+        t.data_operare,
+        t.tip,
+        t.gestiune_sursa_id,
+        t.gestiune_destinatie_id,
+        t.valoare_operatie,
+        t.descriere,
+        mf.numar_inventar,
+        mf.denumire as denumire_mf,
+        mf.valoare_inventar,
+        o.numar_operatie,
+        o.an as an_operatie,
+        td.denumire as tip_document_denumire,
+        o.numar_document
+      FROM tranzactii t
+      JOIN mijloace_fixe mf ON mf.id = t.mijloc_fix_id
+      LEFT JOIN operatiuni o ON o.id = t.operatiune_id
+      LEFT JOIN tipuri_document td ON td.id = o.tip_document_id
+      WHERE t.data_operare BETWEEN ${dataStart} AND ${dataEnd}
+        AND (
+          t.gestiune_destinatie_id = ${gestiuneId}
+          OR t.gestiune_sursa_id = ${gestiuneId}
+          OR (t.tip = 'intrare' AND mf.gestiune_id = ${gestiuneId} AND t.gestiune_destinatie_id IS NULL)
+          OR (t.tip IN ('casare', 'iesire') AND mf.gestiune_id = ${gestiuneId})
+        )
+        ${locFilter}
+        ${contFilter}
+      ORDER BY t.data_operare, o.numar_operatie, t.id
+    `);
+
+    const movementRows = movementsResult[0] as any[];
+
+    let totalIntrari = 0;
+    let totalIesiri = 0;
+    let valoareIntrari = Money.zero();
+    let valoareIesiri = Money.zero();
+
+    const miscari: FisaGestiuneRow[] = movementRows.map((row: any) => {
+      // Determine if this is an intrare or iesire from this gestiune's perspective
+      let tipMiscare: "intrare" | "iesire";
+
+      if (row.tip === "intrare" && (row.gestiune_destinatie_id === gestiuneId || row.gestiune_destinatie_id === null)) {
+        tipMiscare = "intrare";
+      } else if (row.tip === "transfer" && row.gestiune_destinatie_id === gestiuneId) {
+        tipMiscare = "intrare";
+      } else if (row.tip === "transfer" && row.gestiune_sursa_id === gestiuneId) {
+        tipMiscare = "iesire";
+      } else if (row.tip === "casare" || row.tip === "iesire") {
+        tipMiscare = "iesire";
+      } else if (row.tip === "declasare") {
+        tipMiscare = "iesire";
+      } else {
+        // Default: if destination matches, it's intrare; otherwise iesire
+        tipMiscare = row.gestiune_destinatie_id === gestiuneId ? "intrare" : "iesire";
+      }
+
+      const valoare = String(row.valoare_inventar ?? "0.00");
+      const valoareMoney = Money.fromDb(valoare);
+
+      if (tipMiscare === "intrare") {
+        totalIntrari++;
+        valoareIntrari = valoareIntrari.plus(valoareMoney);
+      } else {
+        totalIesiri++;
+        valoareIesiri = valoareIesiri.plus(valoareMoney);
+      }
+
+      return {
+        dataOperare: String(row.data_operare),
+        numarOperatie: row.numar_operatie ?? null,
+        anOperatie: row.an_operatie ?? null,
+        tipDocumentDenumire: row.tip_document_denumire ?? null,
+        numarDocument: row.numar_document ?? null,
+        numarInventar: row.numar_inventar,
+        denumireMijlocFix: row.denumire_mf,
+        tipMiscare,
+        valoare,
+        descriere: row.descriere ?? null,
+      };
+    });
+
+    const soldFinal = soldInitial + totalIntrari - totalIesiri;
+    const valoareSoldFinal = valoareSoldInitial.plus(valoareIntrari).minus(valoareIesiri);
+
+    const data: FisaGestiuneResponse = {
+      gestiune: {
+        id: gestiuneInfo.id,
+        cod: gestiuneInfo.cod,
+        denumire: gestiuneInfo.denumire,
+      },
+      locFolosinta: locInfo,
+      perioada: { start: dataStart, end: dataEnd },
+      soldInitial,
+      intrari: totalIntrari,
+      iesiri: totalIesiri,
+      soldFinal,
+      valoareSoldInitial: valoareSoldInitial.toDbString(),
+      valoareIntrari: valoareIntrari.toDbString(),
+      valoareIesiri: valoareIesiri.toDbString(),
+      valoareSoldFinal: valoareSoldFinal.toDbString(),
+      miscari,
+    };
+
+    return c.json<ApiResponse<FisaGestiuneResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Fisa Gestiune error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea fisei pe gestiune",
+    }, 500);
+  }
+});
+
+// ============================================================================
+// GET /stoc-gestiuni - RAP-16: Situatia Stocului pe Gestiuni (Stock Snapshot)
+// Snapshot: how many assets each gestiune has at a given date
+// ============================================================================
+rapoarteRoutes.get("/stoc-gestiuni", async (c) => {
+  const dataSnapshot = c.req.query("dataSnapshot");
+  const contIdParam = c.req.query("contId");
+  const detaliatParam = c.req.query("detaliat");
+
+  if (!dataSnapshot) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Parametrul dataSnapshot este obligatoriu",
+    }, 400);
+  }
+
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateRegex.test(dataSnapshot)) {
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Format data invalid. Folositi YYYY-MM-DD",
+    }, 400);
+  }
+
+  const contId = contIdParam ? parseInt(contIdParam) : undefined;
+  const detaliat = detaliatParam === "true";
+
+  try {
+    // Get all active gestiuni
+    const gestiuniResult = await db.execute(sql`
+      SELECT id, cod, denumire FROM gestiuni WHERE activ = true ORDER BY cod
+    `);
+    const allGestiuni = gestiuniResult[0] as any[];
+
+    // Check if dataSnapshot is today or in the future (use current stock)
+    const today = new Date().toISOString().split("T")[0];
+    const useCurrentStock = dataSnapshot >= today;
+
+    const rows: StocGestiuneRow[] = [];
+    let totalMF = 0;
+    let totalValoare = Money.zero();
+
+    for (const g of allGestiuni) {
+      let assets;
+      if (useCurrentStock) {
+        assets = await getStocCurent({ gestiuneId: g.id, contId });
+      } else {
+        assets = await getStocLaData({ dataSnapshot, gestiuneId: g.id, contId });
+      }
+
+      if (assets.length === 0) continue;
+
+      let valoareGestiune = Money.zero();
+      for (const a of assets) {
+        valoareGestiune = valoareGestiune.plus(Money.fromDb(a.valoareInventar));
+      }
+
+      const row: StocGestiuneRow = {
+        gestiuneId: g.id,
+        gestiuneCod: g.cod,
+        gestiuneDenumire: g.denumire,
+        numarMijloaceFixe: assets.length,
+        valoareTotala: valoareGestiune.toDbString(),
+      };
+
+      if (detaliat) {
+        row.mijloaceFixe = assets.map((a) => ({
+          numarInventar: a.numarInventar,
+          denumire: a.denumire,
+          valoareInventar: a.valoareInventar,
+          contSimbol: a.contSimbol,
+        }));
+      }
+
+      rows.push(row);
+      totalMF += assets.length;
+      totalValoare = totalValoare.plus(valoareGestiune);
+    }
+
+    const data: StocGestiuneResponse = {
+      rows,
+      totals: {
+        numarGestiuni: rows.length,
+        numarMijloaceFixe: totalMF,
+        valoareTotala: totalValoare.toDbString(),
+      },
+      filters: {
+        dataSnapshot,
+        contId,
+        detaliat,
+      },
+    };
+
+    return c.json<ApiResponse<StocGestiuneResponse>>({ success: true, data });
+  } catch (error) {
+    console.error("Stoc Gestiuni error:", error);
+    return c.json<ApiResponse>({
+      success: false,
+      message: "Eroare la generarea situatiei stocului pe gestiuni",
     }, 500);
   }
 });
