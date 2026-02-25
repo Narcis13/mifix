@@ -21,8 +21,15 @@ import { authMiddleware } from "./middleware/auth";
 
 const app = new Hono();
 
-// Middleware
-app.use("/*", cors());
+// CORS - in production, restrict to client origin
+const allowedOrigin = process.env.CORS_ORIGIN || "*";
+app.use(
+  "/*",
+  cors({
+    origin: allowedOrigin,
+    credentials: true,
+  })
+);
 
 // Apply auth middleware to all /api/* routes
 // Middleware skips /api/auth/login, /api/auth/logout, /api/health internally
@@ -52,7 +59,9 @@ app.get("/", (c) => {
   return c.json({ message: "MiFix API", version: "1.0.0" });
 });
 
+const port = parseInt(process.env.PORT || "3000");
+
 export default {
-  port: 3000,
+  port,
   fetch: app.fetch,
 };

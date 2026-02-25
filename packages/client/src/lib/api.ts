@@ -6,11 +6,12 @@ import type {
   AmortizareVerificare,
 } from "shared";
 
-const API_BASE = "/api";
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 /**
  * Generic fetch wrapper with error handling.
- * Uses Vite's proxy configuration - requests to /api/* go to the server.
+ * In dev, Vite proxy forwards /api/* to the server.
+ * In production, VITE_API_URL points to the API server directly.
  */
 export async function fetchApi<T>(
   endpoint: string,
@@ -18,6 +19,7 @@ export async function fetchApi<T>(
 ): Promise<ApiResponse<T>> {
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         ...options?.headers,
@@ -72,7 +74,7 @@ export const api = {
  * Fetch depreciation history for a specific asset.
  */
 export async function getAmortizariIstoric(mijlocFixId: number): Promise<Amortizare[]> {
-  const response = await fetch(`${API_BASE}/amortizari/istoric/${mijlocFixId}`);
+  const response = await fetch(`${API_BASE}/amortizari/istoric/${mijlocFixId}`, { credentials: "include" });
   const data: ApiResponse<Amortizare[]> = await response.json();
   if (!data.success) {
     throw new Error(data.message || "Failed to fetch depreciation history");
@@ -89,6 +91,7 @@ export async function genereazaAmortizare(
 ): Promise<GenereazaAmortizareResult> {
   const response = await fetch(`${API_BASE}/amortizari/genereaza`, {
     method: "POST",
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ an, luna }),
   });
@@ -104,7 +107,7 @@ export async function genereazaAmortizare(
  */
 export async function getAmortizariSumar(an?: number): Promise<AmortizareSumar[]> {
   const url = an ? `${API_BASE}/amortizari/sumar?an=${an}` : `${API_BASE}/amortizari/sumar`;
-  const response = await fetch(url);
+  const response = await fetch(url, { credentials: "include" });
   const data: ApiResponse<AmortizareSumar[]> = await response.json();
   if (!data.success) {
     throw new Error(data.message || "Failed to fetch summary");
@@ -116,7 +119,7 @@ export async function getAmortizariSumar(an?: number): Promise<AmortizareSumar[]
  * Get verification of which months are processed.
  */
 export async function getAmortizariVerificare(an: number): Promise<AmortizareVerificare[]> {
-  const response = await fetch(`${API_BASE}/amortizari/verificare?an=${an}`);
+  const response = await fetch(`${API_BASE}/amortizari/verificare?an=${an}`, { credentials: "include" });
   const data: ApiResponse<AmortizareVerificare[]> = await response.json();
   if (!data.success) {
     throw new Error(data.message || "Failed to fetch verification");

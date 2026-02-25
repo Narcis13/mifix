@@ -133,11 +133,14 @@ authRoutes.post("/login", async (c) => {
   const token = await sign(payload, JWT_SECRET);
 
   // Set HttpOnly cookie
+  // With Apache reverse proxy, Lax + no secure works over HTTP
+  // For cross-origin without proxy, use sameSite=None + secure (requires HTTPS)
   const isProduction = process.env.NODE_ENV === "production";
+  const useSecureCookies = process.env.COOKIE_SECURE === "true";
   setCookie(c, "token", token, {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: "Lax",
+    secure: useSecureCookies,
+    sameSite: useSecureCookies ? "None" : "Lax",
     path: "/",
     maxAge: 86400, // 24 hours in seconds
   });
