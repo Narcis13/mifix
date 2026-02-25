@@ -730,6 +730,20 @@ operatiuniRoutes.post(
         await tx
           .delete(tranzactii)
           .where(eq(tranzactii.id, data.tranzactieId));
+
+        // 6. Cleanup orphaned operatiune if no transactions remain
+        if (tranzactie.operatiuneId) {
+          const [remaining] = await tx
+            .select({ count: sql<number>`COUNT(*)` })
+            .from(tranzactii)
+            .where(eq(tranzactii.operatiuneId, tranzactie.operatiuneId));
+
+          if (remaining.count === 0) {
+            await tx
+              .delete(operatiuni)
+              .where(eq(operatiuni.id, tranzactie.operatiuneId));
+          }
+        }
       });
 
       return c.json<ApiResponse>({ success: true, message: "Tranzactia a fost stearsa si efectele inversate" });
