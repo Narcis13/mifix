@@ -16,6 +16,7 @@ import { TransferGestiuneDialog } from "@/components/operatiuni/TransferGestiune
 import { TransferLocDialog } from "@/components/operatiuni/TransferLocDialog";
 import { CasareDialog } from "@/components/operatiuni/CasareDialog";
 import { DeclasareDialog } from "@/components/operatiuni/DeclasareDialog";
+import { ExportDispozitivMedicalDialog } from "@/components/dispozitive-medicale/ExportDispozitivMedicalDialog";
 import { TranzactiiTimeline } from "@/components/operatiuni/TranzactiiTimeline";
 import { AmortizariTable } from "@/components/amortizare/AmortizariTable";
 import { toast } from "sonner";
@@ -29,6 +30,7 @@ import {
   TrendingDown,
   History,
   Trash2,
+  Stethoscope,
 } from "lucide-react";
 
 export function MijlocFixDetail() {
@@ -43,6 +45,7 @@ export function MijlocFixDetail() {
   const [transferLocOpen, setTransferLocOpen] = useState(false);
   const [casareOpen, setCasareOpen] = useState(false);
   const [declasareOpen, setDeclasareOpen] = useState(false);
+  const [exportDMOpen, setExportDMOpen] = useState(false);
 
   // Refresh key for timeline
   const [timelineKey, setTimelineKey] = useState(0);
@@ -168,6 +171,11 @@ export function MijlocFixDetail() {
                 >
                   <Ban className="mr-2 h-4 w-4" />
                   Casare
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => setExportDMOpen(true)}>
+                  <Stethoscope className="mr-2 h-4 w-4" />
+                  Export ca Dispozitiv Medical
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
@@ -318,6 +326,11 @@ export function MijlocFixDetail() {
             onOpenChange={setDeclasareOpen}
             mijlocFix={mijlocFix}
             onSuccess={refreshData}
+          />
+          <ExportDispozitivMedicalDialog
+            open={exportDMOpen}
+            onOpenChange={setExportDMOpen}
+            mijlocFix={mijlocFix}
           />
         </>
       )}

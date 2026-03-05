@@ -322,6 +322,198 @@ export const amortizari = mysqlTable(
 );
 
 // ============================================================================
+// Medical Devices Extension - Dispozitive Medicale
+// Legislation basis:
+//   - Regulamentul (UE) 2017/745 (MDR) — clasa risc, UDI, EUDAMED, organism notificat
+//   - Legea 38/2023 — transpunere MDR în România
+//   - ANMDM (Agenția Națională a Medicamentului și Dispozitivelor Medicale)
+//   - Ordinul MS 912/2019 — vigilență dispozitive medicale
+// ============================================================================
+
+// 12. Dispozitive Medicale - Medical Device data (extends mijloace_fixe 1:1)
+export const dispozitiveMedicale = mysqlTable(
+  "dispozitive_medicale",
+  {
+    id: int("id").primaryKey().autoincrement(),
+
+    // Link to fixed asset (1:1)
+    mijlocFixId: int("mijloc_fix_id").notNull().unique(),
+
+    // Clasificare risc per MDR 2017/745 Anexa VIII
+    clasaRisc: mysqlEnum("clasa_risc", ["I", "IIa", "IIb", "III"]).notNull(),
+
+    // Producător (MDR Art. 10)
+    producator: varchar("producator", { length: 300 }).notNull(),
+    taraProducator: varchar("tara_producator", { length: 100 }),
+
+    // Reprezentant autorizat UE (MDR Art. 11) — obligatoriu pt non-UE
+    reprezentantAutorizatUE: varchar("reprezentant_autorizat_ue", { length: 300 }),
+
+    // Importator (MDR Art. 13)
+    importator: varchar("importator", { length: 300 }),
+
+    // Identificare dispozitiv
+    model: varchar("model", { length: 200 }),
+    referintaCatalog: varchar("referinta_catalog", { length: 100 }),
+
+    // UDI — Unique Device Identifier (MDR Art. 27, obligatoriu)
+    udiDI: varchar("udi_di", { length: 100 }),  // Device Identifier (stabil per versiune)
+    udiPI: varchar("udi_pi", { length: 200 }),  // Production Identifier (lot+serie+expirare)
+
+    // Identificatori fizici
+    numarSerie: varchar("numar_serie", { length: 100 }),
+    numarLot: varchar("numar_lot", { length: 100 }),
+    dataFabricatie: date("data_fabricatie"),
+    dataExpirare: date("data_expirare"),
+
+    // EUDAMED — baza de date UE (MDR Art. 29)
+    numarEudamed: varchar("numar_eudamed", { length: 100 }),
+
+    // ANMDM — înregistrare națională România
+    numarInregistrareANMDM: varchar("numar_inregistrare_anmdm", { length: 100 }),
+    dataInregistrareANMDM: date("data_inregistrare_anmdm"),
+
+    // Marcare CE (MDR Art. 20)
+    marcaCE: boolean("marca_ce").default(true),
+    organismNotificat: varchar("organism_notificat", { length: 100 }),
+    numarCertificatCE: varchar("numar_certificat_ce", { length: 100 }),
+    dataExpiraCertificatCE: date("data_expira_certificat_ce"),
+
+    // Destinație utilizare (MDR Art. 2)
+    destinatieUtilizare: varchar("destinatie_utilizare", { length: 500 }),
+
+    // Condiții stocare / transport
+    conditiiStocare: varchar("conditii_stocare", { length: 300 }),
+
+    // Mentenanță planificată
+    intervalMentenantaLuni: int("interval_mentenanta_luni"),
+    dataMentenantaUrmatoare: date("data_mentenanta_urmatoare"),
+
+    // Stare specifică ciclului de viață al DM
+    stareDM: mysqlEnum("stare_dm", [
+      "activ",      // în uz
+      "mentenanta", // în mentenanță/calibrare
+      "retras",     // retras din uz (MDR Art. 95 — field safety)
+      "carantinat", // carantinat — investigație în curs
+      "defect",     // defect, neoperațional
+      "arhivat",    // scos din uz, arhivat
+    ]).notNull().default("activ"),
+
+    observatii: varchar("observatii", { length: 1000 }),
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+    updatedAt: timestamp("updated_at").notNull().default(sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`),
+  },
+  (table) => [
+    index("idx_dispozitive_medicale_mijloc_fix").on(table.mijlocFixId),
+    index("idx_dispozitive_medicale_clasa_risc").on(table.clasaRisc),
+    index("idx_dispozitive_medicale_stare").on(table.stareDM),
+    index("idx_dispozitive_medicale_data_expirare").on(table.dataExpirare),
+    index("idx_dispozitive_medicale_data_mentenanta").on(table.dataMentenantaUrmatoare),
+    index("idx_dispozitive_medicale_data_expira_ce").on(table.dataExpiraCertificatCE),
+  ]
+);
+
+// 13. Mentenanta Dispozitive - Registru mentenanță/calibrare
+// Bază legală: MDR Art. 10(9) — post-market surveillance, Ord. MS 912/2019
+export const mentenantaDispozitive = mysqlTable(
+  "mentenanta_dispozitive",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    dispozitivMedicalId: int("dispozitiv_medical_id").notNull(),
+
+    tipMentenanta: mysqlEnum("tip_mentenanta", [
+      "preventiva",  // mentenanță preventivă planificată
+      "corectiva",   // mentenanță corectivă după defecțiune
+      "calibrare",   // calibrare (RENAR/ISO 17025)
+      "verificare",  // inspecție periodică
+      "actualizare", // actualizare software/firmware
+    ]).notNull(),
+
+    dataPlanificata: date("data_planificata"),
+    dataEfectuata: date("data_efectuata"),
+
+    efectuatDe: varchar("efectuat_de", { length: 200 }),
+    autorizatDe: varchar("autorizat_de", { length: 200 }),
+
+    descriere: varchar("descriere", { length: 1000 }),
+
+    rezultat: mysqlEnum("rezultat_mentenanta", [
+      "ok",          // corespunde, apt de utilizare
+      "conditionat", // acceptat cu restricții
+      "defect",      // necorespunzător, necesită reparație
+      "retras",      // scos din serviciu
+    ]).notNull(),
+
+    // Date calibrare
+    certificatCalibrarNumar: varchar("certificat_calibrare_numar", { length: 100 }),
+    dataExpiraCalibrare: date("data_expira_calibrare"),
+
+    numarRaport: varchar("numar_raport", { length: 100 }),
+    observatii: varchar("observatii", { length: 1000 }),
+    dataMentenantaUrmatoare: date("data_mentenanta_urmatoare"),
+
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  },
+  (table) => [
+    index("idx_mentenanta_dispozitiv").on(table.dispozitivMedicalId),
+    index("idx_mentenanta_data_efectuata").on(table.dataEfectuata),
+    index("idx_mentenanta_data_urmatoare").on(table.dataMentenantaUrmatoare),
+    index("idx_mentenanta_tip").on(table.tipMentenanta),
+  ]
+);
+
+// 14. Incidente Adverse - Raportare Vigilență (MDR Art. 87-92)
+// Bază legală: MDR Art. 87-92, Ordinul MS 912/2019 privind vigilența DM
+// Incidentele grave se raportează obligatoriu la ANMDM
+export const incidenteAdverse = mysqlTable(
+  "incidente_adverse",
+  {
+    id: int("id").primaryKey().autoincrement(),
+    dispozitivMedicalId: int("dispozitiv_medical_id").notNull(),
+
+    dataIncident: date("data_incident").notNull(),
+    dataSesizare: date("data_sesizare"),
+
+    tipIncident: mysqlEnum("tip_incident", [
+      "incident_sever",    // incident grav (MDR Art. 87) — deces/vătămare gravă
+      "incident_nonsever", // incident non-grav
+      "near_miss",         // eveniment quasi-accident
+      "reclamatie_user",   // reclamație utilizator fără incident
+      "malfunctionare",    // malfuncționare dispozitiv
+      "alerta_teren",      // acțiune corectivă de siguranță pe teren (FSCA)
+    ]).notNull(),
+
+    descriere: varchar("descriere", { length: 2000 }).notNull(),
+
+    // Raportare vigilență ANMDM (obligatorie pt incidente grave — MDR Art. 87)
+    raportatANMDM: boolean("raportat_anmdm").default(false),
+    numarRaportANMDM: varchar("numar_raport_anmdm", { length: 100 }),
+    dataRaportANMDM: date("data_raport_anmdm"),
+
+    actiuneCorectiva: varchar("actiune_corectiva", { length: 2000 }),
+    dataInchidere: date("data_inchidere"),
+
+    stareIncident: mysqlEnum("stare_incident", [
+      "deschis",
+      "investigatie",
+      "raportat",
+      "inchis",
+    ]).notNull().default("deschis"),
+
+    observatii: varchar("observatii", { length: 1000 }),
+    createdAt: timestamp("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+    updatedAt: timestamp("updated_at").notNull().default(sql`CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`),
+  },
+  (table) => [
+    index("idx_incidente_dispozitiv").on(table.dispozitivMedicalId),
+    index("idx_incidente_data").on(table.dataIncident),
+    index("idx_incidente_stare").on(table.stareIncident),
+    index("idx_incidente_tip").on(table.tipIncident),
+    index("idx_incidente_raportat_anmdm").on(table.raportatANMDM),
+  ]
+);
+
+// ============================================================================
 // Relations
 // ============================================================================
 
@@ -413,6 +605,10 @@ export const mijloaceFixeRelations = relations(mijloaceFixe, ({ one, many }) => 
   }),
   tranzactii: many(tranzactii),
   amortizari: many(amortizari),
+  dispozitivMedical: one(dispozitiveMedicale, {
+    fields: [mijloaceFixe.id],
+    references: [dispozitiveMedicale.mijlocFixId],
+  }),
 }));
 
 export const tranzactiiRelations = relations(tranzactii, ({ one }) => ({
@@ -446,6 +642,29 @@ export const amortizariRelations = relations(amortizari, ({ one }) => ({
   mijlocFix: one(mijloaceFixe, {
     fields: [amortizari.mijlocFixId],
     references: [mijloaceFixe.id],
+  }),
+}));
+
+export const dispozitiveMedicaleRelations = relations(dispozitiveMedicale, ({ one, many }) => ({
+  mijlocFix: one(mijloaceFixe, {
+    fields: [dispozitiveMedicale.mijlocFixId],
+    references: [mijloaceFixe.id],
+  }),
+  mentenante: many(mentenantaDispozitive),
+  incidente: many(incidenteAdverse),
+}));
+
+export const mentenantaDispozitiveRelations = relations(mentenantaDispozitive, ({ one }) => ({
+  dispozitivMedical: one(dispozitiveMedicale, {
+    fields: [mentenantaDispozitive.dispozitivMedicalId],
+    references: [dispozitiveMedicale.id],
+  }),
+}));
+
+export const incidenteAdverseRelations = relations(incidenteAdverse, ({ one }) => ({
+  dispozitivMedical: one(dispozitiveMedicale, {
+    fields: [incidenteAdverse.dispozitivMedicalId],
+    references: [dispozitiveMedicale.id],
   }),
 }));
 

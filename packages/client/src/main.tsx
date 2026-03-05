@@ -39,6 +39,8 @@ import { OperatiuniMasaPage } from "./pages/OperatiuniMasa";
 import { OperatiuniActePage } from "./pages/OperatiuniActe";
 import { OperatiuneDetailPage } from "./pages/OperatiuneDetail";
 import { VerificarePage } from "./pages/Verificare";
+import { DispozitiveMedicalePage } from "./pages/DispozitiveMedicale";
+import { DispozitivMedicalDetailPage } from "./pages/DispozitivMedicalDetail";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -128,6 +130,13 @@ const router = createBrowserRouter([
       {
         path: "verificare",
         element: <VerificarePage />,
+      },
+      {
+        path: "dispozitive-medicale",
+        children: [
+          { index: true, element: <DispozitiveMedicalePage /> },
+          { path: ":id", element: <DispozitivMedicalDetailPage /> },
+        ],
       },
       {
         path: "mijloace-fixe",

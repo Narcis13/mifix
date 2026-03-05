@@ -3,15 +3,19 @@ import { cn } from "./lib/utils";
 import { Toaster } from "./components/ui/sonner";
 import { Button } from "./components/ui/button";
 import { useAuth } from "./components/auth/AuthContext";
+import { Separator } from "./components/ui/separator";
 
-const navItems = [
+const mainNavItems = [
   { path: "/", label: "Acasa" },
   { path: "/mijloace-fixe", label: "Mijloace Fixe" },
   { path: "/amortizare", label: "Amortizare" },
   { path: "/rapoarte", label: "Rapoarte" },
   { path: "/operatiuni-acte", label: "Operatiuni" },
-  { path: "/operatiuni-masa", label: "Op. Masa" },
+  { path: "/operatiuni-masa", label: "Op. in Masa" },
   { path: "/verificare", label: "Verificare" },
+];
+
+const nomenclatoareItems = [
   { path: "/gestiuni", label: "Gestiuni" },
   { path: "/surse-finantare", label: "Surse Finantare" },
   { path: "/locuri", label: "Locuri Folosinta" },
@@ -21,6 +25,31 @@ const navItems = [
   { path: "/tipuri-stoc", label: "Tipuri Stoc" },
   { path: "/unitati-masura", label: "Unitati Masura" },
 ];
+
+const dispozitiveMedicaleItems = [
+  { path: "/dispozitive-medicale", label: "Registru DM" },
+];
+
+function NavLink({ path, label, location }: { path: string; label: string; location: ReturnType<typeof useLocation> }) {
+  const isActive =
+    path === "/"
+      ? location.pathname === "/"
+      : location.pathname.startsWith(path);
+
+  return (
+    <Link
+      to={path}
+      className={cn(
+        "block px-3 py-1.5 text-sm rounded-md transition-colors",
+        isActive
+          ? "bg-accent text-accent-foreground font-medium"
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+      )}
+    >
+      {label}
+    </Link>
+  );
+}
 
 function App() {
   const location = useLocation();
@@ -33,53 +62,63 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex h-14 items-center justify-between">
-            <Link to="/" className="text-lg font-semibold">
-              MiFix
-            </Link>
-            <div className="flex items-center gap-1">
-              {navItems.map((item) => {
-                const isActive =
-                  item.path === "/"
-                    ? location.pathname === "/"
-                    : location.pathname.startsWith(item.path);
-
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={cn(
-                      "px-3 py-2 text-sm rounded-md transition-colors",
-                      isActive
-                        ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-              <div className="ml-4 flex items-center gap-2 border-l pl-4">
-                {user && (
-                  <span className="text-sm text-muted-foreground">
-                    {user.username}
-                  </span>
-                )}
-                <Button variant="ghost" size="sm" onClick={handleLogout}>
-                  Iesire
-                </Button>
-              </div>
-            </div>
-          </div>
+    <div className="flex min-h-screen bg-background">
+      {/* Sidebar */}
+      <aside className="flex w-52 flex-col border-r bg-background">
+        {/* Logo */}
+        <div className="flex h-14 items-center border-b px-4">
+          <Link to="/" className="text-lg font-bold tracking-tight">
+            MiFix
+          </Link>
         </div>
-      </nav>
+
+        {/* Nav */}
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-3">
+          {mainNavItems.map((item) => (
+            <NavLink key={item.path} {...item} location={location} />
+          ))}
+
+          <Separator className="my-2" />
+
+          <p className="px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
+            Nomenclatoare
+          </p>
+
+          {nomenclatoareItems.map((item) => (
+            <NavLink key={item.path} {...item} location={location} />
+          ))}
+
+          <Separator className="my-2" />
+
+          <p className="px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
+            Dispozitive Medicale
+          </p>
+
+          {dispozitiveMedicaleItems.map((item) => (
+            <NavLink key={item.path} {...item} location={location} />
+          ))}
+        </nav>
+
+        {/* User / Logout */}
+        <div className="border-t p-3">
+          {user && (
+            <p className="mb-2 truncate px-3 text-xs text-muted-foreground">
+              {user.username}
+            </p>
+          )}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start text-muted-foreground"
+            onClick={handleLogout}
+          >
+            Iesire
+          </Button>
+        </div>
+      </aside>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
+      <main className="flex-1 overflow-auto px-6 py-6">
         <Outlet />
       </main>
 

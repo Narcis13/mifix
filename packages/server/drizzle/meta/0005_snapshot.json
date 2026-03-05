@@ -1,0 +1,1938 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "41dfdd01-64f9-4c0a-a416-00e14963b073",
+  "prevId": "9462d7db-37dd-4922-a4f7-9edda648b90e",
+  "tables": {
+    "amortizari": {
+      "name": "amortizari",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "mijloc_fix_id": {
+          "name": "mijloc_fix_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "an": {
+          "name": "an",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "luna": {
+          "name": "luna",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valoare_lunara": {
+          "name": "valoare_lunara",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valoare_cumulata": {
+          "name": "valoare_cumulata",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valoare_ramasa": {
+          "name": "valoare_ramasa",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valoare_inventar": {
+          "name": "valoare_inventar",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "durata_ramasa": {
+          "name": "durata_ramasa",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "calculat": {
+          "name": "calculat",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "data_calcul": {
+          "name": "data_calcul",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_amortizari_mijloc_fix_an_luna": {
+          "name": "idx_amortizari_mijloc_fix_an_luna",
+          "columns": [
+            "mijloc_fix_id",
+            "an",
+            "luna"
+          ],
+          "isUnique": false
+        },
+        "uniq_amortizari_mijloc_fix_an_luna": {
+          "name": "uniq_amortizari_mijloc_fix_an_luna",
+          "columns": [
+            "mijloc_fix_id",
+            "an",
+            "luna"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "amortizari_id": {
+          "name": "amortizari_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "clasificari": {
+      "name": "clasificari",
+      "columns": {
+        "cod": {
+          "name": "cod",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "grupa": {
+          "name": "grupa",
+          "type": "varchar(5)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "durata_normala_min": {
+          "name": "durata_normala_min",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "durata_normala_max": {
+          "name": "durata_normala_max",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cota_amortizare": {
+          "name": "cota_amortizare",
+          "type": "decimal(5,2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "clasificari_cod": {
+          "name": "clasificari_cod",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "conturi": {
+      "name": "conturi",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "simbol": {
+          "name": "simbol",
+          "type": "varchar(30)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tip": {
+          "name": "tip",
+          "type": "enum('activ','pasiv','bifunctional')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "titlu": {
+          "name": "titlu",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "amortizabil": {
+          "name": "amortizabil",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "cont_amortizare": {
+          "name": "cont_amortizare",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "conturi_id": {
+          "name": "conturi_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "conturi_simbol_unique": {
+          "name": "conturi_simbol_unique",
+          "columns": [
+            "simbol"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "dispozitive_medicale": {
+      "name": "dispozitive_medicale",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "mijloc_fix_id": {
+          "name": "mijloc_fix_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "clasa_risc": {
+          "name": "clasa_risc",
+          "type": "enum('I','IIa','IIb','III')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "producator": {
+          "name": "producator",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tara_producator": {
+          "name": "tara_producator",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "reprezentant_autorizat_ue": {
+          "name": "reprezentant_autorizat_ue",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "importator": {
+          "name": "importator",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "model": {
+          "name": "model",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "referinta_catalog": {
+          "name": "referinta_catalog",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "udi_di": {
+          "name": "udi_di",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "udi_pi": {
+          "name": "udi_pi",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_serie": {
+          "name": "numar_serie",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_lot": {
+          "name": "numar_lot",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_fabricatie": {
+          "name": "data_fabricatie",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_expirare": {
+          "name": "data_expirare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_eudamed": {
+          "name": "numar_eudamed",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_inregistrare_anmdm": {
+          "name": "numar_inregistrare_anmdm",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_inregistrare_anmdm": {
+          "name": "data_inregistrare_anmdm",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "marca_ce": {
+          "name": "marca_ce",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        },
+        "organism_notificat": {
+          "name": "organism_notificat",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_certificat_ce": {
+          "name": "numar_certificat_ce",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_expira_certificat_ce": {
+          "name": "data_expira_certificat_ce",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "destinatie_utilizare": {
+          "name": "destinatie_utilizare",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "conditii_stocare": {
+          "name": "conditii_stocare",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "interval_mentenanta_luni": {
+          "name": "interval_mentenanta_luni",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_mentenanta_urmatoare": {
+          "name": "data_mentenanta_urmatoare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "stare_dm": {
+          "name": "stare_dm",
+          "type": "enum('activ','mentenanta','retras','carantinat','defect','arhivat')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'activ'"
+        },
+        "observatii": {
+          "name": "observatii",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_dispozitive_medicale_mijloc_fix": {
+          "name": "idx_dispozitive_medicale_mijloc_fix",
+          "columns": [
+            "mijloc_fix_id"
+          ],
+          "isUnique": false
+        },
+        "idx_dispozitive_medicale_clasa_risc": {
+          "name": "idx_dispozitive_medicale_clasa_risc",
+          "columns": [
+            "clasa_risc"
+          ],
+          "isUnique": false
+        },
+        "idx_dispozitive_medicale_stare": {
+          "name": "idx_dispozitive_medicale_stare",
+          "columns": [
+            "stare_dm"
+          ],
+          "isUnique": false
+        },
+        "idx_dispozitive_medicale_data_expirare": {
+          "name": "idx_dispozitive_medicale_data_expirare",
+          "columns": [
+            "data_expirare"
+          ],
+          "isUnique": false
+        },
+        "idx_dispozitive_medicale_data_mentenanta": {
+          "name": "idx_dispozitive_medicale_data_mentenanta",
+          "columns": [
+            "data_mentenanta_urmatoare"
+          ],
+          "isUnique": false
+        },
+        "idx_dispozitive_medicale_data_expira_ce": {
+          "name": "idx_dispozitive_medicale_data_expira_ce",
+          "columns": [
+            "data_expira_certificat_ce"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "dispozitive_medicale_id": {
+          "name": "dispozitive_medicale_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "dispozitive_medicale_mijloc_fix_id_unique": {
+          "name": "dispozitive_medicale_mijloc_fix_id_unique",
+          "columns": [
+            "mijloc_fix_id"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "gestiuni": {
+      "name": "gestiuni",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "responsabil": {
+          "name": "responsabil",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "gestiuni_id": {
+          "name": "gestiuni_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "gestiuni_cod_unique": {
+          "name": "gestiuni_cod_unique",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "incidente_adverse": {
+      "name": "incidente_adverse",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "dispozitiv_medical_id": {
+          "name": "dispozitiv_medical_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data_incident": {
+          "name": "data_incident",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data_sesizare": {
+          "name": "data_sesizare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tip_incident": {
+          "name": "tip_incident",
+          "type": "enum('incident_sever','incident_nonsever','near_miss','reclamatie_user','malfunctionare','alerta_teren')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "descriere": {
+          "name": "descriere",
+          "type": "varchar(2000)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "raportat_anmdm": {
+          "name": "raportat_anmdm",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "numar_raport_anmdm": {
+          "name": "numar_raport_anmdm",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_raport_anmdm": {
+          "name": "data_raport_anmdm",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "actiune_corectiva": {
+          "name": "actiune_corectiva",
+          "type": "varchar(2000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_inchidere": {
+          "name": "data_inchidere",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "stare_incident": {
+          "name": "stare_incident",
+          "type": "enum('deschis','investigatie','raportat','inchis')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'deschis'"
+        },
+        "observatii": {
+          "name": "observatii",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_incidente_dispozitiv": {
+          "name": "idx_incidente_dispozitiv",
+          "columns": [
+            "dispozitiv_medical_id"
+          ],
+          "isUnique": false
+        },
+        "idx_incidente_data": {
+          "name": "idx_incidente_data",
+          "columns": [
+            "data_incident"
+          ],
+          "isUnique": false
+        },
+        "idx_incidente_stare": {
+          "name": "idx_incidente_stare",
+          "columns": [
+            "stare_incident"
+          ],
+          "isUnique": false
+        },
+        "idx_incidente_tip": {
+          "name": "idx_incidente_tip",
+          "columns": [
+            "tip_incident"
+          ],
+          "isUnique": false
+        },
+        "idx_incidente_raportat_anmdm": {
+          "name": "idx_incidente_raportat_anmdm",
+          "columns": [
+            "raportat_anmdm"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "incidente_adverse_id": {
+          "name": "incidente_adverse_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "locuri_folosinta": {
+      "name": "locuri_folosinta",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "gestiune_id": {
+          "name": "gestiune_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {
+        "idx_locuri_folosinta_gestiune": {
+          "name": "idx_locuri_folosinta_gestiune",
+          "columns": [
+            "gestiune_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "locuri_folosinta_id": {
+          "name": "locuri_folosinta_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "mentenanta_dispozitive": {
+      "name": "mentenanta_dispozitive",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "dispozitiv_medical_id": {
+          "name": "dispozitiv_medical_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tip_mentenanta": {
+          "name": "tip_mentenanta",
+          "type": "enum('preventiva','corectiva','calibrare','verificare','actualizare')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data_planificata": {
+          "name": "data_planificata",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_efectuata": {
+          "name": "data_efectuata",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "efectuat_de": {
+          "name": "efectuat_de",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "autorizat_de": {
+          "name": "autorizat_de",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "descriere": {
+          "name": "descriere",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "rezultat_mentenanta": {
+          "name": "rezultat_mentenanta",
+          "type": "enum('ok','conditionat','defect','retras')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "certificat_calibrare_numar": {
+          "name": "certificat_calibrare_numar",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_expira_calibrare": {
+          "name": "data_expira_calibrare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_raport": {
+          "name": "numar_raport",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "observatii": {
+          "name": "observatii",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_mentenanta_urmatoare": {
+          "name": "data_mentenanta_urmatoare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_mentenanta_dispozitiv": {
+          "name": "idx_mentenanta_dispozitiv",
+          "columns": [
+            "dispozitiv_medical_id"
+          ],
+          "isUnique": false
+        },
+        "idx_mentenanta_data_efectuata": {
+          "name": "idx_mentenanta_data_efectuata",
+          "columns": [
+            "data_efectuata"
+          ],
+          "isUnique": false
+        },
+        "idx_mentenanta_data_urmatoare": {
+          "name": "idx_mentenanta_data_urmatoare",
+          "columns": [
+            "data_mentenanta_urmatoare"
+          ],
+          "isUnique": false
+        },
+        "idx_mentenanta_tip": {
+          "name": "idx_mentenanta_tip",
+          "columns": [
+            "tip_mentenanta"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "mentenanta_dispozitive_id": {
+          "name": "mentenanta_dispozitive_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "mijloace_fixe": {
+      "name": "mijloace_fixe",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "numar_inventar": {
+          "name": "numar_inventar",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "descriere": {
+          "name": "descriere",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "clasificare_cod": {
+          "name": "clasificare_cod",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "gestiune_id": {
+          "name": "gestiune_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "loc_folosinta_id": {
+          "name": "loc_folosinta_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "sursa_finantare_id": {
+          "name": "sursa_finantare_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cont_id": {
+          "name": "cont_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tip_document_id": {
+          "name": "tip_document_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "provenienta_id": {
+          "name": "provenienta_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tip_stoc_id": {
+          "name": "tip_stoc_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "unitate_masura_id": {
+          "name": "unitate_masura_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_achizitie": {
+          "name": "data_achizitie",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "document_achizitie": {
+          "name": "document_achizitie",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "furnizor": {
+          "name": "furnizor",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valoare_initiala": {
+          "name": "valoare_initiala",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valoare_inventar": {
+          "name": "valoare_inventar",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "valoare_amortizata": {
+          "name": "valoare_amortizata",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'0.00'"
+        },
+        "valoare_ramasa": {
+          "name": "valoare_ramasa",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "durata_normala": {
+          "name": "durata_normala",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "durata_ramasa": {
+          "name": "durata_ramasa",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "cota_amortizare_lunara": {
+          "name": "cota_amortizare_lunara",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "e_amortizabil": {
+          "name": "e_amortizabil",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        },
+        "stare": {
+          "name": "stare",
+          "type": "enum('activ','casare','declasare','transfer')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'activ'"
+        },
+        "data_incepere_amortizare": {
+          "name": "data_incepere_amortizare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_finalizare_amortizare": {
+          "name": "data_finalizare_amortizare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_iesire": {
+          "name": "data_iesire",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "motiv_iesire": {
+          "name": "motiv_iesire",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "observatii": {
+          "name": "observatii",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_mijloace_fixe_gestiune": {
+          "name": "idx_mijloace_fixe_gestiune",
+          "columns": [
+            "gestiune_id"
+          ],
+          "isUnique": false
+        },
+        "idx_mijloace_fixe_clasificare": {
+          "name": "idx_mijloace_fixe_clasificare",
+          "columns": [
+            "clasificare_cod"
+          ],
+          "isUnique": false
+        },
+        "idx_mijloace_fixe_stare": {
+          "name": "idx_mijloace_fixe_stare",
+          "columns": [
+            "stare"
+          ],
+          "isUnique": false
+        },
+        "idx_mijloace_fixe_data_achizitie": {
+          "name": "idx_mijloace_fixe_data_achizitie",
+          "columns": [
+            "data_achizitie"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "mijloace_fixe_id": {
+          "name": "mijloace_fixe_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "mijloace_fixe_numar_inventar_unique": {
+          "name": "mijloace_fixe_numar_inventar_unique",
+          "columns": [
+            "numar_inventar"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "operatiuni": {
+      "name": "operatiuni",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "numar_operatie": {
+          "name": "numar_operatie",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "an": {
+          "name": "an",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data_operare": {
+          "name": "data_operare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tip_operatie": {
+          "name": "tip_operatie",
+          "type": "enum('intrare','iesire','transfer','inventar','ajustare')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'transfer'"
+        },
+        "stare_operatie": {
+          "name": "stare_operatie",
+          "type": "enum('deschisa','finalizata','anulata')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'deschisa'"
+        },
+        "tip_document_id": {
+          "name": "tip_document_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "numar_document": {
+          "name": "numar_document",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "data_document": {
+          "name": "data_document",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "descriere": {
+          "name": "descriere",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "uniq_operatiuni_an_numar": {
+          "name": "uniq_operatiuni_an_numar",
+          "columns": [
+            "an",
+            "numar_operatie"
+          ],
+          "isUnique": true
+        },
+        "idx_operatiuni_data": {
+          "name": "idx_operatiuni_data",
+          "columns": [
+            "data_operare"
+          ],
+          "isUnique": false
+        },
+        "idx_operatiuni_tip": {
+          "name": "idx_operatiuni_tip",
+          "columns": [
+            "tip_operatie"
+          ],
+          "isUnique": false
+        },
+        "idx_operatiuni_stare": {
+          "name": "idx_operatiuni_stare",
+          "columns": [
+            "stare_operatie"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "operatiuni_id": {
+          "name": "operatiuni_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "provenienta": {
+      "name": "provenienta",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "provenienta_id": {
+          "name": "provenienta_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "provenienta_cod_unique": {
+          "name": "provenienta_cod_unique",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "surse_finantare": {
+      "name": "surse_finantare",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "capitol": {
+          "name": "capitol",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
+        },
+        "cod_capitol_1": {
+          "name": "cod_capitol_1",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cod_capitol_2": {
+          "name": "cod_capitol_2",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "surse_finantare_id": {
+          "name": "surse_finantare_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "surse_finantare_cod_unique": {
+          "name": "surse_finantare_cod_unique",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "tipuri_document": {
+      "name": "tipuri_document",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "tipuri_document_id": {
+          "name": "tipuri_document_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "tipuri_document_cod_unique": {
+          "name": "tipuri_document_cod_unique",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "tipuri_stoc": {
+      "name": "tipuri_stoc",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "tipuri_stoc_id": {
+          "name": "tipuri_stoc_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "tipuri_stoc_cod_unique": {
+          "name": "tipuri_stoc_cod_unique",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "tranzactii": {
+      "name": "tranzactii",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "mijloc_fix_id": {
+          "name": "mijloc_fix_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "operatiune_id": {
+          "name": "operatiune_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "tip": {
+          "name": "tip",
+          "type": "enum('intrare','transfer','casare','declasare','reevaluare','modernizare','iesire')",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "data_operare": {
+          "name": "data_operare",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "document_numar": {
+          "name": "document_numar",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "document_data": {
+          "name": "document_data",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "gestiune_sursa_id": {
+          "name": "gestiune_sursa_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "gestiune_destinatie_id": {
+          "name": "gestiune_destinatie_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "loc_folosinta_sursa_id": {
+          "name": "loc_folosinta_sursa_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "loc_folosinta_destinatie_id": {
+          "name": "loc_folosinta_destinatie_id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valoare_operatie": {
+          "name": "valoare_operatie",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valoare_inainte": {
+          "name": "valoare_inainte",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "valoare_dupa": {
+          "name": "valoare_dupa",
+          "type": "decimal(15,2)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "descriere": {
+          "name": "descriere",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "observatii": {
+          "name": "observatii",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "idx_tranzactii_mijloc_fix": {
+          "name": "idx_tranzactii_mijloc_fix",
+          "columns": [
+            "mijloc_fix_id"
+          ],
+          "isUnique": false
+        },
+        "idx_tranzactii_tip": {
+          "name": "idx_tranzactii_tip",
+          "columns": [
+            "tip"
+          ],
+          "isUnique": false
+        },
+        "idx_tranzactii_data_operare": {
+          "name": "idx_tranzactii_data_operare",
+          "columns": [
+            "data_operare"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "tranzactii_id": {
+          "name": "tranzactii_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "unitati_masura": {
+      "name": "unitati_masura",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "cod": {
+          "name": "cod",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "denumire": {
+          "name": "denumire",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "unitati_masura_id": {
+          "name": "unitati_masura_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "unitati_masura_cod_unique": {
+          "name": "unitati_masura_cod_unique",
+          "columns": [
+            "cod"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "activ": {
+          "name": "activ",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "users_id": {
+          "name": "users_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "users_username_unique": {
+          "name": "users_username_unique",
+          "columns": [
+            "username"
+          ]
+        }
+      },
+      "checkConstraint": {}
+    }
+  },
+  "views": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "tables": {},
+    "indexes": {}
+  }
+}

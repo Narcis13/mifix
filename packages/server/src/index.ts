@@ -17,6 +17,7 @@ import { operatiuniHeaderRoutes } from "./routes/operatiuni-header";
 import { amortizariRoutes } from "./routes/amortizari";
 import { rapoarteRoutes } from "./routes/rapoarte";
 import { verificareRoutes } from "./routes/verificare";
+import { dispozitiveMedicaleRoutes } from "./routes/dispozitive-medicale";
 import { authMiddleware } from "./middleware/auth";
 
 const app = new Hono();
@@ -53,6 +54,7 @@ app.route("/api/operatiuni-acte", operatiuniHeaderRoutes);
 app.route("/api/amortizari", amortizariRoutes);
 app.route("/api/rapoarte", rapoarteRoutes);
 app.route("/api/verificare", verificareRoutes);
+app.route("/api/dispozitive-medicale", dispozitiveMedicaleRoutes);
 
 // Root route
 app.get("/", (c) => {

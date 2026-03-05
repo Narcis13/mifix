@@ -1,5 +1,5 @@
 import { createInsertSchema } from "drizzle-zod";
-import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument, provenienta, tipuriStoc, unitatiMasura, operatiuni, mijloaceFixe } from "../db/schema";
+import { gestiuni, locuriUilizare, surseFinantare, conturi, tipuriDocument, provenienta, tipuriStoc, unitatiMasura, operatiuni, mijloaceFixe, dispozitiveMedicale, mentenantaDispozitive, incidenteAdverse } from "../db/schema";
 import { z } from "zod";
 
 // ============================================================================
@@ -174,3 +174,82 @@ export type InsertMijlocFix = z.infer<typeof insertMijlocFixSchema>;
 
 export const updateMijlocFixSchema = insertMijlocFixSchema.partial();
 export type UpdateMijlocFix = z.infer<typeof updateMijlocFixSchema>;
+
+// ============================================================================
+// Dispozitive Medicale - Medical Device Extension (MDR EU 2017/745)
+// ============================================================================
+
+const dateStringOpt = () => z.string().transform((val) => new Date(val)).optional();
+
+export const insertDispozitivMedicalSchema = createInsertSchema(dispozitiveMedicale, {
+  mijlocFixId: (schema) => schema.min(1, "Mijloc fix obligatoriu"),
+  producator: (schema) => schema.min(1, "Producator obligatoriu").max(300, "Maxim 300 caractere"),
+  taraProducator: (schema) => schema.max(100).optional(),
+  reprezentantAutorizatUE: (schema) => schema.max(300).optional(),
+  importator: (schema) => schema.max(300).optional(),
+  model: (schema) => schema.max(200).optional(),
+  referintaCatalog: (schema) => schema.max(100).optional(),
+  udiDI: (schema) => schema.max(100).optional(),
+  udiPI: (schema) => schema.max(200).optional(),
+  numarSerie: (schema) => schema.max(100).optional(),
+  numarLot: (schema) => schema.max(100).optional(),
+  numarEudamed: (schema) => schema.max(100).optional(),
+  numarInregistrareANMDM: (schema) => schema.max(100).optional(),
+  organismNotificat: (schema) => schema.max(100).optional(),
+  numarCertificatCE: (schema) => schema.max(100).optional(),
+  destinatieUtilizare: (schema) => schema.max(500).optional(),
+  conditiiStocare: (schema) => schema.max(300).optional(),
+  observatii: (schema) => schema.max(1000).optional(),
+  dataFabricatie: dateStringOpt,
+  dataExpirare: dateStringOpt,
+  dataInregistrareANMDM: dateStringOpt,
+  dataExpiraCertificatCE: dateStringOpt,
+  dataMentenantaUrmatoare: dateStringOpt,
+}).omit({ id: true, createdAt: true, updatedAt: true });
+
+export type InsertDispozitivMedical = z.infer<typeof insertDispozitivMedicalSchema>;
+
+export const updateDispozitivMedicalSchema = insertDispozitivMedicalSchema.partial();
+export type UpdateDispozitivMedical = z.infer<typeof updateDispozitivMedicalSchema>;
+
+// ============================================================================
+// Mentenanta Dispozitive - Maintenance Registry
+// ============================================================================
+export const insertMentenantaSchema = createInsertSchema(mentenantaDispozitive, {
+  dispozitivMedicalId: (schema) => schema.min(1, "Dispozitiv medical obligatoriu"),
+  efectuatDe: (schema) => schema.max(200).optional(),
+  autorizatDe: (schema) => schema.max(200).optional(),
+  descriere: (schema) => schema.max(1000).optional(),
+  certificatCalibrarNumar: (schema) => schema.max(100).optional(),
+  numarRaport: (schema) => schema.max(100).optional(),
+  observatii: (schema) => schema.max(1000).optional(),
+  dataPlanificata: dateStringOpt,
+  dataEfectuata: dateStringOpt,
+  dataExpiraCalibrare: dateStringOpt,
+  dataMentenantaUrmatoare: dateStringOpt,
+}).omit({ id: true, createdAt: true });
+
+export type InsertMentenanta = z.infer<typeof insertMentenantaSchema>;
+
+export const updateMentenantaSchema = insertMentenantaSchema.partial();
+export type UpdateMentenanta = z.infer<typeof updateMentenantaSchema>;
+
+// ============================================================================
+// Incidente Adverse - Adverse Incident Registry (MDR Art. 87-92)
+// ============================================================================
+export const insertIncidentAdversSchema = createInsertSchema(incidenteAdverse, {
+  dispozitivMedicalId: (schema) => schema.min(1, "Dispozitiv medical obligatoriu"),
+  descriere: (schema) => schema.min(1, "Descriere obligatorie").max(2000),
+  numarRaportANMDM: (schema) => schema.max(100).optional(),
+  actiuneCorectiva: (schema) => schema.max(2000).optional(),
+  observatii: (schema) => schema.max(1000).optional(),
+  dataIncident: () => z.string().transform((val) => new Date(val)),
+  dataSesizare: dateStringOpt,
+  dataRaportANMDM: dateStringOpt,
+  dataInchidere: dateStringOpt,
+}).omit({ id: true, createdAt: true, updatedAt: true });
+
+export type InsertIncidentAdvers = z.infer<typeof insertIncidentAdversSchema>;
+
+export const updateIncidentAdversSchema = insertIncidentAdversSchema.partial();
+export type UpdateIncidentAdvers = z.infer<typeof updateIncidentAdversSchema>;

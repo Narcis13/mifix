@@ -21,6 +21,20 @@ export type TipCont = "activ" | "pasiv" | "bifunctional";
 export type TipOperatie = "intrare" | "iesire" | "transfer" | "inventar" | "ajustare";
 export type StareOperatie = "deschisa" | "finalizata" | "anulata";
 
+// Dispozitive medicale (MDR EU 2017/745 + Legea 38/2023)
+export type ClasaRiscDM = "I" | "IIa" | "IIb" | "III";
+export type StareDM = "activ" | "mentenanta" | "retras" | "carantinat" | "defect" | "arhivat";
+export type TipMentenantaDM = "preventiva" | "corectiva" | "calibrare" | "verificare" | "actualizare";
+export type RezultatMentenanta = "ok" | "conditionat" | "defect" | "retras";
+export type TipIncidentAdvers =
+  | "incident_sever"
+  | "incident_nonsever"
+  | "near_miss"
+  | "reclamatie_user"
+  | "malfunctionare"
+  | "alerta_teren";
+export type StareIncident = "deschis" | "investigatie" | "raportat" | "inchis";
+
 // ═══════════════════════════════════════════════════════════════
 // ENTITY INTERFACES
 // Note: Monetary values are strings to preserve decimal precision
@@ -242,6 +256,114 @@ export interface AmortizareVerificare {
   luna: number;
   procesat: boolean;
   numarActive: number;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DISPOZITIVE MEDICALE (MDR EU 2017/745 + Legea 38/2023 + ANMDM)
+// ═══════════════════════════════════════════════════════════════
+
+export interface DispozitivMedical {
+  id: number;
+  mijlocFixId: number;
+  mijlocFix?: Pick<MijlocFix, "id" | "numarInventar" | "denumire">;
+
+  // Clasificare risc (MDR Anexa VIII)
+  clasaRisc: ClasaRiscDM;
+
+  // Producător (MDR Art. 10)
+  producator: string;
+  taraProducator?: string;
+  reprezentantAutorizatUE?: string; // obligatoriu pt non-UE
+  importator?: string;
+
+  // Identificare
+  model?: string;
+  referintaCatalog?: string;
+
+  // UDI (MDR Art. 27)
+  udiDI?: string;   // Device Identifier
+  udiPI?: string;   // Production Identifier (lot+serie+expirare)
+
+  // Identificatori fizici
+  numarSerie?: string;
+  numarLot?: string;
+  dataFabricatie?: string;
+  dataExpirare?: string;
+
+  // Înregistrări
+  numarEudamed?: string;            // EUDAMED (MDR Art. 29)
+  numarInregistrareANMDM?: string;  // Registrul național ANMDM
+  dataInregistrareANMDM?: string;
+
+  // Marcare CE (MDR Art. 20)
+  marcaCE: boolean;
+  organismNotificat?: string;       // nr. Organism Notificat
+  numarCertificatCE?: string;
+  dataExpiraCertificatCE?: string;
+
+  // Utilizare / stocare
+  destinatieUtilizare?: string;
+  conditiiStocare?: string;
+
+  // Mentenanță planificată
+  intervalMentenantaLuni?: number;
+  dataMentenantaUrmatoare?: string;
+
+  stareDM: StareDM;
+  observatii?: string;
+  createdAt: string;
+  updatedAt: string;
+
+  // Relații populate
+  mentenante?: MentenantaDispozitiv[];
+  incidente?: IncidentAdvers[];
+}
+
+export interface MentenantaDispozitiv {
+  id: number;
+  dispozitivMedicalId: number;
+  dispozitivMedical?: Pick<DispozitivMedical, "id" | "mijlocFixId">;
+
+  tipMentenanta: TipMentenantaDM;
+  dataPlanificata?: string;
+  dataEfectuata?: string;
+
+  efectuatDe?: string;
+  autorizatDe?: string;
+  descriere?: string;
+  rezultat: RezultatMentenanta;
+
+  // Date calibrare
+  certificatCalibrarNumar?: string;
+  dataExpiraCalibrare?: string;
+
+  numarRaport?: string;
+  observatii?: string;
+  dataMentenantaUrmatoare?: string;
+  createdAt: string;
+}
+
+export interface IncidentAdvers {
+  id: number;
+  dispozitivMedicalId: number;
+  dispozitivMedical?: Pick<DispozitivMedical, "id" | "mijlocFixId">;
+
+  dataIncident: string;
+  dataSesizare?: string;
+  tipIncident: TipIncidentAdvers;
+  descriere: string;
+
+  // Raportare ANMDM (MDR Art. 87 — obligatorie pt incidente grave)
+  raportatANMDM: boolean;
+  numarRaportANMDM?: string;
+  dataRaportANMDM?: string;
+
+  actiuneCorectiva?: string;
+  dataInchidere?: string;
+  stareIncident: StareIncident;
+  observatii?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // ═══════════════════════════════════════════════════════════════
