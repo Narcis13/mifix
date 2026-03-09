@@ -174,7 +174,8 @@ export interface MijlocFix {
   dataFinalAmortizare?: string;
 
   // Depreciation
-  durataNormala: number; // months
+  durataNormala: number; // months total
+  durataRamasa: number;  // months remaining
   metodaAmortizare: MetodaAmortizare;
   amortizabil: boolean;
   eAmortizabil: boolean; // override for depreciation calculation

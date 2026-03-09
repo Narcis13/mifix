@@ -1,0 +1,1 @@
+ALTER TABLE `mijloace_fixe` MODIFY COLUMN `e_amortizabil` boolean DEFAULT false;

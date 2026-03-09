@@ -11,6 +11,7 @@ import type { AmortizareSumar } from "shared";
 interface AmortizariSummaryProps {
   data: AmortizareSumar[];
   isLoading: boolean;
+  onSelectPeriod?: (an: number, luna: number) => void;
 }
 
 const MONTH_NAMES = [
@@ -36,7 +37,7 @@ function formatMoney(value: string): string {
   });
 }
 
-export function AmortizariSummary({ data, isLoading }: AmortizariSummaryProps) {
+export function AmortizariSummary({ data, isLoading, onSelectPeriod }: AmortizariSummaryProps) {
   if (isLoading) {
     return <p className="text-muted-foreground text-sm py-4">Se incarca...</p>;
   }
@@ -73,7 +74,11 @@ export function AmortizariSummary({ data, isLoading }: AmortizariSummaryProps) {
       </TableHeader>
       <TableBody>
         {data.map((item) => (
-          <TableRow key={`${item.an}-${item.luna}`}>
+          <TableRow
+            key={`${item.an}-${item.luna}`}
+            className={onSelectPeriod ? "cursor-pointer hover:bg-muted/70" : ""}
+            onClick={() => onSelectPeriod?.(item.an, item.luna)}
+          >
             <TableCell className="font-medium">
               {MONTH_NAMES[item.luna - 1]} {item.an}
             </TableCell>

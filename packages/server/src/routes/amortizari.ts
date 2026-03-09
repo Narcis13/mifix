@@ -38,7 +38,8 @@ amortizariRoutes.post(
             and(
               eq(mijloaceFixe.stare, "activ"),
               eq(mijloaceFixe.eAmortizabil, true),
-              gt(mijloaceFixe.valoareRamasa, "0")
+              gt(mijloaceFixe.valoareRamasa, "0"),
+              gt(mijloaceFixe.durataRamasa, 0)
             )
           );
 
@@ -58,12 +59,11 @@ amortizariRoutes.post(
         for (const asset of assets) {
           if (existingIds.has(asset.id)) continue; // Skip already processed
 
-          const valoareInventar = Money.fromDb(asset.valoareInventar);
           const valoareAmortizataCurenta = Money.fromDb(asset.valoareAmortizata);
           const valoareRamasaCurenta = Money.fromDb(asset.valoareRamasa);
 
-          // AMO-01: Calculate monthly depreciation (linear method)
-          const cotaLunara = Money.calculateMonthlyDepreciation(valoareInventar, asset.durataNormala);
+          // AMO-01: Calculate monthly depreciation based on remaining value / remaining duration
+          const cotaLunara = Money.calculateMonthlyDepreciation(valoareRamasaCurenta, asset.durataRamasa);
 
           // AMO-06: Final month protection - don't exceed remaining value
           const amortizareLunara = cotaLunara.greaterThan(valoareRamasaCurenta)

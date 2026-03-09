@@ -172,7 +172,9 @@ export const insertMijlocFixSchema = createInsertSchema(mijloaceFixe, {
 
 export type InsertMijlocFix = z.infer<typeof insertMijlocFixSchema>;
 
-export const updateMijlocFixSchema = insertMijlocFixSchema.partial();
+export const updateMijlocFixSchema = insertMijlocFixSchema.partial().extend({
+  durataRamasa: z.number().min(0, "Durata ramasa trebuie sa fie >= 0").optional(),
+});
 export type UpdateMijlocFix = z.infer<typeof updateMijlocFixSchema>;
 
 // ============================================================================

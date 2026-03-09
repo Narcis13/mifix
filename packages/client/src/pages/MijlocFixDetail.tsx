@@ -274,9 +274,10 @@ export function MijlocFixDetail() {
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <DetailField label="Valoare Inventar" value={formatCurrency(mijlocFix.valoareInventar)} />
           <DetailField label="Valoare Amortizata" value={formatCurrency(mijlocFix.valoareAmortizata)} />
-          <DetailField label="Valoare Ramasa" value={formatCurrency(mijlocFix.valoareRamasa)} />
+          <DetailField label="Valoare Ramasa de Amortizat" value={formatCurrency(mijlocFix.valoareRamasa)} />
           <DetailField label="Data Achizitie" value={formatDate(mijlocFix.dataAchizitie)} />
           <DetailField label="Durata Normala" value={`${mijlocFix.durataNormala} luni`} />
+          <DetailField label="Durata Ramasa" value={`${mijlocFix.durataRamasa} luni`} />
           <DetailField
             label="Amortizabil"
             value={mijlocFix.eAmortizabil === false ? "Nu" : "Da"}

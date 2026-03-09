@@ -209,7 +209,7 @@ export const mijloaceFixe = mysqlTable(
       precision: 15,
       scale: 2,
     }).notNull(),
-    eAmortizabil: boolean("e_amortizabil").default(true), // override depreciation calculation
+    eAmortizabil: boolean("e_amortizabil").default(false), // override depreciation calculation
 
     // State
     stare: mysqlEnum("stare", ["activ", "casare", "declasare", "transfer"]).notNull().default("activ"),

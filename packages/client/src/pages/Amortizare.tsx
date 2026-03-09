@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { GenereazaAmortizareDialog } from "@/components/amortizare/GenereazaAmortizareDialog";
 import { AmortizariSummary } from "@/components/amortizare/AmortizariSummary";
+import { AmortizareDetaliatDialog } from "@/components/amortizare/AmortizareDetaliatDialog";
 import { getAmortizariSumar } from "@/lib/api";
 import type { AmortizareSumar } from "shared";
 import { Calculator, Plus, TrendingDown } from "lucide-react";
@@ -27,6 +28,7 @@ export default function Amortizare() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState<string>("all");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [detaliatPeriod, setDetaliatPeriod] = useState<{ an: number; luna: number } | null>(null);
 
   const loadSummary = useCallback(async () => {
     try {
@@ -134,7 +136,11 @@ export default function Amortizare() {
           </div>
         </CardHeader>
         <CardContent>
-          <AmortizariSummary data={summary} isLoading={isLoading} />
+          <AmortizariSummary
+            data={summary}
+            isLoading={isLoading}
+            onSelectPeriod={(an, luna) => setDetaliatPeriod({ an, luna })}
+          />
         </CardContent>
       </Card>
 
@@ -144,6 +150,16 @@ export default function Amortizare() {
         onOpenChange={setDialogOpen}
         onSuccess={loadSummary}
       />
+
+      {/* Detailed monthly report dialog */}
+      {detaliatPeriod && (
+        <AmortizareDetaliatDialog
+          open={!!detaliatPeriod}
+          onOpenChange={(open) => !open && setDetaliatPeriod(null)}
+          an={detaliatPeriod.an}
+          luna={detaliatPeriod.luna}
+        />
+      )}
     </div>
   );
 }

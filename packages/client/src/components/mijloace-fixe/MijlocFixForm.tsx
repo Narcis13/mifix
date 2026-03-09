@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -63,6 +63,11 @@ const mijlocFixFormSchema = z.object({
   dataAchizitie: z.string().min(1, "Data achizitie obligatorie"),
   durataNormala: z.number().min(1, "Durata normala obligatorie"),
   eAmortizabil: z.boolean(),
+  valoareRamasa: z
+    .string()
+    .regex(/^\d+(\.\d{1,2})?$/, "Format invalid (ex: 1234.56)")
+    .optional(),
+  durataRamasa: z.number().min(0, "Minim 0").optional(),
 });
 
 type MijlocFixFormData = z.infer<typeof mijlocFixFormSchema>;
@@ -111,12 +116,17 @@ export function MijlocFixForm({
       valoareInventar: mijlocFix?.valoareInventar ?? "",
       dataAchizitie: mijlocFix?.dataAchizitie?.split("T")[0] ?? "",
       durataNormala: mijlocFix?.durataNormala ?? 0,
-      eAmortizabil: mijlocFix?.eAmortizabil ?? true,
+      eAmortizabil: mijlocFix?.eAmortizabil ?? false,
+      valoareRamasa: mijlocFix?.valoareRamasa ?? "",
+      durataRamasa: isEditMode ? mijlocFix?.durataRamasa : undefined,
     },
   });
 
-  // Watch gestiuneId to filter locuri
+  // Watch fields
   const gestiuneId = useWatch({ control: form.control, name: "gestiuneId" });
+  const eAmortizabil = useWatch({ control: form.control, name: "eAmortizabil" });
+  const watchedValoareInventar = useWatch({ control: form.control, name: "valoareInventar" });
+  const watchedDurataNormala = useWatch({ control: form.control, name: "durataNormala" });
 
   // Load reference data on mount
   useEffect(() => {
@@ -170,21 +180,39 @@ export function MijlocFixForm({
     loadLocuri();
   }, [gestiuneId, form, mijlocFix]);
 
+  // In create mode: auto-fill valoareRamasa/durataRamasa from valoareInventar/durataNormala
+  // when eAmortizabil is toggled on (only if not edit mode)
+  useEffect(() => {
+    if (!isEditMode && eAmortizabil) {
+      if (watchedValoareInventar && /^\d+(\.\d{1,2})?$/.test(watchedValoareInventar)) {
+        form.setValue("valoareRamasa", watchedValoareInventar);
+      }
+      if (watchedDurataNormala && watchedDurataNormala > 0) {
+        form.setValue("durataRamasa", watchedDurataNormala);
+      }
+    }
+  }, [eAmortizabil, watchedValoareInventar, watchedDurataNormala, isEditMode, form]);
+
   // Handle classification selection
-  const handleClasificareSelect = (clasificare: Clasificare) => {
+  const handleClasificareSelect = useCallback((clasificare: Clasificare) => {
     form.setValue("clasificareCod", clasificare.cod);
     form.setValue("durataNormala", clasificare.durataNormalaMin * 12);
     setSelectedClasificare(clasificare);
     form.clearErrors("clasificareCod");
     form.clearErrors("durataNormala");
-  };
+  }, [form]);
 
   // Submit handler
   const onSubmit = async (data: MijlocFixFormData) => {
     setIsSubmitting(true);
 
-    // Compute derived fields for create
-    const payload = {
+    // For create: valoareRamasa = valoareInventar if not amortizable, else user-provided
+    // For edit: pass explicit valoareRamasa/durataRamasa only when eAmortizabil=true
+    const valoareRamasaPayload = data.eAmortizabil
+      ? (data.valoareRamasa || data.valoareInventar)
+      : data.valoareInventar;
+
+    const payload: Record<string, unknown> = {
       numarInventar: data.numarInventar,
       denumire: data.denumire,
       descriere: data.descriere || null,
@@ -197,17 +225,20 @@ export function MijlocFixForm({
       locFolosintaId: data.locFolosintaId || null,
       contId: data.contId || null,
       sursaFinantareId: data.sursaFinantareId || null,
-      valoareInitiala: data.valoareInventar, // Same as valoareInventar for new assets
+      valoareInitiala: data.valoareInventar,
       valoareInventar: data.valoareInventar,
-      valoareRamasa: isEditMode ? mijlocFix!.valoareRamasa : data.valoareInventar,
+      valoareRamasa: valoareRamasaPayload,
       dataAchizitie: data.dataAchizitie,
-      dataPIF: data.dataAchizitie, // Same as acquisition date by default
+      dataPIF: data.dataAchizitie,
       durataNormala: data.durataNormala,
-      metodaAmortizare: isEditMode ? mijlocFix!.metodaAmortizare : "liniara",
-      amortizabil: true,
       eAmortizabil: data.eAmortizabil,
       stare: isEditMode ? mijlocFix!.stare : "activ",
     };
+
+    // Pass durataRamasa only on edit when amortizable (server computes it from durataNormala on create)
+    if (isEditMode && data.eAmortizabil && data.durataRamasa !== undefined) {
+      payload.durataRamasa = data.durataRamasa;
+    }
 
     const res = isEditMode
       ? await api.put<MijlocFix>(`/mijloace-fixe/${mijlocFix!.id}`, payload)
@@ -639,13 +670,73 @@ export function MijlocFixForm({
                     <div className="space-y-1 leading-none">
                       <FormLabel>Se amortizeaza</FormLabel>
                       <FormDescription>
-                        Debifati pentru mijloace fixe care nu se amortizeaza
-                        (ex: terenuri)
+                        Bifati pentru mijloace fixe supuse amortizarii
+                        (ex: echipamente, cladiri). Terenurile nu se amortizeaza.
                       </FormDescription>
                     </div>
                   </FormItem>
                 )}
               />
+
+              {eAmortizabil && (
+                <>
+                  <FormField
+                    control={form.control}
+                    name="valoareRamasa"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Valoare Ramasa de Amortizat (RON) *</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              type="text"
+                              inputMode="decimal"
+                              placeholder="0.00"
+                              className="pr-12"
+                              {...field}
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                              RON
+                            </span>
+                          </div>
+                        </FormControl>
+                        <FormDescription>
+                          Valoarea care mai trebuie amortizata (baza de calcul lunar)
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="durataRamasa"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Durata Ramasa de Amortizat (luni) *</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            min={0}
+                            placeholder="ex: 48"
+                            value={field.value ?? ""}
+                            onChange={(e) =>
+                              field.onChange(
+                                e.target.value !== "" ? parseInt(e.target.value) : undefined
+                              )
+                            }
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Numarul de luni ramase pana la amortizare completa.
+                          Amortizare lunara = Valoare ramasa / Durata ramasa.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
+              )}
             </div>
           </CardContent>
         </Card>

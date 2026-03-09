@@ -157,6 +157,7 @@ mijloaceFixeRoutes.get("/", async (c) => {
     dataStartAmortizare: row.mijlocFix.dataIncepereAmortizare?.toISOString().split("T")[0],
     dataFinalAmortizare: row.mijlocFix.dataFinalizareAmortizare?.toISOString().split("T")[0],
     durataNormala: row.mijlocFix.durataNormala,
+    durataRamasa: row.mijlocFix.durataRamasa,
     metodaAmortizare: "liniara", // Default method
     amortizabil: row.mijlocFix.eAmortizabil ?? true,
     eAmortizabil: row.mijlocFix.eAmortizabil ?? true,
@@ -349,9 +350,10 @@ mijloaceFixeRoutes.get("/:id", async (c) => {
     dataStartAmortizare: result.mijlocFix.dataIncepereAmortizare?.toISOString().split("T")[0],
     dataFinalAmortizare: result.mijlocFix.dataFinalizareAmortizare?.toISOString().split("T")[0],
     durataNormala: result.mijlocFix.durataNormala,
+    durataRamasa: result.mijlocFix.durataRamasa,
     metodaAmortizare: "liniara",
-    amortizabil: result.mijlocFix.eAmortizabil ?? true,
-    eAmortizabil: result.mijlocFix.eAmortizabil ?? true,
+    amortizabil: result.mijlocFix.eAmortizabil ?? false,
+    eAmortizabil: result.mijlocFix.eAmortizabil ?? false,
     documentAchizitie: result.mijlocFix.documentAchizitie ?? undefined,
     furnizor: result.mijlocFix.furnizor ?? undefined,
     stare: result.mijlocFix.stare as "activ" | "conservare" | "casat" | "transferat" | "vandut",
@@ -502,9 +504,10 @@ mijloaceFixeRoutes.post(
       dataStartAmortizare: created.mijlocFix.dataIncepereAmortizare?.toISOString().split("T")[0],
       dataFinalAmortizare: created.mijlocFix.dataFinalizareAmortizare?.toISOString().split("T")[0],
       durataNormala: created.mijlocFix.durataNormala,
+      durataRamasa: created.mijlocFix.durataRamasa,
       metodaAmortizare: "liniara",
-      amortizabil: created.mijlocFix.eAmortizabil ?? true,
-      eAmortizabil: created.mijlocFix.eAmortizabil ?? true,
+      amortizabil: created.mijlocFix.eAmortizabil ?? false,
+      eAmortizabil: created.mijlocFix.eAmortizabil ?? false,
       documentAchizitie: created.mijlocFix.documentAchizitie ?? undefined,
       furnizor: created.mijlocFix.furnizor ?? undefined,
       stare: created.mijlocFix.stare as "activ" | "conservare" | "casat" | "transferat" | "vandut",
@@ -575,19 +578,19 @@ mijloaceFixeRoutes.put(
       }
     }
 
-    // Recalculate derived fields if valoareInventar or durataNormala changed
+    // Recalculate cotaAmortizareLunara if any relevant amortization field changed
     let updateData: Record<string, unknown> = { ...data };
 
-    const newValoareInventar = data.valoareInventar ?? existing.valoareInventar;
-    const newDurataNormala = data.durataNormala ?? existing.durataNormala;
-
-    if (data.valoareInventar || data.durataNormala) {
-      const valoare = Money.fromDb(newValoareInventar);
-      const cotaAmortizareLunara = Money.calculateMonthlyDepreciation(
-        valoare,
-        newDurataNormala
-      );
-      updateData.cotaAmortizareLunara = cotaAmortizareLunara.toDbString();
+    if (data.valoareRamasa !== undefined || data.durataRamasa !== undefined) {
+      const newValoareRamasa = data.valoareRamasa ?? existing.valoareRamasa;
+      const newDurataRamasa = data.durataRamasa ?? existing.durataRamasa;
+      if (newDurataRamasa > 0) {
+        const valoareRamasa = Money.fromDb(newValoareRamasa);
+        updateData.cotaAmortizareLunara = Money.calculateMonthlyDepreciation(
+          valoareRamasa,
+          newDurataRamasa
+        ).toDbString();
+      }
     }
 
     // Update
@@ -679,9 +682,10 @@ mijloaceFixeRoutes.put(
       dataStartAmortizare: updated.mijlocFix.dataIncepereAmortizare?.toISOString().split("T")[0],
       dataFinalAmortizare: updated.mijlocFix.dataFinalizareAmortizare?.toISOString().split("T")[0],
       durataNormala: updated.mijlocFix.durataNormala,
+      durataRamasa: updated.mijlocFix.durataRamasa,
       metodaAmortizare: "liniara",
-      amortizabil: updated.mijlocFix.eAmortizabil ?? true,
-      eAmortizabil: updated.mijlocFix.eAmortizabil ?? true,
+      amortizabil: updated.mijlocFix.eAmortizabil ?? false,
+      eAmortizabil: updated.mijlocFix.eAmortizabil ?? false,
       documentAchizitie: updated.mijlocFix.documentAchizitie ?? undefined,
       furnizor: updated.mijlocFix.furnizor ?? undefined,
       stare: updated.mijlocFix.stare as "activ" | "conservare" | "casat" | "transferat" | "vandut",
