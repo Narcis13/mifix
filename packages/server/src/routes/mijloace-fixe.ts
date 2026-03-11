@@ -186,7 +186,7 @@ mijloaceFixeRoutes.get("/", async (c) => {
 mijloaceFixeRoutes.get("/cautare", async (c) => {
   const q = c.req.query("q") || "";
   const gestiuneId = c.req.query("gestiuneId");
-  const stare = c.req.query("stare") || "activ";
+  const stare = c.req.query("stare"); // optional; omit to search all states
   const limit = parseInt(c.req.query("limit") || "20");
 
   const conditions = [];

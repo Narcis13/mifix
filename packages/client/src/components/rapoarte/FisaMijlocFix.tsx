@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,70 +7,115 @@ import { Label } from "@/components/ui/label";
 import { PrintLayout } from "./PrintLayout";
 import { api } from "@/lib/api";
 import type { FisaMijlocFix } from "shared";
-import { Printer, Search, ArrowLeft } from "lucide-react";
+import { Printer, ArrowLeft, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useDebounce } from "@/hooks/useDebounce";
+
+interface AssetOption {
+  id: number;
+  numarInventar: string;
+  denumire: string;
+  stare: string;
+}
 
 export function FisaMijlocFixReport() {
-  const [numarInventar, setNumarInventar] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<AssetOption[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [data, setData] = useState<FisaMijlocFix | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const debouncedSearch = useDebounce(searchQuery, 300);
 
   const handlePrint = useReactToPrint({
     contentRef,
     documentTitle: data ? `Fisa_${data.numarInventar}` : "Fisa_Mijloc_Fix",
   });
 
-  const handleSearch = async () => {
-    if (!numarInventar.trim()) return;
+  /** Search assets as user types (min 2 chars) */
+  useEffect(() => {
+    if (debouncedSearch.length < 2) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
 
+    setIsSearching(true);
+    api
+      .get<AssetOption[]>(
+        `/mijloace-fixe/cautare?q=${encodeURIComponent(debouncedSearch)}&limit=15`
+      )
+      .then((res) => {
+        if (res.success && res.data) {
+          setSearchResults(res.data);
+          setShowDropdown(true);
+        }
+      })
+      .finally(() => setIsSearching(false));
+  }, [debouncedSearch]);
+
+  /** Close dropdown when clicking outside */
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setShowDropdown(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  async function loadFisa(assetId: number) {
     setIsLoading(true);
     setError(null);
-
+    setData(null);
     try {
-      // First search for the asset by numarInventar
-      const searchRes = await api.get<{ data: { id: number }[] }>(
-        `/mijloace-fixe?search=${encodeURIComponent(numarInventar)}&limit=1`
-      );
-
-      if (!searchRes.success || !searchRes.data?.data?.[0]) {
-        setError("Mijlocul fix nu a fost gasit");
-        setData(null);
-        setIsLoading(false);
-        return;
-      }
-
-      const assetId = searchRes.data.data[0].id;
-
-      // Now fetch the fisa report
-      const fisaRes = await api.get<FisaMijlocFix>(`/rapoarte/fisa/${assetId}`);
-
-      if (fisaRes.success && fisaRes.data) {
-        setData(fisaRes.data);
-        setError(null);
+      const res = await api.get<FisaMijlocFix>(`/rapoarte/fisa/${assetId}`);
+      if (res.success && res.data) {
+        setData(res.data);
       } else {
-        setError(fisaRes.message || "Eroare la generarea fisei");
-        setData(null);
+        setError(res.message || "Eroare la generarea fisei");
       }
     } catch {
       setError("Eroare de retea");
-      setData(null);
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
-  const formatCurrency = (value: string) => {
-    return parseFloat(value).toLocaleString("ro-RO", {
+  function handleSelectAsset(asset: AssetOption) {
+    setSearchQuery(`${asset.numarInventar} — ${asset.denumire}`);
+    setShowDropdown(false);
+    setSearchResults([]);
+    loadFisa(asset.id);
+  }
+
+  function handleInputChange(value: string) {
+    setSearchQuery(value);
+    setData(null);
+    setError(null);
+  }
+
+  const formatCurrency = (value: string) =>
+    parseFloat(value).toLocaleString("ro-RO", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }) + " RON";
-  };
 
   const formatDate = (dateStr?: string | null) => {
     if (!dateStr) return "-";
     return new Date(dateStr).toLocaleDateString("ro-RO");
+  };
+
+  const stareLabel: Record<string, string> = {
+    activ: "Activ",
+    casare: "Casare",
+    declasare: "Declasare",
+    transfer: "Transfer",
   };
 
   return (
@@ -100,24 +145,73 @@ export function FisaMijlocFixReport() {
       {/* Search Card */}
       <Card className="no-print">
         <CardContent className="pt-6">
-          <div className="flex gap-4 items-end">
-            <div className="flex-1 max-w-sm space-y-2">
-              <Label htmlFor="numarInventar">Numar Inventar</Label>
+          <div className="max-w-lg space-y-2">
+            <Label htmlFor="searchMF">Cauta mijloc fix</Label>
+            <div className="relative" ref={containerRef}>
               <Input
-                id="numarInventar"
-                placeholder="Introduceti numarul de inventar..."
-                value={numarInventar}
-                onChange={(e) => setNumarInventar(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                id="searchMF"
+                placeholder="Numar inventar sau denumire..."
+                value={searchQuery}
+                onChange={(e) => handleInputChange(e.target.value)}
+                onFocus={() => searchResults.length > 0 && setShowDropdown(true)}
+                autoComplete="off"
               />
+              {isSearching && (
+                <Loader2 className="absolute right-3 top-2.5 h-4 w-4 animate-spin text-muted-foreground" />
+              )}
+
+              {/* Dropdown results */}
+              {showDropdown && searchResults.length > 0 && (
+                <div className="absolute z-50 mt-1 w-full rounded-md border bg-popover shadow-md">
+                  <ul className="max-h-64 overflow-y-auto py-1">
+                    {searchResults.map((asset) => (
+                      <li key={asset.id}>
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-accent"
+                          onMouseDown={(e) => {
+                            e.preventDefault(); // prevent input blur before click
+                            handleSelectAsset(asset);
+                          }}
+                        >
+                          <span>
+                            <span className="font-mono font-medium">
+                              {asset.numarInventar}
+                            </span>
+                            <span className="mx-2 text-muted-foreground">—</span>
+                            <span>{asset.denumire}</span>
+                          </span>
+                          {asset.stare !== "activ" && (
+                            <span className="ml-2 rounded px-1.5 py-0.5 text-xs bg-muted text-muted-foreground">
+                              {stareLabel[asset.stare] ?? asset.stare}
+                            </span>
+                          )}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {showDropdown && searchResults.length === 0 && !isSearching && debouncedSearch.length >= 2 && (
+                <div className="absolute z-50 mt-1 w-full rounded-md border bg-popover px-3 py-2 text-sm text-muted-foreground shadow-md">
+                  Niciun mijloc fix gasit
+                </div>
+              )}
             </div>
-            <Button onClick={handleSearch} disabled={isLoading}>
-              <Search className="mr-2 h-4 w-4" />
-              {isLoading ? "Se cauta..." : "Cauta"}
-            </Button>
+            <p className="text-xs text-muted-foreground">
+              Tastati cel putin 2 caractere din numar inventar sau denumire
+            </p>
           </div>
+
+          {isLoading && (
+            <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Se incarca fisa...
+            </div>
+          )}
           {error && (
-            <p className="text-destructive text-sm mt-2">{error}</p>
+            <p className="mt-4 text-sm text-destructive">{error}</p>
           )}
         </CardContent>
       </Card>
@@ -247,8 +341,8 @@ export function FisaMijlocFixReport() {
               </CardContent>
             </Card>
 
-            {/* Amortizare Section */}
-            <Card className="mb-4">
+            {/* Amortizare Section - starts on page 2 when printing */}
+            <Card className="mb-4 print-page-break">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">Amortizare</CardTitle>
               </CardHeader>
