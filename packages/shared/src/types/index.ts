@@ -386,6 +386,13 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
+export type AppVersionSource = "file" | "database";
+
+export interface AppVersionInfo {
+  version: string;
+  source: AppVersionSource;
+}
+
 // ═══════════════════════════════════════════════════════════════
 // HEALTH CHECK RESPONSE
 // ═══════════════════════════════════════════════════════════════

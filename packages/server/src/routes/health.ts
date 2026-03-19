@@ -1,6 +1,7 @@
 import { Hono } from "hono";
-import type { ApiResponse } from "shared";
+import type { ApiResponse, AppVersionInfo } from "shared";
 import { Money } from "shared";
+import { getAppVersionInfo } from "../config/app-version";
 
 const healthRoutes = new Hono();
 
@@ -12,6 +13,16 @@ healthRoutes.get("/", (c) => {
       status: "healthy",
       timestamp: new Date().toISOString(),
     },
+  });
+});
+
+// App version endpoint for the client shell and deployment checks
+healthRoutes.get("/version", async (c) => {
+  const appVersion = await getAppVersionInfo();
+
+  return c.json<ApiResponse<AppVersionInfo>>({
+    success: true,
+    data: appVersion,
   });
 });
 

@@ -19,6 +19,7 @@ import { rapoarteRoutes } from "./routes/rapoarte";
 import { verificareRoutes } from "./routes/verificare";
 import { dispozitiveMedicaleRoutes } from "./routes/dispozitive-medicale";
 import { authMiddleware } from "./middleware/auth";
+import { getAppVersionInfo } from "./config/app-version";
 
 const app = new Hono();
 
@@ -57,8 +58,9 @@ app.route("/api/verificare", verificareRoutes);
 app.route("/api/dispozitive-medicale", dispozitiveMedicaleRoutes);
 
 // Root route
-app.get("/", (c) => {
-  return c.json({ message: "MiFix API", version: "1.0.0" });
+app.get("/", async (c) => {
+  const { version } = await getAppVersionInfo();
+  return c.json({ message: "MiFix API", version });
 });
 
 const port = parseInt(process.env.PORT || "3000");

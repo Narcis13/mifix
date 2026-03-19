@@ -130,7 +130,8 @@ bun run packages/server/dist/index.js
 Din altă sesiune SSH sau local:
 ```bash
 curl http://109.99.176.211:3009/
-# Răspuns așteptat: {"message":"MiFix API","version":"1.0.0"}
+# Răspuns așteptat: {"message":"MiFix API","version":"0.2.0"}
+# Valoarea vine din packages/shared/src/app-version.ts
 
 curl http://109.99.176.211:3009/api/health
 ```

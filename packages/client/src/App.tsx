@@ -4,6 +4,7 @@ import { Toaster } from "./components/ui/sonner";
 import { Button } from "./components/ui/button";
 import { useAuth } from "./components/auth/AuthContext";
 import { Separator } from "./components/ui/separator";
+import { useAppVersion } from "./hooks/useAppVersion";
 
 const mainNavItems = [
   { path: "/", label: "Acasa" },
@@ -55,6 +56,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { version } = useAppVersion();
 
   async function handleLogout() {
     await logout();
@@ -67,8 +69,11 @@ function App() {
       <aside className="flex w-52 flex-col border-r bg-background">
         {/* Logo */}
         <div className="flex h-14 items-center border-b px-4">
-          <Link to="/" className="text-lg font-bold tracking-tight">
-            MiFix
+          <Link to="/" className="inline-flex items-baseline gap-2 text-lg font-bold tracking-tight">
+            <span>MiFix</span>
+            <span className="text-xs font-medium tracking-normal text-muted-foreground">
+              v{version}
+            </span>
           </Link>
         </div>
 
